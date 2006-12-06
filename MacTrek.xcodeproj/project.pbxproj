@@ -747,7 +747,7 @@
 		52BA84C80B10DFFF00F71673 /* SimpleTracker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SimpleTracker.m; path = Tracker/SimpleTracker.m; sourceTree = "<group>"; };
 		52BA84F90B10E22500F71673 /* TrackUpdate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TrackUpdate.h; path = Tracker/TrackUpdate.h; sourceTree = "<group>"; };
 		52BA84FA0B10E22500F71673 /* TrackUpdate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TrackUpdate.m; path = Tracker/TrackUpdate.m; sourceTree = "<group>"; };
-		52C7A7EF0B17800900F2D523 /* mactrek-mosaic.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "mactrek-mosaic.jpg"; path = "../Design Stuff/Images MacTrek/mactrek-mosaic.jpg"; sourceTree = SOURCE_ROOT; };
+		52C7A7EF0B17800900F2D523 /* mactrek-mosaic.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "mactrek-mosaic.jpg"; path = "Resources/Backgrounds/mactrek-mosaic.jpg"; sourceTree = "<group>"; };
 		52D16B640A06C64900995816 /* logo.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = logo.icns; path = Other/logo.icns; sourceTree = "<group>"; };
 		52F5D83C0B1A69E000B8B9C5 /* assert.c */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.c; path = assert.c; sourceTree = "<group>"; };
 		52F5D83D0B1A69E000B8B9C5 /* compat.c */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.c; path = compat.c; sourceTree = "<group>"; };
