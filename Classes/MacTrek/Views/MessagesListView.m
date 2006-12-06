@@ -29,6 +29,9 @@
     [notificationCenter addObserver:self selector:@selector(disableSelection) name:@"PV_PLAYER_SELECTION"];
     // user manually choose a destination, disable our selection
     // $$$ [notificationCenter addObserver:self selector:@selector(disableSelection) name:@""];
+	
+	// when a new game is started we must clean up
+	[notificationCenter addObserver:self selector:@selector(emptyAllRows) name:@"LM_LOGIN_COMPLETE"];	
 }
 
 // tie this to events that change messages

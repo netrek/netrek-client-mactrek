@@ -493,6 +493,7 @@ int startUpEvents = 0;
             gameState = GS_GAME_ACTIVE;
             // a kill or error will get us out of the game  
             [soundPlayerActiveTheme playSoundEffect:@"ENTER_SHIP_SOUND"];
+			[notificationCenter postNotificationName:@"GM_GAME_ENTERED"];
             break;
         default:
             NSLog(@"GuiManager.gameEntered unknown gameState %d", gameState);

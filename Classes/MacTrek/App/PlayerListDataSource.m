@@ -24,7 +24,13 @@
 }
 
 - (void) awakeFromNib {
+	// make sure we refresh when player info becomes available
     [notificationCenter addObserver:self selector:@selector(refreshData) name:@"SP_PLAYER_INFO" 
+                             object:nil useLocks:NO useMainRunLoop:YES]; 
+	
+	// and clean up when we enter a game
+	// to remove old players
+	[notificationCenter addObserver:self selector:@selector(refreshData) name:@"GM_GAME_ENTERED" 
                              object:nil useLocks:NO useMainRunLoop:YES]; 
     
     // set up the toField
