@@ -241,6 +241,10 @@
 - (void)   drawBackgroundImageInRect:(NSRect) Rect {
 	
 	// do nothing
+	// must clear image
+	// at least clear
+    [[NSColor blackColor] set];
+    NSRectFill(Rect);
 }
 
 - (void) drawLabelBackgroundForRect:(NSRect)aRect {
