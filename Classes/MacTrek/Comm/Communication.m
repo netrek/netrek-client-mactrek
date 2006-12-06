@@ -609,15 +609,21 @@ bool goSleeping;
         NSLog(@"Communication.readFromServer exception %@: %@", [e name], [e reason] );
         [notificationCenter postNotificationName:@"COMM_GHOSTBUSTED" object:self 
                                         userInfo:@"Whoops!  We've been ghostbusted!"];
+		readOk = NO;
         if (commMode == COMM_UDP) {
             [self closeUdpConn];
         }
         commMode = commModeRequest = COMM_TCP;
         
+		/* MacTrek 1.1.0 resurection rarely works and usually locks down the 
+			entire program because this thread does a blocking read 
+			why actually? 
+			
         if([self connectToServerUsingNextPort]) {
             [notificationCenter postNotificationName:@"COMM_RESURRECTED" object:self 
                                             userInfo:@"Yea!  We've been resurrected!"];
 			NSLog(@"Communication.readFromServer Yea!  We've been resurrected!");
+			readOk = YES;
         }
         else {
             [notificationCenter postNotificationName:@"COMM_RESURRECT_FAILED" object:self 
@@ -625,6 +631,7 @@ bool goSleeping;
 			NSLog(@"Communication.readFromServer Sorry,  We could not be resurrected!");
 			readOk = NO;
         }
+		*/
     }
     
     //stop = [NSDate timeIntervalSinceReferenceDate];  
