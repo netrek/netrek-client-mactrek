@@ -340,6 +340,10 @@
 			525E650F0B2741A6003C0174 /* PBXTextBookmark */ = 525E650F0B2741A6003C0174 /* PBXTextBookmark */;
 			525E65100B2741A6003C0174 /* PBXTextBookmark */ = 525E65100B2741A6003C0174 /* PBXTextBookmark */;
 			525E65110B2741A6003C0174 /* PBXTextBookmark */ = 525E65110B2741A6003C0174 /* PBXTextBookmark */;
+			525E65120B274200003C0174 /* PBXTextBookmark */ = 525E65120B274200003C0174 /* PBXTextBookmark */;
+			525E65130B274200003C0174 /* PBXTextBookmark */ = 525E65130B274200003C0174 /* PBXTextBookmark */;
+			525E651E0B274470003C0174 /* PBXTextBookmark */ = 525E651E0B274470003C0174 /* PBXTextBookmark */;
+			525E651F0B274470003C0174 /* PBXTextBookmark */ = 525E651F0B274470003C0174 /* PBXTextBookmark */;
 			526E82950B25F3AB003E02E5 = 526E82950B25F3AB003E02E5 /* PBXTextBookmark */;
 			5276C40E0B1A3E6A00E9D5BF = 5276C40E0B1A3E6A00E9D5BF /* PBXTextBookmark */;
 			5276C40F0B1A3E6A00E9D5BF = 5276C40F0B1A3E6A00E9D5BF /* PBXTextBookmark */;
@@ -1582,9 +1586,9 @@
 	};
 	5212F0190B08FFB80059A8B1 /* GameController.m */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {818, 2884}}";
-			sepNavSelRange = "{4706, 0}";
-			sepNavVisRect = "{{0, 1907}, {787, 572}}";
+			sepNavIntBoundsRect = "{{0, 0}, {2171, 3052}}";
+			sepNavSelRange = "{4942, 32}";
+			sepNavVisRect = "{{0, 1575}, {2171, 1120}}";
 		};
 	};
 	5212F01A0B08FFB80059A8B1 /* Gui.h */ = {
@@ -3180,7 +3184,7 @@
 		isa = PBXTextBookmark;
 		fRef = 5212F0190B08FFB80059A8B1 /* GameController.m */;
 		rLen = 9;
-		rLoc = 4671;
+		rLoc = 4758;
 		rType = 0;
 	};
 	525E65100B2741A6003C0174 /* PBXTextBookmark */ = {
@@ -3198,10 +3202,50 @@
 		fRef = 5212F0190B08FFB80059A8B1 /* GameController.m */;
 		name = "GameController.m: 143";
 		rLen = 0;
-		rLoc = 4706;
+		rLoc = 4793;
 		rType = 0;
 		vrLen = 1688;
 		vrLoc = 4572;
+	};
+	525E65120B274200003C0174 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 5212F02F0B08FFB80059A8B1 /* PainterFactory.h */;
+		name = "#import \"Data.h\"";
+		rLen = 17;
+		rLoc = 153;
+		rType = 0;
+		vrLen = 310;
+		vrLoc = 3;
+	};
+	525E65130B274200003C0174 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 5212F0190B08FFB80059A8B1 /* GameController.m */;
+		name = "GameController.m: 143";
+		rLen = 0;
+		rLoc = 4793;
+		rType = 0;
+		vrLen = 1688;
+		vrLoc = 4572;
+	};
+	525E651E0B274470003C0174 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 5212F02F0B08FFB80059A8B1 /* PainterFactory.h */;
+		name = "#import \"Data.h\"";
+		rLen = 17;
+		rLoc = 153;
+		rType = 0;
+		vrLen = 310;
+		vrLoc = 3;
+	};
+	525E651F0B274470003C0174 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 5212F0190B08FFB80059A8B1 /* GameController.m */;
+		name = "GameController.m: 145";
+		rLen = 0;
+		rLoc = 4793;
+		rType = 0;
+		vrLen = 1672;
+		vrLoc = 4529;
 	};
 	526023EA0AAEF9D80027399A /* PBXBookmarkGroup */ = {
 		isa = PBXBookmarkGroup;
@@ -6684,7 +6728,7 @@
 		fRef = 5212F0190B08FFB80059A8B1 /* GameController.m */;
 		name = "GameController.m: 43";
 		rLen = 0;
-		rLoc = 1474;
+		rLoc = 1501;
 		rType = 0;
 		vrLen = 1591;
 		vrLoc = 255;
@@ -6694,7 +6738,7 @@
 		fRef = 5212F0180B08FFB80059A8B1 /* GameController.h */;
 		name = "GameController.h: gameView";
 		rLen = 0;
-		rLoc = 1549;
+		rLoc = 1621;
 		rType = 0;
 		vrLen = 1029;
 		vrLoc = 0;
@@ -6704,7 +6748,7 @@
 		fRef = 5212F0180B08FFB80059A8B1 /* GameController.h */;
 		name = "- (GameView *)gameView";
 		rLen = 22;
-		rLoc = 1526;
+		rLoc = 1598;
 		rType = 0;
 		vrLen = 1302;
 		vrLoc = 637;

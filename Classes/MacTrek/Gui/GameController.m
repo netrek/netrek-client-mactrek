@@ -11,6 +11,8 @@
 
 @implementation GameController
 
+bool forceBarUpdate = NO;
+
 - (void) awakeFromNib {
       
     // watch my shields and stuff
@@ -106,7 +108,7 @@
     }
     
     // update only if required 
-    if ([bar max] != maxValue) {
+    if (([bar max] != maxValue) || forceBarUpdate) {
         NSLog(@"GameController.updateBar %@ setting max to %d", [bar name], maxValue);
         if (field != nil) { // overrules max
             [field setStringValue:[NSString stringWithFormat:@"%d / %d", value, tempMax]];
@@ -121,7 +123,7 @@
         }
         [bar setNeedsDisplay:YES];
     }
-    if ([bar tempMax] != tempMax) {
+    if (([bar tempMax] != tempMax) || forceBarUpdate) {
         NSLog(@"GameController.updateBar %@ setting tempMax to %d", [bar name], tempMax);
         [bar setTempMax:tempMax * 1.0];
         [bar setNeedsDisplay:YES];
@@ -129,7 +131,7 @@
             [field setStringValue:[NSString stringWithFormat:@"%d / %d", value, tempMax]];
         }
     }    
-    if ([bar value] != value) {
+    if (([bar value] != value) || forceBarUpdate) {
         //NSLog(@"GameController.updateBar %d setting value to %d", [bar tag], value);
         if (field != nil) {              
             [field setStringValue:[NSString stringWithFormat:@"%d / %d", value, tempMax]];                            
@@ -144,6 +146,16 @@
     if (![me isMe]) { // this is not me...
         return;
     }
+	
+	// refresh every now and then
+	static int frameCount = 0;
+	
+	if (frameCount++ > FRAMES_PER_FULL_UPDATE_DASHBOARD) {
+		frameCount = 0;
+		forceBarUpdate = YES;
+	} else {
+		forceBarUpdate = NO;
+	}
 
     [self updateBar:hullBar   andTextValue:hullValue   
           withValue:[me hull] max:[[me ship] maxHull] inverseWarning:NO];

@@ -18,6 +18,8 @@
 #import "PlayerListView.h"
 #import "MessagesListView.h"
 
+// once per second 
+#define FRAMES_PER_FULL_UPDATE_DASHBOARD FRAME_RATE
 
 @interface GameController : BaseClass {
    
