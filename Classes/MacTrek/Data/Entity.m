@@ -81,6 +81,10 @@
     requestedSpeed = fast;
 }
 
+- (void) setDirInDeg:(float)newDir {
+    dir = newDir;
+}
+
 - (void) setCourse:(int)newDir {
     dir = newDir;
     //[self trackUpdate];
@@ -150,6 +154,10 @@
 
 - (int) predictedCourse { // extend later
     return dir;
+}
+
+- (float) dirInDeg {
+	return dir;
 }
 
 - (float) dirInRad {

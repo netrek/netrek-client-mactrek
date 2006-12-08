@@ -30,6 +30,7 @@
 - (void) setNetrekFormatCourse:(char)newDir;
 - (void) setPosition:(NSPoint)pos;
 - (void) setCourse:(int)course;
+- (void) setDirInDeg:(float)newDir;
 - (void) setSpeed:(int)speed;
 - (void) setRequestedCourse:(int)course;
 - (void) setRequestedSpeed:(int)speed;
@@ -55,6 +56,7 @@
 - (int) course;
 - (char) netrekFormatCourse;
 - (float) dirInRad;
+- (float) dirInDeg;
 - (int) speed;
 - (int) requestedCourse;
 - (int) requestedSpeed;
