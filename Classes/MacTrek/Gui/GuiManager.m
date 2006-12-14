@@ -107,6 +107,7 @@ int startUpEvents = 0;
 				
 		// shutdown
 		[notificationCenter addObserver:self selector:@selector(shutdown) name:@"MC_MACTREK_SHUTDOWN"];
+
     }
     return self;
 }
@@ -117,7 +118,12 @@ int startUpEvents = 0;
 
 - (void) shutdown {
 	// kill all robots
+	// leave some old code intact	
 	[localServerCntrl stopServer:self];
+	
+	// but stop the new server too
+	// should kill the robots as well
+	[server stopServer];
 }
 
 // to be called..
@@ -176,6 +182,20 @@ int startUpEvents = 0;
 	// set the version string
 	[versionString setStringValue:[NSString stringWithFormat:@"Version %@", VERSION]];
 	NSLog(@"GuiManager.awakeFromNib Setting version to %@", VERSION);
+		
+	// new server controller. No longer managed with buttons but allways running!
+	server = [[ServerControllerNew alloc] init];
+	[server startServer];		// stop only on shutdown...
+								// add localhost if it is not already there
+	if ([selectServerCntrl findServer:@"localhost"] == nil) {
+		MetaServerEntry *entry = [[MetaServerEntry alloc] init];
+		[entry setAddress: @"localhost"];
+		[entry setPort:    2592];
+		[entry setStatus:  DEFAULT];
+		[entry setGameType:    BRONCO];	
+		[selectServerCntrl addServerPassivly:entry];  // gets selected automatically  
+	}
+	
 }
 
 - (void)handleTeamMask:(NSNumber *) mask {

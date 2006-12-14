@@ -28,6 +28,7 @@
 - (MetaServerEntry *) selectedServer;
 - (void) removeServer:(NSString *)name;
 - (void) addServer:(MetaServerEntry *) entry;
+- (void) addServerPassivly:(MetaServerEntry *) entry;
 - (MetaServerEntry *) findServer:(NSString *)name;
 - (void) deselectServer;
 - (void) setServerSelected:(MetaServerEntry *) server;

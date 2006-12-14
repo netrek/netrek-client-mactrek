@@ -62,7 +62,7 @@ bool forceBarUpdate = NO;
     }
     // do the playerList list if an update occured
     if ([playerList hasChanged]) {
-        NSLog(@"GameController.repaint repainting playerList view");
+        //NSLog(@"GameController.repaint repainting playerList view");
         [playerList setNeedsDisplay:YES];
     }
     
@@ -109,7 +109,7 @@ bool forceBarUpdate = NO;
     
     // update only if required 
     if (([bar max] != maxValue) || forceBarUpdate) {
-        NSLog(@"GameController.updateBar %@ setting max to %d", [bar name], maxValue);
+        //NSLog(@"GameController.updateBar %@ setting max to %d", [bar name], maxValue);
         if (field != nil) { // overrules max
             [field setStringValue:[NSString stringWithFormat:@"%d / %d", value, tempMax]];
         }
@@ -124,7 +124,7 @@ bool forceBarUpdate = NO;
         [bar setNeedsDisplay:YES];
     }
     if (([bar tempMax] != tempMax) || forceBarUpdate) {
-        NSLog(@"GameController.updateBar %@ setting tempMax to %d", [bar name], tempMax);
+        //NSLog(@"GameController.updateBar %@ setting tempMax to %d", [bar name], tempMax);
         [bar setTempMax:tempMax * 1.0];
         [bar setNeedsDisplay:YES];
         if (field != nil) { // overrules max

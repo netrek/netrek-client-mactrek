@@ -13,7 +13,9 @@
 #import "LLSystemInformation.h"
 
 @interface ServerControllerNew : ServerController  {
-
+	NSString *pathToResources;
+	NSString *pathToExe;
+    NSString *pathToServer;
 }
 
 @end

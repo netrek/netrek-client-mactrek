@@ -11,45 +11,57 @@
 
 @implementation ServerControllerNew
 
-- (void)startServer {
-    
-	NSString *cpuType;
-	
-	// see what we are
-	if ([LLSystemInformation isPowerPC]) {
-		cpuType = @"PPC";
-	} else {
-		cpuType = @"INTEL";
+- (id) init {
+	self = [super init];
+	if (self != nil) {
+		NSString *cpuType;
+		
+		// see what we are
+		if ([LLSystemInformation isPowerPC]) {
+			cpuType = @"PPC";
+		} else {
+			cpuType = @"INTEL";
+		}
+		
+		NSLog(@"ServerControllerNew.init selecting %@", cpuType);
+		
+		pathToResources = [[[NSBundle mainBundle] resourcePath] retain];
+		pathToExe = [[NSString stringWithFormat:@"%@/PRECOMPILED/%@/bin", pathToResources, cpuType] retain];
+		pathToServer = [[NSString stringWithFormat:@"%@/netrekd", pathToExe] retain];
 	}
+	return self;
+}
+
+- (void)startServer {
+        
+	NSTask *server = [[NSTask alloc] init];
 	
-	NSLog(@"ServerControllerNew.startServer selecting %@", cpuType);
-	
-    NSString *pathToResources = [[NSBundle mainBundle] resourcePath];
-    NSString *pathToServer = [NSString stringWithFormat:@"%@/PRECOMPILED/%@/bin/netrekd", cpuType, pathToResources];
-    NSString *pathToLog = [NSString stringWithFormat:@"%@/PRECOMPILED/%@/var/log", pathToResources];
+	[server setCurrentDirectoryPath:pathToExe];
+	[server setLaunchPath:pathToServer];
+	[server launch];	
+	NSLog(@"ServerControllerNew.startServer launched %@", pathToServer);
+	[server waitUntilExit];
+	[server release];
+}
+
+- (void)stopServer {
     
-    if (serverTask != nil) {
-        // still running? stop the server with restart, this will
-        // start the server again after it is properly stoped
-        [serverTask stopProcess];
-        restartServer = YES;        
-    } else {
-		// clean start
-        serverTask = [[LLTaskWrapper alloc] initWithController:self 
-													 arguments:[NSArray arrayWithObjects:pathToServer, nil] ];
-        [serverTask startProcess];
-    }
-    
-    if (logTask != nil) {
-        [logTask stopProcess];
-        restartLog = YES;        
-    } else {
-        logTask = [[LLTaskWrapper alloc] initWithController:self 
-												  arguments:[NSArray arrayWithObjects:@"/usr/bin/tail",
-													  @"-f", pathToLog, nil] ];
-        [logTask startProcess];         
-    }
+	NSTask *server = [[NSTask alloc] init];
 	
+	[server setCurrentDirectoryPath:pathToExe];
+	[server setLaunchPath:pathToServer];
+	[server setArguments:[NSArray arrayWithObjects:@"stop", nil]];
+	[server launch];
+	[server waitUntilExit];
+	[server release];
+	
+	// make sure we kill the bots
+	server = [[NSTask alloc] init];
+	[server setLaunchPath:@"/usr/bin/killall"];
+	[server setArguments:[NSArray arrayWithObjects:@"robot", nil]];
+	[server launch];
+	[server waitUntilExit];
+	[server release];
 }
 
 @end

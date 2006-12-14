@@ -10,6 +10,7 @@
 #import "BaseClass.h"
 #import "SelectServerController.h"
 #import "ServerController.h"
+#import "ServerControllerNew.h"
 #import "RobotsController.h"
 
 @interface LocalServerController : BaseClass {

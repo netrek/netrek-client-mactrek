@@ -54,8 +54,14 @@
 	// small protection allows for initial emty array, so when tehre is no internet,
 	// you can still play on the local server.
 	if (result != nil) {
+		// check for localhost before releaseing
+		MetaServerEntry *localhost = [self findServer:@"localhost"];
 		[entries release];
 		entries = result;
+		if (localhost != nil) {
+			NSLog(@"MetaServerTableDataSource.refreshServers: keeping localhost");
+			[self addServerPassivly:localhost];
+		}
 	}
     [serverTableView reloadData];
 }
@@ -133,6 +139,11 @@
         }
     }
     return nil;    
+}
+
+- (void) addServerPassivly:(MetaServerEntry *) entry {
+    [entries insertObject:entry atIndex:0];    
+    [serverTableView reloadData];
 }
 
 - (void) addServer:(MetaServerEntry *) entry {

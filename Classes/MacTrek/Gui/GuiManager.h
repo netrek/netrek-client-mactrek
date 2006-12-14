@@ -20,6 +20,7 @@
 #import "PainterFactoryForNetrek.h"
 #import "PainterFactoryForMacTrek.h"
 #import "PainterFactoryForTac.h"
+#import "ServerControllerNew.h"
 #import "GameView.h"
 
 // wait for:
@@ -70,6 +71,8 @@ enum GAME_STATE {
     SoundPlayer                     *soundPlayerActiveTheme;
     PainterFactory                  *painterActiveTheme;
     int                             activeTheme;
+	
+	ServerControllerNew				*server;
 
 	bool multiThreaded; 
 	MetaServerEntry *currentServer;
