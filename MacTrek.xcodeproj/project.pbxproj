@@ -2726,14 +2726,8 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				GENERATE_PROFILING_CODE = YES;
-				HEADER_SEARCH_PATHS = (
-					"/usr/local/include/**",
-					"$(inherited)",
-				);
-				LIBRARY_SEARCH_PATHS = (
-					"/usr/local/lib/**",
-					"$(inherited)",
-				);
+				HEADER_SEARCH_PATHS = "$(inherited)";
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				PREBINDING = NO;
 				SDKROOT = /Developer/SDKs/MacOSX10.4u.sdk;
 				ZERO_LINK = NO;
@@ -2753,14 +2747,8 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				GENERATE_PROFILING_CODE = YES;
-				HEADER_SEARCH_PATHS = (
-					"/usr/local/include/**",
-					"$(inherited)",
-				);
-				LIBRARY_SEARCH_PATHS = (
-					"/usr/local/lib/**",
-					"$(inherited)",
-				);
+				HEADER_SEARCH_PATHS = "$(inherited)";
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				PREBINDING = NO;
 				SDKROOT = /Developer/SDKs/MacOSX10.4u.sdk;
 				ZERO_LINK = NO;

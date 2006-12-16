@@ -26,8 +26,8 @@
 		NSLog(@"ServerControllerNew.init selecting %@", cpuType);
 		
 		pathToResources = [[[NSBundle mainBundle] resourcePath] retain];
-		pathToExe = [[NSString stringWithFormat:@"%@/PRECOMPILED/%@/bin", pathToResources, cpuType] retain];
-		pathToServer = [[NSString stringWithFormat:@"%@/netrekd", pathToExe] retain];
+		pathToExe = [[NSString stringWithFormat:@"%@/PRECOMPILED/%@/lib", pathToResources, cpuType] retain];
+		pathToServer = [[NSString stringWithFormat:@"%@/newstartd", pathToExe] retain];
 	}
 	return self;
 }
@@ -59,6 +59,14 @@
 	server = [[NSTask alloc] init];
 	[server setLaunchPath:@"/usr/bin/killall"];
 	[server setArguments:[NSArray arrayWithObjects:@"robot", nil]];
+	[server launch];
+	[server waitUntilExit];
+	[server release];
+	
+	// and the server
+	server = [[NSTask alloc] init];
+	[server setLaunchPath:@"/usr/bin/killall"];
+	[server setArguments:[NSArray arrayWithObjects:@"newstartd", nil]];
 	[server launch];
 	[server waitUntilExit];
 	[server release];
