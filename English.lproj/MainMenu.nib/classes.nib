@@ -189,13 +189,14 @@
         }, 
         {CLASS = RoundedView; LANGUAGE = ObjC; SUPERCLASS = NSView; }, 
         {
+            ACTIONS = {deselectServer = id; }; 
             CLASS = SelectServerController; 
             LANGUAGE = ObjC; 
             OUTLETS = {
                 loginButton = NSButton; 
                 refreshButton = NSButton; 
                 serverNameTextField = NSTextField; 
-                serverTableView = NSTableView; 
+                spinner = NSProgressIndicator; 
             }; 
             SUPERCLASS = MetaServerTableDataSource; 
         }, 

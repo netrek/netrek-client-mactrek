@@ -14,6 +14,7 @@
     IBOutlet NSTextField               *serverNameTextField;
     IBOutlet NSButton                  *loginButton;
     IBOutlet NSButton                  *refreshButton;
+	IBOutlet NSProgressIndicator       *spinner;
     // the Back button is covered by the menu controller
 }
 

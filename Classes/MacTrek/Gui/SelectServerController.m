@@ -53,12 +53,16 @@ bool validServer;
 
 - (void) setServerSelected:(MetaServerEntry *) server {
     
+
     NSLog(@"SelectServerController.setServerSelected called");
+	// start spinning
+	[spinner startAnimation:self];
     // assume the server is valid
     validServer = YES;
     // call the super to initate and verify the server
     [super setServerSelected:server];    
     // the super has sent a event caught by me (invalidServer) if the server was not ok
+	[spinner stopAnimation:self];
     if ((server != nil) && (validServer)) {
         //[loginButton setEnabled:YES];  only after we found a slot
         [serverNameTextField setStringValue:[server address]];

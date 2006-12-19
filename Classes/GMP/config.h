@@ -208,8 +208,10 @@ MA 02110-1301, USA.
 
 /* Define to 1 each of the following for which a native (ie. CPU specific)
     implementation of the corresponding routine exists.  */
-#undef HAVE_NATIVE_mpn_add_n 
+#define HAVE_NATIVE_mpn_add_n 1
 #undef HAVE_NATIVE_mpn_add_nc 
+#define HAVE_NATIVE_mpn_sub_n 1
+#undef HAVE_NATIVE_mpn_sub_nc 
 /* #undef HAVE_NATIVE_mpn_addlsh1_n */
 /* #undef HAVE_NATIVE_mpn_addmul_1c */
 /* #undef HAVE_NATIVE_mpn_addmul_2 */

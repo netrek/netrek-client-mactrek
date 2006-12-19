@@ -37,8 +37,8 @@ MA 02110-1301, USA. */
 mp_limb_t
 mpn_addsub_n (mp_ptr r1p, mp_ptr r2p, mp_srcptr s1p, mp_srcptr s2p, mp_size_t n)
 {
-  //mp_limb_t acyn, acyo;		/* carry for add */
-  //mp_limb_t scyn, scyo;		/* carry for subtract */
+  mp_limb_t acyn;		/* carry for add */
+  mp_limb_t scyn;		/* carry for subtract */
   mp_limb_t acyo;		/* carry for add */
   mp_limb_t scyo;		/* carry for subtract */
   mp_size_t off;		/* offset in operands */
