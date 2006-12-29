@@ -3,7 +3,7 @@
 //  MacTrek
 //
 //  Created by Chris & Judith Lukassen on 20/09/2006.
-//  Copyright 2006 __MyCompanyName__. All rights reserved.
+//  Copyright 2006 __MyCompanyName__. LGPL Licence.
 //
 
 #import "LLGradientRect.h"

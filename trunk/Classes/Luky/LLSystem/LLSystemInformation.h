@@ -3,7 +3,7 @@
 //  MacTrek
 //
 //  Created by Chris & Judith Lukassen on 14/12/2006.
-//  Copyright 2006 Luky Soft. All rights reserved.
+//  Copyright 2006 Luky Soft. LGPL Licence.
 //
 
 #import <Cocoa/Cocoa.h>

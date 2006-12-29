@@ -3,7 +3,7 @@
 //  MacTrek
 //
 //  Created by Aqua on 20/05/2006.
-//  Copyright 2006 Luky Soft. All rights reserved.
+//  Copyright 2006 Luky Soft. See Licence.txt for licence details.
 //
 
 #import "PacketTypesDebug.h"

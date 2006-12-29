@@ -3,7 +3,7 @@
 //  MacTrek
 //
 //  Created by Aqua on 06/08/2006.
-//  Copyright 2006 Luky Soft. All rights reserved.
+//  Copyright 2006 Luky Soft. See Licence.txt for licence details.
 //
 
 #import <Cocoa/Cocoa.h>

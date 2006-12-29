@@ -3,7 +3,7 @@
 //  MacTrek
 //
 //  Created by Aqua on 22/04/2006.
-//  Copyright 2006 __MyCompanyName__. All rights reserved.
+//  Copyright 2006 __MyCompanyName__. See Licence.txt for licence details.
 //
 
 #import "Player.h"
