@@ -500,6 +500,7 @@
 		52F5DB290B1A69E000B8B9C5 /* vsscanf.c in Sources */ = {isa = PBXBuildFile; fileRef = 52F5D9BE0B1A69E000B8B9C5 /* vsscanf.c */; };
 		52F5DB2C0B1A69E000B8B9C5 /* tal-reent.c in Sources */ = {isa = PBXBuildFile; fileRef = 52F5D9C10B1A69E000B8B9C5 /* tal-reent.c */; };
 		52F5DB2D0B1A69E000B8B9C5 /* version.c in Sources */ = {isa = PBXBuildFile; fileRef = 52F5D9C20B1A69E000B8B9C5 /* version.c */; };
+		52FC6C8B0B45A8CD0052CC8B /* licence.txt in Resources */ = {isa = PBXBuildFile; fileRef = 52FC6C8A0B45A8CD0052CC8B /* licence.txt */; };
 		8D11072A0486CEB800E47090 /* MainMenu.nib in Resources */ = {isa = PBXBuildFile; fileRef = 29B97318FDCFA39411CA2CEA /* MainMenu.nib */; };
 		8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
 		8D11072D0486CEB800E47090 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
@@ -659,12 +660,12 @@
 		5220A6C70A598D2900ADAD05 /* QTKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QTKit.framework; path = /System/Library/Frameworks/QTKit.framework; sourceTree = "<absolute>"; };
 		522F30AD0B0B1D6200E7DDED /* RSAWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RSAWrapper.h; path = RSA/RSAWrapper.h; sourceTree = "<group>"; };
 		522F30AE0B0B1D6200E7DDED /* RSAWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RSAWrapper.m; path = RSA/RSAWrapper.m; sourceTree = "<group>"; };
-		522F30B20B0B1E2C00E7DDED /* rsa_box_0.c */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.c; name = rsa_box_0.c; path = ../../../RSA/MacTrek/rsa_box_0.c; sourceTree = "<group>"; };
-		522F30B30B0B1E2C00E7DDED /* rsa_box_4.c */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.c; name = rsa_box_4.c; path = ../../../RSA/MacTrek/rsa_box_4.c; sourceTree = "<group>"; };
-		522F30B40B0B1E2C00E7DDED /* rsa_box_1.c */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.c; name = rsa_box_1.c; path = ../../../RSA/MacTrek/rsa_box_1.c; sourceTree = "<group>"; };
-		522F30B50B0B1E2C00E7DDED /* rsa_box.c */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.c; name = rsa_box.c; path = ../../../RSA/MacTrek/rsa_box.c; sourceTree = "<group>"; };
-		522F30B60B0B1E2C00E7DDED /* rsa_box_3.c */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.c; name = rsa_box_3.c; path = ../../../RSA/MacTrek/rsa_box_3.c; sourceTree = "<group>"; };
-		522F30B70B0B1E2C00E7DDED /* rsa_box_2.c */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.c; name = rsa_box_2.c; path = ../../../RSA/MacTrek/rsa_box_2.c; sourceTree = "<group>"; };
+		522F30B20B0B1E2C00E7DDED /* rsa_box_0.c */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.c; name = rsa_box_0.c; path = ../../../../RSA/MacTrek/rsa_box_0.c; sourceTree = "<group>"; };
+		522F30B30B0B1E2C00E7DDED /* rsa_box_4.c */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.c; name = rsa_box_4.c; path = ../../../../RSA/MacTrek/rsa_box_4.c; sourceTree = "<group>"; };
+		522F30B40B0B1E2C00E7DDED /* rsa_box_1.c */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.c; name = rsa_box_1.c; path = ../../../../RSA/MacTrek/rsa_box_1.c; sourceTree = "<group>"; };
+		522F30B50B0B1E2C00E7DDED /* rsa_box.c */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.c; name = rsa_box.c; path = ../../../../RSA/MacTrek/rsa_box.c; sourceTree = "<group>"; };
+		522F30B60B0B1E2C00E7DDED /* rsa_box_3.c */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.c; name = rsa_box_3.c; path = ../../../../RSA/MacTrek/rsa_box_3.c; sourceTree = "<group>"; };
+		522F30B70B0B1E2C00E7DDED /* rsa_box_2.c */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.c; name = rsa_box_2.c; path = ../../../../RSA/MacTrek/rsa_box_2.c; sourceTree = "<group>"; };
 		52756EA90B3554CA00631149 /* PRECOMPILED */ = {isa = PBXFileReference; lastKnownFileType = folder; name = PRECOMPILED; path = Resources/PRECOMPILED; sourceTree = "<group>"; };
 		527E05010AF3666000B5D37F /* OmniNetworking.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OmniNetworking.framework; path = ../Release/OmniNetworking.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		527E05020AF3666000B5D37F /* OmniBase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = OmniBase.framework; path = ../Release/OmniBase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1132,6 +1133,7 @@
 		52F5D9BE0B1A69E000B8B9C5 /* vsscanf.c */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.c; path = vsscanf.c; sourceTree = "<group>"; };
 		52F5D9C10B1A69E000B8B9C5 /* tal-reent.c */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.c; path = "tal-reent.c"; sourceTree = "<group>"; };
 		52F5D9C20B1A69E000B8B9C5 /* version.c */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.c; path = version.c; sourceTree = "<group>"; };
+		52FC6C8A0B45A8CD0052CC8B /* licence.txt */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text; path = licence.txt; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Info.plist; sourceTree = "<group>"; };
 		8D1107320486CEB800E47090 /* MacTrek.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MacTrek.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -1215,6 +1217,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				52FC6C8A0B45A8CD0052CC8B /* licence.txt */,
 				52756EA90B3554CA00631149 /* PRECOMPILED */,
 				529F08850B06935F00255735 /* LLResources */,
 				529F078D0B06934F00255735 /* Backgrounds */,
@@ -2137,6 +2140,7 @@
 				528E7EF50B0A6CAC00B22943 /* Screenshot_1.png in Resources */,
 				52C7A7F00B17800900F2D523 /* mactrek-mosaic.jpg in Resources */,
 				52756F210B3554CA00631149 /* PRECOMPILED in Resources */,
+				52FC6C8B0B45A8CD0052CC8B /* licence.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

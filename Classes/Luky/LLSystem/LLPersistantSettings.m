@@ -3,7 +3,7 @@
 //  MacTrek
 //
 //  Created by Aqua on 20/08/2006.
-//  Copyright 2006 Luky Soft. All rights reserved.
+//  Copyright 2006 Luky Soft. LGPL Licence.
 //
 
 #import "LLPersistantSettings.h"
