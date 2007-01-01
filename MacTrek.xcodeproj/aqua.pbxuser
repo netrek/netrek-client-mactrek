@@ -97,7 +97,7 @@
 				PBXFileTableDataSourceColumnWidthsKey = (
 					20,
 					695,
-					247,
+					247.2085,
 				);
 				PBXFileTableDataSourceColumnsKey = (
 					PBXErrorsWarningsDataSource_TypeID,
@@ -219,10 +219,14 @@
 					PBXFileDataSource_Warnings_ColumnID,
 				);
 			};
-			PBXPerProjectTemplateStateSaveDate = 189114440;
-			PBXWorkspaceStateSaveDate = 189114440;
+			PBXPerProjectTemplateStateSaveDate = 189340410;
+			PBXWorkspaceStateSaveDate = 189340410;
 		};
 		perUserProjectItems = {
+			5246DBF80B491BAC00B57D11 /* PBXTextBookmark */ = 5246DBF80B491BAC00B57D11 /* PBXTextBookmark */;
+			5246DBFA0B491BAC00B57D11 /* PBXTextBookmark */ = 5246DBFA0B491BAC00B57D11 /* PBXTextBookmark */;
+			5246DC190B491CFA00B57D11 /* PBXTextBookmark */ = 5246DC190B491CFA00B57D11 /* PBXTextBookmark */;
+			5246DC220B491E8900B57D11 /* PBXTextBookmark */ = 5246DC220B491E8900B57D11 /* PBXTextBookmark */;
 			528658210B386C8200355164 /* PBXTextBookmark */ = 528658210B386C8200355164 /* PBXTextBookmark */;
 			528658230B386C8200355164 /* PBXTextBookmark */ = 528658230B386C8200355164 /* PBXTextBookmark */;
 			52D7041F0B386D1100CD124C /* PBXTextBookmark */ = 52D7041F0B386D1100CD124C /* PBXTextBookmark */;
@@ -233,13 +237,11 @@
 			52FC6CA80B45AA110052CC8B /* PBXTextBookmark */ = 52FC6CA80B45AA110052CC8B /* PBXTextBookmark */;
 			52FC6CA90B45AA110052CC8B /* PBXTextBookmark */ = 52FC6CA90B45AA110052CC8B /* PBXTextBookmark */;
 			52FC6CAA0B45AA110052CC8B /* PBXTextBookmark */ = 52FC6CAA0B45AA110052CC8B /* PBXTextBookmark */;
-			52FC6CAC0B45AA110052CC8B /* PBXTextBookmark */ = 52FC6CAC0B45AA110052CC8B /* PBXTextBookmark */;
 			52FC6CAD0B45AA110052CC8B /* PBXTextBookmark */ = 52FC6CAD0B45AA110052CC8B /* PBXTextBookmark */;
 			52FC6CAE0B45AA110052CC8B /* PBXTextBookmark */ = 52FC6CAE0B45AA110052CC8B /* PBXTextBookmark */;
 			52FC6CAF0B45AA110052CC8B /* PBXTextBookmark */ = 52FC6CAF0B45AA110052CC8B /* PBXTextBookmark */;
 			52FC6CB00B45AA110052CC8B /* PBXTextBookmark */ = 52FC6CB00B45AA110052CC8B /* PBXTextBookmark */;
 			52FC6CB10B45AA110052CC8B /* PBXTextBookmark */ = 52FC6CB10B45AA110052CC8B /* PBXTextBookmark */;
-			52FC6CB30B45AA110052CC8B /* PBXTextBookmark */ = 52FC6CB30B45AA110052CC8B /* PBXTextBookmark */;
 		};
 		sourceControlManager = 523E417D09F259F800EE59E2 /* Source Control */;
 		userBookmarkGroup = 526023EA0AAEF9D80027399A /* PBXBookmarkGroup */;
@@ -270,7 +272,8 @@
 		fileReference = 5212EFD10B08FFB80059A8B1 /* Communication.m */;
 		hitCount = 1;
 		lineNumber = 1412;
-		modificationTime = 187990930.422149;
+		location = Communication.ob;
+		modificationTime = 189341169.304822;
 		state = 1;
 	};
 	5208E4120A4735860060A38C /* PainterFactory.m */ = {
@@ -1024,9 +1027,9 @@
 	};
 	5212F0260B08FFB80059A8B1 /* Postman.m */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {2171, 3318}}";
-			sepNavSelRange = "{952, 0}";
-			sepNavVisRect = "{{0, 1076}, {2171, 1120}}";
+			sepNavIntBoundsRect = "{{0, 0}, {944, 3332}}";
+			sepNavSelRange = "{1111, 0}";
+			sepNavVisRect = "{{0, 103}, {944, 665}}";
 		};
 	};
 	5212F0270B08FFB80059A8B1 /* SelectServerController.h */ = {
@@ -1336,6 +1339,8 @@
 		};
 		sourceDirectories = (
 		);
+		variableFormatDictionary = {
+		};
 	};
 	523E417D09F259F800EE59E2 /* Source Control */ = {
 		isa = PBXSourceControlManager;
@@ -1367,6 +1372,55 @@
 			5276C5560B1A500F00E9D5BF /* Communication.m:1266 */,
 		);
 	};
+	5246DBF80B491BAC00B57D11 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 5212F0070B08FFB80059A8B1 /* Status.m */;
+		name = "Status.m: 1";
+		rLen = 0;
+		rLoc = 0;
+		rType = 0;
+		vrLen = 681;
+		vrLoc = 0;
+	};
+	5246DBFA0B491BAC00B57D11 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 5212F0070B08FFB80059A8B1 /* Status.m */;
+		name = "Status.m: 1";
+		rLen = 0;
+		rLoc = 0;
+		rType = 0;
+		vrLen = 681;
+		vrLoc = 0;
+	};
+	5246DC140B491CEB00B57D11 /* Postman.m */ = {
+		isa = PBXFileReference;
+		lastKnownFileType = sourcecode.c.objc;
+		name = Postman.m;
+		path = /Users/aqua/Documents/Projects/MacTrek/Client/trunk/Classes/MacTrek/Gui/Postman.m;
+		sourceTree = "<absolute>";
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {878, 3332}}";
+			sepNavSelRange = "{1074, 0}";
+			sepNavVisRect = "{{0, 0}, {787, 572}}";
+		};
+	};
+	5246DC190B491CFA00B57D11 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 5246DC140B491CEB00B57D11 /* Postman.m */;
+		rLen = 1;
+		rLoc = 34;
+		rType = 1;
+	};
+	5246DC220B491E8900B57D11 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 5212F0260B08FFB80059A8B1 /* Postman.m */;
+		name = "Postman.m: 35";
+		rLen = 0;
+		rLoc = 1111;
+		rType = 0;
+		vrLen = 1895;
+		vrLoc = 137;
+	};
 	5254BCBC0AC9E7BE00BD2845 /* GuiManager.m:114 */ = {
 		isa = PBXFileBreakpoint;
 		actions = (
@@ -1378,7 +1432,7 @@
 		functionName = "-applicationShouldTerminate:";
 		hitCount = 1;
 		lineNumber = 114;
-		modificationTime = 187990925.757869;
+		modificationTime = 189341166.046373;
 		state = 2;
 	};
 	5258C3DE0AC1DE19001479BB /* LLBar.m:26 */ = {
@@ -1392,7 +1446,7 @@
 		functionName = "-init";
 		hitCount = 1;
 		lineNumber = 26;
-		modificationTime = 187990925.757863;
+		modificationTime = 189341166.04636;
 		state = 2;
 	};
 	526023EA0AAEF9D80027399A /* PBXBookmarkGroup */ = {
@@ -1417,7 +1471,7 @@
 		functionName = "-drawLabelBackgroundForRect:";
 		hitCount = 1;
 		lineNumber = 101;
-		modificationTime = 187990925.757873;
+		modificationTime = 189341166.046378;
 		state = 2;
 	};
 	527481230ACAB4DC001A80A1 /* PainterFactory.m:1476 */ = {
@@ -1431,7 +1485,7 @@
 		functionName = "-drawLabelForPlanet:belowRect:";
 		hitCount = 1;
 		lineNumber = 1476;
-		modificationTime = 187990925.7578761;
+		modificationTime = 189341166.046381;
 		state = 2;
 	};
 	5276C4860B1A40BB00E9D5BF /* Communication.m:1181 */ = {
@@ -1445,7 +1499,8 @@
 		functionName = "-connectToServerUsingPort:expectedHost:";
 		hitCount = 1;
 		lineNumber = 1181;
-		modificationTime = 187990930.442655;
+		location = Communication.ob;
+		modificationTime = 189341169.315627;
 		state = 1;
 	};
 	5276C4880B1A40BE00E9D5BF /* Communication.m:1221 */ = {
@@ -1459,7 +1514,8 @@
 		functionName = "-openUdpConn";
 		hitCount = 1;
 		lineNumber = 1221;
-		modificationTime = 187990930.458605;
+		location = Communication.ob;
+		modificationTime = 189341169.327642;
 		state = 1;
 	};
 	5276C5560B1A500F00E9D5BF /* Communication.m:1266 */ = {
@@ -1473,7 +1529,7 @@
 		functionName = "-setUpAndRunThread:";
 		hitCount = 1;
 		lineNumber = 1266;
-		modificationTime = 187990925.757895;
+		modificationTime = 189341166.046399;
 		state = 2;
 	};
 	528658210B386C8200355164 /* PBXTextBookmark */ = {
@@ -1850,7 +1906,8 @@
 		functionName = "-showKeyMapPanel";
 		hitCount = 1;
 		lineNumber = 601;
-		modificationTime = 187990930.375764;
+		location = GuiManager.ob;
+		modificationTime = 189341169.12631;
 		state = 1;
 	};
 	528E83660B0A8F5600B22943 /* SimpleBaseClass.h */ = {
@@ -1937,7 +1994,7 @@
 		functionName = "-snap";
 		hitCount = 1;
 		lineNumber = 38;
-		modificationTime = 187990925.75784;
+		modificationTime = 189341166.046343;
 		state = 2;
 	};
 	52D16B640A06C64900995816 /* logo.icns */ = {
@@ -2033,7 +2090,8 @@
 		functionName = "-trackUpdate";
 		hitCount = 1;
 		lineNumber = 108;
-		modificationTime = 187990929.970984;
+		location = Entity.ob;
+		modificationTime = 189341169.204136;
 		state = 1;
 	};
 	52F5D83E0B1A69E000B8B9C5 /* config.h */ = {
@@ -2099,19 +2157,10 @@
 	};
 	52FC6CAB0B45AA110052CC8B /* aqua.pbxuser */ = {
 		isa = PBXFileReference;
+		lastKnownFileType = text;
 		name = aqua.pbxuser;
 		path = /Users/aqua/Documents/Projects/MacTrek/Client/trunk/MacTrek.xcodeproj/aqua.pbxuser;
 		sourceTree = "<absolute>";
-	};
-	52FC6CAC0B45AA110052CC8B /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = 5212F0070B08FFB80059A8B1 /* Status.m */;
-		name = "Status.m: 1";
-		rLen = 0;
-		rLoc = 0;
-		rType = 0;
-		vrLen = 681;
-		vrLoc = 0;
 	};
 	52FC6CAD0B45AA110052CC8B /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
@@ -2165,19 +2214,10 @@
 	};
 	52FC6CB20B45AA110052CC8B /* aqua.pbxuser */ = {
 		isa = PBXFileReference;
+		lastKnownFileType = text;
 		name = aqua.pbxuser;
 		path = /Users/aqua/Documents/Projects/MacTrek/Client/trunk/MacTrek.xcodeproj/aqua.pbxuser;
 		sourceTree = "<absolute>";
-	};
-	52FC6CB30B45AA110052CC8B /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = 5212F0070B08FFB80059A8B1 /* Status.m */;
-		name = "Status.m: 1";
-		rLen = 0;
-		rLoc = 0;
-		rType = 0;
-		vrLen = 681;
-		vrLoc = 0;
 	};
 	8D1107260486CEB800E47090 /* MacTrek */ = {
 		activeExec = 0;

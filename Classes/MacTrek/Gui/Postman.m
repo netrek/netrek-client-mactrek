@@ -27,21 +27,22 @@
 - (void) newMessage:(NSString*) str {	
 	
 	// a hog request is 5 spaces
-	// e.g.         < F2->F2        >
-	// so take the trailing characters
-	if ([str length] <  5) {
-		return;
-	}
+	// e.g.         < F2->ALL        >
 	
-	NSString *hog = [str substringFromIndex:([str length] - 5)];
-	if ([hog isEqualToString:@"     "]) {
+	// Bug 1625370 hog calls do not end on 5 spaces, but consist of 5 spaces
+	// thus stringlength is 15
+	NSString *hog = [str substringWithRange:NSMakeRange(10, 5)];
+	if ( ([hog isEqualToString:@"     "]) && ([str length] != 15) ){
+		// found 5 spaces at starting at right spot in a string with the right length
+	
 		// respond by sending version number
 		NSLog(@"Postman.newMessage hog request");
 		// see if we can find the addressy
 		NSRange range = [str rangeOfString:@"->"];
 		if (range.location == NSNotFound) {
-			NSLog(@"Postman.newMessage responding to ALL with version");
-			[self sendMessage:[NSString stringWithFormat:@"Running: %@ %@", APP_NAME, VERSION] to:@"ALL"];
+			// Bug 1625370 only reply to real users
+			//NSLog(@"Postman.newMessage responding to ALL with version");
+			//[self sendMessage:[NSString stringWithFormat:@"Running: %@ %@", APP_NAME, VERSION] to:@"ALL"];
 		} else {
 			NSString *origin = [[str substringToIndex:range.location] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
 			NSLog(@"Postman.newMessage responding to %@ with version", origin);
