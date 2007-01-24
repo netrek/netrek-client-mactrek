@@ -171,11 +171,9 @@ int startUpEvents = 0;
     
     // set up a timer to redraw at FRAME_RATE 
     // since some data is updated outside the main loop and in the receive 
-    // thread
-    [NSTimer scheduledTimerWithTimeInterval: (1 / FRAME_RATE)
-                                     target:self selector:@selector(screenRefreshTimerFired:)
-                                   userInfo:nil 
-                                    repeats:YES];
+    // thread (default is still with timer (so not sync))
+	[self setSyncScreenUpdateWithRead:NO];
+	
     // does the controller wait, or asks for reads herself...
     [loginCntrl setMultiThreaded:multiThreaded];
 	
@@ -210,16 +208,41 @@ int startUpEvents = 0;
     }
 }
 
+// added synchronized access with the reader, disables the timer
+// and relies on SERVER_READER_READ_SYNC to be repainted
+- (void)setSyncScreenUpdateWithRead:(bool)enable {
+	
+	// stop active timer
+	[timer invalidate];
+	if (timer != nil) {
+		[timer release];
+	}
+	
+	// use sync or timer
+	if (enable) {
+		[notificationCenter addObserver:self selector:@selector(screenRefreshTimerFired:) name:@"SERVER_READER_READ_SYNC"
+								 object:nil useLocks:YES useMainRunLoop:YES]; 
+	}
+	else {		
+		timer = [NSTimer scheduledTimerWithTimeInterval: (1 / FRAME_RATE)
+												 target:self selector:@selector(screenRefreshTimerFired:)
+											   userInfo:nil 
+												repeats:YES];
+	}
+
+}
+
 - (void)screenRefreshTimerFired:(NSTimer*)theTimer {
     
-   //static NSTimeInterval start, stop;
-   //start = [NSDate timeIntervalSinceReferenceDate]; 
-   //NSLog(@"GuiManager.screenRefreshTimerFired(slept): %f sec", (start-stop));        
+   static NSTimeInterval start, stop;
+	
+   start = [NSDate timeIntervalSinceReferenceDate]; 
+   NSLog(@"GuiManager.screenRefreshTimerFired(slept): %f sec", (start-stop));        
 
     if (gameState == GS_GAME_ACTIVE) {
         // $$ this will work, but what about when we are killed?
         if (!multiThreaded) {
-            //[notificationCenter setEnable:NO];
+            //[\icationCenter setEnable:NO];
             [client singleReadFromServer]; // single threaded 
         }
 
@@ -228,9 +251,11 @@ int startUpEvents = 0;
     } else {
         //[notificationCenter setEnable:YES];
     }
-    //stop = [NSDate timeIntervalSinceReferenceDate];  
-    //NSLog(@"GuiManager.screenRefreshTimerFired(spent): %f sec", (stop-start));
-    //[mainWindow displayIfNeeded];   // not needed comm is now threadsafe 
+	
+    stop = [NSDate timeIntervalSinceReferenceDate];  
+    NSLog(@"GuiManager.screenRefreshTimerFired(spent): %f sec", (stop-start));
+    
+	//[mainWindow displayIfNeeded];   // not needed comm is now threadsafe 
 }
 
 - (void)serverSelected:(MetaServerEntry *) selectedServer {

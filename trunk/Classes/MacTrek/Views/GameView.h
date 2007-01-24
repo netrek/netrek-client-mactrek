@@ -16,7 +16,8 @@
 #import "Carbon/Carbon.h"
 #import "LLScreenShotController.h"
 
-#define FRAME_RATE  20 
+// dropped to 10 reduces async update problem by factor 2 *still not perfect though*
+#define FRAME_RATE  10 
 #define MAX_WAIT_BEFORE_DRAW  (1/(2*FRAME_RATE)) 
 
 // 10%
