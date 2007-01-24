@@ -59,9 +59,9 @@
 		
 		if (([sound currentTime].timeValue > 0 ) && 
 			([sound currentTime].timeValue  < [sound duration].timeValue)) {
-			//NSLog(@"SoundEffect.sound already playing sound %@, skipping....", name);
+			//LLLog(@"SoundEffect.sound already playing sound %@, skipping....", name);
 		} else {
-			//NSLog(@"SoundEffect.sound free sound found %@", name);
+			//LLLog(@"SoundEffect.sound free sound found %@", name);
 			[sound gotoBeginning];
 			return sound;
 		}
@@ -70,7 +70,7 @@
 	if (autogrow) {
 		// do something
 	}
-	NSLog(@"SoundEffect.sound no free sound found %@", name);
+	LLLog(@"SoundEffect.sound no free sound found %@", name);
 	return nil;		
 }
 
@@ -104,7 +104,7 @@
 	QTMovie *sound = [self sound];
 	if (sound != nil) {
 		[sound setVolume:vol];
-		NSLog(@"SoundEffect.playWithVolume %f sound %@", vol, name);
+		LLLog(@"SoundEffect.playWithVolume %f sound %@", vol, name);
 		[sound play];
 	}
 }
@@ -121,7 +121,7 @@
 			
 		MediaSetSoundBalance((void*)sound, balance); 
 		[sound setVolume:vol];
-		NSLog(@"SoundEffect.playWithVolume %f balance %f (%d) sound %@", vol, bal, balance, name);
+		LLLog(@"SoundEffect.playWithVolume %f balance %f (%d) sound %@", vol, bal, balance, name);
 		[sound play];
 	}
 }

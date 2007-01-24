@@ -30,9 +30,9 @@
     // create a private pool for this thread
     NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
     
-    NSLog(@"MetaServerTableDataSource.refreshServersInSeperateThread: start running");
+    LLLog(@"MetaServerTableDataSource.refreshServersInSeperateThread: start running");
     [self refreshServers:self];
-    NSLog(@"MetaServerTableDataSource.refreshServersInSeperateThread: complete");
+    LLLog(@"MetaServerTableDataSource.refreshServersInSeperateThread: complete");
     
     //[notificationCenter postNotificationName:@"MS_SERVERS_READ"];
     
@@ -47,7 +47,7 @@
 		result = [meta readFromMetaServer:@"metaserver.netrek.org" atPort:3521];
 	}
 	@catch (NSException * e) {
-		NSLog(@"MetaServerTableDataSource.refreshServers: error %@", [e reason]);
+		LLLog(@"MetaServerTableDataSource.refreshServers: error %@", [e reason]);
 		return;
 	}
 
@@ -59,7 +59,7 @@
 		[entries release];
 		entries = result;
 		if (localhost != nil) {
-			NSLog(@"MetaServerTableDataSource.refreshServers: keeping localhost");
+			LLLog(@"MetaServerTableDataSource.refreshServers: keeping localhost");
 			[self addServerPassivly:localhost];
 		}
 	}
@@ -101,7 +101,7 @@
 
 - (void) setServerSelected:(MetaServerEntry *) server {
 
-    NSLog(@"MetaServerTableDataSource.setServerSelected called");
+    LLLog(@"MetaServerTableDataSource.setServerSelected called");
     [selectedServer release];
     selectedServer = server;
     [selectedServer retain];

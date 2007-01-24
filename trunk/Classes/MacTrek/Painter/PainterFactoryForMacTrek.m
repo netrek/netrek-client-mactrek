@@ -20,7 +20,7 @@
     NSImage *rawImage = [[NSImage alloc] initWithContentsOfFile:pathToImage];
     
     if (rawImage == nil) {
-        //NSLog(@"PainterFactoryForMacTrek.loadImage %@ failed, reverting to super", pathToImage);
+        //LLLog(@"PainterFactoryForMacTrek.loadImage %@ failed, reverting to super", pathToImage);
         // something went wrong try super image
         return [super loadImage:imageName];
     }

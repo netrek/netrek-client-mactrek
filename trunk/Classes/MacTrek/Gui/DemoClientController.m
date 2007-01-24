@@ -27,7 +27,7 @@
 - (IBAction)play:(id)sender {
        
     if (selectedServer != nil) {
-         NSLog(@"DemoClientController play at server: %@ port %d", [selectedServer address], [selectedServer port]);
+         LLLog(@"DemoClientController play at server: %@ port %d", [selectedServer address], [selectedServer port]);
         [jtrek startJTrekAt:[selectedServer address] port:[selectedServer port]];
     }    
 }

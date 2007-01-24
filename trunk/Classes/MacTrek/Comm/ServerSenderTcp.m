@@ -22,7 +22,7 @@
 
 - (bool) sendBuffer:(char*) buffer length:(int)size {
     
-    NSLog(@"ServerSenderTcp.sendBuffer message: %@ (%d) size: %d", 
+    LLLog(@"ServerSenderTcp.sendBuffer message: %@ (%d) size: %d", 
           [pktConv clientPacketString:buffer[0]], buffer[0], size);
     [pktConv printPacketInBuffer:buffer size:size];
 	
@@ -32,12 +32,12 @@
         if (socket != nil) {
             [socket writeData:packet];
         } else {
-            NSLog(@"ServerSenderTcp.sendBuffer cannot send message, socket was closed");
+            LLLog(@"ServerSenderTcp.sendBuffer cannot send message, socket was closed");
         }
         
     }
     @catch (NSException * e) {
-        NSLog(@"ServerSenderTcp.sendBuffer cannot send message, should close!");
+        LLLog(@"ServerSenderTcp.sendBuffer cannot send message, should close!");
         [packet release];
         return NO;
     }

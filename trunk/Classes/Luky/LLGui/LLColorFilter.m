@@ -40,23 +40,23 @@
     
     // check if source is ok    
     if ([srcImageRep bitsPerSample] != 8) {
-	    NSLog(@"LLColorFilter.replaceColor src has incompatible colordepth %d", [srcImageRep bitsPerSample]);
+	    LLLog(@"LLColorFilter.replaceColor src has incompatible colordepth %d", [srcImageRep bitsPerSample]);
 	    return nil;
     }
     if (([srcImageRep samplesPerPixel] != 3) && ([srcImageRep samplesPerPixel] != 4)) { 
-	    NSLog(@"LLColorFilter.replaceColor src has incompatible samples per pixel %d", [srcImageRep samplesPerPixel]);
+	    LLLog(@"LLColorFilter.replaceColor src has incompatible samples per pixel %d", [srcImageRep samplesPerPixel]);
 	    return nil;
     }
     if ([srcImageRep isPlanar]) {
-	    NSLog(@"LLColorFilter.replaceColor src has incompatible planes");
+	    LLLog(@"LLColorFilter.replaceColor src has incompatible planes");
 	    return nil;
     }
     if ([srcImageRep hasAlpha]) {
-	    NSLog(@"LLColorFilter.replaceColor src has no alpha");
+	    LLLog(@"LLColorFilter.replaceColor src has no alpha");
 	    return nil;
     }
     if (sizeof(int) != 4) {
-	    NSLog(@"LLColorFilter.replaceColor platform error, int is not 4 bytes");
+	    LLLog(@"LLColorFilter.replaceColor platform error, int is not 4 bytes");
 	    return nil;
     }
     

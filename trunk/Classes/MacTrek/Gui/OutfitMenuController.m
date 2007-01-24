@@ -29,7 +29,7 @@ char myship = SHIP_CA;
 }
 
 - (void) awakeFromNib { 
-    NSLog(@"OutfitMenuController.awakeFromNib reached");
+    LLLog(@"OutfitMenuController.awakeFromNib reached");
 }
 
 - (void) redrawButton:(NSButton*)but withShip:(int)shiptType{
@@ -72,7 +72,7 @@ char myship = SHIP_CA;
         
         // check
         if (universe == nil) {
-            NSLog(@"OutfitMenuController.handleTeamMask NO ! my universe is too small");
+            LLLog(@"OutfitMenuController.handleTeamMask NO ! my universe is too small");
             return;
         }
         

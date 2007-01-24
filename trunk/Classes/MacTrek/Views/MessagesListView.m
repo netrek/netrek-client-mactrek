@@ -43,7 +43,7 @@
     }
     
     // add it
-    NSLog(@"MessagesListView.newMessage (%@)", message);
+    LLLog(@"MessagesListView.newMessage (%@)", message);
     [self addString:message];
 	// report the addition
 	[notificationCenter postNotificationName:@"MV_NEW_MESSAGE" object:self userInfo:message];
@@ -58,7 +58,7 @@
     
     if ((message == nil) ||
         ([message length] <= 0)) {
-        NSLog(@"MessagesListView.newMessageInDictionairy empty message"); 
+        LLLog(@"MessagesListView.newMessageInDictionairy empty message"); 
         return;
     }
     
@@ -71,7 +71,7 @@
     // A new type distress/macro call came in. parse it appropriately
     if (flags == (TEAM | DISTR | VALID)) {
         
-        NSLog(@"MessagesListView.newMessageInDictionairy distress not parsed.. (%@)", message);
+        LLLog(@"MessagesListView.newMessageInDictionairy distress not parsed.. (%@)", message);
         return;
         /*
         Distress distress = new Distress(data, message, from);

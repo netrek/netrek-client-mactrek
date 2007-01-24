@@ -32,7 +32,7 @@
 	NSImage *image = [[NSImage alloc] initWithContentsOfFile:pathToImage];
 	
 	if (image == nil) {
-		NSLog(@"LLGradientRect.addImage: ERROR, cannot find %@", pathToImage);
+		LLLog(@"LLGradientRect.addImage: ERROR, cannot find %@", pathToImage);
 	} else {	
 		[images setObject:image forKey:key];
 	}

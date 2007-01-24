@@ -22,7 +22,7 @@
 
 - (bool)snap {
     
-	NSLog(@"LLScreenShotController.snap %d", counter);
+	LLLog(@"LLScreenShotController.snap %d", counter);
 	
     if (isRunning) {
         // still running? 
@@ -40,17 +40,17 @@
                                                   arg, nil]]; 
 		counter++;
         [process startProcess];
-		NSLog(@"LLScreenShotController.snap with name %@", arg);
+		LLLog(@"LLScreenShotController.snap with name %@", arg);
 		return YES;
     }
 }
 
 - (void)processStarted:(id)task {
-    NSLog(@"LLScreenShotController.processStarted");
+    LLLog(@"LLScreenShotController.processStarted");
 }
 
 - (void)processFinished:(id)task {
-    NSLog(@"LLScreenShotController.processFinished:  done");
+    LLLog(@"LLScreenShotController.processFinished:  done");
 	isRunning = NO;
 }
 

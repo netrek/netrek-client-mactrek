@@ -39,7 +39,7 @@
     if (timeOut > 0.0) {
 		if ([sock waitForInputWithTimeout:timeOut] == NO) {
 			// trouble!
-			NSLog(@"ServerReaderTcp.doRead TIMEOUT! more than %f sec passed", timeOut);
+			LLLog(@"ServerReaderTcp.doRead TIMEOUT! more than %f sec passed", timeOut);
 			return nil;
 		}
 	}	

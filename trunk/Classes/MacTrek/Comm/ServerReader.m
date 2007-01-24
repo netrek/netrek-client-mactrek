@@ -134,11 +134,11 @@ NSMutableData *leftOverPacket;
 }
 
 - (void) close {
-    NSLog(@"ServerReader.close this should have been overwritten");
+    LLLog(@"ServerReader.close this should have been overwritten");
 }
 
 - (NSData *) doRead {
-    NSLog(@"ServerReader.doRead this should have been overwritten");
+    LLLog(@"ServerReader.doRead this should have been overwritten");
     return nil;
 }
 
@@ -154,7 +154,7 @@ NSMutableData *leftOverPacket;
     
     // check for leftovers
     if (leftOverPacket != nil) {
-        //NSLog(@"ServerReader.readFromServer pre-pending %d bytes", [leftOverPacket length]);
+        //LLLog(@"ServerReader.readFromServer pre-pending %d bytes", [leftOverPacket length]);
         [leftOverPacket appendData:dataReceived];
         
         count = [leftOverPacket length];
@@ -166,9 +166,9 @@ NSMutableData *leftOverPacket;
     }
   
     /*
-    NSLog(@"ServerReader.readFromServer raw block read start:");
+    LLLog(@"ServerReader.readFromServer raw block read start:");
     [pktConv printPacketInBuffer:buffer size:count];
-    NSLog(@"ServerReader.readFromServer raw block read end");
+    LLLog(@"ServerReader.readFromServer raw block read end");
     */
     
     while(count > 0)  {
@@ -177,7 +177,7 @@ NSMutableData *leftOverPacket;
         if(ptype < 1 || ptype > SP_BITMAP) {
             
             // debug THIS we want to see!
-            NSLog(@"ServerReader.readFromServer received message: %@ (%d), count: %d", 
+            LLLog(@"ServerReader.readFromServer received message: %@ (%d), count: %d", 
                   [pktConv serverPacketString:buffer[0]], buffer[0], count);
             bool oldSetting = [pktConv debugPackets];
             [pktConv setDebugPackets:YES];
@@ -185,8 +185,8 @@ NSMutableData *leftOverPacket;
             [pktConv setDebugPackets:oldSetting];
             
             // continue
-            NSLog(@"ServerReader.readFromServer: Unknown packet type. Flushing packet buffer & input stream.");
-            NSLog([NSString stringWithFormat:@"ServerReader.readFromServer: Last packet type: %d", ptype]);
+            LLLog(@"ServerReader.readFromServer: Unknown packet type. Flushing packet buffer & input stream.");
+            LLLog([NSString stringWithFormat:@"ServerReader.readFromServer: Last packet type: %d", ptype]);
             // flush
             count = 0;
             buffer = nil;
@@ -196,7 +196,7 @@ NSMutableData *leftOverPacket;
         
         int size = PACKET_SIZES[ptype];
         // debug 
-        //NSLog(@"ServerReader.readFromServer received message: %@ (%d), size %d buffer size: %d", 
+        //LLLog(@"ServerReader.readFromServer received message: %@ (%d), size %d buffer size: %d", 
         //      [pktConv serverPacketString:buffer[0]], buffer[0], size, count);
         [pktConv printPacketInBuffer:buffer size:size];
         
@@ -204,7 +204,7 @@ NSMutableData *leftOverPacket;
         // determine the size of the packet before we can handle it
 		if (size == -1) {
             if(count < 4) {
-                NSLog(@"ServerReader.readFromServer: variable buffer too small");
+                LLLog(@"ServerReader.readFromServer: variable buffer too small");
 				return;
             }
             
@@ -268,7 +268,7 @@ NSMutableData *leftOverPacket;
 					size = (buffer[1] & 0xFF) * 2 + 2;
 					break;
 				default:					
-					NSLog([NSString stringWithFormat:@"ServerReader.readFromServer: Unknown variable buffer: %c", ptype]);
+					LLLog([NSString stringWithFormat:@"ServerReader.readFromServer: Unknown variable buffer: %c", ptype]);
 					return;
             }
             // stuff some bits to make it fit in an integer
@@ -276,15 +276,15 @@ NSMutableData *leftOverPacket;
                 size += (4 - (size % 4));
             }
             if (size <= 0) {
-                NSLog([NSString stringWithFormat:@"ServerReader.readFromServer: bad size: %d", size]);
-				NSLog([NSString stringWithFormat:@"ServerReader.readFromServer: for packet type: %c", ptype]);
+                LLLog([NSString stringWithFormat:@"ServerReader.readFromServer: bad size: %d", size]);
+				LLLog([NSString stringWithFormat:@"ServerReader.readFromServer: for packet type: %c", ptype]);
 				return;
             }
         }
         
         // we have the size and the packettype, now handle it
         if(count < size) {
-            //NSLog(@"ServerReader.readFromServer message %d only %d of %d bytes in buffer, preserving", ptype, count, size);
+            //LLLog(@"ServerReader.readFromServer message %d only %d of %d bytes in buffer, preserving", ptype, count, size);
             [leftOverPacket release];
             leftOverPacket = [NSMutableData dataWithBytes:buffer length:count];
             [leftOverPacket retain];
@@ -306,7 +306,7 @@ NSMutableData *leftOverPacket;
             // move on!
             buffer += size;
         } else {
-            NSLog(@"ServerReader.readFromServer packet %d was not handled correctly", buffer[0]);
+            LLLog(@"ServerReader.readFromServer packet %d was not handled correctly", buffer[0]);
         }
         
         // exact fit in frame, no leftover
@@ -403,32 +403,32 @@ int shortFromPacket(char *buffer, int offset) {
 // too big to be in switch
 -(void) handleUdpReply:(char*) buffer {
     
-    NSLog([NSString stringWithFormat:@"ServerReader.handleUdpReply: UDP: Received UDP reply %c", (buffer[1])]);
+    LLLog([NSString stringWithFormat:@"ServerReader.handleUdpReply: UDP: Received UDP reply %c", (buffer[1])]);
     
     switch (buffer[1] & 0xFF) {
         case SWITCH_TCP_OK:
             if ([communication commMode] == COMM_TCP) {
-                NSLog(@"ServerReader.handleUdpReply: Got SWITCH_TCP_OK while in TCP mode; ignoring");
+                LLLog(@"ServerReader.handleUdpReply: Got SWITCH_TCP_OK while in TCP mode; ignoring");
             }
             else {
                 [communication setCommMode: COMM_TCP];
                 [communication setCommStatus: STAT_CONNECTED];
-                NSLog(@"ServerReader.handleUdpReply: Connected to server's TCP port");
+                LLLog(@"ServerReader.handleUdpReply: Connected to server's TCP port");
 				// close UDP in comm
                 [notificationCenter postNotificationName:@"SP_UDP_SWITCHED_TO_TCP" object:self userInfo:nil];
             }
             break;
         case SWITCH_UDP_OK:
             if ([communication commMode] == COMM_UDP) {
-                NSLog(@"ServerReader.handleUdpReply: Got SWITCH_UDP_OK while in UDP mode; ignoring");
+                LLLog(@"ServerReader.handleUdpReply: Got SWITCH_UDP_OK while in UDP mode; ignoring");
             }
             else {
                 // the server is forcing UDP down our throat?
                 if ([communication commModeRequest] != COMM_UDP) {
-                    NSLog(@"ServerReader.handleUdpReply: Got unsolicited SWITCH_UDP_OK; ignoring");
+                    LLLog(@"ServerReader.handleUdpReply: Got unsolicited SWITCH_UDP_OK; ignoring");
                 }
                 else {
-                    NSLog(@"ServerReader.handleUdpReply: Connected to server's UDP port");
+                    LLLog(@"ServerReader.handleUdpReply: Connected to server's UDP port");
                     [communication setCommMode: COMM_UDP];
                     [communication setCommStatus: STAT_VERIFY_UDP];    
                     int port = intFromPacket(buffer, 4);
@@ -445,10 +445,10 @@ int shortFromPacket(char *buffer, int offset) {
         case SWITCH_DENIED:     
             // look for some scary bits in the reason byte
             if (intFromPacket(buffer, 4) == 0) {
-                NSLog(@"ServerReader.handleUdpReply: Switch to UDP failed (different version)");
+                LLLog(@"ServerReader.handleUdpReply: Switch to UDP failed (different version)");
             }
             else {
-                NSLog(@"ServerReader.handleUdpReply: Switch to UDP denied");
+                LLLog(@"ServerReader.handleUdpReply: Switch to UDP denied");
             }
             // reset mode request to org mode
             [communication setCommModeRequest:[communication commMode]];
@@ -460,13 +460,13 @@ int shortFromPacket(char *buffer, int offset) {
             break;
         case SWITCH_VERIFY:
             [notificationCenter postNotificationName:@"SP_SWITCH_VERIFY" object:self userInfo:nil];
-            NSLog(@"ServerReader.handleUdpReply: Received UDP verification");
+            LLLog(@"ServerReader.handleUdpReply: Received UDP verification");
             // This is here because I noticed player stats weren't being 
             // updated unless I sent this request manually
             [notificationCenter postNotificationName:@"SP_ASK_FOR_COMM_UPDATE" object:self userInfo:nil];
 			break;
         default:
-            NSLog([NSString stringWithFormat: @"ServerReader.handleUdpReply: Got funny reply (%c) in UDP_REPLY packet",
+            LLLog([NSString stringWithFormat: @"ServerReader.handleUdpReply: Got funny reply (%c) in UDP_REPLY packet",
                 (buffer[1])]);
             break;
     }
@@ -919,8 +919,8 @@ int shortFromPacket(char *buffer, int offset) {
             }
         }
         @catch (NSException * e) {
-            NSLog([NSString stringWithFormat: @"ServerReader.handleVPlanet: planet owner out of bounds: ", ownerId]);
-            NSLog([NSString stringWithFormat: @"ServerReader.handleVPlanet: planet : ", planet_index]);
+            LLLog([NSString stringWithFormat: @"ServerReader.handleVPlanet: planet owner out of bounds: ", ownerId]);
+            LLLog([NSString stringWithFormat: @"ServerReader.handleVPlanet: planet : ", planet_index]);
             [universe movePlanet:planet toTeam:[universe teamWithId:TEAM_NOBODY]];
         }
         
@@ -1024,7 +1024,7 @@ int shortFromPacket(char *buffer, int offset) {
 }
 
 - (void) handleSequence:(char *) buffer {
-    NSLog(@"ServerReader.handleSequence: SP_SEQUENCE not implemented");
+    LLLog(@"ServerReader.handleSequence: SP_SEQUENCE not implemented");
 }
 
 	/** handlePacket */
@@ -1047,8 +1047,8 @@ int shortFromPacket(char *buffer, int offset) {
                 [notificationCenter postNotificationName:@"SP_MESSAGE" object:self userInfo:obj];  
             }
             @catch (NSException * e) {
-                NSLog(@"ServerReader.handlePacket: SP_MESSAGE error");
-                NSLog([NSString stringWithFormat:@"%@: %@", [e name], [e reason]]);
+                LLLog(@"ServerReader.handlePacket: SP_MESSAGE error");
+                LLLog([NSString stringWithFormat:@"%@: %@", [e name], [e reason]]);
             }        
 			break; 
 		case SP_PLAYER_INFO :
@@ -1060,7 +1060,7 @@ int shortFromPacket(char *buffer, int offset) {
                 [player setShip:ship];
                 int teamId = [universe remappedTeamIdWithId: buffer[3]]; // and is with this team
                 if (teamId > TEAM_MAX) {
-                    NSLog(@"ServerReader.handlePacket: SP_PLAYER_INFO error team %d unknown", teamId);
+                    LLLog(@"ServerReader.handlePacket: SP_PLAYER_INFO error team %d unknown", teamId);
                     break;
                 }
                 Team *team = [universe teamWithId:teamId];
@@ -1069,8 +1069,8 @@ int shortFromPacket(char *buffer, int offset) {
                 [notificationCenter postNotificationName:@"SP_PLAYER_INFO" object:self userInfo:player];
             }
             @catch (NSException * e) {
-                NSLog(@"ServerReader.handlePacket: SP_PLAYER_INFO error");
-                NSLog([NSString stringWithFormat:@"%@: %@", [e name], [e reason]]);
+                LLLog(@"ServerReader.handlePacket: SP_PLAYER_INFO error");
+                LLLog([NSString stringWithFormat:@"%@: %@", [e name], [e reason]]);
             }
 			break;
 		case SP_KILLS :
@@ -1081,8 +1081,8 @@ int shortFromPacket(char *buffer, int offset) {
                 //[notificationCenter postNotificationName:@"SP_KILLS" object:self userInfo:player];
             }
             @catch (NSException * e) {
-                NSLog(@"ServerReader.handlePacket: SP_KILLS error"); 
-                NSLog([NSString stringWithFormat:@"%@: %@", [e name], [e reason]]);
+                LLLog(@"ServerReader.handlePacket: SP_KILLS error"); 
+                LLLog([NSString stringWithFormat:@"%@: %@", [e name], [e reason]]);
             }
             break;
 		case SP_PLAYER :
@@ -1109,8 +1109,8 @@ int shortFromPacket(char *buffer, int offset) {
                 //[notificationCenter postNotificationName:@"SP_PLAYER" object:self userInfo:player];     
             }
             @catch (NSException * e) {
-                NSLog(@"ServerReader.handlePacket: SP_PLAYER error");
-                NSLog([NSString stringWithFormat:@"%@: %@", [e name], [e reason]]);
+                LLLog(@"ServerReader.handlePacket: SP_PLAYER error");
+                LLLog([NSString stringWithFormat:@"%@: %@", [e name], [e reason]]);
             }
             break;
 		case SP_TORP_INFO :
@@ -1129,8 +1129,8 @@ int shortFromPacket(char *buffer, int offset) {
                 //[notificationCenter postNotificationName:@"SP_TORP_INFO" object:self userInfo:torp];
             }
             @catch (NSException * e) {
-                NSLog(@"ServerReader.handlePacket: SP_TORP_INFO error");
-                NSLog([NSString stringWithFormat:@"%@: %@", [e name], [e reason]]);
+                LLLog(@"ServerReader.handlePacket: SP_TORP_INFO error");
+                LLLog([NSString stringWithFormat:@"%@: %@", [e name], [e reason]]);
             }
 			break;
 		case SP_TORP :
@@ -1151,8 +1151,8 @@ int shortFromPacket(char *buffer, int offset) {
                 //[notificationCenter postNotificationName:@"SP_TORP" object:self userInfo:torp];         
             }
             @catch (NSException * e) {
-                NSLog(@"ServerReader.handlePacket: SP_TORP error");
-                NSLog([NSString stringWithFormat:@"%@: %@", [e name], [e reason]]);
+                LLLog(@"ServerReader.handlePacket: SP_TORP error");
+                LLLog([NSString stringWithFormat:@"%@: %@", [e name], [e reason]]);
             }
 			break;
 		case SP_PHASER :
@@ -1193,8 +1193,8 @@ int shortFromPacket(char *buffer, int offset) {
                     
             }
             @catch (NSException * e) {
-                NSLog(@"ServerReader.handlePacket: SP_PHASER error");
-                NSLog([NSString stringWithFormat:@"%@: %@", [e name], [e reason]]);
+                LLLog(@"ServerReader.handlePacket: SP_PHASER error");
+                LLLog([NSString stringWithFormat:@"%@: %@", [e name], [e reason]]);
             }
 			break;
 		case SP_PLASMA_INFO :
@@ -1212,8 +1212,8 @@ int shortFromPacket(char *buffer, int offset) {
                     //[notificationCenter postNotificationName:@"SP_PLASMA_INFO" object:self userInfo:plasma];  
             }
             @catch (NSException * e) {
-                NSLog(@"ServerReader.handlePacket: SP_PLASMA_INFO error");
-                NSLog([NSString stringWithFormat:@"%@: %@", [e name], [e reason]]);
+                LLLog(@"ServerReader.handlePacket: SP_PLASMA_INFO error");
+                LLLog([NSString stringWithFormat:@"%@: %@", [e name], [e reason]]);
             }
 			break;
 		case SP_PLASMA :
@@ -1235,8 +1235,8 @@ int shortFromPacket(char *buffer, int offset) {
                 //[notificationCenter postNotificationName:@"SP_PLASMA" object:self userInfo:plasma];         
             }
             @catch (NSException * e) {
-                NSLog(@"ServerReader.handlePacket: SP_PLASMA error");
-                NSLog([NSString stringWithFormat:@"%@: %@", [e name], [e reason]]);
+                LLLog(@"ServerReader.handlePacket: SP_PLASMA error");
+                LLLog([NSString stringWithFormat:@"%@: %@", [e name], [e reason]]);
             }
             break;
 		case SP_WARNING :
@@ -1245,8 +1245,8 @@ int shortFromPacket(char *buffer, int offset) {
                 [notificationCenter postNotificationName:@"SP_WARNING" object:self userInfo:warning];    
             }
             @catch (NSException * e) {
-                NSLog(@"ServerReader.handlePacket: SP_WARNING error");
-                NSLog([NSString stringWithFormat:@"%@: %@", [e name], [e reason]]);
+                LLLog(@"ServerReader.handlePacket: SP_WARNING error");
+                LLLog([NSString stringWithFormat:@"%@: %@", [e name], [e reason]]);
             }
 			break;
 		case SP_MOTD :
@@ -1256,17 +1256,17 @@ int shortFromPacket(char *buffer, int offset) {
                     motd_done = YES;
                 } 
                 else if(!motd_done) { // part of the message of the day
-                    //NSLog(@"ServerReader.handlePacket: SP_MOTD: %@", line);
+                    //LLLog(@"ServerReader.handlePacket: SP_MOTD: %@", line);
                     //[notificationCenter postNotificationName:@"SP_MOTD" object:self userInfo:line];
                 }
                 else {                // server info message
-                    //NSLog(@"ServerReader.handlePacket: SP_MOTD: %@", line);
+                    //LLLog(@"ServerReader.handlePacket: SP_MOTD: %@", line);
                     //[notificationCenter postNotificationName:@"SP_MOTD_SERVER_INFO" object:self userInfo:line];
                 }                
             }
             @catch (NSException * e) {
-                NSLog(@"ServerReader.handlePacket: SP_MOTD error");
-                NSLog([NSString stringWithFormat:@"%@: %@", [e name], [e reason]]);
+                LLLog(@"ServerReader.handlePacket: SP_MOTD error");
+                LLLog([NSString stringWithFormat:@"%@: %@", [e name], [e reason]]);
             }
             break;
 		case SP_YOU :
@@ -1307,8 +1307,8 @@ int shortFromPacket(char *buffer, int offset) {
                 //[notificationCenter postNotificationName:@"SP_YOU" object:self userInfo:me];  
             }
             @catch (NSException * e) {
-                NSLog(@"ServerReader.handlePacket: SP_YOU error");
-                NSLog([NSString stringWithFormat:@"%@: %@", [e name], [e reason]]);
+                LLLog(@"ServerReader.handlePacket: SP_YOU error");
+                LLLog([NSString stringWithFormat:@"%@: %@", [e name], [e reason]]);
             }
             break;
 		case SP_QUEUE :
@@ -1317,8 +1317,8 @@ int shortFromPacket(char *buffer, int offset) {
                 [notificationCenter postNotificationName:@"SP_QUEUE" object:self userInfo:queueSize];
             }
             @catch (NSException * e) {
-                NSLog(@"ServerReader.handlePacket: SP_QUEUE error");
-                NSLog([NSString stringWithFormat:@"%@: %@", [e name], [e reason]]);
+                LLLog(@"ServerReader.handlePacket: SP_QUEUE error");
+                LLLog([NSString stringWithFormat:@"%@: %@", [e name], [e reason]]);
             }
 			break;
 		case SP_STATUS :
@@ -1335,8 +1335,8 @@ int shortFromPacket(char *buffer, int offset) {
                 //[notificationCenter postNotificationName:@"SP_STATUS" object:self userInfo:status];
             }
             @catch (NSException * e) {
-                NSLog(@"ServerReader.handlePacket: SP_STATUS error");
-                NSLog([NSString stringWithFormat:@"%@: %@", [e name], [e reason]]);
+                LLLog(@"ServerReader.handlePacket: SP_STATUS error");
+                LLLog([NSString stringWithFormat:@"%@: %@", [e name], [e reason]]);
             }
             break;
 		case SP_PLANET :
@@ -1358,8 +1358,8 @@ int shortFromPacket(char *buffer, int offset) {
                 //[notificationCenter postNotificationName:@"SP_PLANET" object:self userInfo:planet];
             }
             @catch (NSException * e) {
-                NSLog(@"ServerReader.handlePacket: SP_PLANET error");
-                NSLog([NSString stringWithFormat:@"%@: %@", [e name], [e reason]]);
+                LLLog(@"ServerReader.handlePacket: SP_PLANET error");
+                LLLog([NSString stringWithFormat:@"%@: %@", [e name], [e reason]]);
             }
             break;
 		case SP_PICKOK :
@@ -1373,8 +1373,8 @@ int shortFromPacket(char *buffer, int offset) {
                 }                
             }
             @catch (NSException * e) {
-                NSLog(@"ServerReader.handlePacket: SP_PICKOK error");
-                NSLog([NSString stringWithFormat:@"%@: %@", [e name], [e reason]]);
+                LLLog(@"ServerReader.handlePacket: SP_PICKOK error");
+                LLLog([NSString stringWithFormat:@"%@: %@", [e name], [e reason]]);
             }
             break;
 		case SP_LOGIN :
@@ -1395,8 +1395,8 @@ int shortFromPacket(char *buffer, int offset) {
                 }
             }
             @catch (NSException * e) {
-                NSLog(@"ServerReader.handlePacket: SP_LOGIN error, reason:");
-                NSLog([NSString stringWithFormat:@"%@: %@", [e name], [e reason]]);
+                LLLog(@"ServerReader.handlePacket: SP_LOGIN error, reason:");
+                LLLog([NSString stringWithFormat:@"%@: %@", [e name], [e reason]]);
             }
             break;
 		case SP_FLAGS :
@@ -1407,8 +1407,8 @@ int shortFromPacket(char *buffer, int offset) {
                 //[notificationCenter postNotificationName:@"SP_FLAGS" object:self userInfo:player];     
             }
             @catch (NSException * e) {
-                NSLog(@"ServerReader.handlePacket: SP_FLAGS error");
-                NSLog([NSString stringWithFormat:@"%@: %@", [e name], [e reason]]);
+                LLLog(@"ServerReader.handlePacket: SP_FLAGS error");
+                LLLog([NSString stringWithFormat:@"%@: %@", [e name], [e reason]]);
             }
             break;
 		case SP_MASK :
@@ -1418,8 +1418,8 @@ int shortFromPacket(char *buffer, int offset) {
                                                   object:self userInfo:[NSNumber numberWithInt:teamMask]];                
             }
             @catch (NSException * e) {
-                NSLog(@"ServerReader.handlePacket: SP_MASK error");
-                NSLog([NSString stringWithFormat:@"%@: %@", [e name], [e reason]]);
+                LLLog(@"ServerReader.handlePacket: SP_MASK error");
+                LLLog([NSString stringWithFormat:@"%@: %@", [e name], [e reason]]);
             }
             break;
 		case SP_PSTATUS :
@@ -1448,12 +1448,12 @@ int shortFromPacket(char *buffer, int offset) {
                 }
             }
             @catch (NSException * e) {
-                NSLog(@"ServerReader.handlePacket: SP_PSTATUS error");
-                NSLog([NSString stringWithFormat:@"%@: %@", [e name], [e reason]]);
+                LLLog(@"ServerReader.handlePacket: SP_PSTATUS error");
+                LLLog([NSString stringWithFormat:@"%@: %@", [e name], [e reason]]);
             }
             break;
 		case SP_BADVERSION :
-            NSLog(@"ServerReader.handlePacket: SP_BADVERSION not implemented");
+            LLLog(@"ServerReader.handlePacket: SP_BADVERSION not implemented");
             break;
 		case SP_HOSTILE :
             @try {
@@ -1464,8 +1464,8 @@ int shortFromPacket(char *buffer, int offset) {
                 //[notificationCenter postNotificationName:@"SP_HOSTILE" object:self userInfo:player];
             }
             @catch (NSException * e) {
-                NSLog(@"ServerReader.handlePacket: SP_HOSTILE error");
-                NSLog([NSString stringWithFormat:@"%@: %@", [e name], [e reason]]);
+                LLLog(@"ServerReader.handlePacket: SP_HOSTILE error");
+                LLLog([NSString stringWithFormat:@"%@: %@", [e name], [e reason]]);
             }
             break;
 		case SP_STATS :
@@ -1497,8 +1497,8 @@ int shortFromPacket(char *buffer, int offset) {
                 //[notificationCenter postNotificationName:@"SP_STATS" object:self userInfo:player];
             }
             @catch (NSException * e) {
-                NSLog(@"ServerReader.handlePacket: SP_STATS error");
-                NSLog([NSString stringWithFormat:@"%@: %@", [e name], [e reason]]);
+                LLLog(@"ServerReader.handlePacket: SP_STATS error");
+                LLLog([NSString stringWithFormat:@"%@: %@", [e name], [e reason]]);
             }
             break;
 		case SP_PL_LOGIN :
@@ -1524,8 +1524,8 @@ int shortFromPacket(char *buffer, int offset) {
                 //[notificationCenter postNotificationName:@"SP_PL_LOGIN" object:self userInfo:player];
             }
             @catch (NSException * e) {
-                NSLog(@"ServerReader.handlePacket: SP_PL_LOGIN error");
-                NSLog([NSString stringWithFormat:@"%@: %@", [e name], [e reason]]);
+                LLLog(@"ServerReader.handlePacket: SP_PL_LOGIN error");
+                LLLog([NSString stringWithFormat:@"%@: %@", [e name], [e reason]]);
             }
 			break;
 		case SP_RESERVED :
@@ -1536,8 +1536,8 @@ int shortFromPacket(char *buffer, int offset) {
                 [notificationCenter postNotificationName:@"SP_RESERVED" object:self userInfo:sreserved];
             }
             @catch (NSException * e) {
-                NSLog(@"ServerReader.handlePacket: SP_RESERVED error");
-                NSLog([NSString stringWithFormat:@"%@: %@", [e name], [e reason]]);
+                LLLog(@"ServerReader.handlePacket: SP_RESERVED error");
+                LLLog([NSString stringWithFormat:@"%@: %@", [e name], [e reason]]);
             }            
             break;
 		case SP_PLANET_LOC :
@@ -1563,8 +1563,8 @@ int shortFromPacket(char *buffer, int offset) {
                 //[notificationCenter postNotificationName:@"SP_PLANET_LOC" object:self userInfo:planet];
             }
             @catch (NSException * e) {
-                NSLog(@"ServerReader.handlePacket: SP_PLANET_LOC error");
-                NSLog([NSString stringWithFormat:@"%@: %@", [e name], [e reason]]);
+                LLLog(@"ServerReader.handlePacket: SP_PLANET_LOC error");
+                LLLog([NSString stringWithFormat:@"%@: %@", [e name], [e reason]]);
             }            
             break;
 		case SP_UDP_REPLY :
@@ -1573,8 +1573,8 @@ int shortFromPacket(char *buffer, int offset) {
                 [self handleUdpReply:buffer];
             }
             @catch (NSException * e) {
-                NSLog(@"ServerReader.handlePacket: SP_PLANET_LOC error");
-                NSLog([NSString stringWithFormat:@"%@: %@", [e name], [e reason]]);
+                LLLog(@"ServerReader.handlePacket: SP_PLANET_LOC error");
+                LLLog([NSString stringWithFormat:@"%@: %@", [e name], [e reason]]);
             }            
             break;       
 		case SP_SEQUENCE : 
@@ -1584,7 +1584,7 @@ int shortFromPacket(char *buffer, int offset) {
             break;          
 		case SP_RSA_KEY :
 			@try {
-                NSLog(@"ServerReader.handlePacket: RSA verification requested.");
+                LLLog(@"ServerReader.handlePacket: RSA verification requested.");
                 NSMutableData *data = [NSMutableData dataWithBytes:(buffer+4) length:RSA_KEY_SIZE];                
                 // do some stuff with RSA,
                 // looks very specific, let the RSA handler take care of it when
@@ -1592,12 +1592,12 @@ int shortFromPacket(char *buffer, int offset) {
                 [notificationCenter postNotificationName:@"SP_RSA_KEY" object:self userInfo:data];
             }
             @catch (NSException * e) {
-                NSLog(@"ServerReader.handlePacket: SP_RSA_KEY error");
-                NSLog([NSString stringWithFormat:@"%@: %@", [e name], [e reason]]);
+                LLLog(@"ServerReader.handlePacket: SP_RSA_KEY error");
+                LLLog([NSString stringWithFormat:@"%@: %@", [e name], [e reason]]);
             }            
             break;            
 		case SP_MOTD_PIC :
-            NSLog(@"ServerReader.handlePacket: SP_MOTD_PIC not implemented");           
+            LLLog(@"ServerReader.handlePacket: SP_MOTD_PIC not implemented");           
             break; 
 		case SP_SHIP_CAP :
 			@try {
@@ -1620,8 +1620,8 @@ int shortFromPacket(char *buffer, int offset) {
                 [notificationCenter postNotificationName:@"SP_SHIP_CAP" object:self userInfo:ship];
             }
             @catch (NSException * e) {
-                NSLog(@"ServerReader.handlePacket: SP_SHIP_CAP error");
-                NSLog([NSString stringWithFormat:@"%@: %@", [e name], [e reason]]);
+                LLLog(@"ServerReader.handlePacket: SP_SHIP_CAP error");
+                LLLog([NSString stringWithFormat:@"%@: %@", [e name], [e reason]]);
             }            
             break; 
 		case SP_S_REPLY :
@@ -1630,7 +1630,7 @@ int shortFromPacket(char *buffer, int offset) {
                 switch(reply) {
                     case SPK_VOFF :
                         if([communication shortVersion] == SHORTVERSION && ![communication receiveShort]) {
-                            NSLog(@"ServerReader.handlePacket: Using Short Packet Version 1.");
+                            LLLog(@"ServerReader.handlePacket: Using Short Packet Version 1.");
                             // funny, this never rolls back?
                             [communication setShortVersion: OLDSHORTVERSION];
                             //comm.sendShortReq(SPK_VON); should be done by communication upon							
@@ -1661,18 +1661,18 @@ int shortFromPacket(char *buffer, int offset) {
 						//[communication sendShortReq:[NSNumber numberWithInt:SPK_SALL]];
                         [notificationCenter postNotificationName:@"SP_S_REPLY_SPK_VON" object:self 
                                                         userInfo:[NSNumber numberWithInt:SPK_SALL]];
-                        NSLog(@"ServerReader.handlePacket: Receiving Short Packet Version ");
+                        LLLog(@"ServerReader.handlePacket: Receiving Short Packet Version ");
                         break;
                     case SPK_THRESHOLD:
                         break;
                     default:
-                        NSLog(@"ServerReader.handlePacket: Unknown response packet value short-req ");
+                        LLLog(@"ServerReader.handlePacket: Unknown response packet value short-req ");
                         break;
                 }
             }
             @catch (NSException * e) {
-                NSLog(@"ServerReader.handlePacket: SP_S_REPLY error");
-                NSLog([NSString stringWithFormat:@"%@: %@", [e name], [e reason]]);
+                LLLog(@"ServerReader.handlePacket: SP_S_REPLY error");
+                LLLog([NSString stringWithFormat:@"%@: %@", [e name], [e reason]]);
             }            
             break; 
 		case SP_S_MESSAGE :
@@ -1712,8 +1712,8 @@ int shortFromPacket(char *buffer, int offset) {
                 [notificationCenter postNotificationName:@"SP_S_MESSAGE" object:self userInfo:message];
             }
             @catch (NSException * e) {
-                NSLog(@"ServerReader.handlePacket: SP_S_MESSAGE error");
-                NSLog([NSString stringWithFormat:@"%@: %@", [e name], [e reason]]);
+                LLLog(@"ServerReader.handlePacket: SP_S_MESSAGE error");
+                LLLog([NSString stringWithFormat:@"%@: %@", [e name], [e reason]]);
             }            
             break; 
 		case SP_S_WARNING :
@@ -1722,12 +1722,12 @@ int shortFromPacket(char *buffer, int offset) {
                     swarningHandler = [[ShortPacketWarningHandler alloc] init];
                 }
                 // way to much code to handle in here, create seperate class as helper
-                NSLog(@"ServerReader.handlePacket: SP_S_WARNING passing to ShortPacketWarningHandler");
+                LLLog(@"ServerReader.handlePacket: SP_S_WARNING passing to ShortPacketWarningHandler");
                 [swarningHandler handleSWarning:buffer];
             }
             @catch (NSException * e) {
-                NSLog(@"ServerReader.handlePacket: SP_S_WARNING error");
-                NSLog([NSString stringWithFormat:@"%@: %@", [e name], [e reason]]);
+                LLLog(@"ServerReader.handlePacket: SP_S_WARNING error");
+                LLLog([NSString stringWithFormat:@"%@: %@", [e name], [e reason]]);
             }            
             break; 
 		case SP_S_YOU :
@@ -1763,8 +1763,8 @@ int shortFromPacket(char *buffer, int offset) {
                 [notificationCenter postNotificationName:@"SP_S_YOU" object:self userInfo:me];                
             }
             @catch (NSException * e) {
-                NSLog(@"ServerReader.handlePacket: SP_S_YOU error");
-                NSLog([NSString stringWithFormat:@"%@: %@", [e name], [e reason]]);
+                LLLog(@"ServerReader.handlePacket: SP_S_YOU error");
+                LLLog([NSString stringWithFormat:@"%@: %@", [e name], [e reason]]);
             }            
             break; 
 		case SP_S_YOU_SS :
@@ -1804,8 +1804,8 @@ int shortFromPacket(char *buffer, int offset) {
                 [notificationCenter postNotificationName:@"SP_S_YOU_SS" object:self userInfo:me];     
             }
             @catch (NSException * e) {
-                NSLog(@"ServerReader.handlePacket: SP_S_YOU_SS error");
-                NSLog([NSString stringWithFormat:@"%@: %@", [e name], [e reason]]);
+                LLLog(@"ServerReader.handlePacket: SP_S_YOU_SS error");
+                LLLog([NSString stringWithFormat:@"%@: %@", [e name], [e reason]]);
             }            
             break; 
 		case SP_S_PLAYER :
@@ -1814,8 +1814,8 @@ int shortFromPacket(char *buffer, int offset) {
                 [self handleVPlayer:buffer];
             }
             @catch (NSException * e) {
-                NSLog(@"ServerReader.handlePacket: SP_S_PLAYER error");
-                NSLog([NSString stringWithFormat:@"%@: %@", [e name], [e reason]]);
+                LLLog(@"ServerReader.handlePacket: SP_S_PLAYER error");
+                LLLog([NSString stringWithFormat:@"%@: %@", [e name], [e reason]]);
             }            
             break; 
 		case SP_PING :
@@ -1834,8 +1834,8 @@ int shortFromPacket(char *buffer, int offset) {
                 [notificationCenter postNotificationName:@"SP_PING" object:self userInfo:pingStats];  
             }
             @catch (NSException * e) {
-                NSLog(@"ServerReader.handlePacket: SP_PING error");
-                NSLog([NSString stringWithFormat:@"%@: %@", [e name], [e reason]]);
+                LLLog(@"ServerReader.handlePacket: SP_PING error");
+                LLLog([NSString stringWithFormat:@"%@: %@", [e name], [e reason]]);
             }            
             break; 
 		case SP_S_TORP :
@@ -1844,8 +1844,8 @@ int shortFromPacket(char *buffer, int offset) {
                 [self handleVTorp:buffer];
             }
             @catch (NSException * e) {
-                NSLog(@"ServerReader.handlePacket: SP_S_TORP error");
-                NSLog([NSString stringWithFormat:@"%@: %@", [e name], [e reason]]);
+                LLLog(@"ServerReader.handlePacket: SP_S_TORP error");
+                LLLog([NSString stringWithFormat:@"%@: %@", [e name], [e reason]]);
             }            
             break; 
 		case SP_S_TORP_INFO :
@@ -1853,8 +1853,8 @@ int shortFromPacket(char *buffer, int offset) {
                 [self handleVTorpInfo:buffer];
             }
             @catch (NSException * e) {
-                NSLog(@"ServerReader.handlePacket: SP_S_TORP_INFO error");
-                NSLog([NSString stringWithFormat:@"%@: %@", [e name], [e reason]]);
+                LLLog(@"ServerReader.handlePacket: SP_S_TORP_INFO error");
+                LLLog([NSString stringWithFormat:@"%@: %@", [e name], [e reason]]);
             }            
             break; 
 		case SP_S_PLANET :
@@ -1862,8 +1862,8 @@ int shortFromPacket(char *buffer, int offset) {
                 [self handleVPlanet:buffer];
             }
             @catch (NSException * e) {
-                NSLog(@"ServerReader.handlePacket: SP_S_PLANET error");
-                NSLog([NSString stringWithFormat:@"%@: %@", [e name], [e reason]]);
+                LLLog(@"ServerReader.handlePacket: SP_S_PLANET error");
+                LLLog([NSString stringWithFormat:@"%@: %@", [e name], [e reason]]);
             }            
             break; 
 		case SP_S_PHASER :
@@ -1871,8 +1871,8 @@ int shortFromPacket(char *buffer, int offset) {
                 [self handleVPhaser:buffer];
             }
             @catch (NSException * e) {
-                NSLog(@"ServerReader.handlePacket: SP_S_PHASER error");
-                NSLog([NSString stringWithFormat:@"%@: %@", [e name], [e reason]]);
+                LLLog(@"ServerReader.handlePacket: SP_S_PHASER error");
+                LLLog([NSString stringWithFormat:@"%@: %@", [e name], [e reason]]);
             }            
             break; 
 		case SP_S_KILLS :
@@ -1890,8 +1890,8 @@ int shortFromPacket(char *buffer, int offset) {
                 }            
             }
             @catch (NSException * e) {
-                NSLog(@"ServerReader.handlePacket: SP_S_KILLS error");
-                NSLog([NSString stringWithFormat:@"%@: %@", [e name], [e reason]]);
+                LLLog(@"ServerReader.handlePacket: SP_S_KILLS error");
+                LLLog([NSString stringWithFormat:@"%@: %@", [e name], [e reason]]);
             }            
             break; 
 		case SP_S_STATS :
@@ -1923,8 +1923,8 @@ int shortFromPacket(char *buffer, int offset) {
                 [notificationCenter postNotificationName:@"SP_S_STATS" object:self userInfo:player];
             }
             @catch (NSException * e) {
-                NSLog(@"ServerReader.handlePacket: SP_S_STATS error");
-                NSLog([NSString stringWithFormat:@"%@: %@", [e name], [e reason]]);
+                LLLog(@"ServerReader.handlePacket: SP_S_STATS error");
+                LLLog([NSString stringWithFormat:@"%@: %@", [e name], [e reason]]);
             }            
             break; 
 		case SP_FEATURE :
@@ -1940,18 +1940,18 @@ int shortFromPacket(char *buffer, int offset) {
                 [notificationCenter postNotificationName:@"SP_FEATURE" object:self userInfo:nil];
             }            
             @catch (NSException * e) {
-                NSLog(@"ServerReader.handlePacket: SP_FEATURE error");
-                NSLog([NSString stringWithFormat:@"%@: %@", [e name], [e reason]]);
+                LLLog(@"ServerReader.handlePacket: SP_FEATURE error");
+                LLLog([NSString stringWithFormat:@"%@: %@", [e name], [e reason]]);
             }            
             break; 
 		case SP_BITMAP :
-            NSLog(@"ServerReader.handlePacket: SP_BITMAP not implemented");           
+            LLLog(@"ServerReader.handlePacket: SP_BITMAP not implemented");           
 			break;						
 		}
         
         
         //NSTimeInterval stop = [NSDate timeIntervalSinceReferenceDate];  
-        //NSLog(@"ServerReader.handlePacket took: %f sec", (stop-start));    
+        //LLLog(@"ServerReader.handlePacket took: %f sec", (stop-start));    
         
     return YES;
 }
@@ -1960,7 +1960,7 @@ int shortFromPacket(char *buffer, int offset) {
     
     // looks for null temination it self, i could check maxlength, but it's okay
     NSString *line = [NSString stringWithUTF8String:(buffer + start)];
-    //NSLog(@"ServerReader.stringFromBuffer (%@)", line);
+    //LLLog(@"ServerReader.stringFromBuffer (%@)", line);
     return line;
     /*
     
@@ -1969,12 +1969,12 @@ int shortFromPacket(char *buffer, int offset) {
         if (buffer[i] == '\0') {
             end = i;
             NSString *line = [NSString stringWithCString:(buffer + start) length:end + 1];
-            NSLog(@"ServerReader.stringFromBuffer (%@)", line);
+            LLLog(@"ServerReader.stringFromBuffer (%@)", line);
             return line;
         }
     }
     NSString *line = [NSString stringWithCString:(buffer + start) length:end + 1];
-    NSLog(@"ServerReader.stringFromBuffer (%@)", line);
+    LLLog(@"ServerReader.stringFromBuffer (%@)", line);
     return line;
      */
 }

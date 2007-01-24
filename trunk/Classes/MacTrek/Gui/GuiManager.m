@@ -142,7 +142,7 @@ int startUpEvents = 0;
     startUpEvents++;
     [startUpProgress setIntValue:startUpEvents];
     [startUpProgress setNeedsDisplay:YES];
-    NSLog(@"GuiManager.increaseStartUpCounter got event %d of %d", startUpEvents, NR_OF_EVENTS_BEFORE_SHOWING_MENU);
+    LLLog(@"GuiManager.increaseStartUpCounter got event %d of %d", startUpEvents, NR_OF_EVENTS_BEFORE_SHOWING_MENU);
     
     if (startUpEvents == NR_OF_EVENTS_BEFORE_SHOWING_MENU) {
         
@@ -160,7 +160,7 @@ int startUpEvents = 0;
         
     } else if (startUpEvents > NR_OF_EVENTS_BEFORE_SHOWING_MENU) {
         
-        NSLog(@"GuiManager.increaseStartUpCounter did not expect this event... %d", startUpEvents);
+        LLLog(@"GuiManager.increaseStartUpCounter did not expect this event... %d", startUpEvents);
         [menuCntrl raiseMenu:self]; // $$ try..
     }    
 }
@@ -179,7 +179,7 @@ int startUpEvents = 0;
 	
 	// set the version string
 	[versionString setStringValue:[NSString stringWithFormat:@"Version %@", VERSION]];
-	NSLog(@"GuiManager.awakeFromNib Setting version to %@", VERSION);
+	LLLog(@"GuiManager.awakeFromNib Setting version to %@", VERSION);
 		
 	// new server controller. No longer managed with buttons but allways running!
 	server = [[ServerControllerNew alloc] init];
@@ -193,7 +193,6 @@ int startUpEvents = 0;
 		[entry setGameType:    BRONCO];	
 		[selectServerCntrl addServerPassivly:entry];  // gets selected automatically  
 	}
-	
 }
 
 - (void)handleTeamMask:(NSNumber *) mask {
@@ -201,7 +200,7 @@ int startUpEvents = 0;
     // the mask may change. So we keep an eye out for a change.
     if ((gameState == GS_LOGIN_ACCEPTED) && (!multiThreaded)) {
         // no outit done yet try 10ms delay
-        NSLog(@"GuiManager.handleTeamMask firing up a read");
+        LLLog(@"GuiManager.handleTeamMask firing up a read");
         [client performSelector: @selector(singleReadFromServer) 
                      withObject: self 
                      afterDelay: 1];
@@ -237,7 +236,7 @@ int startUpEvents = 0;
    static NSTimeInterval start, stop;
 	
    start = [NSDate timeIntervalSinceReferenceDate]; 
-   NSLog(@"GuiManager.screenRefreshTimerFired(slept): %f sec", (start-stop));        
+   LLLog(@"GuiManager.screenRefreshTimerFired(slept): %f sec", (start-stop));        
 
     if (gameState == GS_GAME_ACTIVE) {
         // $$ this will work, but what about when we are killed?
@@ -253,7 +252,7 @@ int startUpEvents = 0;
     }
 	
     stop = [NSDate timeIntervalSinceReferenceDate];  
-    NSLog(@"GuiManager.screenRefreshTimerFired(spent): %f sec", (stop-start));
+    LLLog(@"GuiManager.screenRefreshTimerFired(spent): %f sec", (stop-start));
     
 	//[mainWindow displayIfNeeded];   // not needed comm is now threadsafe 
 }
@@ -266,7 +265,7 @@ int startUpEvents = 0;
             // this event can also be a deselect 
             // handle it seperatly
             if (selectedServer == nil) {
-                NSLog(@"GuiManager.serverSelected forwarding to deselect");
+                LLLog(@"GuiManager.serverSelected forwarding to deselect");
                 [self serverDeSelected];
                 return;
             }
@@ -282,7 +281,7 @@ int startUpEvents = 0;
                                  port:[selectedServer port] 
                              seperate:multiThreaded]) {
                 // equals a CC_SERVER_CALL_SUCCESS
-                NSLog(@"GuiManager.serverSelected connect to server successfull"); 
+                LLLog(@"GuiManager.serverSelected connect to server successfull"); 
                 // handle state entering
                 if (multiThreaded) {            // other wise we have already a slot found
                    [self serverConnected]; 
@@ -290,7 +289,7 @@ int startUpEvents = 0;
                             
             } else {
                 // equals a CC_SERVER_CALL_FAILED
-                NSLog(@"GuiManager.serverSelected cannot connect to server!");                
+                LLLog(@"GuiManager.serverSelected cannot connect to server!");                
                 // fall back to the first state
                 [self serverDeSelected];
                 // tell the selector that this server is no good
@@ -314,16 +313,16 @@ int startUpEvents = 0;
             break;
         case GS_OUTFIT_ACCEPTED:
         case GS_GAME_ACTIVE:
-            NSLog(@"GuiManager.serverSelected unexpected gameState %d, reseting", gameState);
+            LLLog(@"GuiManager.serverSelected unexpected gameState %d, reseting", gameState);
             [self serverDeSelected];
             [menuCntrl raiseMenu:self];
             break;
         default:
-            NSLog(@"GuiManager.serverSelected unknown gameState %d", gameState);
+            LLLog(@"GuiManager.serverSelected unknown gameState %d", gameState);
             break;
     }  	
     
-    NSLog(@"GuiManager.serverSelected GAMESTATE = %d", gameState);
+    LLLog(@"GuiManager.serverSelected GAMESTATE = %d", gameState);
 }
 
 - (void) serverDeSelected {
@@ -346,7 +345,7 @@ int startUpEvents = 0;
     // so make sure nothing is selected after all
     [selectServerCntrl deselectServer:self];
     
-    NSLog(@"GuiManager.serverDeSelected GAMESTATE = %d", gameState);
+    LLLog(@"GuiManager.serverDeSelected GAMESTATE = %d", gameState);
 }
 
 - (void) serverConnected {
@@ -366,17 +365,17 @@ int startUpEvents = 0;
         case GS_GAME_ACTIVE:
         case GS_LOGIN_ACCEPTED:
         case GS_NO_SERVER_SELECTED:
-            NSLog(@"GuiManager.serverConnected unexpected gameState %d, reseting", gameState);
+            LLLog(@"GuiManager.serverConnected unexpected gameState %d, reseting", gameState);
             [self serverDeSelected];
             [menuCntrl raiseMenu:self];            
             break;
         default:
-            NSLog(@"GuiManager.serverConnected unknown gameState %d", gameState);
+            LLLog(@"GuiManager.serverConnected unknown gameState %d", gameState);
             break;
     }
  
     
-    NSLog(@"GuiManager.serverConnected GAMESTATE = %d", gameState);
+    LLLog(@"GuiManager.serverConnected GAMESTATE = %d", gameState);
 }
 
 - (void) serverSlotFound {
@@ -384,7 +383,7 @@ int startUpEvents = 0;
         case GS_NO_SERVER_SELECTED:
 
         case GS_OUTFIT_ACCEPTED:
-            NSLog(@"GuiManager.serverSlotFound unexpected gameState %d, reseting", gameState);
+            LLLog(@"GuiManager.serverSlotFound unexpected gameState %d, reseting", gameState);
             [self serverDeSelected];
             [menuCntrl raiseMenu:self];            
             break;
@@ -405,16 +404,16 @@ int startUpEvents = 0;
             
             // send our settings to the server            
             if (![client sendSlotSettingsToServer]) {
-                NSLog(@"GuiManager.serverSlotFound cannot send slot settings to server!");
+                LLLog(@"GuiManager.serverSlotFound cannot send slot settings to server!");
                 [self serverDeSelected];
             }
             break;
         default:
-            NSLog(@"GuiManager.serverSlotFound unknown gameState %d", gameState);
+            LLLog(@"GuiManager.serverSlotFound unknown gameState %d", gameState);
             break;
     }
     
-    NSLog(@"GuiManager.serverSlotFound GAMESTATE = %d", gameState);
+    LLLog(@"GuiManager.serverSlotFound GAMESTATE = %d", gameState);
 }
 
 - (void) iDied {
@@ -433,12 +432,12 @@ int startUpEvents = 0;
         case GS_SERVER_SELECTED:
         case GS_SERVER_CONNECTED:
         case GS_OUTFIT_ACCEPTED:
-            NSLog(@"GuiManager.loginComplete unexpected gameState %d, reseting", gameState);
+            LLLog(@"GuiManager.loginComplete unexpected gameState %d, reseting", gameState);
             [self serverDeSelected];
             [menuCntrl raiseMenu:self]; 
             break;
         case GS_LOGIN_ACCEPTED: // when outfit is not accepted try again
-            NSLog(@"GuiManager.loginComplete login was not accepted, try again");
+            LLLog(@"GuiManager.loginComplete login was not accepted, try again");
             // a successfull outfit moves us to the next state
             break;
         case GS_SERVER_SLOT_FOUND:
@@ -474,10 +473,10 @@ int startUpEvents = 0;
             // a successfull outfit moves us to the next state
             break;
         default:
-            NSLog(@"GuiManager.loginComplete unknown gameState %d", gameState);
+            LLLog(@"GuiManager.loginComplete unknown gameState %d", gameState);
             break;
     }
-    NSLog(@"GuiManager.loginComplete GAMESTATE = %d", gameState);
+    LLLog(@"GuiManager.loginComplete GAMESTATE = %d", gameState);
 }
 
 - (void) outfitAccepted {
@@ -488,7 +487,7 @@ int startUpEvents = 0;
         case GS_OUTFIT_ACCEPTED:
         case GS_SERVER_SLOT_FOUND:
         case GS_GAME_ACTIVE:
-            NSLog(@"GuiManager.outfitAccepted unexpected gameState %d, reseting", gameState);
+            LLLog(@"GuiManager.outfitAccepted unexpected gameState %d, reseting", gameState);
             [self serverDeSelected];
 			[menuCntrl setCanPlay:NO];
             [menuCntrl raiseMenu:self];            
@@ -504,10 +503,10 @@ int startUpEvents = 0;
  
             break;
         default:
-            NSLog(@"GuiManager.outfitAccepted unknown gameState %d", gameState);
+            LLLog(@"GuiManager.outfitAccepted unknown gameState %d", gameState);
             break;
     }
-    NSLog(@"GuiManager.outfitAccepted GAMESTATE = %d", gameState);
+    LLLog(@"GuiManager.outfitAccepted GAMESTATE = %d", gameState);
 }
 
 - (void) gameEntered { 
@@ -519,7 +518,7 @@ int startUpEvents = 0;
         case GS_LOGIN_ACCEPTED:
         case GS_SERVER_SLOT_FOUND:
         case GS_GAME_ACTIVE:
-            NSLog(@"GuiManager.gameEntered unexpected gameState %d, reseting", gameState);
+            LLLog(@"GuiManager.gameEntered unexpected gameState %d, reseting", gameState);
             [self serverDeSelected];
             [menuCntrl raiseMenu:self];            
             break;
@@ -541,10 +540,10 @@ int startUpEvents = 0;
 			[notificationCenter postNotificationName:@"GM_GAME_ENTERED"];
             break;
         default:
-            NSLog(@"GuiManager.gameEntered unknown gameState %d", gameState);
+            LLLog(@"GuiManager.gameEntered unknown gameState %d", gameState);
             break;
     }
-    NSLog(@"GuiManager.gameEntered GAMESTATE = %d", gameState);
+    LLLog(@"GuiManager.gameEntered GAMESTATE = %d", gameState);
 }
 
 - (void) commError { 
@@ -557,17 +556,17 @@ int startUpEvents = 0;
         case GS_SERVER_SLOT_FOUND:
         case GS_GAME_ACTIVE:
         case GS_OUTFIT_ACCEPTED:
-            NSLog(@"GuiManager.commError unexpected (gameState %d), reseting", gameState);
+            LLLog(@"GuiManager.commError unexpected (gameState %d), reseting", gameState);
 			[keyMapPanel close]; // remove the help screen
             [self serverDeSelected];
 			[menuCntrl disableLogin];
             [menuCntrl raiseMenu:self];            
             break;
         default:
-            NSLog(@"GuiManager.gameEntered unknown gameState %d", gameState);
+            LLLog(@"GuiManager.gameEntered unknown gameState %d", gameState);
             break;
     }
-    NSLog(@"GuiManager.commError GAMESTATE = %d", gameState);
+    LLLog(@"GuiManager.commError GAMESTATE = %d", gameState);
 }
 
 - (void) setTheme {
@@ -579,7 +578,7 @@ int startUpEvents = 0;
 	bool accel = [settingsCntrl accelerate];
     
     if (theme != activeTheme) {
-        NSLog(@"GuiManager.setTheme to theme %d", theme);
+        LLLog(@"GuiManager.setTheme to theme %d", theme);
         switch (theme) {
         case 1:            
             [gameCntrl setPainter:painterTheme1];
@@ -603,7 +602,7 @@ int startUpEvents = 0;
             [soundPlayerActiveTheme subscribeToNotifications];  // activate            
             break;            
         default:
-            NSLog(@"GuiManager.setTheme ERROR, do not know of theme %d", theme);
+            LLLog(@"GuiManager.setTheme ERROR, do not know of theme %d", theme);
             break;
         }
 		activeTheme = theme;
@@ -617,7 +616,7 @@ int startUpEvents = 0;
     if ([settingsCntrl fxLevel] == 0.0) {
         // special case disable all sound
         [soundPlayerActiveTheme unSubscibeToNotifications]; // silence
-        NSLog(@"GuiManager.setTheme silencing SOUND");
+        LLLog(@"GuiManager.setTheme silencing SOUND");
     }
 }
 
@@ -631,7 +630,7 @@ int startUpEvents = 0;
 }
 
 - (void) fillKeyMapPanel {
-	NSLog(@"GuiManager.fillKeyMapPanel setting keymap in help panel");
+	LLLog(@"GuiManager.fillKeyMapPanel setting keymap in help panel");
 
 	NSMutableString *result = [[[NSMutableString alloc] init] autorelease];
 	MTKeyMap *keyMap = [settingsCntrl keyMap];

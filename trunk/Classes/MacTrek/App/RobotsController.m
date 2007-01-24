@@ -86,17 +86,17 @@
         [logDestination insertText: output];
         [logDestination setEditable:NO];
     } else {
-        NSLog([NSString stringWithFormat: @"RobotsController.appendOutput %@", output]);
+        LLLog([NSString stringWithFormat: @"RobotsController.appendOutput %@", output]);
     }
     
 }
 
 - (void)processStarted:(id)task {
-    NSLog(@"RobotsController.processStarted");
+    LLLog(@"RobotsController.processStarted");
 }
 
 - (void)processFinished:(id)task {
-    NSLog(@"RobotsController.processFinished:  done");
+    LLLog(@"RobotsController.processFinished:  done");
 }
 
 @end

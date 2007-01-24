@@ -81,7 +81,7 @@ static NSBezierPath *line = nil; // this makes us fast, but not rentrant
 
 - (void) setValue:(float)newValue {
 	if ((value > max) || (value > tempMax)) {
-		//NSLog(@"LLBar.setValue too large");
+		//LLLog(@"LLBar.setValue too large");
 		//return;
         newValue = max;
 	}
@@ -90,7 +90,7 @@ static NSBezierPath *line = nil; // this makes us fast, but not rentrant
 
 - (void) setTempMax:(float)newValue { // explicitly reduce the max, temporarly
 	if (newValue > max) {
-		NSLog(@"LLBar.setTempMax tempmax <= max");
+		LLLog(@"LLBar.setTempMax tempmax <= max");
 		return;
 	}
 	tempMax = newValue;
@@ -98,7 +98,7 @@ static NSBezierPath *line = nil; // this makes us fast, but not rentrant
 
 - (void) setWarning:(float)newValue {
 	if (newValue > max) {
-		NSLog(@"LLBar.setWarning <= max");
+		LLLog(@"LLBar.setWarning <= max");
 		return;
 	}
 	warning = newValue;
@@ -106,7 +106,7 @@ static NSBezierPath *line = nil; // this makes us fast, but not rentrant
 
 - (void) setCritical:(float)newValue {
 	if (newValue > max) {
-		NSLog(@"LLBar.setCritical <= max");
+		LLLog(@"LLBar.setCritical <= max");
 		return;
 	}
 	critical = newValue;
@@ -225,17 +225,17 @@ static NSBezierPath *line = nil; // this makes us fast, but not rentrant
         
         // a discrete bar is filled with rectangles
         // we first draw nrOfDescreteRects for max maxNrOfDescreteRects
-        //NSLog(@"LLBar.drawRect max %f tempMax %f value %f", max, tempMax, value);
-        //NSLog(@"LLBar.drawRect maxNrOfDescreteRects %d tempMaxNrOfDescreteRects %d nrOfDescreteRects %d ", maxNrOfDescreteRects, tempMaxNrOfDescreteRects, nrOfDescreteRects);
+        //LLLog(@"LLBar.drawRect max %f tempMax %f value %f", max, tempMax, value);
+        //LLLog(@"LLBar.drawRect maxNrOfDescreteRects %d tempMaxNrOfDescreteRects %d nrOfDescreteRects %d ", maxNrOfDescreteRects, tempMaxNrOfDescreteRects, nrOfDescreteRects);
 
         float discreteRectWidth = maxBarLength; // should hold nrOfDescreteRects
-        //NSLog(@"LLBar.drawRect 1 width %f",discreteRectWidth);
+        //LLLog(@"LLBar.drawRect 1 width %f",discreteRectWidth);
         discreteRectWidth -= LLBAR_SEPERATION_BETWEEN_RECTS; // remove left seperator
-        //NSLog(@"LLBar.drawRect 2 width %f",discreteRectWidth);
+        //LLLog(@"LLBar.drawRect 2 width %f",discreteRectWidth);
         discreteRectWidth /= maxNrOfDescreteRects; // with for rect+right seperator
-        //NSLog(@"LLBar.drawRect 3 width %f",discreteRectWidth);
+        //LLLog(@"LLBar.drawRect 3 width %f",discreteRectWidth);
         discreteRectWidth -= LLBAR_SEPERATION_BETWEEN_RECTS; // width of single rect
-        //NSLog(@"LLBar.drawRect 4 width %f",discreteRectWidth);
+        //LLLog(@"LLBar.drawRect 4 width %f",discreteRectWidth);
         barRect.size.width = discreteRectWidth;
                
         barRect.origin.x += LLBAR_SEPERATION_BETWEEN_RECTS; // left seperator

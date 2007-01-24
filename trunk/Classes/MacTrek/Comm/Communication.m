@@ -431,14 +431,14 @@ bool goSleeping;
                 return;
                 break;
 			default:
-				NSLog(@"Communications.sendServerPacketWithBuffer unknown UDP packet");
+				LLLog(@"Communications.sendServerPacketWithBuffer unknown UDP packet");
 				break;
 		}
 	} 
     
     // either TCP mode or critical packet
     if ((tcpSender == nil) || (![tcpSender sendBuffer:buffer length:size])) {
-        NSLog(@"Communications.sendServerPacketWithBuffer TCP write error");
+        LLLog(@"Communications.sendServerPacketWithBuffer TCP write error");
         [notificationCenter postNotificationName:@"COMM_TCP_WRITE_ERROR" object:self 
                                         userInfo:@"TCP write error"];
     }
@@ -537,7 +537,7 @@ bool goSleeping;
 // alternativly you can call them directly on the Communication object.
 //
 -(void)cleanUp:(id)sender {
-	NSLog(@"Communication.cleanUp entered");
+	LLLog(@"Communication.cleanUp entered");
     if (tcpReader != nil) {
         [self sendByeReq:self];
         [tcpReader close];
@@ -570,8 +570,8 @@ bool goSleeping;
     //static NSTimeInterval start, stop;
     
     //start = [NSDate timeIntervalSinceReferenceDate]; 
-    //NSLog(@"Communication.readFromServer(slept): %f sec", (start-stop)); 
-    //NSLog(@"Communication.readFromServer entered");
+    //LLLog(@"Communication.readFromServer(slept): %f sec", (start-stop)); 
+    //LLLog(@"Communication.readFromServer entered");
     
     // read from UDP connection
     if(udpReader != nil && commStatus != STAT_SWITCH_TCP) {
@@ -606,7 +606,7 @@ bool goSleeping;
         }
     }
     @catch(NSException *e) {
-        NSLog(@"Communication.readFromServer exception %@: %@", [e name], [e reason] );
+        LLLog(@"Communication.readFromServer exception %@: %@", [e name], [e reason] );
         [notificationCenter postNotificationName:@"COMM_GHOSTBUSTED" object:self 
                                         userInfo:@"Whoops!  We've been ghostbusted!"];
 		readOk = NO;
@@ -622,20 +622,20 @@ bool goSleeping;
         if([self connectToServerUsingNextPort]) {
             [notificationCenter postNotificationName:@"COMM_RESURRECTED" object:self 
                                             userInfo:@"Yea!  We've been resurrected!"];
-			NSLog(@"Communication.readFromServer Yea!  We've been resurrected!");
+			LLLog(@"Communication.readFromServer Yea!  We've been resurrected!");
 			readOk = YES;
         }
         else {
             [notificationCenter postNotificationName:@"COMM_RESURRECT_FAILED" object:self 
                                             userInfo:@"Sorry,  We could not be resurrected!"];
-			NSLog(@"Communication.readFromServer Sorry,  We could not be resurrected!");
+			LLLog(@"Communication.readFromServer Sorry,  We could not be resurrected!");
 			readOk = NO;
         }
 		*/
     }
     
     //stop = [NSDate timeIntervalSinceReferenceDate];  
-    //NSLog(@"Communication.readFromServer(spent): %f sec", (stop-start));
+    //LLLog(@"Communication.readFromServer(spent): %f sec", (stop-start));
 	return readOk;
 }
 
@@ -697,7 +697,7 @@ bool goSleeping;
 }
 
 - (void) sendQuitReq:(id)sender {
-	NSLog(@"Communication.sendQuitReq entered");
+	LLLog(@"Communication.sendQuitReq entered");
     [self sendShortPacketWithId:CP_QUIT];
 }
 
@@ -706,7 +706,7 @@ bool goSleeping;
 }
 
 - (void) sendByeReq:(id)sender {
-	NSLog(@"Communication.sendByeReq entered");
+	LLLog(@"Communication.sendByeReq entered");
     [self sendShortPacketWithId:CP_BYE];
 }
 
@@ -812,7 +812,7 @@ bool goSleeping;
 	// this client supports RSA thus we do not have
 	// to encrypt old style. Only to tell the server
 	// which version of RSA we support
-	NSLog(@"Communication.sendReservedReply responding with: RSA v2.0 CLIENT");
+	LLLog(@"Communication.sendReservedReply responding with: RSA v2.0 CLIENT");
 
 	buffer[0] = CP_RESERVED;	
 	// sreserved contains 16 bytes that are key
@@ -834,7 +834,7 @@ bool goSleeping;
     int port = [tcpSender serverPort]; // get the port from the socket
     ONHost *server = [tcpSender serverHost];
 	
-	NSLog(@"Communication.sendRSAResponse responding with: %@:%d",
+	LLLog(@"Communication.sendRSAResponse responding with: %@:%d",
 		[server hostname], port);
 	
     NSData *response = [rsaCoder encode:data forHost:server onPort:port];
@@ -1020,12 +1020,12 @@ bool goSleeping;
     if (req == COMM_UDP) {
         // open UDP port
         if([self openUdpConn]) {
-            NSLog([NSString stringWithFormat:@"Communication.sendUdpReq: bind to local port %d success", localUdpPort]);
+            LLLog([NSString stringWithFormat:@"Communication.sendUdpReq: bind to local port %d success", localUdpPort]);
             [notificationCenter postNotificationName:@"COMM_UDP_REQ_SUCCESS" object:self 
                                             userInfo:@"UDP connection established"];
         }
         else {
-            NSLog([NSString stringWithFormat:@"Communication.sendUdpReq: bind to local port %d failed", localUdpPort]);
+            LLLog([NSString stringWithFormat:@"Communication.sendUdpReq: bind to local port %d failed", localUdpPort]);
             commModeRequest = COMM_TCP;
             commStatus = STAT_CONNECTED;
             [notificationCenter postNotificationName:@"COMM_UDP_REQ_FAILED" object:self 
@@ -1051,7 +1051,7 @@ bool goSleeping;
     }
     
     NSString *message = [NSString stringWithFormat:@"UDP: Sent request for %@ mode", (req == COMM_TCP ? @"TCP" : @"UDP")];
-    NSLog([NSString stringWithFormat:@"Communication.sendUdpReq: %@", message]);
+    LLLog([NSString stringWithFormat:@"Communication.sendUdpReq: %@", message]);
     
     [notificationCenter postNotificationName:@"COMM_UDP_REQ_FOR_MODE" object:self 
                                     userInfo:message];
@@ -1063,7 +1063,7 @@ bool goSleeping;
     buffer[2] = (char)0;
     [self bigEndianInteger:0 inBuffer:buffer withOffset:4];
     if (![udpSender sendBuffer:buffer length:8]) {
-        NSLog(@"Communication.sendUdpVerify: UDP: send failed.  Closing UDP connection");  
+        LLLog(@"Communication.sendUdpVerify: UDP: send failed.  Closing UDP connection");  
        
         [notificationCenter postNotificationName:@"COMM_UDP_LINK_SEVERED" object:self 
                                         userInfo:@"UDP link severed"];
@@ -1085,13 +1085,13 @@ bool goSleeping;
     ONHost *hostName;
 	ONTCPSocket *socket;
     
-    NSLog([NSString stringWithFormat:@"Communication.callServer: %@ at %d", server, port]);
+    LLLog([NSString stringWithFormat:@"Communication.callServer: %@ at %d", server, port]);
     @try {
         // try this
         hostName = [ONHost hostForHostname:server];
     }
     @catch (NSException * e) {
-        NSLog([NSString stringWithFormat:@"Communication.callServer: %@", [e reason]]);
+        LLLog([NSString stringWithFormat:@"Communication.callServer: %@", [e reason]]);
         return NO;
     }    
 	
@@ -1099,7 +1099,7 @@ bool goSleeping;
         // connect and create a stream
         socket = [ONTCPSocket tcpSocket];
         [socket connectToHost:hostName port:port];
-        NSLog(@"Communication.callServer: got connection parameters");
+        LLLog(@"Communication.callServer: got connection parameters");
         // create a sender and receiver
         [tcpSender release];
         tcpSender = [[ServerSenderTcp alloc] initWithSocket:socket];
@@ -1110,7 +1110,7 @@ bool goSleeping;
         [self sendSocketVersionAndNumberReq:port];
     }
     @catch (NSException * e) {
-        NSLog([NSString stringWithFormat:@"Communication.callServer: error connecting to %@", hostName]);
+        LLLog([NSString stringWithFormat:@"Communication.callServer: error connecting to %@", hostName]);
         return NO;
     }
     
@@ -1141,7 +1141,7 @@ bool goSleeping;
     
     ONHost *hostName;
     
-    NSLog([NSString stringWithFormat:@"Communication.connectToServer: (%@) Waiting for connection at port %d", host, port]);
+    LLLog([NSString stringWithFormat:@"Communication.connectToServer: (%@) Waiting for connection at port %d", host, port]);
     
     // setup a TCP server, and accept the first incomming connection
     ONTCPSocket *serverTCPSocket, *connectionTCPSocket;
@@ -1151,16 +1151,16 @@ bool goSleeping;
         [serverTCPSocket startListeningOnLocalPort:port allowingAddressReuse:YES];    
     }
     @catch (NSException * e) {
-        NSLog(@"Communication.connectToServer: error creating socket %d", port);
+        LLLog(@"Communication.connectToServer: error creating socket %d", port);
         return false;
     }
     
     @try {
         connectionTCPSocket = [serverTCPSocket acceptConnectionOnNewSocket];
-        NSLog(@"Communication.connectToServer: got connection");
+        LLLog(@"Communication.connectToServer: got connection");
     }
     @catch (NSException * e) {
-        NSLog(@"Communication.connectToServer: error accepting connection on socket %d", port);
+        LLLog(@"Communication.connectToServer: error accepting connection on socket %d", port);
         return false;
     }
     
@@ -1183,10 +1183,10 @@ bool goSleeping;
         [self sendSocketVersionAndNumberReq:port];
     }
     @catch (NSException * e) {
-        NSLog([NSString stringWithFormat:@"Communication.connectToServer: error connecting to %@", hostName]);
+        LLLog([NSString stringWithFormat:@"Communication.connectToServer: error connecting to %@", hostName]);
         return false;
     }
-    NSLog([NSString stringWithFormat:@"Communication.connectToServer: got connection to %@ at %d", hostName, port]);
+    LLLog([NSString stringWithFormat:@"Communication.connectToServer: got connection to %@ at %d", hostName, port]);
     return YES;
 }
 
@@ -1196,7 +1196,7 @@ bool goSleeping;
     // if baseLocalUdpPort is defined, we want to start from that
     if(baseLocalUdpPort > 0)  {
         localUdpPort = baseLocalUdpPort;
-        NSLog([NSString stringWithFormat:@"Communication.openUdp: UDP: using base port %d", baseLocalUdpPort]);
+        LLLog([NSString stringWithFormat:@"Communication.openUdp: UDP: using base port %d", baseLocalUdpPort]);
     }
     else {
         localUdpPort = (int)(random() * 32767);
@@ -1213,7 +1213,7 @@ bool goSleeping;
             [udpSocket setLocalPortNumber: localUdpPort allowingAddressReuse: YES];
             [udpSocket setAllowsBroadcast: YES]; // In  case we are sending to the broadcast address
             
-                        NSLog([NSString stringWithFormat:@"Communication.openUdp: UDP: port is %d", localUdpPort]);
+                        LLLog([NSString stringWithFormat:@"Communication.openUdp: UDP: port is %d", localUdpPort]);
             
             // setup the reader and writer
             [udpReader release];
@@ -1236,12 +1236,12 @@ bool goSleeping;
             }
         }
     }
-    NSLog(@"Communication.openUdp: UDP: Unable to find a local port to bind to");
+    LLLog(@"Communication.openUdp: UDP: Unable to find a local port to bind to");
     return false;
 }
 
 - (void) closeUdpConn {
-    NSLog(@"Communication.closeUdpConn: UDP: Closing UDP socket");
+    LLLog(@"Communication.closeUdpConn: UDP: Closing UDP socket");
     [udpReader close];
     [udpReader release];
     [udpSender close];
@@ -1249,7 +1249,7 @@ bool goSleeping;
 }
 
 - (void) forceResetToTCP {
-    NSLog(@"Communication.forceResetToTCP: UDP: FORCE RESET REQUESTED"); 
+    LLLog(@"Communication.forceResetToTCP: UDP: FORCE RESET REQUESTED"); 
     [self sendUdpReq:[NSNumber numberWithChar:COMM_TCP]];
 
     commMode = commModeRequest = COMM_TCP;
@@ -1263,14 +1263,14 @@ bool goSleeping;
     // create a private pool for this thread
     NSAutoreleasePool *tempPool = [[NSAutoreleasePool alloc] init];
     
-    NSLog(@"Communication.setUpAndRunThread: start running");
+    LLLog(@"Communication.setUpAndRunThread: start running");
     //[notificationCenter postNotificationName:@"COMM_STARTED_THREAD" object:self userInfo:nil];
     
     // add this thread to the main run loop..
     //[[NSRunLoop currentRunLoop] run];
     [self run:self];	
 	
-    NSLog(@"Communication.setUpAndRunThread: stopped running");
+    LLLog(@"Communication.setUpAndRunThread: stopped running");
     //[notificationCenter postNotificationName:@"COMM_STOPPED_THREAD" object:self userInfo:nil];
     
     // release the pool
@@ -1282,7 +1282,7 @@ bool goSleeping;
 }
 
 - (void) run:(id)sender {
-    NSLog(@"Communication.run started");
+    LLLog(@"Communication.run started");
     // keep reading in blocked mode from the server
     // despatch event of what we got. Some reads may result in writes within the same
     // thread, therefor all access to the sendXXX methods are synchronized using locks
@@ -1293,12 +1293,12 @@ bool goSleeping;
         //NSTimeInterval start, stop;
         while (keepRunning) {
             //start = [NSDate timeIntervalSinceReferenceDate]; 
-            //NSLog(@"Communication.run(slept): %f sec", (start-stop));        
+            //LLLog(@"Communication.run(slept): %f sec", (start-stop));        
 			if (goSleeping && !isSleeping) {
-				NSLog(@"Communication.run going to sleep");
+				LLLog(@"Communication.run going to sleep");
 				isSleeping = YES;				
 			} else if (isSleeping && !goSleeping) {
-				NSLog(@"Communication.run going to awake from sleep");
+				LLLog(@"Communication.run going to awake from sleep");
 				isSleeping = NO;	
 			}
 				
@@ -1306,15 +1306,15 @@ bool goSleeping;
 				sleep(COMM_NETWORK_TIMEOUT);
 			} else {
 				if ([self readFromServer] == NO) {
-					NSLog(@"Communication.run ERROR detected going to sleep");
+					LLLog(@"Communication.run ERROR detected going to sleep");
 					// error occured, better stop
 					 goSleeping = YES;
 				}  
 			}
             //stop = [NSDate timeIntervalSinceReferenceDate];  
-            //NSLog(@"Communication.run(blocking): %f sec", (stop-start));            
+            //LLLog(@"Communication.run(blocking): %f sec", (stop-start));            
         }
-        NSLog(@"Communication.run stopped");
+        LLLog(@"Communication.run stopped");
         isRunning = NO; // must do this in setUpAndRunThread or the object will be
 						// destroyed before the pool is released ??
     } else {
@@ -1336,7 +1336,7 @@ bool goSleeping;
 - (bool) startCommunicationThread {
     // spawns seperate thread that listens to the server
     if (isRunning) {
-        NSLog(@"Communication.startCommunicationThread: already running");
+        LLLog(@"Communication.startCommunicationThread: already running");
         return NO;
     }
     // detatch a new thread and start listening
@@ -1352,18 +1352,18 @@ bool goSleeping;
 
 - (bool) stopCommunicationThread {
     if (!isRunning) {
-        NSLog(@"Communication.stopCommunicationThread: not running");
+        LLLog(@"Communication.stopCommunicationThread: not running");
         return NO;
     }  
-    NSLog(@"Communication.stopCommunicationThread: asking thread to stop wait for notification");
+    LLLog(@"Communication.stopCommunicationThread: asking thread to stop wait for notification");
     keepRunning = NO;   
 	
 	// wait for thread to exit
 	while (isRunning)  {
-		NSLog(@"Communication.stopCommunicationThread: waiting for stop");
+		LLLog(@"Communication.stopCommunicationThread: waiting for stop");
 		sleep(COMM_NETWORK_TIMEOUT);
 	}
-    NSLog(@"Communication.stopCommunicationThread: thread stopped");
+    LLLog(@"Communication.stopCommunicationThread: thread stopped");
     return YES;
 }
 
@@ -1371,33 +1371,33 @@ bool goSleeping;
 // reanimate later on
 - (bool) suspendCommunicationThread {
 	if (!isRunning) {
-        NSLog(@"Communication.suspendCommunicationThread: not running");
+        LLLog(@"Communication.suspendCommunicationThread: not running");
         return NO;
     } 
 	goSleeping = YES;
 	
 	// wait for thread to sleep
 	while (!isSleeping)  {
-		NSLog(@"Communication.suspendCommunicationThread: waiting for sleep");
+		LLLog(@"Communication.suspendCommunicationThread: waiting for sleep");
 		sleep(COMM_NETWORK_TIMEOUT);
 	}
-    NSLog(@"Communication.suspendCommunicationThread: thread sleeping");
+    LLLog(@"Communication.suspendCommunicationThread: thread sleeping");
     return YES;
 }
 
 - (bool) awakeCommunicationThread {
 	if (!isSleeping) {
-        NSLog(@"Communication.awakeCommunicationThread: not sleeping");
+        LLLog(@"Communication.awakeCommunicationThread: not sleeping");
         return NO;
     } 
 	goSleeping = NO;
 	
 	// wait for thread to awake
 	while (isSleeping)  {
-		NSLog(@"Communication.awakeCommunicationThread: waiting for awake");
+		LLLog(@"Communication.awakeCommunicationThread: waiting for awake");
 		sleep(COMM_NETWORK_TIMEOUT);
 	}
-    NSLog(@"Communication.awakeCommunicationThread: thread awake");
+    LLLog(@"Communication.awakeCommunicationThread: thread awake");
     return YES;
 }
 

@@ -29,10 +29,10 @@ NSAutoreleasePool *pool;
 - (void) invokeRemoteObjectWithUserData:(id)data {
 
 	if (theProxy != nil) {
-		//NSLog(@"LLDOSender.invokeRemoteObjectWithUserData called");
+		//LLLog(@"LLDOSender.invokeRemoteObjectWithUserData called");
 		[theProxy invokeWithUserData:data];
 	} else {
-		 NSLog(@"LLDOSender.invokeRemoteObjectWithUserData called without proxy object");
+		 LLLog(@"LLDOSender.invokeRemoteObjectWithUserData called without proxy object");
 	}
 }
 

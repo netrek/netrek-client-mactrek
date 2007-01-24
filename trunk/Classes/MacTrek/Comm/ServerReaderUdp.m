@@ -54,7 +54,7 @@
     if (timeOut > 0.0) {
 		if ([udpSocket waitForInputWithTimeout:timeOut] == NO) {
 			// trouble!
-			NSLog(@"ServerReaderUdp.doRead TIMEOUT! more than %f sec passed", timeOut);
+			LLLog(@"ServerReaderUdp.doRead TIMEOUT! more than %f sec passed", timeOut);
 			return nil;
 		}
 	}	
@@ -65,18 +65,18 @@
         [data setLength: length];    
     }
     @catch (NSException * e) {
-        NSLog(@"ServerReaderUdp.doRead: Timed out waiting for UDP response from server");
+        LLLog(@"ServerReaderUdp.doRead: Timed out waiting for UDP response from server");
         // error, switch to TCP just like when the server asks us to
         [communication setCommMode: COMM_TCP];
         [communication setCommStatus: STAT_CONNECTED];
-        NSLog(@"ServerReaderUdp.doRead: Should connected to server's TCP port");
+        LLLog(@"ServerReaderUdp.doRead: Should connected to server's TCP port");
         [notificationCenter postNotificationName:@"SP_UDP_SWITCHED_TO_TCP" object:self userInfo:nil];
         
         return nil;
     }
     
     // debug
-    NSLog([NSString stringWithFormat: @"ServerReaderUpd.doRead got packet from %@:%d:\n", 
+    LLLog([NSString stringWithFormat: @"ServerReaderUpd.doRead got packet from %@:%d:\n", 
         [udpSocket remoteAddressHost], [udpSocket remoteAddressPort]]);
     
     return data;
@@ -141,7 +141,7 @@
                  } */
                 // the remaining packets will be dropped and we shouldn't count the SP_SEQUENCE packet either
                 [communication decreasePacketsReceived];
-                NSLog(@"ServerReaderUdp.handleSequence: rejected out of sequence packet");
+                LLLog(@"ServerReaderUdp.handleSequence: rejected out of sequence packet");
             }
         }
         if ([udpStats recentCount] > UDP_RECENT_INTR) {

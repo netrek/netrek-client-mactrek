@@ -22,11 +22,11 @@
 		// to do this, we register as a server DO object
 		
 		if ([theConnection registerName:@"LLDOServer"] == NO) {
-			NSLog(@"LLDOReceiver.init failed, cannot obtain the default connection for this thread ");
+			LLLog(@"LLDOReceiver.init failed, cannot obtain the default connection for this thread ");
 			theConnection = nil;
 			return nil;
 		} else {
-			NSLog(@"LLDOReceiver.init success, obtained the default connection for this thread ");
+			LLLog(@"LLDOReceiver.init success, obtained the default connection for this thread ");
 		}
 		// nothing more to do,
 		// the sender will declare a protocol and try to use it.
@@ -42,10 +42,10 @@
 
 - (void) invokeWithUserData:(id)data {
 	if ((target != nil) && (selector != nil)) {
-		//NSLog(@"LLDOReceiver.invokeWithUserData called");
+		//LLLog(@"LLDOReceiver.invokeWithUserData called");
         [target performSelector:selector withObject:data];
 	} else {
-		NSLog(@"LLDOReceiver.invokeWithUserData called but have no target or selector");
+		LLLog(@"LLDOReceiver.invokeWithUserData called but have no target or selector");
 	}
 }
 

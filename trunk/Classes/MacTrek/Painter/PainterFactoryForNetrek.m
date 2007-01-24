@@ -299,7 +299,7 @@
         frames = imgPlanetUnknown;
         frameRect = NSMakeRect( 0, 0, [imgPlanetUnknown size].width, [imgPlanetUnknown size].width);
         frameRect.origin.y += ([planet fuse] / PFN_SLOW_MOTION_FACTOR_PLANET) * [imgPlanetUnknown size].width;
-        //NSLog(@"PainterFactoryForNetrek.drawPlanet %@ frame %d", [planet name], ([planet fuse] / PFN_SLOW_MOTION_FACTOR_PLANET));
+        //LLLog(@"PainterFactoryForNetrek.drawPlanet %@ frame %d", [planet name], ([planet fuse] / PFN_SLOW_MOTION_FACTOR_PLANET));
     } else {
         // type is HOME|ARI|ROCK
         if ([planet flags] & PLANET_AGRI) {
@@ -351,7 +351,7 @@
                 frameRect.origin.x += 1 * frameRect.size.width;
                 break;
             default:
-                NSLog(@"PainterFactoryForNetrek.drawPlanet %@ has no team?", [planet name]);
+                LLLog(@"PainterFactoryForNetrek.drawPlanet %@ has no team?", [planet name]);
                 frameRect.origin.x += 1 * frameRect.size.width;
                 break;
         }

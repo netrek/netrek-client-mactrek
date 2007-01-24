@@ -22,7 +22,7 @@
 
 - (bool) sendBuffer:(char*) buffer length:(int)size {
 
-    NSLog(@"ServerSenderUdp.sendBuffer message: %@ (%d) size: %d", 
+    LLLog(@"ServerSenderUdp.sendBuffer message: %@ (%d) size: %d", 
           [pktConv clientPacketString:buffer[0]], buffer[0], size);
     
     NSData *packet = [[NSData alloc] initWithBytes:buffer length:size];

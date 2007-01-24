@@ -20,7 +20,7 @@
     NSImage *rawImage = [[NSImage alloc] initWithContentsOfFile:pathToImage];
     
     if (rawImage == nil) {
-        NSLog(@"PainterFactoryForTac.loadImage %@ failed, reverting to super", pathToImage);
+        LLLog(@"PainterFactoryForTac.loadImage %@ failed, reverting to super", pathToImage);
         // something went wrong try super image
         return [super loadImage:imageName];
     }
@@ -106,7 +106,7 @@
 	imgShip = [extraImages objectForKey:key];
 	 	
 	if (imgShip == nil) {
-		NSLog(@"PainterFactoryForTac.drawShipType unknown ship %@", key);
+		LLLog(@"PainterFactoryForTac.drawShipType unknown ship %@", key);
 		[super drawShipType:type forTeamId:teamId withCloakPhase:cloakPhase inRect:Rect];
 		return;
 	}
@@ -160,7 +160,7 @@
 	imgPlanet = [extraImages objectForKey:key];
 	
 	if (imgPlanet == nil) {
-		NSLog(@"PainterFactoryForTac.drawPlanet unknown planet %@", key);
+		LLLog(@"PainterFactoryForTac.drawPlanet unknown planet %@", key);
 		[super drawPlanet:planet inRect:Rect];
 		return;
 	}        

@@ -81,7 +81,7 @@
         // (it will come and ask for data)
         [playerList reloadData];  
     } else {
-        NSLog(@"PlayerListDataSource.refresh skipping, no change detected");
+        LLLog(@"PlayerListDataSource.refresh skipping, no change detected");
     }
 
 }

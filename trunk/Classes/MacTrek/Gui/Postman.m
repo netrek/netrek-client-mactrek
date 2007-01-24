@@ -36,16 +36,16 @@
 		// found 5 spaces at starting at right spot in a string with the right length
 	
 		// respond by sending version number
-		NSLog(@"Postman.newMessage hog request");
+		LLLog(@"Postman.newMessage hog request");
 		// see if we can find the addressy
 		NSRange range = [str rangeOfString:@"->"];
 		if (range.location == NSNotFound) {
 			// Bug 1625370 only reply to real users
-			//NSLog(@"Postman.newMessage responding to ALL with version");
+			//LLLog(@"Postman.newMessage responding to ALL with version");
 			//[self sendMessage:[NSString stringWithFormat:@"Running: %@ %@", APP_NAME, VERSION] to:@"ALL"];
 		} else {
 			NSString *origin = [[str substringToIndex:range.location] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
-			NSLog(@"Postman.newMessage responding to %@ with version", origin);
+			LLLog(@"Postman.newMessage responding to %@ with version", origin);
 			[self sendMessage:[NSString stringWithFormat:@"Running: %@ %@", APP_NAME, VERSION] to:origin];
 		}		
 	} 
@@ -58,7 +58,7 @@
         // it is is [F|R|O|I] followed by index
         // check first
         if ([self individualIdOfAdress:[str substringWithRange:NSMakeRange(0,2)]] == nil) {
-            NSLog(@"Postman.messageSelected can't find a sender in %@", str);
+            LLLog(@"Postman.messageSelected can't find a sender in %@", str);
             return;
         }
         [self setDestination:[str substringWithRange:NSMakeRange(0,2)]];        
@@ -66,7 +66,7 @@
         // it is [F|R|O|I] followed by index
         // check first
         if ([self individualIdOfAdress:[str substringWithRange:NSMakeRange(1,2)]] == nil) {
-            NSLog(@"Postman.messageSelected can't find a sender in %@", str);
+            LLLog(@"Postman.messageSelected can't find a sender in %@", str);
             return;
         }
         [self setDestination:[str substringWithRange:NSMakeRange(1,2)]];
@@ -75,14 +75,14 @@
         // it is is [F|R|O|I] followed by index
         // check first
         if ([self individualIdOfAdress:[str substringWithRange:NSMakeRange(0,2)]] == nil) {
-            NSLog(@"Postman.messageSelected can't find a sender in %@", str);
+            LLLog(@"Postman.messageSelected can't find a sender in %@", str);
             return;
         }
         [self setDestination:[str substringWithRange:NSMakeRange(0,2)]];
     } else {
         // must be GOD or ALL or FED.. try:
         if ([self individualIdOfAdress:[str substringWithRange:NSMakeRange(0,3)]] == nil) {
-            NSLog(@"Postman.messageSelected can't find a sender in %@", str);
+            LLLog(@"Postman.messageSelected can't find a sender in %@", str);
             return;
         }
         [self setDestination:[str substringWithRange:NSMakeRange(0,3)]];        
@@ -93,13 +93,13 @@
     // player strings has the id between brackets
     NSRange temp = [str rangeOfString:@"("];
     if (temp.location == NSNotFound) {
-        NSLog(@"Postman.playerSelected can't find a sender in %@", str);
+        LLLog(@"Postman.playerSelected can't find a sender in %@", str);
         return;
     }
     int start = temp.location + 1;
     temp = [str rangeOfString:@")"];
     if (temp.location == NSNotFound) {
-        NSLog(@"Postman.playerSelected can't find a sender in %@", str);
+        LLLog(@"Postman.playerSelected can't find a sender in %@", str);
         return;
     }
     int size = temp.location - start; 
@@ -184,14 +184,14 @@
             playerId += 10;
         } else {
             [notificationCenter postNotificationName:@"PM_WARNING" userInfo:@"Unknown player. message not sent."];
-            NSLog(@"Postman.individualIdOfAdress Unknown player %@ message not sent.", address);
+            LLLog(@"Postman.individualIdOfAdress Unknown player %@ message not sent.", address);
             return nil;  
         }
 
         // simple sanity check
         if ([[universe playerWithId:playerId] status] == PLAYER_FREE) {
             [notificationCenter postNotificationName:@"PM_WARNING" userInfo:@"That player left the game. message not sent."];
-            NSLog(@"Postman.individualIdOfAdress player %@ left game message not sent.", address);
+            LLLog(@"Postman.individualIdOfAdress player %@ left game message not sent.", address);
             return nil;
         }
         return [NSNumber numberWithChar:playerId];
@@ -222,7 +222,7 @@
 // delegate functions of textfield
 - (void)controlTextDidEndEditing:(NSNotification *)aNotification {
     if ([[self message] length] > 0) {
-        NSLog(@"Postman.controlTextDidEndEditing sending message %@", [self message]);
+        LLLog(@"Postman.controlTextDidEndEditing sending message %@", [self message]);
         [self sendCurrentMessage];
         // clean up since the change of focus when the mouse moves creates a 
         // second event that we do not wish to send.
@@ -230,7 +230,7 @@
         // the same as pressing enter
         [self setMessage:@""];  
     } else {
-        NSLog(@"Postman.controlTextDidEndEditing ignoring message %@", [self message]);
+        LLLog(@"Postman.controlTextDidEndEditing ignoring message %@", [self message]);
     }
 }
 

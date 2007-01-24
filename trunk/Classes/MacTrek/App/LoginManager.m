@@ -38,7 +38,7 @@ bool serverReplyReceived = NO;
 //--
 -(void) reset {
     state = LOGIN_GETNAME;
-    NSLog(@"LoginManager.reset state %d", state);
+    LLLog(@"LoginManager.reset state %d", state);
 }
 
 // handle server reports
@@ -67,7 +67,7 @@ bool serverReplyReceived = NO;
             [notificationCenter postNotificationName:@"LM_LOGIN_COMPLETE" object:self userInfo:nil];
 			break;
         default:
-            NSLog(@"LoginManager.serverReportsLoginAccepted state %d", state);
+            LLLog(@"LoginManager.serverReportsLoginAccepted state %d", state);
             break;
     }
 }
@@ -90,7 +90,7 @@ bool serverReplyReceived = NO;
             [notificationCenter postNotificationName:@"LM_LOGIN_BAD_PASSWORD" object:self userInfo:nil];
 			break;
         default:
-            NSLog(@"LoginManager.serverReportsLoginDenied state %d", state);
+            LLLog(@"LoginManager.serverReportsLoginDenied state %d", state);
             break;
     }
     
@@ -100,7 +100,7 @@ bool serverReplyReceived = NO;
 - (void) setName:(NSString *)loginName {
     
     if (state != LOGIN_GETNAME) {
-        NSLog(@"LoginManager.setName strange ? did not expect state %d", state);
+        LLLog(@"LoginManager.setName strange ? did not expect state %d", state);
         state = LOGIN_GETNAME;
     }        
     
