@@ -47,7 +47,7 @@
 }
 
 - (void) setAccelerate:(bool)accel {
-	NSLog(@"PainterFactory.setAccelerate");
+	LLLog(@"PainterFactory.setAccelerate");
     accelerate = accel;
 }
 
@@ -78,9 +78,9 @@
     // create a private pool for this thread
     NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
     
-    NSLog(@"PainterFactory.cacheImagesInSeperateThread: start running");
+    LLLog(@"PainterFactory.cacheImagesInSeperateThread: start running");
     [self cacheImages];
-    NSLog(@"PainterFactory.cacheImagesInSeperateThread: complete");
+    LLLog(@"PainterFactory.cacheImagesInSeperateThread: complete");
     
     [notificationCenter postNotificationName:@"PF_IMAGES_CACHED"];
     
@@ -237,7 +237,7 @@
     startPoint.y -= cos(course) * (float)[me speed] / 4.0f;
     startPoint.x -= sin(course) * (float)[me speed] / 4.0f;
     
-    //NSLog(@"### c %f sp (%f, %f)", course, startPoint.x, startPoint.y);
+    //LLLog(@"### c %f sp (%f, %f)", course, startPoint.x, startPoint.y);
     
     // repeat the bitmap if it shifted completely out of view
     if(startPoint.x < -backGroundImageSize.width) {
@@ -381,7 +381,7 @@
         [self drawPlanet: planet inRect:planetViewBounds];
         if (!simple) {   // in simple mode we do not increase counters
             [planet increaseFuse];
-            //NSLog(@"PainterFactory.drawPlanet %@ increased fuse to %d", [planet name], [planet fuse]);
+            //LLLog(@"PainterFactory.drawPlanet %@ increased fuse to %d", [planet name], [planet fuse]);
         }
                 
         // draw the name
@@ -575,7 +575,7 @@
 					// Here I will have to compute the end coordinate
 					compute = PHASER_MAX_DISTANCE * ([[player ship] phaserDamage ] / 100.0f);
                     // use radian conversion or tri
-                    //NSLog(@"deg %d rad %f, cos %f, sin %f disx %d disy %d, px %f, py %f", 
+                    //LLLog(@"deg %d rad %f, cos %f, sin %f disx %d disy %d, px %f, py %f", 
                     //[phaser course], [phaser dirInRad],
                     //      sinf([phaser dirInRad]), cosf([phaser dirInRad]),
                     //      (int) (compute * cosf([phaser dirInRad])), (int)(compute * sinf([phaser dirInRad])),
@@ -611,7 +611,7 @@
                                         gamePosInCentreOfView:centreOfGameBounds
                                                     withScale:scale];
                 
-                //NSLog(@"PainterFactory.playerPhaser firing at x=%f, y=%f", phaserEndPoint.x, phaserEndPoint.y);
+                //LLLog(@"PainterFactory.playerPhaser firing at x=%f, y=%f", phaserEndPoint.x, phaserEndPoint.y);
                 
                 [line removeAllPoints];
                 [line moveToPoint:phaserStartPoint];
@@ -661,7 +661,7 @@
             continue;
         }
         
-        //NSLog(@"PainterFactory.drawPlayers tractor from (%f, %f) to (%f, %f)",
+        //LLLog(@"PainterFactory.drawPlayers tractor from (%f, %f) to (%f, %f)",
         //      tractorStartPoint.x, tractorStartPoint.y,
         //      tractorEndPoint.x, tractorEndPoint.y);
         
@@ -669,7 +669,7 @@
                              (double)(tractorStartPoint.y - tractorEndPoint.y)) + pi / 2.0;
         //double dir = theta / pi * 128; // no need we can work in rad
                 
-        //NSLog(@"PainterFactory.drawPlayers tractor from (%f / %f) to (%f)",
+        //LLLog(@"PainterFactory.drawPlayers tractor from (%f / %f) to (%f)",
         //      ((double)(tractorEndPoint.x - tractorStartPoint.x)), 
         //      ((double)(tractorStartPoint.y - tractorEndPoint.y)) + pi / 2.0);
 
@@ -687,7 +687,7 @@
         int yOffset = (int)(cos(theta) * maxDim);
         int xOffset = (int)(sin(theta) * maxDim);
         
-        //NSLog(@"PainterFactory.drawPlayers tractor tetha %f xOff %d, yOff %d", theta, xOffset, yOffset);
+        //LLLog(@"PainterFactory.drawPlayers tractor tetha %f xOff %d, yOff %d", theta, xOffset, yOffset);
         
         // draw it
         NSPoint p1 = NSMakePoint(tractorEndPoint.x + xOffset, tractorEndPoint.y + yOffset);
@@ -730,7 +730,7 @@
                 // ---
                 // check for fuse and status changes
                 // ---
-                //NSLog(@"PainterFactory.drawTorpsInRect status %d, previous %d", [torp status], [torp previousStatus]);
+                //LLLog(@"PainterFactory.drawTorpsInRect status %d, previous %d", [torp status], [torp previousStatus]);
                 
                 // check fuse overrun (maxfuse (n) sets the number of frames 0..n-1)
                 if ([torp fuse] >= [torp maxfuse]) {
@@ -1025,7 +1025,7 @@
     static NSTimeInterval start, stop;
     start = [NSDate timeIntervalSinceReferenceDate];  
     if ((start-stop) > 0.1) {
-        NSLog(@"PainterFactory.drawView: slept %f sec", (start-stop));
+        LLLog(@"PainterFactory.drawView: slept %f sec", (start-stop));
     }
     
     // -------------------------------------------------------------------------
@@ -1102,7 +1102,7 @@
     // -------------------------------------------------------------------------
     stop = [NSDate timeIntervalSinceReferenceDate];  
     if ((stop - start) > 0.1) {
-        NSLog(@"PainterFactory.drawView: %f sec", (stop-start));
+        LLLog(@"PainterFactory.drawView: %f sec", (stop-start));
     }
     
     // post-code
@@ -1144,7 +1144,7 @@
 // --------
 
 - (void)   drawPlayer:(Player*) player inRect:(NSRect) Rect {
-    //NSLog(@"PainterFactory.drawPlayer course %f %@",course, 
+    //LLLog(@"PainterFactory.drawPlayer course %f %@",course, 
     //      [NSString stringWithFormat:@"x=%f, y=%f, w=%f, h=%f", 
     //          Rect.origin.x, Rect.origin.y, Rect.size.width, Rect.size.height]);
     
@@ -1195,7 +1195,7 @@
     // get angle
     float angle = (360.0 * shieldPercentage / 100);
     
-    //NSLog(@"PainterFactory.drawShield strenght %f, angle %f", shieldPercentage, angle);
+    //LLLog(@"PainterFactory.drawShield strenght %f, angle %f", shieldPercentage, angle);
     
     // draw
     [shieldColor set];
@@ -1214,7 +1214,7 @@
 }
 
 - (void)   drawPlanet:(Planet*) planet inRect:(NSRect) Rect {
-    //NSLog(@"PainterFactory.drawPlanet %@", 
+    //LLLog(@"PainterFactory.drawPlanet %@", 
     //      [NSString stringWithFormat:@"x=%f, y=%f, w=%f, h=%f", 
     //          Rect.origin.x, Rect.origin.y, Rect.size.width, Rect.size.height]);
 	
@@ -1241,14 +1241,14 @@
     
     Rect = NSInsetRect(Rect, -delta, -delta); // use minus to make larger
     
-    //NSLog(@"PainterFactory.drawTorp %@",  
+    //LLLog(@"PainterFactory.drawTorp %@",  
     //     [NSString stringWithFormat:@"x=%f, y=%f, w=%f, h=%f", 
     //       Rect.origin.x, Rect.origin.y, Rect.size.width, Rect.size.height]);
     [shapes drawCircleInRect:Rect];
 }
 
 - (void)   drawPlasma:(Plasma*) plasma inRect:(NSRect) Rect {
-    //NSLog(@"PainterFactory.drawPlasma %@", 
+    //LLLog(@"PainterFactory.drawPlasma %@", 
     //      [NSString stringWithFormat:@"x=%f, y=%f, w=%f, h=%f", 
     //          Rect.origin.x, Rect.origin.y, Rect.size.width, Rect.size.height]);
     [[self colorForTeam:[plasma team]] set];
@@ -1260,7 +1260,7 @@
     // at least clear
     [[NSColor blackColor] set];
     NSRectFill(Rect);
-    //NSLog(@"PainterFactory.drawBackgroundImageInRect %@",  
+    //LLLog(@"PainterFactory.drawBackgroundImageInRect %@",  
     //[NSString stringWithFormat:@"x=%f, y=%f, w=%f, h=%f", 
     //    Rect.origin.x, Rect.origin.y, Rect.size.width, Rect.size.height]);
 }
@@ -1402,9 +1402,9 @@
 			
 			// and store it
 			[player setLabel:labelImage forKey:key];
-			NSLog(@"PainterFactory.drawLabelForPlayer created label: %@", label);
+			LLLog(@"PainterFactory.drawLabelForPlayer created label: %@", label);
 		} else {
-			//NSLog(@"PainterFactory.drawLabelForPlayer using cached label: %@", label);
+			//LLLog(@"PainterFactory.drawLabelForPlayer using cached label: %@", label);
 		}
 		
 		NSRect destRect;
@@ -1482,9 +1482,9 @@
         
         // and store it
         [planet setLabel:labelImage forKey:label];
-        NSLog(@"PainterFactory.drawLabelForPlanet created label: %@", label);
+        LLLog(@"PainterFactory.drawLabelForPlanet created label: %@", label);
     } else {
-        //NSLog(@"PainterFactory.drawLabelForPlanet using cached label: %@", label);
+        //LLLog(@"PainterFactory.drawLabelForPlanet using cached label: %@", label);
     }
 
     NSRect destRect;

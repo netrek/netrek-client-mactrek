@@ -92,11 +92,11 @@ bool sendEvents = YES;
   useMainRunLoop:(bool)useMainLoop {                                                     
     
     if (notificationObserver == nil) {
-        NSLog(@"LLNotificationCenter.addObserver notificationObserver cannot be nil");
+        LLLog(@"LLNotificationCenter.addObserver notificationObserver cannot be nil");
         return;
     } 
     if (notificationSelector == nil) {
-        NSLog(@"LLNotificationCenter.addObserver notificationSelector cannot be nil");
+        LLLog(@"LLNotificationCenter.addObserver notificationSelector cannot be nil");
         return;
     }
     // little optimalization, when using the mainloop it is thread safe anyway
@@ -128,7 +128,7 @@ bool sendEvents = YES;
 
 - (void) remotelyPostedEvent:(LLNotificationCenterEntry *)listener {
     
-    //NSLog(@"LLNotificationCenter.remotelyPostedEvent %@", [listener name]); 
+    //LLLog(@"LLNotificationCenter.remotelyPostedEvent %@", [listener name]); 
     
     // get the parameters passed over the DO
     id target = [listener target];
@@ -151,7 +151,7 @@ bool sendEvents = YES;
     LLDOSender *sender = [senders objectForKey:threadID];
     if (sender == nil) {
         // new thread? create a seperate sender
-        NSLog(@"LLNotificationCenter.getSenderForMyThread creating sender for thread %d", threadID);
+        LLLog(@"LLNotificationCenter.getSenderForMyThread creating sender for thread %d", threadID);
         sender = [[LLDOSender alloc] init];
         [senders setObject:sender forKey:threadID];
     }
@@ -169,12 +169,12 @@ bool sendEvents = YES;
     }
     
     // debug print, very helpfull, but takes load
-    //NSLog(@"LLNotificationCenter.postNotificationName %@", name);
+    //LLLog(@"LLNotificationCenter.postNotificationName %@", name);
     
     bool hasObserver = NO;
     
     if (name == nil) {
-        NSLog(@"LLNotificationCenter.postNotification nil strings are no longer accepted");
+        LLLog(@"LLNotificationCenter.postNotification nil strings are no longer accepted");
         return;
     }
     
@@ -197,7 +197,7 @@ bool sendEvents = YES;
                     [target performSelector:selector withObject:userInfo];       // invoke 
                     [synchronizeAccess unlock]; // but unlock                        
                 } else {
-                    NSLog(@"LLNotificationCenter.postNotificationName waited %d seconds for lock, discarding event");
+                    LLLog(@"LLNotificationCenter.postNotificationName waited %d seconds for lock, discarding event");
                     return; // no lock obtained, so no need to unlock
                 }
             } else {
@@ -223,13 +223,13 @@ bool sendEvents = YES;
         } 
     }
     if (!hasObserver) { // avoid this to speed up things
-       NSLog(@"LLNotificationCenter.postNotificationName WARNING notification %@ has no observer", name);
+       LLLog(@"LLNotificationCenter.postNotificationName WARNING notification %@ has no observer", name);
     }
 }
 
 - (void)removeObserver:(id)notificationObserver        
                   name:(NSString *)notificationName {
-    NSLog(@"LLNotificationCenter.removeObserver %@", notificationObserver); 
+    LLLog(@"LLNotificationCenter.removeObserver %@", notificationObserver); 
     
     int removed = 0;
     // go through entire dictionairy
@@ -272,7 +272,7 @@ bool sendEvents = YES;
         }
          */
     }   
-    NSLog(@"LLNotificationCenter.removeObserver removed %d occurences", removed);
+    LLLog(@"LLNotificationCenter.removeObserver removed %d occurences", removed);
 }
 
 - (void) postNotificationName:(NSString *)name {

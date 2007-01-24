@@ -107,7 +107,7 @@ bool clockRunning = NO;
 }
 
 - (void) loginComplete:(id)sender {
-    NSLog(@"LoginController.loginComplete reached");
+    LLLog(@"LoginController.loginComplete reached");
     [loginInstruction setStringValue:@"Welcome!"];
     [notificationCenter postNotificationName:@"LC_LOGIN_COMPLETE"];
     [outfitButton setEnabled:YES];
@@ -132,7 +132,7 @@ bool clockRunning = NO;
 
 // handling of input events
 - (void)passwordDidEndEditing:(NSNotification *)aNotification {
-	NSLog(@"LoginController.passwordDidEndEditing %@", [aNotification name]);
+	LLLog(@"LoginController.passwordDidEndEditing %@", [aNotification name]);
     
     if (makeNewPassword) {
         [loginInstruction setStringValue:@"Enter it again to make sure you typed it right."];
@@ -153,7 +153,7 @@ bool clockRunning = NO;
 }
 
 - (void)loginDidEndEditing:(NSNotification *)aNotification {
-	NSLog(@"LoginController.loginDidEndEditing %@", [aNotification name]);
+	LLLog(@"LoginController.loginDidEndEditing %@", [aNotification name]);
     
     // and login
     [loginManager setName: [playerName stringValue]];
@@ -181,7 +181,7 @@ bool clockRunning = NO;
 }
 
 - (void)passwordVerifyDidEndEditing:(NSNotification *)aNotification {
-	NSLog(@"LoginController.passwordVerifyDidEndEditing %@", [aNotification name]);
+	LLLog(@"LoginController.passwordVerifyDidEndEditing %@", [aNotification name]);
     
     // verify complete
     if ([[playerPassword stringValue] isEqualToString:[playerPasswordVerify stringValue]]) {
@@ -226,7 +226,7 @@ bool clockRunning = NO;
 
 - (void) startClock {
     if (clockRunning) {
-        NSLog(@"LoginController.startClock clock already running");
+        LLLog(@"LoginController.startClock clock already running");
         return;        
     }
     

@@ -137,7 +137,7 @@
     [soundEffects setObject:sound forKey:@"WARNING_SOUND"];    // replaced it
     
     // we are done
-    NSLog(@"SoundPlayer.loadSound done");
+    LLLog(@"SoundPlayer.loadSound done");
     [notificationCenter postNotificationName:@"SP_SOUNDS_CACHED"];
 }
 
@@ -177,7 +177,7 @@
     if (sound != nil) {
         [sound playWithVolume:volumeFX];
     } else {
-        NSLog(@"Soundplayer.playSoundEffect no sound for %@", snd);
+        LLLog(@"Soundplayer.playSoundEffect no sound for %@", snd);
     }
 
 }
@@ -264,12 +264,12 @@
 - (void) playSoundEffect:(SoundEffect*)sound atAngle:(float)angle atDistance:(float)distance {
     
     if (sound == nil) {
-        NSLog(@"Sounplayer.playSoundEffect no sound..");
+        LLLog(@"Sounplayer.playSoundEffect no sound..");
         return;
     }
     
     if (distance > SP_MAX_RANGE) { // prevent negative volume
-        NSLog(@"Sounplayer.playSoundEffect refuse to play, too far away");
+        LLLog(@"Sounplayer.playSoundEffect refuse to play, too far away");
         return;
     }
  

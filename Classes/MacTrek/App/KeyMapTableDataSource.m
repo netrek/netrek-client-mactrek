@@ -31,7 +31,7 @@
 	// NIB since the object is archived
 	[keyMapTableView reloadData];
 	[keyMapTableView noteNumberOfRowsChanged];
-	NSLog(@"KeyMapTableDataSource.awakeFromNib");
+	LLLog(@"KeyMapTableDataSource.awakeFromNib");
 }
 
 - (MTKeyMap *) keyMap {
@@ -41,7 +41,7 @@
 - (int)numberOfRowsInTableView:(NSTableView *)aTableView {
 
     if (keyMapTableView == aTableView) {
-		 NSLog(@"KeyMapTableDataSource.numberOfRowsInTableView %d", [myMap count]);
+		 LLLog(@"KeyMapTableDataSource.numberOfRowsInTableView %d", [myMap count]);
         return [myMap count];
     }
     return 0;
@@ -50,7 +50,7 @@
 - (id)tableView:(NSTableView *)aTableView
     objectValueForTableColumn:(NSTableColumn *)aTableColumn
             row:(int)rowIndex {
-   //NSLog(@"KeyMapTableDataSource.objectValueForTableColumn row %d", rowIndex);
+   //LLLog(@"KeyMapTableDataSource.objectValueForTableColumn row %d", rowIndex);
 	
     if (keyMapTableView == aTableView) {
         NSArray *actionKeys = [myMap allKeys];

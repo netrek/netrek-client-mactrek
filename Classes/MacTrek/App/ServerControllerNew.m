@@ -23,7 +23,7 @@
 			cpuType = @"INTEL";
 		}
 		
-		NSLog(@"ServerControllerNew.init selecting %@", cpuType);
+		LLLog(@"ServerControllerNew.init selecting %@", cpuType);
 		
 		pathToResources = [[[NSBundle mainBundle] resourcePath] retain];
 		pathToExe = [[NSString stringWithFormat:@"%@/PRECOMPILED/%@/lib", pathToResources, cpuType] retain];
@@ -39,7 +39,7 @@
 	[server setCurrentDirectoryPath:pathToExe];
 	[server setLaunchPath:pathToServer];
 	[server launch];	
-	NSLog(@"ServerControllerNew.startServer launched %@", pathToServer);
+	LLLog(@"ServerControllerNew.startServer launched %@", pathToServer);
 	[server waitUntilExit];
 	[server release];
 }

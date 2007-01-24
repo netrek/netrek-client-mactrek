@@ -36,7 +36,7 @@
 
 - (void) addString:(NSString *)str withColor:(NSColor *)col {
     
-   // NSLog(@"LLStringList.addStringWithColor: [%@]  %@", str, name);
+   // LLLog(@"LLStringList.addStringWithColor: [%@]  %@", str, name);
     
     // set up the attributes
     [normalAttribute setValue:col forKey:NSForegroundColorAttributeName];
@@ -63,7 +63,7 @@
         // the selected row scrolled up
         if (selectedRow >= 0) {
             selectedRow--;
-            //NSLog(@"LLStringList.addString selected row is now %d %@", selectedRow, name);
+            //LLLog(@"LLStringList.addString selected row is now %d %@", selectedRow, name);
         }
     }
     
@@ -91,7 +91,7 @@
     
     
     //aRect = [self bounds]; // always completely redraw
-    //NSLog(@"LLStringList.drawRect x=%f, y=%f, w=%f, h=%f", aRect.origin.x, aRect.origin.y, aRect.size.width, aRect.size.height);
+    //LLLog(@"LLStringList.drawRect x=%f, y=%f, w=%f, h=%f", aRect.origin.x, aRect.origin.y, aRect.size.width, aRect.size.height);
     
     // draw frame
     [[NSColor whiteColor] set];
@@ -119,7 +119,7 @@
         
         // draw string
         [aStr drawAtPoint:p];
-        //NSLog(@"LLStringList.draw string %@ at [%f, %f]", aStr, p.x, p.y);
+        //LLLog(@"LLStringList.draw string %@ at [%f, %f]", aStr, p.x, p.y);
         
         // specify the lower left corner
         p.y += rowHeigth;
@@ -157,7 +157,7 @@
     
     selectedRow = row;
     
-   // NSLog(@"LLStringList.setSelectedRow selected row is now %d %@", selectedRow, name);
+   // LLLog(@"LLStringList.setSelectedRow selected row is now %d %@", selectedRow, name);
     NSString *selectedString = [[stringList objectAtIndex:selectedRow] string];
     
     [self newStringSelected:selectedString]; // for derived classes
@@ -188,7 +188,7 @@
         }
     }
     if (id == -1) {
-        NSLog(@"LLStringList.removeString error string [%@] not found %@", str, name);
+        LLLog(@"LLStringList.removeString error string [%@] not found %@", str, name);
         return;
     }
     [stringList removeObjectAtIndex:id];

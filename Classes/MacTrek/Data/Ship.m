@@ -160,7 +160,7 @@
             break;
         default:
             abbrev = [NSString stringWithString:@"??"];
-            NSLog(@"Ship.initWithType: unknown %d", type);
+            LLLog(@"Ship.initWithType: unknown %d", type);
             break;
         }
         [abbrev retain];
@@ -211,7 +211,7 @@
 - (void) setWidth: (int) newWidth {
 	
 	// Sturgion server send crazy widths
-	NSLog(@"Ship.setWidth to %d, old setting %d");
+	LLLog(@"Ship.setWidth to %d, old setting %d");
 	//width = newWidth;
 }
 

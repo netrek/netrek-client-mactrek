@@ -8,6 +8,7 @@
 
 #import <Cocoa/Cocoa.h>
 #import "Version.h"
+#import "Luky.h"
 
 @interface SimpleBaseClass : NSObject {
 

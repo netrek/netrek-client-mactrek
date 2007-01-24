@@ -61,7 +61,7 @@
 -(void) checkFeature:(NSString*)name withType:(char)type withArg1:(int)arg1 withArg2:(int)arg2 withValue:(int)value {
     
     if (features == nil) {
-        NSLog(@"FeatureList.checkFeature %@ initialization ERROR", name);
+        LLLog(@"FeatureList.checkFeature %@ initialization ERROR", name);
         return;
     }
     
@@ -89,7 +89,7 @@
             
             if([name isEqualToString:@"FEATURE_PACKETS"]) {
               //  for (int i = 0; i < [features count]; i++) {
-              //     NSLog([NSString stringWithFormat:@"FeatureList.checkFeature: SERVER FEATURES - %@ = %d", 
+              //     LLLog([NSString stringWithFormat:@"FeatureList.checkFeature: SERVER FEATURES - %@ = %d", 
               //         [[features objectAtIndex:i] name], 
               //         [[features objectAtIndex:i] value]]);
               //  }
@@ -140,7 +140,7 @@
                             [s appendString:@" TTS"];
                         }
                         if ([s length] > 0) {
-                            NSLog([NSString stringWithFormat:@"%@ disabled", s]);
+                            LLLog([NSString stringWithFormat:@"%@ disabled", s]);
                         }
                         break;
 					case FEATURE_OFF:
@@ -149,7 +149,7 @@
                 }
             }
         } 
-        //NSLog([NSString stringWithFormat:@"FeatureList.checkFeature: Feature %@ from server unknown to client!", name]);
+        //LLLog([NSString stringWithFormat:@"FeatureList.checkFeature: Feature %@ from server unknown to client!", name]);
     }
     
 }

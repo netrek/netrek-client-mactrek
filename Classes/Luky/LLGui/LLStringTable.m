@@ -42,7 +42,7 @@
 - (void)drawRect:(NSRect)aRect {
     
     aRect = [self bounds]; // always completely redraw
-    //NSLog(@"LLStringTable.drawRect x=%f, y=%f, w=%f, h=%f", aRect.origin.x, aRect.origin.y, aRect.size.width, aRect.size.height);
+    //LLLog(@"LLStringTable.drawRect x=%f, y=%f, w=%f, h=%f", aRect.origin.x, aRect.origin.y, aRect.size.width, aRect.size.height);
     
     int nrOfColumns = [columns count];
     int columnWidth = [self bounds].size.width / [columns count];
@@ -74,7 +74,7 @@
     
     int columnWidth = [self bounds].size.width / [columns count];
     int selectedColumn = mousePosition.x / columnWidth;
- //   NSLog(@"LLStringTable.mouseDown selected column is now %d", selectedColumn);
+ //   LLLog(@"LLStringTable.mouseDown selected column is now %d", selectedColumn);
     
     int nrOfColumns = [columns count];
     for (int i = 0; i < nrOfColumns; i++) {
@@ -121,7 +121,7 @@
     // delete
     for (int i = newNrOfColumns; i < [columns count]; i++) {
         [columns removeLastObject];
-//        NSLog(@"LLStringTable.setNrOfColumns removing column");
+//        LLLog(@"LLStringTable.setNrOfColumns removing column");
     }
     
     // add
@@ -129,13 +129,13 @@
         LLStringList *list = [[LLStringList alloc] init];
         [list setIdentifer:[NSString stringWithFormat:@"[column %d]", j]];
         [columns addObject:list];
- //       NSLog(@"LLStringTable.setNrOfColumns adding column %d", j);
+ //       LLLog(@"LLStringTable.setNrOfColumns adding column %d", j);
     }   
     
     // set bounds of ALL
     for (int k = 0; k < [columns count]; k++) {
         LLStringList *list = [columns objectAtIndex:k];
-        NSLog(@"LLStringTable.setNrOfColumns (%d) x=%f, y=%f, w=%f, h=%f", k, listBounds.origin.x, listBounds.origin.y, listBounds.size.width, listBounds.size.height);
+        LLLog(@"LLStringTable.setNrOfColumns (%d) x=%f, y=%f, w=%f, h=%f", k, listBounds.origin.x, listBounds.origin.y, listBounds.size.width, listBounds.size.height);
         [list setFrame:listBounds];
         [list setBounds:listBounds];
         [list awakeFromNib];
@@ -146,7 +146,7 @@
 
 - (void) removeString:(NSString *)str fromColumn:(int)column {
     if (column >= [columns count]) {
-        NSLog(@"LLStringTable.removeString column %d does not exist", column);
+        LLLog(@"LLStringTable.removeString column %d does not exist", column);
         return; // column does not exist
     }
     LLStringList *list = [columns objectAtIndex:column];
@@ -156,10 +156,10 @@
 
 - (void) addString:(NSString *)str toColumn:(int)column {
     if (column >= [columns count]) {
-        NSLog(@"LLStringTable.addString column %d does not exist", column);
+        LLLog(@"LLStringTable.addString column %d does not exist", column);
         return; // column does not exist
     }
-//    NSLog(@"LLStringTable.addString [%@] to column %d", str, column);
+//    LLLog(@"LLStringTable.addString [%@] to column %d", str, column);
     LLStringList *list = [columns objectAtIndex:column];
     [list addString:str];
     hasChanged = YES;
@@ -167,11 +167,11 @@
 
 - (void) addString:(NSString *)str withColor:(NSColor *)col toColumn:(int)column {
     if (column >= [columns count]) {
-        NSLog(@"LLStringTable.addStringWithColor column %d does not exist", column);
+        LLLog(@"LLStringTable.addStringWithColor column %d does not exist", column);
         return; // column does not exist
     }
     LLStringList *list = [columns objectAtIndex:column];
- //   NSLog(@"LLStringTable.addStringWithColor [%@] to column %d", str, column);
+ //   LLLog(@"LLStringTable.addStringWithColor [%@] to column %d", str, column);
     [list addString:str withColor:col];
     hasChanged = YES;
 }

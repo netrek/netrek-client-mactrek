@@ -66,7 +66,7 @@
     // sometimes the drawing takes so long the timer invokes another go
     // maybe should use locks..
     if (busyDrawing) {
-        NSLog(@"GameView.drawRect busy drawing");
+        LLLog(@"GameView.drawRect busy drawing");
         return;
     }    
     busyDrawing = YES;
@@ -86,7 +86,7 @@ whichRepresentsGameBounds:gameBounds
         
         [[universe synchronizeAccess] unlock];
     } else {
-        NSLog(@"GameView.drawRect waited %f seconds for lock, discarding", MAX_WAIT_BEFORE_DRAW);
+        LLLog(@"GameView.drawRect waited %f seconds for lock, discarding", MAX_WAIT_BEFORE_DRAW);
         
         // first set up the gamebounds based on my position
         NSRect gameBounds = [painter gameRectAround:[self gamePointRepresentingCentreOfView]
@@ -111,34 +111,34 @@ whichRepresentsGameBounds:gameBounds
 - (void) keyDown:(NSEvent *)theEvent {
     
     if (keyMap == nil) {
-        NSLog(@"GameView.keyDown have no keymap");
+        LLLog(@"GameView.keyDown have no keymap");
         [super keyDown:theEvent];
         return;
     }
     
     switch (inputMode) {
     case GV_NORMAL_MODE:
-        NSLog(@"GameView.keyDown handle in normal mode");
+        LLLog(@"GameView.keyDown handle in normal mode");
         [self normalModeKeyDown:theEvent];
         break;
     case GV_MESSAGE_MODE:
-        NSLog(@"GameView.keyDown handle in message mode");
+        LLLog(@"GameView.keyDown handle in message mode");
         [self messageModeKeyDown:theEvent];
         break;
     case GV_MACRO_MODE:
-        NSLog(@"GameView.keyDown handle in macro mode");
+        LLLog(@"GameView.keyDown handle in macro mode");
         [self macroModeKeyDown:theEvent];
         break;
     case GV_REFIT_MODE:
-        NSLog(@"GameView.keyDown handle in refit mode");
+        LLLog(@"GameView.keyDown handle in refit mode");
         [self refitModeKeyDown:theEvent];
         break;
 	case GV_WAR_MODE:
-        NSLog(@"GameView.keyDown handle in war mode");
+        LLLog(@"GameView.keyDown handle in war mode");
         [self warModeKeyDown:theEvent];
         break;
     default:
-        NSLog(@"GameView.keyDown unknown mode %d", inputMode);
+        LLLog(@"GameView.keyDown unknown mode %d", inputMode);
         // reset
         inputMode = GV_NORMAL_MODE;
         break;
@@ -247,7 +247,7 @@ whichRepresentsGameBounds:gameBounds
 
 - (void) macroModeKeyDown:(NSEvent *)theEvent {
     // $$ should do something here
-    NSLog(@"GameView.macroModeKeyDown not implemented");
+    LLLog(@"GameView.macroModeKeyDown not implemented");
     // reset
     inputMode = GV_NORMAL_MODE;
 }
@@ -295,7 +295,7 @@ whichRepresentsGameBounds:gameBounds
     
 	// is a team selected for negotiations?
 	if (warTeam == nil) {
-		NSLog(@"GameView.warModeKeyDown no team selected");
+		LLLog(@"GameView.warModeKeyDown no team selected");
 		return;
 	}	
 	
@@ -305,12 +305,12 @@ whichRepresentsGameBounds:gameBounds
 	if (theChar == 'h') {
 		// they really want to decleare war
 		warMask |= [warTeam bitMask];
-		NSLog(@"GameView.warModeKeyDown declaring hostile on %@", [warTeam abbreviation]);
+		LLLog(@"GameView.warModeKeyDown declaring hostile on %@", [warTeam abbreviation]);
 		[notificationCenter postNotificationName:@"COMM_SEND_WAR_REQ" userInfo:[NSNumber numberWithChar:warMask]];    
 	} else if (theChar == 'p') {
 		// they really want to decleare peace
 		warMask &= ~([warTeam bitMask]);
-        NSLog(@"GameView.warModeKeyDown declaring peace on %@", [warTeam abbreviation]);
+        LLLog(@"GameView.warModeKeyDown declaring peace on %@", [warTeam abbreviation]);
 		[notificationCenter postNotificationName:@"COMM_SEND_WAR_REQ" userInfo:[NSNumber numberWithChar:warMask]];
 	} 
 	// always clear the team
@@ -358,13 +358,13 @@ whichRepresentsGameBounds:gameBounds
             scale = newScale;
         }
     }
-    NSLog(@"GameView.scrollWheel setting scale to %d", scale);
+    LLLog(@"GameView.scrollWheel setting scale to %d", scale);
 }
 
 
 - (void) sendSpeedReq:(int)speed {
     if (universe == nil) {
-        NSLog(@"GameView.sendSpeedReq have no universe?");
+        LLLog(@"GameView.sendSpeedReq have no universe?");
     }
     
     int maxSpeed = [[[universe playerThatIsMe] ship] maxSpeed];   
@@ -392,7 +392,7 @@ whichRepresentsGameBounds:gameBounds
     if (dir < 0) {
         dir += 360;
     }
-    //NSLog(@"GameView.mouseDir = %f", dir);
+    //LLLog(@"GameView.mouseDir = %f", dir);
     
     return dir;
 }
@@ -400,7 +400,7 @@ whichRepresentsGameBounds:gameBounds
 // $$ may need locks here if the code becomes multi threaded
 - (bool) performAction:(int) action {
     
-    //NSLog(@"GameView.performAction performing action %d", action);
+    //LLLog(@"GameView.performAction performing action %d", action);
     
     int maxSpeed, speed;
     Player *target = nil;
@@ -410,7 +410,7 @@ whichRepresentsGameBounds:gameBounds
     
     switch (action) {
         case ACTION_UNKNOWN:
-            NSLog(@"GameView.performAction unknown action %d", action);
+            LLLog(@"GameView.performAction unknown action %d", action);
             return NO;
             break;
 	    case ACTION_CLOAK:
@@ -605,13 +605,13 @@ whichRepresentsGameBounds:gameBounds
             }
             break;
         case ACTION_DISTRESS_CALL:
-            NSLog(@"GameView.performAction Marcro's not implemented"); // $$ todo
+            LLLog(@"GameView.performAction Marcro's not implemented"); // $$ todo
             break;
         case ACTION_ARMIES_CARRIED_REPORT:
-            NSLog(@"GameView.performAction Marcro's not implemented"); // $$ todo
+            LLLog(@"GameView.performAction Marcro's not implemented"); // $$ todo
             break;
         case ACTION_MESSAGE:
-            //NSLog(@"GameView.performAction MESSAGE not implemented"); 
+            //LLLog(@"GameView.performAction MESSAGE not implemented"); 
             // update warning
             [notificationCenter postNotificationName:@"GV_MODE_INFO" userInfo:@"A=all, [TFORK]=team, [0..f]=player"];
             inputMode = GV_MESSAGE_MODE;
@@ -646,7 +646,7 @@ whichRepresentsGameBounds:gameBounds
             }
             break;
         case ACTION_REFIT:
-            //NSLog(@"GameView.performAction REFIT not implemented"); 
+            //LLLog(@"GameView.performAction REFIT not implemented"); 
             // update warning
             [notificationCenter postNotificationName:@"GV_MODE_INFO" userInfo:@"s=scout, d=destroyer, c=cruiser, b=battleship, a=assault, g=galaxy, o=starbase"];
             inputMode = GV_REFIT_MODE;
@@ -687,7 +687,7 @@ whichRepresentsGameBounds:gameBounds
             break;
         case ACTION_HELP:
 			[notificationCenter postNotificationName:@"GV_SHOW_HELP"];
-            NSLog(@"GameView.performAction HELP should raise panel"); 
+            LLLog(@"GameView.performAction HELP should raise panel"); 
 			break;
         case ACTION_DEBUG:
             [painter setDebugLabels:![painter debugLabels]];
@@ -696,11 +696,11 @@ whichRepresentsGameBounds:gameBounds
 			[screenshotController snap];
 			break;
 		case ACTION_COUP:
-			NSLog(@"GameView.performAction sending coup request");
+			LLLog(@"GameView.performAction sending coup request");
             [notificationCenter postNotificationName:@"COMM_SEND_COUP_REQ" userInfo:nil]; 
             break;
         default:
-            NSLog(@"GameView.performAction unknown action %d", action);
+            LLLog(@"GameView.performAction unknown action %d", action);
             return NO;
             break;
     }

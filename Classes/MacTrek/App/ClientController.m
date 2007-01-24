@@ -37,9 +37,9 @@ bool ghostStart = NO;
 - (void) checkForDeath:(Player *)player {
     // did i die?
     if ([player isMe]) {
-        NSLog(@"ClientController.checkForDeath status = %@", [player statusString]);
+        LLLog(@"ClientController.checkForDeath status = %@", [player statusString]);
         if (([player status] == PLAYER_EXPLODE) ) {
-            NSLog(@"ClientController.checkForDeath: firing delayed death warrent");
+            LLLog(@"ClientController.checkForDeath: firing delayed death warrent");
             // wait for the drawing to end 
             // $$ then generate an event on the drawing of the explosion!
             // [self performSelector: @selector(iDied:) withObject:player afterDelay: 2.0];
@@ -52,14 +52,14 @@ bool ghostStart = NO;
 - (void) slowDeath:(Player *)me {
     // needed because this is called while still drawing the gameview 
     // changing the drawing now would invoke a different graphic context
-    NSLog(@"ClientController.slowDeath: i think i am dead");
+    LLLog(@"ClientController.slowDeath: i think i am dead");
    [self performSelector: @selector(iDied:) withObject:me afterDelay: 0.1]; 
 }
 
 
 - (void) iDied:(Player *)me {
     // go to outfitting
-    NSLog(@"ClientController.iDied: today was a good day to die");
+    LLLog(@"ClientController.iDied: today was a good day to die");
     [me setStatus:PLAYER_OUTFIT];
     [notificationCenter postNotificationName:@"CC_GO_OUTFIT" 
                                       object:self 
@@ -71,10 +71,10 @@ bool ghostStart = NO;
     // if i got a slot, i have become a player
 	Player *me = [universe playerThatIsMe];
 	if (me == nil) {
-        NSLog(@"ClientController.slotObtained checking... nope");
+        LLLog(@"ClientController.slotObtained checking... nope");
         return NO;
     } else {
-        NSLog(@"ClientController.slotObtained checking... YES");
+        LLLog(@"ClientController.slotObtained checking... YES");
         return YES;
     }    
 }
@@ -84,14 +84,14 @@ bool ghostStart = NO;
     // should only be called if i got a slot
     if (![self slotObtained]) {
         // i'm not a player yet
-		 NSLog(@"ClientController.setupSlot called, but not a player");
+		 LLLog(@"ClientController.setupSlot called, but not a player");
 		return; 
     }
     
     Player *me = [universe playerThatIsMe];
     
 	// report our success
-    NSLog(@"ClientController.setupSlot started");
+    LLLog(@"ClientController.setupSlot started");
 	[notificationCenter postNotificationName:@"CC_SLOT_FOUND" 
 									  object:self 
 									userInfo:nil];
@@ -116,7 +116,7 @@ bool ghostStart = NO;
 
 // use this when multithreading
 - (void) findSlot {
-    ///NSLog(@"ClientController.findSlot start looking for a slot");
+    ///LLLog(@"ClientController.findSlot start looking for a slot");
     
     // loop until i find a slot $$ very BAD, wait for the proper event (something with
     // a player update i suppose :
@@ -156,7 +156,7 @@ bool ghostStart = NO;
 
 - (bool)startClientAt:(NSString *)server port:(int)port seperate:(bool)multiThread {
 	
-	NSLog(@"ClientController.startClientAt: %@ port %d", server, port);
+	LLLog(@"ClientController.startClientAt: %@ port %d", server, port);
     
     // call the server
 	if ([communication callServer:server port:port]) {      
@@ -182,7 +182,7 @@ bool ghostStart = NO;
                 [self findSlot];
                 return YES;
             } else {
-                NSLog(@"ClientController.startClientAt: ERROR starting thread");
+                LLLog(@"ClientController.startClientAt: ERROR starting thread");
                 return NO;
             } 
         } else {
@@ -196,14 +196,14 @@ bool ghostStart = NO;
         }
 
     } else {
-        NSLog(@"ClientController.startClientAt: %@ port %d NO CONNECTION", server, port);
+        LLLog(@"ClientController.startClientAt: %@ port %d NO CONNECTION", server, port);
         [notificationCenter postNotificationName:@"CC_SERVER_CALL_FAILED"];
         return NO;
     }
 }
 
 - (void)stop {
-    NSLog(@"ClientController.stop stoping thread and cleaning self");
+    LLLog(@"ClientController.stop stoping thread and cleaning self");
 	if ([communication isRunning]) {
 		// try to suspend the activity
 		[communication suspendCommunicationThread];

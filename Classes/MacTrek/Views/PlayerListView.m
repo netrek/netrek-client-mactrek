@@ -43,11 +43,11 @@
             column = 1;
             break;
         default:
-            NSLog(@"PlayerListView.addPlayer illigal team");
+            LLLog(@"PlayerListView.addPlayer illigal team");
             return;
             break;
     }
-   // NSLog(@"PlayerListView.addPlayer [%@] to column %d", [player nameWithRank], column);
+   // LLLog(@"PlayerListView.addPlayer [%@] to column %d", [player nameWithRank], column);
     [self addString:[player nameWithRankAndKillIndicatorAndShipType] withColor:[[player team] colorForTeam] toColumn:column];
 }
 
@@ -67,11 +67,11 @@
             column = 1;
             break;
         default:
-            NSLog(@"PlayerListView.removePlayer illigal team");
+            LLLog(@"PlayerListView.removePlayer illigal team");
             return;
             break;
     }
-  //  NSLog(@"PlayerListView.removePlayer [%@] from column %d", [player nameWithRank], column);
+  //  LLLog(@"PlayerListView.removePlayer [%@] from column %d", [player nameWithRank], column);
     [self removeString:[player nameWithRankAndKillIndicatorAndShipType] fromColumn:column];
 }
 

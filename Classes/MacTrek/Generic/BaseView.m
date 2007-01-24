@@ -50,13 +50,13 @@
 // old style cursor change, but works
 // default behaviour = focus follows mouse
 - (void) mouseEntered:(NSEvent*)evt {
-    NSLog(@"BaseView.mouseEntered making myself first responder");
+    LLLog(@"BaseView.mouseEntered making myself first responder");
     [[self window] makeFirstResponder:self];
     [[NSCursor crosshairCursor] push];
 }
 
 - (void) mouseExited:(NSEvent*)evt {
-    NSLog(@"BaseView.mouseExited resigning myself as first responder");
+    LLLog(@"BaseView.mouseExited resigning myself as first responder");
     [[self window] resignFirstResponder];
     [[NSCursor crosshairCursor] pop];
 }
@@ -99,18 +99,18 @@
     [self setNeedsDisplay:YES];
     /* not needed, done by trackingRect and mouseEnter
     if([[self window] makeFirstResponder:self]) { // make this view first responder
-        NSLog(@"BaseView.becomeFirstResponder OK");
+        LLLog(@"BaseView.becomeFirstResponder OK");
     } else {
-        NSLog(@"BaseView.becomeFirstResponder failed");
+        LLLog(@"BaseView.becomeFirstResponder failed");
     }
      */ 
-    NSLog(@"BaseView.becomeFirstResponder ok i accept");
+    LLLog(@"BaseView.becomeFirstResponder ok i accept");
     return YES; // always accept
 }
 
 - (bool) resignFirstResponder {
     [self setNeedsDisplay:YES];
-    NSLog(@"BaseView.resignFirstResponder ok i resign");
+    LLLog(@"BaseView.resignFirstResponder ok i resign");
     return [super resignFirstResponder];
 }
 

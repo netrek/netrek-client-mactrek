@@ -242,12 +242,12 @@ static Player *me;
 
 - (Planet *) planetWithId:(int)planetId {
     //  could need planet remap here...
-    //NSLog([NSString stringWithFormat: @"Universe.planetWithId: %d", planetId]);
+    //LLLog([NSString stringWithFormat: @"Universe.planetWithId: %d", planetId]);
     return [planets objectAtIndex:planetId];
 }
 
 - (Player *) playerWithId:(int)playerId {
-    //NSLog([NSString stringWithFormat: @"Universe.playerWithId: %d", playerId]);
+    //LLLog([NSString stringWithFormat: @"Universe.playerWithId: %d", playerId]);
     return [players objectAtIndex:playerId];
 }
 
@@ -314,7 +314,7 @@ static Player *me;
 }
 
 - (void)     movePlanet:(Planet *)planet toTeam: (Team *)targetTeam{
-    //NSLog([NSString stringWithFormat: @"Universe.movePlanet %@ to team %@", [planet name], [targetTeam abbreviation]]);
+    //LLLog([NSString stringWithFormat: @"Universe.movePlanet %@ to team %@", [planet name], [targetTeam abbreviation]]);
     for (int i = 0; i < [teams count]; i++) {
         Team *team = [teams objectAtIndex:i];
         if (team == targetTeam) {

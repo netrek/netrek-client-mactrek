@@ -332,10 +332,10 @@
     if (self != nil) {
         if ([keyMap count] == 0) {
             // something went wrong
-            NSLog(@"MTKeyMap.initWithDefaultFile keymap file is empty, loading defaults");
+            LLLog(@"MTKeyMap.initWithDefaultFile keymap file is empty, loading defaults");
             [self fillWithDefaults];
         } else {
-            NSLog(@"MTKeyMap.initWithDefaultFile keymap file loaded %d", [keyMap count]);
+            LLLog(@"MTKeyMap.initWithDefaultFile keymap file loaded %d", [keyMap count]);
         }
         
     }
@@ -387,17 +387,17 @@
     // convert all dicts to Keymap entries and add them
     while ((entryAsDict = [temp objectForKey:[enumerator nextObject]])) {
         MTKeyMapEntry *keyEntry = [[MTKeyMapEntry alloc] initWithDictionairy:entryAsDict];
-        NSLog(@"MTKeyMap.readDefaultKeyMap setting key [%c] for action: %@", [keyEntry key], [keyEntry description]);
+        LLLog(@"MTKeyMap.readDefaultKeyMap setting key [%c] for action: %@", [keyEntry key], [keyEntry description]);
         [newKeyMap setObject:keyEntry forKey:[NSNumber numberWithInt:[keyEntry action]]];
     }          
     // ---
     
     if ([newKeyMap count] == 0) {
         // something went wrong
-        NSLog(@"MTKeyMap.readDefaultKeyMap keymap file is empty");
+        LLLog(@"MTKeyMap.readDefaultKeyMap keymap file is empty");
         return;
     } else {
-        NSLog(@"MTKeyMap.readDefaultKeyMap loaded %d items", [newKeyMap count]);
+        LLLog(@"MTKeyMap.readDefaultKeyMap loaded %d items", [newKeyMap count]);
     }
     // swap maps
     [keyMap release];
@@ -421,9 +421,9 @@
     
     // dicts in dicts can be written to disk
     if ([temp writeToFile:file atomically:NO]) {
-        NSLog(@"MTKeyMap.writeToFile %@ successfull", file);
+        LLLog(@"MTKeyMap.writeToFile %@ successfull", file);
     } else {
-        NSLog(@"MTKeyMap.writeToFile %@ failed", file); 
+        LLLog(@"MTKeyMap.writeToFile %@ failed", file); 
     }
 
     changedSinceLastWrite = NO;

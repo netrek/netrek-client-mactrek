@@ -96,7 +96,7 @@
     [sound loadSoundWithName:@"SoundEffects2/good-day-to-die.au"];
     [soundEffects setObject:sound forKey:@"I_DIED_SOUND"];  
     // we are done
-    NSLog(@"SoundPlayerForMacTrek.loadSound done");
+    LLLog(@"SoundPlayerForMacTrek.loadSound done");
     [notificationCenter postNotificationName:@"SP_SOUNDS_CACHED"];
 }
 

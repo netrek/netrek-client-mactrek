@@ -68,7 +68,7 @@ SimpleTracker *defaultTracker = nil;
 	float dy = (lastPosition.y - [track position].y);
  
 	if (((dx > 0.0) || (dy > 0.0)) && ([track ident] != nil)) {
-		NSLog(@"%@ O(%f, %f) P(%f, %f) D(%f, %f)", [track ident],
+		LLLog(@"%@ O(%f, %f) P(%f, %f) D(%f, %f)", [track ident],
 			  [track position].x, [track position].y, 
 			  lastPosition.x, lastPosition.y, 
 			  dx, dy);
@@ -85,7 +85,7 @@ SimpleTracker *defaultTracker = nil;
 
 	
 	if ([history count] < 2) {
-		//NSLog(@"SimpleTracker.positionAtTime not enough data %d for %@",[history count], [[history objectAtIndex:0] ident]);
+		//LLLog(@"SimpleTracker.positionAtTime not enough data %d for %@",[history count], [[history objectAtIndex:0] ident]);
 		return [[history objectAtIndex:0] position];
 	}
 	
@@ -119,7 +119,7 @@ SimpleTracker *defaultTracker = nil;
 	float dy = (lastPosition.y - pos1.y);
 	
 	if (((dx > 0.0) || (dy > 0.0)) && ([track1 ident] != nil)) {
-		NSLog(@"%@ O(%f, %f) P(%f, %f) D(%f, %f) S%f(%d) C%f(%d)", [track1 ident],
+		LLLog(@"%@ O(%f, %f) P(%f, %f) D(%f, %f) S%f(%d) C%f(%d)", [track1 ident],
 			  pos1.x, pos1.y, 
 			  lastPosition.x, lastPosition.y, 
 			  dx, dy, speed, [track1 speed], course, [track1 course]);

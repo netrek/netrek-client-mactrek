@@ -8,6 +8,4 @@
 
 #import <Cocoa/Cocoa.h>
 
-bool LLLogEnabled=YES;
-
-#define LLLog(format, ...) if(LLLogEnabled) { NSLog(format, ## __VA_ARGS__); } 
+#define LLLog if([[NSUserDefaults standardUserDefaults]boolForKey:@"LLLogDisabled"]!=YES)NSLog

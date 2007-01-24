@@ -7,7 +7,6 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import "Luky.h"
 #import "SimpleBaseClass.h"
 
 @class BaseClass;

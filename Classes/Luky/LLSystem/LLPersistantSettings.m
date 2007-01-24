@@ -26,7 +26,7 @@ LLPersistantSettings* defaultSettings;
               
         if ([settings count] == 0) {
             // something went wrong ?
-            NSLog(@"LLPersistantSettings.init WARNING: settings file is empty");
+            LLLog(@"LLPersistantSettings.init WARNING: settings file is empty");
             settings = [[NSMutableDictionary alloc] init];
         } 
     }
@@ -43,7 +43,7 @@ LLPersistantSettings* defaultSettings;
 - (void)update {
     // we could check if something really changed..
     if (![settings writeToFile:pathToSettings atomically:YES]) {
-        NSLog(@"LLPersistantSettings.update WARNING: settings file is corrupt");
+        LLLog(@"LLPersistantSettings.update WARNING: settings file is corrupt");
     }
 }
 

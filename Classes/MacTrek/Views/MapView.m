@@ -43,7 +43,7 @@ NSRect gameBounds;
 }
 
 - (void) keyDown:(NSEvent *)theEvent {
-    NSLog(@"MapView.keyDown entered");
+    LLLog(@"MapView.keyDown entered");
     [super keyDown:theEvent];
 }
 

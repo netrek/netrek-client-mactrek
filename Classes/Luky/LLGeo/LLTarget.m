@@ -27,7 +27,7 @@
 		origin = pos;
 		angle = course;
  	    size = newSpeed;
-		NSLog(@"LLTarget.init %f (%f, %f) S%d C%f", 
+		LLLog(@"LLTarget.init %f (%f, %f) S%d C%f", 
 			  [timeStamp timeIntervalSinceReferenceDate], pos.x, pos.y, size, course);
 		
 	}

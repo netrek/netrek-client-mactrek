@@ -32,7 +32,7 @@ bool serverRuns = NO;
 }
 
 - (void) awakeFromNib {
-    NSLog(@"LocalServerController awakeFromNib");
+    LLLog(@"LocalServerController awakeFromNib");
 
     // setup the server controller and tie it to the log window
     server = [[ServerController alloc] initWithTextView: serverLogView];

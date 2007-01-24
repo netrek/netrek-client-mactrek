@@ -23,18 +23,18 @@
 - (id) initWithSocket:(ONInternetSocket*) newSocket {   
     self = [super init];
     if (self != nil) {
-        NSLog(@"ServerSender.initWithSocket should have been subclassed!");
+        LLLog(@"ServerSender.initWithSocket should have been subclassed!");
     }
     return self;
 }
 
 - (bool) sendBuffer:(char*) buffer length:(int)size {
-    NSLog(@"ServerSender.sendBuffer should have been subclassed!");
+    LLLog(@"ServerSender.sendBuffer should have been subclassed!");
     return NO;
 }
 
 - (void) close {
-    NSLog(@"ServerSender.close should have been subclassed!");
+    LLLog(@"ServerSender.close should have been subclassed!");
 }
 
 @end

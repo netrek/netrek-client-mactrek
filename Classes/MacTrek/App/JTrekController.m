@@ -68,17 +68,17 @@
         [logDestination insertText: output];
         [logDestination setEditable:NO];
     } else {
-        NSLog([NSString stringWithFormat: @"JTrekController.appendOutput %@", output]);
+        LLLog([NSString stringWithFormat: @"JTrekController.appendOutput %@", output]);
     }
     
 }
 
 - (void)processStarted:(id)task {
-    NSLog(@"JTrekController.processStarted");
+    LLLog(@"JTrekController.processStarted");
 }
 
 - (void)processFinished:(id)task {
-    NSLog(@"JTrekController.processFinished:  done");
+    LLLog(@"JTrekController.processFinished:  done");
 }
 
 @end

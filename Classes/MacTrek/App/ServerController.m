@@ -99,7 +99,7 @@
 		system("killall -9 robot");
 		system("killall netrekd");		
         
-        NSLog(@"ServerController.stopServer kill PID %d", serverPid);
+        LLLog(@"ServerController.stopServer kill PID %d", serverPid);
         serverPid = -1;
     }
 }
@@ -129,18 +129,18 @@
         [logDestination insertText: output];
         [logDestination setEditable:NO];
     } else {
-        NSLog([NSString stringWithFormat: @"ServerController.appendOutput %@", output]);
+        LLLog([NSString stringWithFormat: @"ServerController.appendOutput %@", output]);
     }
 
 }
 
 - (void)processStarted:(id)task {
     if (task == serverTask) {
-        NSLog(@"ServerController.processStarted: serverTask");
+        LLLog(@"ServerController.processStarted: serverTask");
     } else if (task == logTask) {
-        NSLog(@"ServerController.processStarted: logTask");
+        LLLog(@"ServerController.processStarted: logTask");
     } else {
-        NSLog(@"ServerController.processStarted: unknown task");
+        LLLog(@"ServerController.processStarted: unknown task");
     }
 }
 
@@ -149,7 +149,7 @@
     if (task == serverTask) {
         //[serverTask release];
         serverTask = nil;
-        NSLog(@"ServerController.processFinished: serverTask done");
+        LLLog(@"ServerController.processFinished: serverTask done");
         // is this stop part of a restart?
         if (restartServer) {
             serverTask = [[LLTaskWrapper alloc] initWithController:self 
@@ -161,7 +161,7 @@
     } else if (task == logTask) {
         //[logTask release];
         logTask = nil;
-        NSLog(@"ServerController.processFinished: logTask done");
+        LLLog(@"ServerController.processFinished: logTask done");
         if (restartLog) {
             logTask = [[LLTaskWrapper alloc] initWithController:self 
                                                     arguments:[NSArray arrayWithObjects:@"/usr/bin/tail",
@@ -170,7 +170,7 @@
             restartLog = NO;
         }    
     } else {
-        NSLog(@"ServerController.processFinished: unknown task done");
+        LLLog(@"ServerController.processFinished: unknown task done");
     }
 }
 

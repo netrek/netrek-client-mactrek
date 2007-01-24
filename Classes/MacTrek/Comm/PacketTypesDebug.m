@@ -376,7 +376,7 @@
     for (int i = 0; i < LINE_WIDTH; i++) {
         [seperator appendString:@"---"];
     }
-    NSLog(seperator);
+    LLLog(seperator);
     
     while (size > LINE_WIDTH) {
         // print a line
@@ -391,8 +391,8 @@
                 [ascii appendString:[NSString stringWithFormat: @"   ", buffer[i]]];
             }            
         }
-        NSLog(line);
-        NSLog(ascii);
+        LLLog(line);
+        LLLog(ascii);
         
         buffer += LINE_WIDTH;
         size -= LINE_WIDTH;
@@ -410,9 +410,9 @@
             [ascii appendString:[NSString stringWithFormat: @"   ", buffer[i]]];
         }
     }
-    NSLog(line);
-    NSLog(ascii);
-    NSLog(seperator);
+    LLLog(line);
+    LLLog(ascii);
+    LLLog(seperator);
 }
 
 @end

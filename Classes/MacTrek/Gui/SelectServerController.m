@@ -32,7 +32,7 @@ bool validServer;
 }
 
 - (void) invalidServer {
-    NSLog(@"SelectServerController.invalidServer called");
+    LLLog(@"SelectServerController.invalidServer called");
     // can not use [self setServerSelected:nil] because it would generate another event
     // MS_SERVER_SELECTED which would trigger a connect, which would be invalid which would ...
     validServer = NO;
@@ -54,7 +54,7 @@ bool validServer;
 - (void) setServerSelected:(MetaServerEntry *) server {
     
 
-    NSLog(@"SelectServerController.setServerSelected called");
+    LLLog(@"SelectServerController.setServerSelected called");
 	// start spinning
 	[spinner startAnimation:self];
     // assume the server is valid
@@ -74,7 +74,7 @@ bool validServer;
 }
 
 - (void)manualEntryDidEndEditing:(NSNotification *)aNotification {
-	NSLog(@"SelectServerController.manualEntryDidEndEditing %@", [aNotification name]);
+	LLLog(@"SelectServerController.manualEntryDidEndEditing %@", [aNotification name]);
 	
 	// is called upon a manual enter in the textfield
 	// okay is leak, but how often do you enter a server
@@ -87,7 +87,7 @@ bool validServer;
     [entry setGameType:    BRONCO];	
 
 	// to allow for manual selection of server
-    NSLog(@"SelectServerController.manualEntryDidEndEditing should connect to %@", [serverNameTextField stringValue]);    
+    LLLog(@"SelectServerController.manualEntryDidEndEditing should connect to %@", [serverNameTextField stringValue]);    
 	// try and find the port number
 	NSString *name = [serverNameTextField stringValue];
 	NSRange dot = [name rangeOfString:@":"];

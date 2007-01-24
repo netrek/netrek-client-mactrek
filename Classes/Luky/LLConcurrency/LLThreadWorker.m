@@ -62,7 +62,7 @@
     // Make sure the target has that selector
     if( ![target respondsToSelector:selector] )
     {	
-        NSLog( @"\nLLThreadWorker reports: Target %@ does not respond to selector %@.", target, selector );
+        LLLog( @"\nLLThreadWorker reports: Target %@ does not respond to selector %@.", target, selector );
         return nil;
     }   // end if: error
     
@@ -216,10 +216,10 @@
 												 beforeDate:[NSDate distantFuture]];
 		}
 		@catch (NSException * e) {
-			NSLog(@"LLThreadWorker.startThread isRunning error %@", [e reason]);
+			LLLog(@"LLThreadWorker.startThread isRunning error %@", [e reason]);
 		}
 
-        NSLog(@"LLThreadWorker.startThread isRunning: %d, _endRunLoop: %d", isRunning, _endRunLoop );
+        LLLog(@"LLThreadWorker.startThread isRunning: %d, _endRunLoop: %d", isRunning, _endRunLoop );
     } while ( isRunning && !_endRunLoop);   
 
     

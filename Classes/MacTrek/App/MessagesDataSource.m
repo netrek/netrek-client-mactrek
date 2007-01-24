@@ -69,7 +69,7 @@ NSMutableArray *messages = nil;
     }
     
     // add it
-    NSLog(@"MessagesDataSource.newMessage (%@)", message);
+    LLLog(@"MessagesDataSource.newMessage (%@)", message);
     [messages addObject:message];
     if ([messages count] > maxMessages) {
         [messages removeObjectAtIndex:0];
@@ -90,7 +90,7 @@ NSMutableArray *messages = nil;
             row:(int)rowIndex {
 
     NSString *message = [messages objectAtIndex:rowIndex];
-    //NSLog(@"MessagesDataSource.valueForRow (%@)", message);
+    //LLLog(@"MessagesDataSource.valueForRow (%@)", message);
     return message;
 }
 

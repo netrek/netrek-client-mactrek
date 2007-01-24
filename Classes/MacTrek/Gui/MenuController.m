@@ -99,7 +99,7 @@
 }
 
 - (IBAction)quit:(id)sender {
-    NSLog(@"MenuController.quit");
+    LLLog(@"MenuController.quit");
     [tabFrameView selectTabViewItemWithIdentifier:@"Splash"];
     // stop the whole app
 	[notificationCenter postNotificationName:@"MC_MACTREK_SHUTDOWN"];
