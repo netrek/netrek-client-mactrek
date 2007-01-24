@@ -76,6 +76,7 @@ enum GAME_STATE {
 
 	bool multiThreaded; 
 	MetaServerEntry *currentServer;
+	NSTimer *timer;
 }
 
 - (NSApplicationTerminateReply)applicationShouldTerminate:(NSApplication *)sender;
@@ -86,5 +87,6 @@ enum GAME_STATE {
 - (void) setTheme;
 - (void) showKeyMapPanel;
 - (void) fillKeyMapPanel;
+- (void)setSyncScreenUpdateWithRead:(bool)enable;
 
 @end

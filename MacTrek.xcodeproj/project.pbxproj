@@ -740,6 +740,7 @@
 		528E7EF40B0A6CAC00B22943 /* Screenshot_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Screenshot_1.png; path = Resources/Backgrounds/Screenshot_1.png; sourceTree = "<group>"; };
 		528E83660B0A8F5600B22943 /* SimpleBaseClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimpleBaseClass.h; sourceTree = "<group>"; };
 		528E83670B0A8F5600B22943 /* SimpleBaseClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SimpleBaseClass.m; sourceTree = "<group>"; };
+		5294F6EE0B679A1400DE60C6 /* LLLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLLog.h; sourceTree = "<group>"; };
 		529847F10A7E909C00918799 /* Quartz.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quartz.framework; path = /System/Library/Frameworks/Quartz.framework; sourceTree = "<absolute>"; };
 		529F078D0B06934F00255735 /* Backgrounds */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Backgrounds; path = Resources/Backgrounds; sourceTree = "<group>"; };
 		529F07970B06934F00255735 /* Buttons */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Buttons; path = Resources/Buttons; sourceTree = "<group>"; };
@@ -1625,6 +1626,7 @@
 				528E7E0A0B0A649E00B22943 /* LLTaskWrapper.m */,
 				52DC5E380B31574200C78FD1 /* LLSystemInformation.h */,
 				52DC5E390B31574200C78FD1 /* LLSystemInformation.m */,
+				5294F6EE0B679A1400DE60C6 /* LLLog.h */,
 			);
 			path = LLSystem;
 			sourceTree = "<group>";

@@ -312,7 +312,9 @@ NSMutableData *leftOverPacket;
         // exact fit in frame, no leftover
         [leftOverPacket release];
         leftOverPacket = nil;
-
+		
+		// report end of read cycle, COW will redraw screen now
+		[notificationCenter postNotificationName:@"SERVER_READER_READ_SYNC"];
     }
 }
 
