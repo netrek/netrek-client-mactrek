@@ -133,6 +133,7 @@ int startUpEvents = 0;
 
 // Application delegate function
 - (NSApplicationTerminateReply)applicationShouldTerminate:(NSApplication *)sender {
+	LLLog(@"GuiManager.applicationShouldTerminate: shutting down");
 	[self shutdown];
 	return NSTerminateNow;
 }
@@ -172,7 +173,7 @@ int startUpEvents = 0;
     // set up a timer to redraw at FRAME_RATE 
     // since some data is updated outside the main loop and in the receive 
     // thread (default is still with timer (so not sync))
-	[self setSyncScreenUpdateWithRead:NO];
+	[self setSyncScreenUpdateWithRead:YES];
 	
     // does the controller wait, or asks for reads herself...
     [loginCntrl setMultiThreaded:multiThreaded];
@@ -220,7 +221,7 @@ int startUpEvents = 0;
 	// use sync or timer
 	if (enable) {
 		[notificationCenter addObserver:self selector:@selector(screenRefreshTimerFired:) name:@"SERVER_READER_READ_SYNC"
-								 object:nil useLocks:YES useMainRunLoop:YES]; 
+								 object:nil useLocks:NO useMainRunLoop:NO]; 
 	}
 	else {		
 		timer = [NSTimer scheduledTimerWithTimeInterval: (1 / FRAME_RATE)
@@ -235,8 +236,8 @@ int startUpEvents = 0;
     
    static NSTimeInterval start, stop;
 	
-   start = [NSDate timeIntervalSinceReferenceDate]; 
-   LLLog(@"GuiManager.screenRefreshTimerFired(slept): %f sec", (start-stop));        
+   //start = [NSDate timeIntervalSinceReferenceDate]; 
+   ///LLLog(@"GuiManager.screenRefreshTimerFired(slept): %f sec", (start-stop));        
 
     if (gameState == GS_GAME_ACTIVE) {
         // $$ this will work, but what about when we are killed?
@@ -251,8 +252,8 @@ int startUpEvents = 0;
         //[notificationCenter setEnable:YES];
     }
 	
-    stop = [NSDate timeIntervalSinceReferenceDate];  
-    LLLog(@"GuiManager.screenRefreshTimerFired(spent): %f sec", (stop-start));
+    //stop = [NSDate timeIntervalSinceReferenceDate];  
+    //LLLog(@"GuiManager.screenRefreshTimerFired(spent): %f sec", (stop-start));
     
 	//[mainWindow displayIfNeeded];   // not needed comm is now threadsafe 
 }
