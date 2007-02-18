@@ -80,6 +80,7 @@ enum GAME_STATE {
 }
 
 - (NSApplicationTerminateReply)applicationShouldTerminate:(NSApplication *)sender;
+- (void) testLog:(NSNotification *)notification;
 - (void) serverDeSelected;
 - (void) serverConnected;
 - (void) gameEntered;

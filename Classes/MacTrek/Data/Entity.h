@@ -8,10 +8,12 @@
 
 #import <Cocoa/Cocoa.h>
 #import "SimpleBaseClass.h"
-#import "SimpleTracker.h"
+//#import "SimpleTracker.h" moved to m file to avoid recursion
 
 @interface Entity : SimpleBaseClass {
     NSPoint position;
+	NSPoint syncedPosition;
+	bool tracked;
 	float dir;									// Real direction
 	int speed;									// Real speed
     float requestedDir;							
@@ -23,10 +25,11 @@
     NSString *labelKey;
     NSImage *label;
 	NSMutableArray *history;
-	SimpleTracker *tracker;
+	//SimpleTracker *tracker;
 	NSString *ident;
 }
 
+- (void) setTracked:(bool)tr;
 - (void) setNetrekFormatCourse:(char)newDir;
 - (void) setPosition:(NSPoint)pos;
 - (void) setCourse:(int)course;
@@ -34,6 +37,7 @@
 - (void) setSpeed:(int)speed;
 - (void) setRequestedCourse:(int)course;
 - (void) setRequestedSpeed:(int)speed;
+- (void) setSyncedPosition:(NSPoint)pos;
 - (void) setShowInfo:(bool)show;
 - (void) setFuse:(int)newLevel;
 - (void) setMaxFuse:(int)newLevel;

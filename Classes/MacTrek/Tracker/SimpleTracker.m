@@ -17,16 +17,55 @@ SimpleTracker *defaultTracker = nil;
 	self = [super init];
 	if (self != nil) {
 		geoCalc = [LLTrigonometry defaultInstance];
+		registeredEntities = [[NSMutableArray alloc] init];
+		notificationCenter = [LLNotificationCenter defaultCenter];
+		[notificationCenter addObserver:self selector:@selector(predictForRegisteredEntities) name:@"SERVER_READER_READ_SYNC"
+								 object:nil useLocks:NO useMainRunLoop:NO];
 	}
 	return self;
 }
-
 
 + (SimpleTracker*) defaultTracker {
     if (defaultTracker == nil) {
         defaultTracker = [[SimpleTracker alloc] init];
     }
     return defaultTracker;
+}
+
+- (bool) isRegistered:(Entity *)obj {
+	return [registeredEntities containsObject:obj];
+}
+
+- (void) registerEntity:(Entity *)obj {
+	if (![self isRegistered:obj]) {
+		[registeredEntities addObject:obj];
+		[obj setTracked:YES];
+	} else {
+		LLLog(@"SimpleTracker.registerEntity double entry");
+	}
+}
+
+- (void) deRegisterOject:(Entity *)obj {
+	if ([self isRegistered:obj]) {
+		[registeredEntities removeObject:obj];
+		[obj setTracked:NO];
+	} else {
+		LLLog(@"SimpleTracker.deRegisterOject unknown entry");
+	}
+}
+
+- (void) predictForRegisteredEntities {
+	
+	// actually is not a predict,
+	// but a synchronize against the positions that
+	// we received
+	//LLLog(@"SimpleTracker.predictForRegisteredEntities syncing");
+	
+	unsigned int i, count = [registeredEntities count];
+	for (i = 0; i < count; i++) {
+		Entity* obj = [registeredEntities objectAtIndex:i];
+		[obj setSyncedPosition:[obj position]];
+	}
 }
 
 - (void) setEnabled:(bool)onOff {

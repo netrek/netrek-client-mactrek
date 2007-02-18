@@ -24,6 +24,8 @@ static Player *me;
     if (self != nil) {
         // create helper
         trigonometry = [LLTrigonometry defaultInstance];
+		
+		SimpleTracker *tracker = [SimpleTracker defaultTracker]; // obtain pointer to default tracker
         
         status    = [[Status alloc] init];
         players   = [[NSMutableArray alloc] init];
@@ -41,6 +43,8 @@ static Player *me;
              // create players with one phaser and one plasma
             Player* player = [[Player alloc] initWithPlayerId:i]; 
             [players addObject:player];
+			// track players
+			[tracker registerEntity:player];
             // $$ should add these to the player as well for easy reference
             Phaser *phaser = [[Phaser alloc] init];
             [phaser setOwner:player];

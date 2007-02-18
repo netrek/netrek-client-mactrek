@@ -9,6 +9,7 @@
 #import <Cocoa/Cocoa.h>
 #import "Data.h"
 #import "SimpleBaseClass.h"
+#import "SimpleTracker.h"
 
 #define UNIVERSE_SCALE  40
 #define UNIVERSE_MAX_PLANETS  40

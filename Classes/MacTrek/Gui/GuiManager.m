@@ -173,7 +173,7 @@ int startUpEvents = 0;
     // set up a timer to redraw at FRAME_RATE 
     // since some data is updated outside the main loop and in the receive 
     // thread (default is still with timer (so not sync))
-	[self setSyncScreenUpdateWithRead:YES];
+	[self setSyncScreenUpdateWithRead:NO];
 	
     // does the controller wait, or asks for reads herself...
     [loginCntrl setMultiThreaded:multiThreaded];
@@ -194,6 +194,39 @@ int startUpEvents = 0;
 		[entry setGameType:    BRONCO];	
 		[selectServerCntrl addServerPassivly:entry];  // gets selected automatically  
 	}
+	
+	// register for quit
+	[[NSNotificationCenter defaultCenter] addObserver:self
+											 selector:@selector(killed:) 
+												 name:NSWindowWillCloseNotification
+											   object:nil]; 
+	
+/*	logs all notification of the system, use with care
+		
+	[[NSNotificationCenter defaultCenter] addObserver:self
+											 selector:@selector(testLog:) 
+												 name:nil
+											   object:nil];
+	//*/
+}
+
+- (void) killed:(NSNotification *)notification {
+	//LLLog(@"GuiManager.killed: %@", [notification name]);	
+	
+	// get's called a zilliion times
+	static bool beeingKilled = NO;
+	
+	if  (!beeingKilled) {
+		beeingKilled = YES;
+		[menuCntrl quit:self];
+	} else {
+		//LLLog(@"GuiManager.killed: ignoring double kill");
+	}
+}
+
+
+- (void) testLog:(NSNotification *)notification {
+	LLLog(@"GuiManager.testLog: %@", [notification name]);	
 }
 
 - (void)handleTeamMask:(NSNumber *) mask {
