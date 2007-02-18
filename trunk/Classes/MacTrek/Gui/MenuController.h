@@ -29,6 +29,8 @@
 - (IBAction)raiseGame:(id)sender;
 - (IBAction)raiseCredits:(id)sender;
 - (IBAction)quit:(id)sender;
+- (NSApplicationTerminateReply)applicationWillTerminate:(NSNotification *)notification;
+- (NSApplicationTerminateReply)applicationShouldTerminate:(NSApplication *)sender;
 
 // return to the menu
 - (IBAction)raiseMenu:(id)sender; 

@@ -7,7 +7,9 @@
 //
 
 #import "Entity.h"
+#import "SimpleTracker.h"
 
+SimpleTracker *tracker;
 
 @implementation Entity
 
@@ -19,6 +21,7 @@
         position.x = -1000;
         position.y = -1000;
         showInfo = NO;
+		tracked = NO;
         fuse = 0;
         step = 1;
         maxfuse = 100;
@@ -97,9 +100,14 @@
 
 - (void) setPosition:(NSPoint)pos {
     position = pos;
-    [self trackUpdate];
+    //[self trackUpdate];  depricated as of 1.2.0
 }
 
+- (void) setSyncedPosition:(NSPoint)pos {
+    syncedPosition = pos;
+}
+
+// depricated as of 1.2.0
 - (void) trackUpdate {	
 	
 	if ([tracker enabled]) {
@@ -125,8 +133,9 @@
 
 - (NSPoint) predictedPosition {
 
-	if ([tracker enabled]) {
-		return [tracker positionForHistory:history];
+	if ([tracker enabled] && tracked) {
+		//return [tracker positionForHistory:history];
+		return syncedPosition;
 	} else {
 		return position;
 	}    
@@ -146,6 +155,10 @@
 
 - (int) requestedSpeed {
     return requestedSpeed;
+}
+
+- (void) setTracked:(bool)tr{
+	tracked = tr;
 }
 
 - (int) course {
