@@ -514,12 +514,18 @@
         // the actual drawing code of the label
         // ---  
         
-        // draw name
-        [self drawLabelForPlayer:player belowRect:playerViewBounds];
-        
-        if (simple) {   // in simple mode we do not draw any weapons
-            continue;
-        }
+
+                
+        if (simple) {   
+			[self drawLabelForPlayer:player belowRect:playerViewBounds];
+            continue; // in simple mode we do not draw any weapons
+        } else {
+			// draw name
+			// unless cloaked (well almost completly cloaked
+			if ([self alphaForPlayer:player] >= 0.5) {
+				[self drawLabelForPlayer:player belowRect:playerViewBounds];
+			}			
+		}
         
         // ---
         // the actual drawing code of the shields
@@ -544,7 +550,7 @@
             if ([player isMe]) {
                 shieldStrenght = [player shield] * 100 / [[player ship] maxShield];
             }
-            [self drawShieldWithStrenght: shieldStrenght inRect:playerViewBounds];            
+            [self drawShieldWithStrenght: shieldStrenght inRect:playerViewBounds andAlpha:[self alphaForPlayer:player]];            
         }
         
         // save this value, we may need it again
@@ -1143,6 +1149,13 @@
 // should be overwritten by subclasses
 // --------
 
+- (float) alphaForPlayer:(Player *)player {
+	
+	float alpha = 1.0;
+	alpha -= (((1.0 - PF_MIN_ALPHA_VALUE) * [player cloakPhase]) / PLAYER_CLOAK_PHASES);
+	return alpha;
+}
+
 - (void)   drawPlayer:(Player*) player inRect:(NSRect) Rect {
     //LLLog(@"PainterFactory.drawPlayer course %f %@",course, 
     //      [NSString stringWithFormat:@"x=%f, y=%f, w=%f, h=%f", 
@@ -1152,8 +1165,7 @@
     if ([player cloakPhase] > 0) {
         // find out aplha value PF_MIN_ALPHA_VALUE (0.1) means fully cloaked
         // 1.0 means fully uncloaked
-        float alpha = 1.0;
-        alpha -= (((1.0 - PF_MIN_ALPHA_VALUE) * [player cloakPhase]) / PLAYER_CLOAK_PHASES);
+		float alpha = [self alphaForPlayer:player];
         col = [col colorWithAlphaComponent:alpha];
     }
     
@@ -1176,7 +1188,7 @@
 	[p release];
 }
 
-- (void)   drawShieldWithStrenght: (float)shieldPercentage inRect:(NSRect) Rect {
+- (void)   drawShieldWithStrenght: (float)shieldPercentage inRect:(NSRect) Rect andAlpha:(float)alpha {
     
     // recalculate
     NSPoint centre = [self centreOfRect:Rect];
@@ -1197,8 +1209,9 @@
     
     //LLLog(@"PainterFactory.drawShield strenght %f, angle %f", shieldPercentage, angle);
     
-    // draw
-    [shieldColor set];
+    // draw (with intensity) BUG 1636274
+    shieldColor = [shieldColor colorWithAlphaComponent:alpha];
+	[shieldColor set];
     
     // first the remaining strenght
     [line removeAllPoints];  

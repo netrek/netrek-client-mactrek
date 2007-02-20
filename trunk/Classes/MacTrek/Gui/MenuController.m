@@ -46,15 +46,6 @@
 	} else {
 		[startServerButton setEnabled:NO];
 	}
-	
-	// make sure we are the delegate
-	[[NSApplication sharedApplication] setDelegate:self];
-	// register quit
-	[[NSNotificationCenter defaultCenter] addObserver:self
-											 selector:@selector(applicationWillTerminate:) 
-												 name:NSApplicationWillTerminateNotification
-											    object:NSApp]; 
-
 }
 
 // internal routines
@@ -113,18 +104,6 @@
     // stop the whole app
 	[notificationCenter postNotificationName:@"MC_MACTREK_SHUTDOWN"];
     [[NSApplication sharedApplication] stop:self];    
-}
-
-- (NSApplicationTerminateReply)applicationShouldTerminate:(NSApplication *)sender {
-	LLLog(@"MenuController.applicationShouldTerminate");
-	return YES;
-}
-
-// should be called as we are the apps delegate
-- (NSApplicationTerminateReply)applicationWillTerminate:(NSNotification *)notification {
-	LLLog(@"MenuController.applicationWillTerminate");
-    [self quit:self];
-	return YES;
 }
 
 // return to the menu

@@ -181,6 +181,7 @@
             LANGUAGE = ObjC; 
             OUTLETS = {
                 commTextField = NSTextField; 
+                gameView = GameView; 
                 messageList = MessagesListView; 
                 playerList = PlayerListView; 
                 toField = NSTextField; 
@@ -209,6 +210,7 @@
                 graphicsModel = NSSegmentedControl; 
                 musicLevel = NSSlider; 
                 trackingEnabledButton = NSButton; 
+                voiceCmds = NSButton; 
                 voiceOver = NSButton; 
             }; 
             SUPERCLASS = KeyMapTableDataSource; 

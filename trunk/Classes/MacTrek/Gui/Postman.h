@@ -11,12 +11,14 @@
 #import "PlayerListView.h"
 #import "MessagesListView.h"
 #import "MessageConstants.h"
+#import "GameView.h"
 
 @interface Postman : BaseClass {
     IBOutlet NSTextField *commTextField;
     IBOutlet NSTextField *toField; 
     IBOutlet PlayerListView *playerList;
     IBOutlet MessagesListView *messageList;
+	IBOutlet GameView *gameView;
 }
 
 // get/set the field (called by click in lists or keyevent)

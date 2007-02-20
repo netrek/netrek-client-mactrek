@@ -19,6 +19,7 @@
     IBOutlet NSSlider              *fxLevel;
     IBOutlet NSSegmentedControl    *graphicsModel;  
     IBOutlet NSButton              *voiceOver;
+	IBOutlet NSButton              *voiceCmds;
 	IBOutlet NSButton              *accelerateButton;
 	IBOutlet NSButton              *trackingEnabledButton;
     // the Back button is covered by the menu controller
@@ -27,6 +28,7 @@
 - (bool)  trackingEnabled;
 - (bool)  soundEnabled;
 - (bool)  voiceEnabled;
+- (bool) voiceCommands;
 - (bool)  accelerate;
 - (float) musicLevel;
 - (float) fxLevel;

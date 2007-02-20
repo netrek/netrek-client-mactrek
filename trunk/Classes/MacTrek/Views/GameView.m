@@ -27,6 +27,24 @@
     busyDrawing = NO;
     
     inputMode = GV_NORMAL_MODE;
+		
+	// listen to voice commands here
+	[notificationCenter addObserver:self selector:@selector(voiceCommand:) name:@"VC_VOICE_COMMAND"];
+}
+
+
+- (void) voiceCommand:(NSNumber *) action {
+	
+	// before we accept a command, the mouse must
+	// be in our window	
+	NSPoint mousePos = [self mousePos];
+	
+	if (NSPointInRect(mousePos, [self bounds])) {
+		LLLog(@"GameView.voiceCommand entered");
+		[self performAction:[action intValue]];
+	} else {
+		LLLog(@"GameView.voiceCommand ignored");
+	}	
 }
 
 - (void) makeFirstResponder {
@@ -40,6 +58,7 @@
 }
 
 - (NSPoint) gamePointRepresentingCentreOfView {
+	//LLLog(@"GameView.gamePointRepresentingCentreOfView entered");
     return [[universe playerThatIsMe] predictedPosition];
 }
 
@@ -326,6 +345,11 @@ whichRepresentsGameBounds:gameBounds
     [self performAction:ACTION_FIRE_PHASER];
 }
 
+// 1636254 continuous steering
+- (void)rightMouseDragged:(NSEvent *)theEvent {
+	[self rightMouseDown:theEvent];
+}
+
 - (void) rightMouseDown:(NSEvent *)theEvent {
     
     [self performAction:ACTION_SET_COURSE];
@@ -378,15 +402,27 @@ whichRepresentsGameBounds:gameBounds
 
 - (float) mouseDir {
 
+	/* 1636263 must be relative between centerpos
     NSPoint mouseLocation = [self mousePos];
     
     // we are at the center
-    NSPoint ourLocation;
+	NSPoint ourLocation;
     NSRect bounds = [self bounds];
     ourLocation.x = bounds.size.width / 2;
     ourLocation.y = bounds.size.height / 2;
     
     // the direction is
+	//float dir = [trigonometry angleDegBetween:mouseLocation andPoint:ourLocation];
+    */
+	 
+	// convert the mouse pointer to a point in the game grid
+	NSPoint mouseLocation = [painter gamePointFromViewPoint:[self mousePos] 
+												   viewRect:[self bounds]
+									  gamePosInCentreOfView:[self gamePointRepresentingCentreOfView] 
+												  withScale:scale]; 
+	
+	NSPoint ourLocation = [[universe playerThatIsMe] predictedPosition];
+	
     float dir = [trigonometry angleDegBetween:mouseLocation andPoint:ourLocation];
     dir -= 90;  // north is 0 deg
     if (dir < 0) {

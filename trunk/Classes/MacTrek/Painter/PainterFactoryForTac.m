@@ -106,7 +106,8 @@
 	imgShip = [extraImages objectForKey:key];
 	 	
 	if (imgShip == nil) {
-		LLLog(@"PainterFactoryForTac.drawShipType unknown ship %@", key);
+		// let's not log every redraw
+		//LLLog(@"PainterFactoryForTac.drawShipType unknown ship %@", key);
 		[super drawShipType:type forTeamId:teamId withCloakPhase:cloakPhase inRect:Rect];
 		return;
 	}

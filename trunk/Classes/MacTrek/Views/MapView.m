@@ -36,9 +36,12 @@ NSRect gameBounds;
     
     // use simpler drawing (eg omit weapons)
     [painter setSimplifyDrawing:YES];
+
 }
 
+
 - (NSPoint) gamePointRepresentingCentreOfView {
+	LLLog(@"MapView.gamePointRepresentingCentreOfView entered");
     return centerPoint;
 }
 
@@ -54,16 +57,26 @@ NSRect gameBounds;
 }
 
 - (void) mouseDown:(NSEvent *)theEvent {
-    // where you click becomes the center
-    centerPoint = [painter gamePointFromViewPoint:[self mousePos] 
+	
+	// command click moves center point BUG 1636263
+	// (wouldn't it be cool if you could drag?) 
+	if ( [theEvent modifierFlags] & NSCommandKeyMask ) {
+		// where you click becomes the center
+		centerPoint = [painter gamePointFromViewPoint:[self mousePos] 
                                              viewRect:[self bounds]
                                 gamePosInCentreOfView:[self gamePointRepresentingCentreOfView] 
                                             withScale:scale]; 
-    
-    // set up the gamebounds based on my position
-    gameBounds = [painter gameRectAround:[self gamePointRepresentingCentreOfView]
-                                        forView:[self bounds]
-                                      withScale:scale]; 
+		
+		// set up the gamebounds based on my position
+		gameBounds = [painter gameRectAround:[self gamePointRepresentingCentreOfView]
+									 forView:[self bounds]
+								   withScale:scale]; 
+	}
+	else {
+		// fire torp
+		[super mouseDown:theEvent];
+	}
+   
 }
 
 - (void) scrollWheel:(NSEvent *)theEvent {
