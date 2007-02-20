@@ -21,7 +21,7 @@
 #define PF_ALERT_BORDER_WIDTH 2
 #define PF_TRIANGLE_WIDTH   600.0
 #define PF_TRIANGLE_HEIGHT  400.0
-#define PF_MIN_ALPHA_VALUE  0.1
+#define PF_MIN_ALPHA_VALUE  0.05
 
 @interface PainterFactory : BaseClass {
     bool debugLabels;
@@ -73,7 +73,7 @@
 
 // should be overwritten by subclasses
 - (void)   drawPlayer:(Player*) player inRect:(NSRect) Rect;
-- (void)   drawShieldWithStrenght: (float)shieldPercentage inRect:(NSRect) Rect;
+- (void)   drawShieldWithStrenght: (float)shieldPercentage inRect:(NSRect) Rect andAlpha:(float)alpha;
 - (void)   drawLabelForPlanet:(Planet*)planets belowRect:(NSRect)planetViewBounds;
 - (void)   drawLabelForPlayer:(Player*)player belowRect:(NSRect)playerViewBounds;
 - (void)   drawPlanet:(Planet*) planet inRect:(NSRect) Rect;
@@ -98,6 +98,7 @@
 
 //  could be overwritten to match the size of the subclasses artwork
 //
+- (float) alphaForPlayer:(Player *)player;
 - (NSString *)labelForPlanet:(Planet*)planet;
 - (NSString*) labelForPlayer:(Player*)player;
 - (NSString*) label2ForPlayer:(Player*)player;

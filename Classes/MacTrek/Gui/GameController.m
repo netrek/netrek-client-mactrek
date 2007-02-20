@@ -39,6 +39,10 @@ bool forceBarUpdate = NO;
     
     //synth is an ivar    
     [synth setDelegate:self];
+	
+	// set up voice control (1.2.0 feature)
+	voiceCntrl = [[MTVoiceController alloc] init];
+	//[voiceCntrl enableListening:YES];
 }
 
 - (GameView *)gameView {
@@ -48,6 +52,11 @@ bool forceBarUpdate = NO;
 - (void) setSpeakComputerMessages:(bool)speak {
     shouldSpeak = speak;
 }
+
+- (void) setListenToVoiceCommands:(bool)listen {
+	[voiceCntrl setEnableListening:listen];
+}
+
 
 - (void) repaint {
     // invoked by timer
@@ -186,6 +195,8 @@ bool forceBarUpdate = NO;
 - (void) setKeyMap:(MTKeyMap *)newKeyMap {
     // pass it on
     [gameView setKeyMap:newKeyMap];
+	// 1636263 support interaction on main map
+	[mapView setKeyMap:newKeyMap];
 }
 
 - (void) setPainter:(PainterFactory*)newPainter {

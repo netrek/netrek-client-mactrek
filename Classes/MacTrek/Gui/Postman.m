@@ -143,7 +143,12 @@
     if (indiv == nil) {
         return;
     }
-    
+
+	if ((msg == nil) || ([msg isEqualToString:@""])) {
+		LLLog(@"Postman.sendMessage refuse to send empty message");
+        return;
+    }
+	
     [notificationCenter postNotificationName:@"COMM_SEND_MESSAGE" userInfo: [NSDictionary dictionaryWithObjectsAndKeys:
         group, @"group", indiv, @"indiv", msg, @"message", nil]];
     
@@ -222,13 +227,20 @@
 // delegate functions of textfield
 - (void)controlTextDidEndEditing:(NSNotification *)aNotification {
     if ([[self message] length] > 0) {
-        LLLog(@"Postman.controlTextDidEndEditing sending message %@", [self message]);
+        LLLog(@"Postman.controlTextDidEndEditing sending message [%@]", [self message]);
         [self sendCurrentMessage];
         // clean up since the change of focus when the mouse moves creates a 
         // second event that we do not wish to send.
         // $$ alternatively check if we are losing first responder status since that is not
         // the same as pressing enter
         [self setMessage:@""];  
+		// try to return the focus
+		NSWindow *win = [gameView window];
+		if ([win makeFirstResponder:gameView]) {
+			LLLog(@"Postman.controlTextDidEndEditing returned focus");
+		} else {
+			LLLog(@"Postman.controlTextDidEndEditing ERROR returning focus");
+		}
     } else {
         LLLog(@"Postman.controlTextDidEndEditing ignoring message %@", [self message]);
     }

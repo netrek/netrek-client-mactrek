@@ -198,10 +198,10 @@ int startUpEvents = 0;
 	// register for quit
 	[[NSNotificationCenter defaultCenter] addObserver:self
 											 selector:@selector(killed:) 
-												 name:NSWindowWillCloseNotification
+												 name:NSMenuDidChangeItemNotification //NSWindowWillCloseNotification
 											   object:nil]; 
 	
-/*	logs all notification of the system, use with care
+/* logs all notification of the system, use with care
 		
 	[[NSNotificationCenter defaultCenter] addObserver:self
 											 selector:@selector(testLog:) 
@@ -211,7 +211,7 @@ int startUpEvents = 0;
 }
 
 - (void) killed:(NSNotification *)notification {
-	//LLLog(@"GuiManager.killed: %@", [notification name]);	
+	LLLog(@"GuiManager.killed: %@", [notification name]);	
 	
 	// get's called a zilliion times
 	static bool beeingKilled = NO;
@@ -642,6 +642,9 @@ int startUpEvents = 0;
 		activeTheme = theme;
 		[gameCntrl setSpeakComputerMessages:shouldSpeak];
 		[painterActiveTheme setAccelerate:accel];
+		
+		// add voice commands
+		[gameCntrl setListenToVoiceCommands:[settingsCntrl voiceCommands]]; 
     }
     
     [soundPlayerActiveTheme setVolumeFx:[settingsCntrl fxLevel]]; 

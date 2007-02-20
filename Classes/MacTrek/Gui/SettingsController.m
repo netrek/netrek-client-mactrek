@@ -29,6 +29,14 @@
     if (val != nil) {
         [fxLevel setFloatValue:[val floatValue]];
     }
+	val = [settings valueForKey:@"VOICE_CMDS"];
+    if (val != nil) {
+        if ([val boolValue]) {
+			[voiceCmds setState:NSOnState];   
+        } else {
+            [voiceCmds setState:NSOffState];
+        }        
+    }
     val = [settings valueForKey:@"VOICE_OVER"];
     if (val != nil) {
         if ([val boolValue]) {
@@ -66,6 +74,7 @@
     
     [settings setLazyValue:[NSNumber numberWithFloat:[self musicLevel]] forKey:@"MUSIC_LEVEL"];
     [settings setLazyValue:[NSNumber numberWithFloat:[self fxLevel]] forKey:@"FX_LEVEL"];
+	[settings setLazyValue:[NSNumber numberWithBool:[self voiceCommands]] forKey:@"VOICE_CMDS"];
     [settings setLazyValue:[NSNumber numberWithBool:[self voiceEnabled]] forKey:@"VOICE_OVER"];
 	[settings setLazyValue:[NSNumber numberWithBool:[self accelerate]] forKey:@"ACCELERATE"];
     [settings setLazyValue:[NSNumber numberWithInt:[self graphicsModel]] forKey:@"THEME"];   
@@ -99,6 +108,10 @@
 
 - (bool) accelerate {
     return ([accelerateButton state] == NSOnState);
+}
+
+- (bool) voiceCommands {
+    return ([voiceCmds state] == NSOnState);
 }
 
 - (bool) voiceEnabled {

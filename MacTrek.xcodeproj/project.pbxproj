@@ -143,6 +143,7 @@
 		52BA84FB0B10E22500F71673 /* TrackUpdate.m in Sources */ = {isa = PBXBuildFile; fileRef = 52BA84FA0B10E22500F71673 /* TrackUpdate.m */; };
 		52C7A7F00B17800900F2D523 /* mactrek-mosaic.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 52C7A7EF0B17800900F2D523 /* mactrek-mosaic.jpg */; };
 		52D16B650A06C64900995816 /* logo.icns in Resources */ = {isa = PBXBuildFile; fileRef = 52D16B640A06C64900995816 /* logo.icns */; };
+		52D37C9E0B8A5C1800265266 /* MTVoiceController.m in Sources */ = {isa = PBXBuildFile; fileRef = 52D37C9D0B8A5C1800265266 /* MTVoiceController.m */; };
 		52DC5E3A0B31574200C78FD1 /* LLSystemInformation.m in Sources */ = {isa = PBXBuildFile; fileRef = 52DC5E390B31574200C78FD1 /* LLSystemInformation.m */; };
 		52DC5E4F0B3158D600C78FD1 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52DC5E3D0B3158D500C78FD1 /* SystemConfiguration.framework */; };
 		52DC5EF00B3158EA00C78FD1 /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52DC5E500B3158EA00C78FD1 /* IOKit.framework */; };
@@ -757,6 +758,8 @@
 		52BA84FA0B10E22500F71673 /* TrackUpdate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TrackUpdate.m; path = Tracker/TrackUpdate.m; sourceTree = "<group>"; };
 		52C7A7EF0B17800900F2D523 /* mactrek-mosaic.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "mactrek-mosaic.jpg"; path = "Resources/Backgrounds/mactrek-mosaic.jpg"; sourceTree = "<group>"; };
 		52D16B640A06C64900995816 /* logo.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = logo.icns; path = Resources/logo.icns; sourceTree = "<group>"; };
+		52D37C9C0B8A5C1800265266 /* MTVoiceController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTVoiceController.h; sourceTree = "<group>"; };
+		52D37C9D0B8A5C1800265266 /* MTVoiceController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTVoiceController.m; sourceTree = "<group>"; };
 		52DC5E380B31574200C78FD1 /* LLSystemInformation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLSystemInformation.h; sourceTree = "<group>"; };
 		52DC5E390B31574200C78FD1 /* LLSystemInformation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLSystemInformation.m; sourceTree = "<group>"; };
 		52DC5E3D0B3158D500C78FD1 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = /Developer/SDKs/MacOSX10.4u.sdk/System/Library/Frameworks/SystemConfiguration.framework; sourceTree = "<absolute>"; };
@@ -1475,6 +1478,8 @@
 				5212F03F0B08FFB80059A8B1 /* SoundPlayerForNetrek.m */,
 				5212F0400B08FFB80059A8B1 /* SoundPlayerForTac.h */,
 				5212F0410B08FFB80059A8B1 /* SoundPlayerForTac.m */,
+				52D37C9C0B8A5C1800265266 /* MTVoiceController.h */,
+				52D37C9D0B8A5C1800265266 /* MTVoiceController.m */,
 			);
 			path = Sound;
 			sourceTree = "<group>";
@@ -2628,6 +2633,7 @@
 				52F5DB2D0B1A69E000B8B9C5 /* version.c in Sources */,
 				52DC5E3A0B31574200C78FD1 /* LLSystemInformation.m in Sources */,
 				52DC5F0C0B3159DE00C78FD1 /* ServerControllerNew.m in Sources */,
+				52D37C9E0B8A5C1800265266 /* MTVoiceController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

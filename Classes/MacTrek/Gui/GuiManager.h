@@ -77,6 +77,7 @@ enum GAME_STATE {
 	bool multiThreaded; 
 	MetaServerEntry *currentServer;
 	NSTimer *timer;
+
 }
 
 - (NSApplicationTerminateReply)applicationShouldTerminate:(NSApplication *)sender;

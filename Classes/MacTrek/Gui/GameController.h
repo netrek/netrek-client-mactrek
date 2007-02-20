@@ -17,6 +17,7 @@
 #import "Luky.h"
 #import "PlayerListView.h"
 #import "MessagesListView.h"
+#import "MTVoiceController.h"
 
 // once per second 
 #define FRAMES_PER_FULL_UPDATE_DASHBOARD FRAME_RATE
@@ -43,6 +44,7 @@
     // commputer message
     IBOutlet NSTextField *messageTextField;
     NSSpeechSynthesizer* synth;
+	MTVoiceController *voiceCntrl;
     bool shouldSpeak;
     
     // players
@@ -75,5 +77,7 @@
     inverseWarning:(bool)inverse;
 - (void) setPainter:(PainterFactory*)newPainter;
 - (void) setSpeakComputerMessages:(bool)speak;
+- (void) setListenToVoiceCommands:(bool)listen;
+
 
 @end
