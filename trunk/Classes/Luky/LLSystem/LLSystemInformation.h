@@ -20,7 +20,7 @@
 
 + (NSString *)machineType;
 + (NSString *)humanMachineType;
-+ (NSString *)humanMachineTypeAlternate;
+//+ (NSString *)humanMachineTypeAlternate;
 
 + (long)processorClockSpeed;
 + (long)processorClockSpeedInMHz;

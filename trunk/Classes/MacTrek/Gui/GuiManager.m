@@ -211,7 +211,14 @@ int startUpEvents = 0;
 }
 
 - (void) killed:(NSNotification *)notification {
-	LLLog(@"GuiManager.killed: %@", [notification name]);	
+	
+	NSMenu *source = [notification object];
+	NSMenuItem *item = [source itemAtIndex:[[[notification userInfo] valueForKey:@"NSMenuItemIndex"] intValue]];
+	
+	LLLog(@"GuiManager.killed: %@, menu [%@]", [notification name], [item title]);	
+	if (![[item title] isEqualToString:@"Quit"]){
+		return; // wrong menu changed
+	}
 	
 	// get's called a zilliion times
 	static bool beeingKilled = NO;
@@ -561,6 +568,8 @@ int startUpEvents = 0;
             [[settingsCntrl keyMap] writeToDefaultFileIfChanged];
             // first pass on the keyMap that was created in the settings
             [gameCntrl setKeyMap:[settingsCntrl keyMap]]; 
+			// 1666849 and the mouse
+			[gameCntrl setMouseMap:[settingsCntrl mouseMap]];
 			[self fillKeyMapPanel];
             // and the volume setting
             [soundPlayerActiveTheme setVolumeFx:[settingsCntrl fxLevel]];

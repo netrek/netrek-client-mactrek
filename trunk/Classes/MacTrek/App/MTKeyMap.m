@@ -8,6 +8,9 @@
 
 #import "MTKeyMap.h"
 
+// DISABLE THIS BEFORE RELEASE !
+// BUG 1667154
+//#define DEBUG
 
 @implementation MTKeyMap
 
@@ -281,12 +284,14 @@
                                 description: @"Show help window"];    
     [keyMap setObject:entry forKey:[NSNumber numberWithInt:[entry action]]];
     
+#ifdef DEBUG
     entry = [[MTKeyMapEntry alloc] initAction: ACTION_DEBUG
                                       withKey:'?' 
                                 modifierFlags: 0 
                                   description: @"Activate debug labels"];    
     [keyMap setObject:entry forKey:[NSNumber numberWithInt:[entry action]]];
-		
+#endif
+	
     entry = [[MTKeyMapEntry alloc] initAction: ACTION_SCREENSHOT
                                       withKey:'\\' 
                                 modifierFlags: 0 

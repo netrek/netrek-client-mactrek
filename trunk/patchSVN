@@ -1,1 +1,2 @@
-svn checkout https://mactrek.svn.sourceforge.net/svnroot/mactrek/trunk/English.lproj/MainMenu\~.nib English.lproj
+#svn checkout https://mactrek.svn.sourceforge.net/svnroot/mactrek/trunk/English.lproj/MainMenu\~.nib English.lproj
+cp -R ../tmp/English.lproj/MainMenu~.nib/* English.lproj/

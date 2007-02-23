@@ -18,6 +18,7 @@
 #import "PlayerListView.h"
 #import "MessagesListView.h"
 #import "MTVoiceController.h"
+#import "MTMouseMap.h"
 
 // once per second 
 #define FRAMES_PER_FULL_UPDATE_DASHBOARD FRAME_RATE
@@ -70,6 +71,7 @@
 - (void) newMessage:(NSString*)message;
 - (void) updateDashboard:(Player*) me;
 - (void) setKeyMap:(MTKeyMap *)newKeyMap;
+- (void) setMouseMap:(MTMouseMap *)newMouseMap;
 - (void) updateBar:(LLBar*) bar andTextValue:(NSTextField*)field 
          withValue:(int)value max:(int)maxValue inverseWarning:(bool)inverse;
 - (void) updateBar:(LLBar*) bar andTextValue:(NSTextField*)field 

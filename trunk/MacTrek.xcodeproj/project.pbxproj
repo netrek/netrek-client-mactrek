@@ -501,6 +501,8 @@
 		52F5DB290B1A69E000B8B9C5 /* vsscanf.c in Sources */ = {isa = PBXBuildFile; fileRef = 52F5D9BE0B1A69E000B8B9C5 /* vsscanf.c */; };
 		52F5DB2C0B1A69E000B8B9C5 /* tal-reent.c in Sources */ = {isa = PBXBuildFile; fileRef = 52F5D9C10B1A69E000B8B9C5 /* tal-reent.c */; };
 		52F5DB2D0B1A69E000B8B9C5 /* version.c in Sources */ = {isa = PBXBuildFile; fileRef = 52F5D9C20B1A69E000B8B9C5 /* version.c */; };
+		52F819800B8EDB73003ED1BE /* MTMouseMap.m in Sources */ = {isa = PBXBuildFile; fileRef = 52F8197F0B8EDB73003ED1BE /* MTMouseMap.m */; };
+		52F819910B8F1280003ED1BE /* mouse.png in Resources */ = {isa = PBXBuildFile; fileRef = 52F819900B8F1280003ED1BE /* mouse.png */; };
 		52FC6C8B0B45A8CD0052CC8B /* licence.txt in Resources */ = {isa = PBXBuildFile; fileRef = 52FC6C8A0B45A8CD0052CC8B /* licence.txt */; };
 		8D11072A0486CEB800E47090 /* MainMenu.nib in Resources */ = {isa = PBXBuildFile; fileRef = 29B97318FDCFA39411CA2CEA /* MainMenu.nib */; };
 		8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
@@ -1137,6 +1139,9 @@
 		52F5D9BE0B1A69E000B8B9C5 /* vsscanf.c */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.c; path = vsscanf.c; sourceTree = "<group>"; };
 		52F5D9C10B1A69E000B8B9C5 /* tal-reent.c */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.c; path = "tal-reent.c"; sourceTree = "<group>"; };
 		52F5D9C20B1A69E000B8B9C5 /* version.c */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.c; path = version.c; sourceTree = "<group>"; };
+		52F8197E0B8EDB73003ED1BE /* MTMouseMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTMouseMap.h; sourceTree = "<group>"; };
+		52F8197F0B8EDB73003ED1BE /* MTMouseMap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTMouseMap.m; sourceTree = "<group>"; };
+		52F819900B8F1280003ED1BE /* mouse.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = mouse.png; path = "../../Design Stuff/Images MacTrek/mouse.png"; sourceTree = SOURCE_ROOT; };
 		52FC6C8A0B45A8CD0052CC8B /* licence.txt */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text; path = licence.txt; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Info.plist; sourceTree = "<group>"; };
 		8D1107320486CEB800E47090 /* MacTrek.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MacTrek.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1249,6 +1254,7 @@
 				528E7EBE0B0A67F200B22943 /* stklingon_attack02.jpg */,
 				528E7EF40B0A6CAC00B22943 /* Screenshot_1.png */,
 				52C7A7EF0B17800900F2D523 /* mactrek-mosaic.jpg */,
+				52F819900B8F1280003ED1BE /* mouse.png */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -1307,6 +1313,8 @@
 				5212EFC30B08FFB80059A8B1 /* MetaServerTableDataSource.m */,
 				5212EFC40B08FFB80059A8B1 /* MTKeyMap.h */,
 				5212EFC50B08FFB80059A8B1 /* MTKeyMap.m */,
+				52F8197E0B8EDB73003ED1BE /* MTMouseMap.h */,
+				52F8197F0B8EDB73003ED1BE /* MTMouseMap.m */,
 				5212EFC60B08FFB80059A8B1 /* MTKeyMapEntry.h */,
 				5212EFC70B08FFB80059A8B1 /* MTKeyMapEntry.m */,
 				5212EFC80B08FFB80059A8B1 /* PlayerListDataSource.h */,
@@ -2148,6 +2156,7 @@
 				52C7A7F00B17800900F2D523 /* mactrek-mosaic.jpg in Resources */,
 				52756F210B3554CA00631149 /* PRECOMPILED in Resources */,
 				52FC6C8B0B45A8CD0052CC8B /* licence.txt in Resources */,
+				52F819910B8F1280003ED1BE /* mouse.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2634,6 +2643,7 @@
 				52DC5E3A0B31574200C78FD1 /* LLSystemInformation.m in Sources */,
 				52DC5F0C0B3159DE00C78FD1 /* ServerControllerNew.m in Sources */,
 				52D37C9E0B8A5C1800265266 /* MTVoiceController.m in Sources */,
+				52F819800B8EDB73003ED1BE /* MTMouseMap.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

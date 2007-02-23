@@ -19,6 +19,7 @@
 	warTeam = nil; // no team selected 
     step = GV_SCALE_STEP;
     keyMap = nil;
+	mouseMap = nil;
     scale = 40; // default
     trigonometry = [LLTrigonometry defaultInstance];
 
@@ -122,8 +123,17 @@ whichRepresentsGameBounds:gameBounds
     busyDrawing = NO;
 }
 
+// 1666849 selectable mouse buttons
+- (void) setMouseMap:(MTMouseMap *)newMouseMap {
+	[mouseMap release];
+	mouseMap = newMouseMap;
+	[mouseMap retain];
+}
+
 - (void) setKeyMap:(MTKeyMap *)newKeyMap {
+	[keyMap release];
     keyMap = newKeyMap;
+	[keyMap retain];
 }
 
 // view functions
@@ -336,25 +346,34 @@ whichRepresentsGameBounds:gameBounds
 	warTeam = nil;
 }
 
-// mouse events $$ currently static allocated
+// mouse events 1666849 now dynamic allocated
 - (void) mouseDown:(NSEvent *)theEvent {
-    [self performAction:ACTION_FIRE_TORPEDO];
+    [self performAction:[mouseMap actionMouseLeft]];
 }
 
 - (void) otherMouseDown:(NSEvent *)theEvent {
-    [self performAction:ACTION_FIRE_PHASER];
+    [self performAction:[mouseMap actionMouseMiddle]];
 }
 
-// 1636254 continuous steering
+- (void) rightMouseDown:(NSEvent *)theEvent {    
+    [self performAction:[mouseMap actionMouseRight]];
+}
+
+// 1636254 continuous steering (or torping for that matter since 1666849)
 - (void)rightMouseDragged:(NSEvent *)theEvent {
 	[self rightMouseDown:theEvent];
 }
 
-- (void) rightMouseDown:(NSEvent *)theEvent {
-    
-    [self performAction:ACTION_SET_COURSE];
+- (void)mouseDragged:(NSEvent *)theEvent {
+	[self mouseDown:theEvent];
 }
 
+- (void) otherMouseDragged:(NSEvent *)theEvent {
+	[self otherMouseDown:theEvent];
+}
+
+// there should be an action for that and a button but leave it
+// static for now 
 - (void) scrollWheel:(NSEvent *)theEvent {
     float mouseRole = [theEvent deltaY];
     // 1.0 means zoom in

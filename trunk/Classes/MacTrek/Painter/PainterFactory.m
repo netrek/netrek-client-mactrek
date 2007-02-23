@@ -514,19 +514,21 @@
         // the actual drawing code of the label
         // ---  
         
-
-                
-        if (simple) {   
-			[self drawLabelForPlayer:player belowRect:playerViewBounds];
-            continue; // in simple mode we do not draw any weapons
-        } else {
-			// draw name
-			// unless cloaked (well almost completly cloaked
-			if ([self alphaForPlayer:player] >= 0.5) {
+        // draw name
+		// unless cloaked
+		if (!([player flags] & PLAYER_CLOAK)) {        
 				[self drawLabelForPlayer:player belowRect:playerViewBounds];
-			}			
+		} else { // when cloaked
+			if (simple) {   
+				[self drawLabelForPlayer:player belowRect:playerViewBounds];
+			}
+		}
+
+		if (simple) {   
+			continue; // in simple mode we do not draw any weapons
 		}
         
+		
         // ---
         // the actual drawing code of the shields
         // ---  
@@ -1520,6 +1522,11 @@
 - (NSString*) labelForPlayer:(Player*)player {
 	
 	NSString *label = [NSString stringWithFormat:@"%@", [player mapCharsWithKillIndicator]];
+
+	// bug 1666845 Cloaked ships should be ??
+	if (([player flags] & PLAYER_CLOAK)) {
+		return @"??";
+	}
 	
     // extended label?
     if ([player showInfo] || debugLabels) {
@@ -1542,7 +1549,13 @@
 	return label;
 }
 
-- (NSString*) label2ForPlayer:(Player*)player {
+- (NSString*) label2ForPlayer:(Player*)player {	
+	
+	// bug 1666845 Cloaked ships should be ??
+	if (([player flags] & PLAYER_CLOAK)) {
+		return nil;
+	}
+	
 	if (debugLabels) {
 		// prepare another line
 		NSArray *torps = [player torps];
@@ -1562,6 +1575,12 @@
 }
 
 - (NSString*) label3ForPlayer:(Player*)player {
+	
+	// bug 1666845 Cloaked ships should be ??
+	if (([player flags] & PLAYER_CLOAK)) {
+		return nil;
+	}	
+	
 	if (debugLabels) {
 		// prepare another line		 			
 		Plasma *plasma = [universe plasmaWithId:[player plasmaId]];

@@ -199,6 +199,12 @@ bool forceBarUpdate = NO;
 	[mapView setKeyMap:newKeyMap];
 }
 
+- (void) setMouseMap:(MTMouseMap *)newMouseMap {
+	// 1666849 selectable mouse buttons
+	[gameView setMouseMap:newMouseMap];
+	[mapView setMouseMap:newMouseMap];
+}
+
 - (void) setPainter:(PainterFactory*)newPainter {
     [gameView setPainter:newPainter];
 }

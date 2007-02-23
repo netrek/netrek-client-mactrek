@@ -32,11 +32,11 @@
 	// Bug 1625370 hog calls do not end on 5 spaces, but consist of 5 spaces
 	// thus stringlength is 15
 	NSString *hog = [str substringWithRange:NSMakeRange(10, 5)];
-	if ( ([hog isEqualToString:@"     "]) && ([str length] != 15) ){
+	if ( ([hog isEqualToString:@"     "]) && ([str length] == 15) ){
 		// found 5 spaces at starting at right spot in a string with the right length
 	
 		// respond by sending version number
-		LLLog(@"Postman.newMessage hog request");
+		LLLog(@"Postman.newMessage hog request: [%@] len %d", str, [str length]);
 		// see if we can find the addressy
 		NSRange range = [str rangeOfString:@"->"];
 		if (range.location == NSNotFound) {
