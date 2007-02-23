@@ -58,9 +58,9 @@
 #define ACTION_DEBUG            44
 
 #define ACTION_SCREENSHOT       45
-
 #define ACTION_WAR				46
 #define ACTION_COUP				47
+#define ACTION_ZOOM				48
 
 // unsupported actions for future implementation
 // which are possible in COW

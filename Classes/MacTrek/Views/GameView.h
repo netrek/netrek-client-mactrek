@@ -15,6 +15,7 @@
 #import "PainterFactoryForNetrek.h"
 #import "Carbon/Carbon.h"
 #import "LLScreenShotController.h"
+#import "MTMouseMap.h"
 
 // dropped to 10 reduces async update problem by factor 2 *still not perfect though*
 #define FRAME_RATE  10 
@@ -32,6 +33,7 @@
 
 @interface GameView : BaseView {
     MTKeyMap *keyMap;
+	MTMouseMap *mouseMap;
 	char warMask;
 	Team *warTeam;
     int scale;
@@ -53,6 +55,7 @@
 - (int)  scale;
 
 - (void) setKeyMap:(MTKeyMap *)newKeyMap;
+- (void) setMouseMap:(MTMouseMap *)newMouseMap;
 
 -(float) mouseDir;
 

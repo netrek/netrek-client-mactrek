@@ -46,6 +46,11 @@
 
 - (NSString*) labelForPlayer:(Player*)player {
 	
+	// bug 1666845 Cloaked ships should be ??
+	if (([player flags] & PLAYER_CLOAK)) {
+		return @"??";
+	}
+	
 	NSString *label = [NSString stringWithFormat:@"%@ (%@)", [player mapCharsWithKillIndicator],
 		[player name]];
 	
@@ -58,6 +63,11 @@
 }
 
 - (NSString*) label2ForPlayer:(Player*)player {
+	
+	// bug 1666845 Cloaked ships should be ??
+	if (([player flags] & PLAYER_CLOAK)) {
+		return nil;
+	}
 	
 	// extended label?
 	if ([player showInfo] || debugLabels) {

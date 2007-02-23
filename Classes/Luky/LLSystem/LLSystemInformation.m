@@ -160,19 +160,20 @@ static NSDictionary *translationDictionary=nil;
 
 //for some reason, this does not work
 //probably old stuff still around
+/*
 + (NSString *)humanMachineTypeAlternate
 {
 	OSErr err;
 	long result;
 	Str255 name;
 	err=Gestalt('mach',&result); //gestaltMachineType = 'mach'
-	if (err==nil) {
+	if (err==nil) {		
 		GetIndString(name,kMachineNameStrID,(short)result);
 		return [NSString stringWithCString:name];
 	} else
 		return @"humanMachineTypeAlternate: machine name cannot be determined";
 }
-
+*/
 
 #pragma mark *** Getting Processor info ***
 

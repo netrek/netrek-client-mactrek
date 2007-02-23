@@ -9,6 +9,8 @@
 #import <Cocoa/Cocoa.h>
 #import "KeyMapTableDataSource.h"
 #import "LLPersistantSettings.h"
+#import "MTMouseMap.h"
+#import "Luky.h"
 
 #define GRAPHICS_MODEL_NETREK  0
 #define GRAPHICS_MODEL_MACTREK 1
@@ -22,18 +24,27 @@
 	IBOutlet NSButton              *voiceCmds;
 	IBOutlet NSButton              *accelerateButton;
 	IBOutlet NSButton              *trackingEnabledButton;
+	
+	IBOutlet NSPopUpButton		   *leftMouse;
+	IBOutlet NSPopUpButton		   *rightMouse;
+	IBOutlet NSPopUpButton		   *middleMouse;
+	IBOutlet NSPopUpButton		   *wheelMouse;
     // the Back button is covered by the menu controller
 }
 
 - (bool)  trackingEnabled;
 - (bool)  soundEnabled;
 - (bool)  voiceEnabled;
-- (bool) voiceCommands;
+- (bool)  voiceCommands;
 - (bool)  accelerate;
 - (float) musicLevel;
 - (float) fxLevel;
 - (int)   graphicsModel;
 - (void)  setPreviousValues;
 - (void)  saveSettings;
+- (int) actionForButton:(NSPopUpButton *) button;
+- (NSString *) stringForAction:(int) action;
+- (MTMouseMap *)mouseMap;
+  
 
 @end

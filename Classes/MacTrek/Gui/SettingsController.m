@@ -18,7 +18,7 @@
 
 - (void) setPreviousValues {
     LLPersistantSettings *settings = [LLPersistantSettings defaultSettings];
-    
+	
     NSNumber *val;
     
     val = [settings valueForKey:@"MUSIC_LEVEL"];
@@ -65,6 +65,25 @@
             [trackingEnabledButton setState:NSOffState];
         }        
     }
+	// set the mouse settings too FR 1666849
+	val = [settings valueForKey:@"LEFT_MOUSE"];
+    if (val != nil) {
+        [leftMouse selectItemWithTitle:[self stringForAction:[val intValue]]];
+    }
+	val = [settings valueForKey:@"MIDDLE_MOUSE"];
+    if (val != nil) {
+        [middleMouse selectItemWithTitle:[self stringForAction:[val intValue]]];
+    }
+	val = [settings valueForKey:@"RIGHT_MOUSE"];
+    if (val != nil) {
+        [rightMouse selectItemWithTitle:[self stringForAction:[val intValue]]];
+    }
+	val = [settings valueForKey:@"WHEEL_MOUSE"];
+    if (val != nil) {
+        [wheelMouse selectItemWithTitle:[self stringForAction:[val intValue]]];
+    }
+		
+	// set internal tracker state
 	[[SimpleTracker defaultTracker] setEnabled:[self trackingEnabled]];
 }
 
@@ -79,6 +98,14 @@
 	[settings setLazyValue:[NSNumber numberWithBool:[self accelerate]] forKey:@"ACCELERATE"];
     [settings setLazyValue:[NSNumber numberWithInt:[self graphicsModel]] forKey:@"THEME"];   
 	[settings setLazyValue:[NSNumber numberWithBool:[self trackingEnabled]] forKey:@"TRACKING"];
+	
+	// get the mouse settings too FR 1666849
+	MTMouseMap *mouseMap = [self mouseMap];
+	[settings setLazyValue:[NSNumber numberWithInt:[mouseMap actionMouseLeft]] forKey:@"LEFT_MOUSE"];
+	[settings setLazyValue:[NSNumber numberWithInt:[mouseMap actionMouseMiddle]] forKey:@"MIDDLE_MOUSE"];
+	[settings setLazyValue:[NSNumber numberWithInt:[mouseMap actionMouseRight]] forKey:@"RIGHT_MOUSE"];
+	[settings setLazyValue:[NSNumber numberWithInt:[mouseMap actionMouseWheel]] forKey:@"WHEEL_MOUSE"];
+	
     [settings update];
 	
 	// an excellent place to tell the tracker what the status is
@@ -121,5 +148,55 @@
 - (int)  graphicsModel {
     return [graphicsModel selectedSegment];
 }
+
+- (NSString *) stringForAction:(int) action {
+	
+	switch (action) {
+	case ACTION_SET_COURSE:
+		return @"Course";
+		break;
+	case ACTION_FIRE_PHASER:
+		return @"Phaser";
+		break;
+	case ACTION_FIRE_TORPEDO:
+		return @"Torpedo";
+		break;
+	case ACTION_ZOOM:
+		return @"Zoom";
+		break;
+	default:
+		LLLog(@"SettingsController.stringForAction action %d unknown", action);
+		return nil;
+		break;
+	}
+}
+
+- (int) actionForButton:(NSPopUpButton *) button {
+	if ([[[button selectedItem] title] isEqualToString:@"Course"] ) {
+		return ACTION_SET_COURSE;
+	} else if ([[[button selectedItem] title] isEqualToString:@"Torpedo"] ) {
+		return ACTION_FIRE_TORPEDO;
+	} else if ([[[button selectedItem] title] isEqualToString:@"Phaser"] ) {
+		return ACTION_FIRE_PHASER;
+	} else if ([[[button selectedItem] title] isEqualToString:@"Zoom"] ) {
+		return ACTION_ZOOM;
+	} else {
+		LLLog(@"SettingsController.actionForButton item %@ unknown", [[button selectedItem] title]);
+		return -1;
+	}
+}
+
+- (MTMouseMap *)mouseMap {
+	
+	MTMouseMap *mouseMap = [[[MTMouseMap alloc] init] autorelease];
+	
+	[mouseMap setActionMouseLeft:[self actionForButton:leftMouse]];
+	[mouseMap setActionMouseRight:[self actionForButton:rightMouse]];
+	[mouseMap setActionMouseMiddle:[self actionForButton:middleMouse]];
+	[mouseMap setActionMouseWheel:[self actionForButton:wheelMouse]];
+	
+	return mouseMap;	
+}
+    
 
 @end
