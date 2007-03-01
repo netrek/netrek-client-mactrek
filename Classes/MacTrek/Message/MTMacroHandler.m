@@ -33,7 +33,10 @@ int  line_length = 0;
 
 - (void) initializeMacros {
 	// $$$ should read from a file here
-	[macros setObject:[[MTMacro alloc] initWithName:@"distress" macro:@"help"] forKey:@"E"];
+	
+	// the key should be identical to the description used in MTKeyMap to create a key to activate this macro
+	// be sure to specify NSControlKeyMask too
+	[macros setObject:[[MTMacro alloc] initWithName:@"mac.F.T" macro:@"Help!  Carrying %a!!"] forKey:@"MACRO_CARRYING"];
 }
 
 - (void) setKeyMap:(MTKeyMap *)list {
@@ -45,7 +48,9 @@ int  line_length = 0;
 }
 
 - (MTMacro *)getMacroForKey:(char)key {
-	return [macros objectForKey:[NSString stringWithFormat:@"%c", key]];
+	int action = [keyMap actionForKey:key withModifierFlags: NSControlKeyMask]; // $$ hoops? what flags to use?
+	NSString *description = [keyMap descriptionForAction:action];
+	return [macros objectForKey:description];
 }
 
 /** handleMacro */
