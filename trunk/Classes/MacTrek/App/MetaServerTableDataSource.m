@@ -17,6 +17,7 @@
         selectedServer = nil;
         meta = [[MetaServerParser alloc] init];
 		entries = [[NSMutableArray alloc] init];
+		bonjourServers = [[NSMutableArray alloc] init];
         // initial query is in seperate thread
         [NSThread detachNewThreadSelector:@selector(refreshServersInSeperateThread:) toTarget:self withObject:nil];
     }
@@ -27,6 +28,12 @@
     // technically this should be done with locks since
     // it can be invoked from init and by user if he is very very fast...
     
+	// 1667734 add rendezvous servers
+	NSNetServiceBrowser *serviceBrowser;
+	serviceBrowser = [[NSNetServiceBrowser alloc] init];
+	[serviceBrowser setDelegate:self];
+	[serviceBrowser searchForServicesOfType:@"_netrek._tcp" inDomain:@""];	
+	
     // create a private pool for this thread
     NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
     
@@ -38,6 +45,45 @@
     
     // release the pool
     [pool release];
+}
+
+// 1667734 add rendezvous servers
+- (void)netServiceBrowser:(NSNetServiceBrowser *)netServiceBrowser didFindService:(NSNetService *)netService moreComing:(BOOL)moreServicesComing {
+	
+	if ([[netService type] isEqualToString:@"_netrek._tcp"]){
+		
+		// create a new entry
+		MetaServerEntry *entry = [[MetaServerEntry alloc] init];
+		[entry setAddress: [netService hostName]];
+		[entry setPort:    2592];
+		[entry setStatus:  RENDEZVOUS];
+		[entry setGameType:    BRONCO];	
+		
+		[bonjourServers insertObject:entry atIndex:0];    
+		[serverTableView reloadData];
+		
+		LLLog(@"MetaServerTableDataSource.netServiceBrowser: added %@", [netService hostName]);
+	} else {
+		LLLog(@"MetaServerTableDataSource.netServiceBrowser: unknown service %@", [netService type]); 
+	}
+
+}
+
+- (void)netServiceBrowser:(NSNetServiceBrowser *)netServiceBrowser didRemoveService:(NSNetService *)netService moreComing:(BOOL)moreServicesComing {
+	if ([[netService type] isEqualToString:@"_netrek._tcp"]){
+		
+		// find and remove
+		MetaServerEntry *server = [self findServer:[netService hostName]];
+		
+		if (server != nil) {
+			[bonjourServers removeObject:server];
+		}
+		[serverTableView reloadData];
+		
+		LLLog(@"MetaServerTableDataSource.netServiceBrowser: removed %@", [netService hostName]);
+	} else {
+		LLLog(@"MetaServerTableDataSource.netServiceBrowser:(rem) unknown service %@", [netService type]); 
+	}
 }
 
 - (IBAction)refreshServers:(id)sender {  
@@ -63,7 +109,14 @@
 			[self addServerPassivly:localhost];
 		}
 	}
+	// 1667734 add rendezvous servers
+	[self addRendezVousServerToArray:result];
+	
     [serverTableView reloadData];
+}
+
+- (void) addRendezVousServerToArray:(NSMutableArray*) result {
+	[result addObjectsFromArray:bonjourServers];
 }
 
 - (int)numberOfRowsInTableView:(NSTableView *)aTableView {

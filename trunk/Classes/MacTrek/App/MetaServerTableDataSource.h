@@ -18,6 +18,7 @@
     // internal data
     MetaServerParser *meta;
     NSMutableArray *entries;  
+    NSMutableArray *bonjourServers; 
     
     // selected entry
     MetaServerEntry *selectedServer;
@@ -32,5 +33,10 @@
 - (MetaServerEntry *) findServer:(NSString *)name;
 - (void) deselectServer;
 - (void) setServerSelected:(MetaServerEntry *) server;
+- (void) addRendezVousServerToArray:(NSMutableArray*) result;
+
+// rendezvous delegate functions
+- (void)netServiceBrowser:(NSNetServiceBrowser *)netServiceBrowser didRemoveService:(NSNetService *)netService moreComing:(BOOL)moreServicesComing;
+- (void)netServiceBrowser:(NSNetServiceBrowser *)netServiceBrowser didFindService:(NSNetService *)netService moreComing:(BOOL)moreServicesComing;
 
 @end

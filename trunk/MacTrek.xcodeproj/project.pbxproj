@@ -86,6 +86,7 @@
 		522F9F4C0B96C842001C4896 /* MTDistress.m in Sources */ = {isa = PBXBuildFile; fileRef = 522F9F4B0B96C842001C4896 /* MTDistress.m */; };
 		5256E09F0B931D560078C491 /* MTMacroHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 5256E09E0B931D560078C491 /* MTMacroHandler.m */; };
 		5256E0B20B9320D80078C491 /* MTMacro.m in Sources */ = {isa = PBXBuildFile; fileRef = 5256E0B10B9320D80078C491 /* MTMacro.m */; };
+		52604A9B0B97016B0097D103 /* LLNetServiceDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 52604A9A0B97016B0097D103 /* LLNetServiceDelegate.m */; };
 		52756F210B3554CA00631149 /* PRECOMPILED in Resources */ = {isa = PBXBuildFile; fileRef = 52756EA90B3554CA00631149 /* PRECOMPILED */; };
 		527E05030AF3666000B5D37F /* OmniNetworking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 527E05010AF3666000B5D37F /* OmniNetworking.framework */; };
 		527E05040AF3666000B5D37F /* OmniBase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 527E05020AF3666000B5D37F /* OmniBase.framework */; };
@@ -678,6 +679,8 @@
 		5256E09E0B931D560078C491 /* MTMacroHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTMacroHandler.m; sourceTree = "<group>"; };
 		5256E0B00B9320D80078C491 /* MTMacro.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTMacro.h; sourceTree = "<group>"; };
 		5256E0B10B9320D80078C491 /* MTMacro.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTMacro.m; sourceTree = "<group>"; };
+		52604A990B97016B0097D103 /* LLNetServiceDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLNetServiceDelegate.h; sourceTree = "<group>"; };
+		52604A9A0B97016B0097D103 /* LLNetServiceDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLNetServiceDelegate.m; sourceTree = "<group>"; };
 		52756EA90B3554CA00631149 /* PRECOMPILED */ = {isa = PBXFileReference; lastKnownFileType = folder; name = PRECOMPILED; path = Resources/PRECOMPILED; sourceTree = "<group>"; };
 		527E05010AF3666000B5D37F /* OmniNetworking.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OmniNetworking.framework; path = ../Release/OmniNetworking.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		527E05020AF3666000B5D37F /* OmniBase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = OmniBase.framework; path = ../Release/OmniBase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1565,6 +1568,8 @@
 				528E7DD90B0A649E00B22943 /* LLNotificationCenter.m */,
 				528E7DDA0B0A649E00B22943 /* LLNotificationCenterEntry.h */,
 				528E7DDB0B0A649E00B22943 /* LLNotificationCenterEntry.m */,
+				52604A990B97016B0097D103 /* LLNetServiceDelegate.h */,
+				52604A9A0B97016B0097D103 /* LLNetServiceDelegate.m */,
 			);
 			path = LLComm;
 			sourceTree = "<group>";
@@ -2662,6 +2667,7 @@
 				5256E09F0B931D560078C491 /* MTMacroHandler.m in Sources */,
 				5256E0B20B9320D80078C491 /* MTMacro.m in Sources */,
 				522F9F4C0B96C842001C4896 /* MTDistress.m in Sources */,
+				52604A9B0B97016B0097D103 /* LLNetServiceDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

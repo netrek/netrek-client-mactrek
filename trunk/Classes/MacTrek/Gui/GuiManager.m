@@ -119,11 +119,12 @@ int startUpEvents = 0;
 - (void) shutdown {
 	// kill all robots
 	// leave some old code intact	
-	[localServerCntrl stopServer:self];
+	//[localServerCntrl stopServer:self];
 	
 	// but stop the new server too
 	// should kill the robots as well
 	[server stopServer];
+	[service stop];
 }
 
 // to be called..
@@ -193,6 +194,20 @@ int startUpEvents = 0;
 		[entry setStatus:  DEFAULT];
 		[entry setGameType:    BRONCO];	
 		[selectServerCntrl addServerPassivly:entry];  // gets selected automatically  
+		
+		// 1667734 add RendezVous
+		service = [[NSNetService alloc] initWithDomain:@""
+												  type:@"_netrek._tcp"
+												  name:@"" 
+												  port:2593];
+		if(service) {
+			[service setDelegate:[[LLNetServiceDelegate alloc] init]];
+			[service publish];
+			LLLog(@"GuiManager.awakeFromNib published NSNetService for netrek.");
+		}
+		else {
+			LLLog(@"GuiManager.awakeFromNib An error occurred initializing the NSNetService object.");
+		}
 	}
 	
 	// register for quit
