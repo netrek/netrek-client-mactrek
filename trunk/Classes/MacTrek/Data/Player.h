@@ -165,6 +165,7 @@
 - (void) increasePlasmaCount;
 - (void) decreasePlasmaCount;
 - (bool) friendlyToPlayer:(Player*) player;
+- (char) letterForPlayer;
 
 
 - (void) updateHostile: (int) newhostile
