@@ -245,13 +245,18 @@ static Player *me;
 }
 
 - (Planet *) planetWithId:(int)planetId {
-    //  could need planet remap here...
-    //LLLog([NSString stringWithFormat: @"Universe.planetWithId: %d", planetId]);
+    if (planetId > [planets count]) {
+		LLLog([NSString stringWithFormat: @"Universe.planetWithId: %d", planetId]);
+		return nil;
+	}
     return [planets objectAtIndex:planetId];
 }
 
 - (Player *) playerWithId:(int)playerId {
-    //LLLog([NSString stringWithFormat: @"Universe.playerWithId: %d", playerId]);
+	if (playerId > [players count]) {
+		LLLog([NSString stringWithFormat: @"Universe.playerWithId: %d", playerId]);
+		return nil;
+	}
     return [players objectAtIndex:playerId];
 }
 

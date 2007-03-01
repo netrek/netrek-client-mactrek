@@ -41,6 +41,8 @@
 -(NSString *)abbreviation;
 -(int)  teamId;
 -(int)  count;
+-(char) letterForPlayer:(int)i;
 - (NSColor *) colorForTeam;
+-(char)letterForTeam;
 
 @end

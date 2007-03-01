@@ -495,6 +495,12 @@
     cloakphase--;
 }
 
+-(char) letterForPlayer {
+    
+    char letters[] = "0123456789abcdefghijklmnopqrstuvwxyz";
+    return letters[playerId];
+}
+
 - (int) availableTorps {
     
     // what can we fire ? based on fuel 

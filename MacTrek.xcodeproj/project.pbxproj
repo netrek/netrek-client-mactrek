@@ -83,6 +83,9 @@
 		522F30BB0B0B1E2C00E7DDED /* rsa_box.c in Sources */ = {isa = PBXBuildFile; fileRef = 522F30B50B0B1E2C00E7DDED /* rsa_box.c */; };
 		522F30BC0B0B1E2C00E7DDED /* rsa_box_3.c in Sources */ = {isa = PBXBuildFile; fileRef = 522F30B60B0B1E2C00E7DDED /* rsa_box_3.c */; };
 		522F30BD0B0B1E2C00E7DDED /* rsa_box_2.c in Sources */ = {isa = PBXBuildFile; fileRef = 522F30B70B0B1E2C00E7DDED /* rsa_box_2.c */; };
+		522F9F4C0B96C842001C4896 /* MTDistress.m in Sources */ = {isa = PBXBuildFile; fileRef = 522F9F4B0B96C842001C4896 /* MTDistress.m */; };
+		5256E09F0B931D560078C491 /* MTMacroHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 5256E09E0B931D560078C491 /* MTMacroHandler.m */; };
+		5256E0B20B9320D80078C491 /* MTMacro.m in Sources */ = {isa = PBXBuildFile; fileRef = 5256E0B10B9320D80078C491 /* MTMacro.m */; };
 		52756F210B3554CA00631149 /* PRECOMPILED in Resources */ = {isa = PBXBuildFile; fileRef = 52756EA90B3554CA00631149 /* PRECOMPILED */; };
 		527E05030AF3666000B5D37F /* OmniNetworking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 527E05010AF3666000B5D37F /* OmniNetworking.framework */; };
 		527E05040AF3666000B5D37F /* OmniBase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 527E05020AF3666000B5D37F /* OmniBase.framework */; };
@@ -669,6 +672,12 @@
 		522F30B50B0B1E2C00E7DDED /* rsa_box.c */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.c; name = rsa_box.c; path = ../../../../RSA/MacTrek/rsa_box.c; sourceTree = "<group>"; };
 		522F30B60B0B1E2C00E7DDED /* rsa_box_3.c */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.c; name = rsa_box_3.c; path = ../../../../RSA/MacTrek/rsa_box_3.c; sourceTree = "<group>"; };
 		522F30B70B0B1E2C00E7DDED /* rsa_box_2.c */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.c; name = rsa_box_2.c; path = ../../../../RSA/MacTrek/rsa_box_2.c; sourceTree = "<group>"; };
+		522F9F4A0B96C842001C4896 /* MTDistress.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTDistress.h; sourceTree = "<group>"; };
+		522F9F4B0B96C842001C4896 /* MTDistress.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTDistress.m; sourceTree = "<group>"; };
+		5256E09D0B931D560078C491 /* MTMacroHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTMacroHandler.h; sourceTree = "<group>"; };
+		5256E09E0B931D560078C491 /* MTMacroHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTMacroHandler.m; sourceTree = "<group>"; };
+		5256E0B00B9320D80078C491 /* MTMacro.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTMacro.h; sourceTree = "<group>"; };
+		5256E0B10B9320D80078C491 /* MTMacro.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTMacro.m; sourceTree = "<group>"; };
 		52756EA90B3554CA00631149 /* PRECOMPILED */ = {isa = PBXFileReference; lastKnownFileType = folder; name = PRECOMPILED; path = Resources/PRECOMPILED; sourceTree = "<group>"; };
 		527E05010AF3666000B5D37F /* OmniNetworking.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OmniNetworking.framework; path = ../Release/OmniNetworking.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		527E05020AF3666000B5D37F /* OmniBase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = OmniBase.framework; path = ../Release/OmniBase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1454,6 +1463,12 @@
 			children = (
 				5212F02C0B08FFB80059A8B1 /* RCMmessage.h */,
 				5212F02D0B08FFB80059A8B1 /* RCMmessage.m */,
+				5256E09D0B931D560078C491 /* MTMacroHandler.h */,
+				5256E09E0B931D560078C491 /* MTMacroHandler.m */,
+				5256E0B00B9320D80078C491 /* MTMacro.h */,
+				5256E0B10B9320D80078C491 /* MTMacro.m */,
+				522F9F4A0B96C842001C4896 /* MTDistress.h */,
+				522F9F4B0B96C842001C4896 /* MTDistress.m */,
 			);
 			path = Message;
 			sourceTree = "<group>";
@@ -2644,6 +2659,9 @@
 				52DC5F0C0B3159DE00C78FD1 /* ServerControllerNew.m in Sources */,
 				52D37C9E0B8A5C1800265266 /* MTVoiceController.m in Sources */,
 				52F819800B8EDB73003ED1BE /* MTMouseMap.m in Sources */,
+				5256E09F0B931D560078C491 /* MTMacroHandler.m in Sources */,
+				5256E0B20B9320D80078C491 /* MTMacro.m in Sources */,
+				522F9F4C0B96C842001C4896 /* MTDistress.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
