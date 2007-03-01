@@ -20,227 +20,227 @@
     // combat
     entry = [[MTKeyMapEntry alloc] initAction: ACTION_CLOAK 
                                     withKey:'c' 
-                              modifierFlags: 0 
-                                description: @"Toggle cloak"];
+                              modifierFlags: NSDeviceIndependentModifierFlagsMask 
+								description: @"Toggle cloak"];
     [keyMap setObject:entry forKey:[NSNumber numberWithInt:[entry action]]];
     
     entry = [[MTKeyMapEntry alloc] initAction: ACTION_DET_ENEMY 
                                     withKey:'d' 
-                              modifierFlags: 0 
+                              modifierFlags: NSDeviceIndependentModifierFlagsMask 
                                 description: @"Detonate enemy topedos"];
     [keyMap setObject:entry forKey:[NSNumber numberWithInt:[entry action]]];
     
     entry = [[MTKeyMapEntry alloc] initAction: ACTION_DET_OWN 
                                     withKey:'D' 
-                              modifierFlags: 0 
+                              modifierFlags: NSDeviceIndependentModifierFlagsMask 
                                 description: @"Detonate own topedos"];
     [keyMap setObject:entry forKey:[NSNumber numberWithInt:[entry action]]];
         
     entry = [[MTKeyMapEntry alloc] initAction: ACTION_FIRE_PLASMA 
                                     withKey:'f' 
-                              modifierFlags: 0 
+                              modifierFlags: NSDeviceIndependentModifierFlagsMask 
                                 description: @"Fire plasma torpedo"];
     [keyMap setObject:entry forKey:[NSNumber numberWithInt:[entry action]]];
     
     entry = [[MTKeyMapEntry alloc] initAction: ACTION_FIRE_TORPEDO
                                     withKey:'t' 
-                              modifierFlags: 0 
+                              modifierFlags: NSDeviceIndependentModifierFlagsMask 
                                 description: @"Fire photon torpedo"];
     [keyMap setObject:entry forKey:[NSNumber numberWithInt:[entry action]]];
     
     entry = [[MTKeyMapEntry alloc] initAction: ACTION_FIRE_PHASER
                                     withKey:'p' 
-                              modifierFlags: 0 
+                              modifierFlags: NSDeviceIndependentModifierFlagsMask 
                                 description: @"Fire phaser"];
     [keyMap setObject:entry forKey:[NSNumber numberWithInt:[entry action]]];
                 
     
     entry = [[MTKeyMapEntry alloc] initAction: ACTION_SHIELDS
                                     withKey:'s' 
-                              modifierFlags: 0 
+                              modifierFlags: NSDeviceIndependentModifierFlagsMask 
                                 description: @"Toggle shields"];
     [keyMap setObject:entry forKey:[NSNumber numberWithInt:[entry action]]];
     
     entry = [[MTKeyMapEntry alloc] initAction: ACTION_TRACTOR
                                     withKey:'y' 
-                              modifierFlags: 0 
+                              modifierFlags: NSDeviceIndependentModifierFlagsMask 
                                 description: @"Toggle tractor beam"];
     [keyMap setObject:entry forKey:[NSNumber numberWithInt:[entry action]]];
     
     entry = [[MTKeyMapEntry alloc] initAction: ACTION_PRESSOR
                                     withKey:'u' 
-                              modifierFlags: 0 
+                              modifierFlags: NSDeviceIndependentModifierFlagsMask 
                                 description: @"Toggle pressor beam"];
     [keyMap setObject:entry forKey:[NSNumber numberWithInt:[entry action]]];
     
     // Movement And Navigation Functions:
     entry = [[MTKeyMapEntry alloc] initAction: ACTION_WARP_0 
                                     withKey:'0' 
-                              modifierFlags: 0 
+                              modifierFlags: NSDeviceIndependentModifierFlagsMask 
                                 description: @"Set speed to warp 0 (stop)"];
     [keyMap setObject:entry forKey:[NSNumber numberWithInt:[entry action]]];
     
     entry = [[MTKeyMapEntry alloc] initAction: ACTION_WARP_1 
                                     withKey:'1' 
-                              modifierFlags: 0 
+                              modifierFlags: NSDeviceIndependentModifierFlagsMask 
                                 description: @"Set speed to warp 1"];
     [keyMap setObject:entry forKey:[NSNumber numberWithInt:[entry action]]];
     
     entry = [[MTKeyMapEntry alloc] initAction: ACTION_WARP_2
                                     withKey:'2' 
-                              modifierFlags: 0 
+                              modifierFlags: NSDeviceIndependentModifierFlagsMask 
                                 description: @"Set speed to warp 2"];
     [keyMap setObject:entry forKey:[NSNumber numberWithInt:[entry action]]];
     
     entry = [[MTKeyMapEntry alloc] initAction: ACTION_WARP_3 
                                     withKey:'3' 
-                              modifierFlags: 0 
+                              modifierFlags: NSDeviceIndependentModifierFlagsMask 
                                 description: @"Set speed to warp 3"];
     [keyMap setObject:entry forKey:[NSNumber numberWithInt:[entry action]]];
     
     entry = [[MTKeyMapEntry alloc] initAction: ACTION_WARP_4 
                                     withKey:'4' 
-                              modifierFlags: 0 
+                              modifierFlags: NSDeviceIndependentModifierFlagsMask 
                                 description: @"Set speed to warp 4"];
     [keyMap setObject:entry forKey:[NSNumber numberWithInt:[entry action]]];
     
     entry = [[MTKeyMapEntry alloc] initAction: ACTION_WARP_5
                                     withKey:'5' 
-                              modifierFlags: 0 
+                              modifierFlags: NSDeviceIndependentModifierFlagsMask 
                                 description: @"Set speed to warp 5"];
     [keyMap setObject:entry forKey:[NSNumber numberWithInt:[entry action]]];
     
     entry = [[MTKeyMapEntry alloc] initAction: ACTION_WARP_6
                                     withKey:'6' 
-                              modifierFlags: 0 
+                              modifierFlags: NSDeviceIndependentModifierFlagsMask 
                                 description: @"Set speed to warp 6"];
     [keyMap setObject:entry forKey:[NSNumber numberWithInt:[entry action]]];
     
     entry = [[MTKeyMapEntry alloc] initAction: ACTION_WARP_7
                                     withKey:'7' 
-                              modifierFlags: 0 
+                              modifierFlags: NSDeviceIndependentModifierFlagsMask 
                                 description: @"Set speed to warp 7"];
     [keyMap setObject:entry forKey:[NSNumber numberWithInt:[entry action]]];
     
     entry = [[MTKeyMapEntry alloc] initAction: ACTION_WARP_8 
                                     withKey:'8' 
-                              modifierFlags: 0 
+                              modifierFlags: NSDeviceIndependentModifierFlagsMask 
                                 description: @"Set speed to warp 8"];
     [keyMap setObject:entry forKey:[NSNumber numberWithInt:[entry action]]];
     
     entry = [[MTKeyMapEntry alloc] initAction: ACTION_WARP_9 
                                     withKey:'9' 
-                              modifierFlags: 0 
+                              modifierFlags: NSDeviceIndependentModifierFlagsMask 
                                 description: @"Set speed to warp 9"];
     [keyMap setObject:entry forKey:[NSNumber numberWithInt:[entry action]]];
     
     entry = [[MTKeyMapEntry alloc] initAction: ACTION_WARP_10 
                                     withKey:')' 
-                              modifierFlags: 0 
+                              modifierFlags: NSDeviceIndependentModifierFlagsMask 
                                 description: @"Set speed to warp 10"];
     [keyMap setObject:entry forKey:[NSNumber numberWithInt:[entry action]]];
     
     entry = [[MTKeyMapEntry alloc] initAction: ACTION_WARP_11 
                                     withKey:'!' 
-                              modifierFlags: 0 
+                              modifierFlags: NSDeviceIndependentModifierFlagsMask 
                                 description: @"Set speed to warp 11"];
     [keyMap setObject:entry forKey:[NSNumber numberWithInt:[entry action]]];
     
     entry = [[MTKeyMapEntry alloc] initAction: ACTION_WARP_12
                                     withKey:'@' 
-                              modifierFlags: 0 
+                              modifierFlags: NSDeviceIndependentModifierFlagsMask 
                                 description: @"Set speed to warp 12"];
     [keyMap setObject:entry forKey:[NSNumber numberWithInt:[entry action]]];
     
     entry = [[MTKeyMapEntry alloc] initAction: ACTION_WARP_MAX
                                     withKey:'%' 
-                              modifierFlags: 0 
+                              modifierFlags: NSDeviceIndependentModifierFlagsMask 
                                 description: @"Set speed to maximum warp"];
     [keyMap setObject:entry forKey:[NSNumber numberWithInt:[entry action]]];
     
     entry = [[MTKeyMapEntry alloc] initAction: ACTION_WARP_HALF_MAX
                                     withKey:'#' 
-                              modifierFlags: 0 
+                              modifierFlags: NSDeviceIndependentModifierFlagsMask 
                                 description: @"Set speed to half of maximum warp"];
     [keyMap setObject:entry forKey:[NSNumber numberWithInt:[entry action]]];
     
     entry = [[MTKeyMapEntry alloc] initAction: ACTION_WARP_INCREASE
                                     withKey:'>' 
-                              modifierFlags: 0 
+                              modifierFlags: NSDeviceIndependentModifierFlagsMask 
                                 description: @"Increase speed by 1"];
     [keyMap setObject:entry forKey:[NSNumber numberWithInt:[entry action]]];
     
     entry = [[MTKeyMapEntry alloc] initAction: ACTION_WARP_DECREASE
                                     withKey:'<' 
-                              modifierFlags: 0 
+                              modifierFlags: NSDeviceIndependentModifierFlagsMask 
                                 description: @"Decrease speed by 1"];
     [keyMap setObject:entry forKey:[NSNumber numberWithInt:[entry action]]];
     
     entry = [[MTKeyMapEntry alloc] initAction: ACTION_SET_COURSE
                                     withKey:'k' 
-                              modifierFlags: 0 
+                              modifierFlags: NSDeviceIndependentModifierFlagsMask 
                                 description: @"Set course"];
     [keyMap setObject:entry forKey:[NSNumber numberWithInt:[entry action]]];
         
     entry = [[MTKeyMapEntry alloc] initAction: ACTION_LOCK
                                     withKey:'l' 
-                              modifierFlags: 0 
+                              modifierFlags: NSDeviceIndependentModifierFlagsMask 
                                 description: @"Lock on target"];
     [keyMap setObject:entry forKey:[NSNumber numberWithInt:[entry action]]];
                         
     entry = [[MTKeyMapEntry alloc] initAction: ACTION_PRACTICE_BOT
                                     withKey:'*' 
-                              modifierFlags: 0 
+                              modifierFlags: NSDeviceIndependentModifierFlagsMask 
                                 description: @"Send in practice bot"];
     [keyMap setObject:entry forKey:[NSNumber numberWithInt:[entry action]]];
     
     entry = [[MTKeyMapEntry alloc] initAction: ACTION_TRANSWARP
                                     withKey:'*' 
-                              modifierFlags: 0 
+                              modifierFlags: NSDeviceIndependentModifierFlagsMask 
                                 description: @"Engage transwarp drive"];
     [keyMap setObject:entry forKey:[NSNumber numberWithInt:[entry action]]];
     
     // Planet Functions                                
     entry = [[MTKeyMapEntry alloc] initAction: ACTION_BOMB
                                     withKey:'b' 
-                              modifierFlags: 0 
+                              modifierFlags: NSDeviceIndependentModifierFlagsMask 
                                 description: @"Bombard planet"];
     [keyMap setObject:entry forKey:[NSNumber numberWithInt:[entry action]]];
     
     entry = [[MTKeyMapEntry alloc] initAction: ACTION_ORBIT
                                     withKey:'o' 
-                              modifierFlags: 0 
+                              modifierFlags: NSDeviceIndependentModifierFlagsMask 
                                 description: @"Orbit planet"];
     [keyMap setObject:entry forKey:[NSNumber numberWithInt:[entry action]]];
                                     
     entry = [[MTKeyMapEntry alloc] initAction: ACTION_BEAM_DOWN
                                     withKey:'x' 
-                              modifierFlags: 0 
+                              modifierFlags: NSDeviceIndependentModifierFlagsMask 
                                 description: @"Beam armies down"];
     [keyMap setObject:entry forKey:[NSNumber numberWithInt:[entry action]]];
     
     entry = [[MTKeyMapEntry alloc] initAction: ACTION_BEAM_UP
                                     withKey:'z' 
-                              modifierFlags: 0 
+                              modifierFlags: NSDeviceIndependentModifierFlagsMask 
                                 description: @"Beam armies up"];
     [keyMap setObject:entry forKey:[NSNumber numberWithInt:[entry action]]];
                                     
     //Message Functions
     entry = [[MTKeyMapEntry alloc] initAction: ACTION_DISTRESS_CALL
                                     withKey:'E' 
-                              modifierFlags: 0 
+                              modifierFlags: NSDeviceIndependentModifierFlagsMask 
                                 description: @"Send distress call"];
     [keyMap setObject:entry forKey:[NSNumber numberWithInt:[entry action]]];       
     
     entry = [[MTKeyMapEntry alloc] initAction: ACTION_ARMIES_CARRIED_REPORT
                                     withKey:'F' 
-                              modifierFlags: 0 
+                              modifierFlags: NSDeviceIndependentModifierFlagsMask 
                                 description: @"Send armies carried report"];
     [keyMap setObject:entry forKey:[NSNumber numberWithInt:[entry action]]]; 
 
     entry = [[MTKeyMapEntry alloc] initAction: ACTION_MESSAGE
                                     withKey:'m' 
-                              modifierFlags: 0 
+                              modifierFlags: NSDeviceIndependentModifierFlagsMask 
                                 description: @"Start sending message"];
     [keyMap setObject:entry forKey:[NSNumber numberWithInt:[entry action]]]; 
           
@@ -249,64 +249,64 @@
     // Misc. Functions
     entry = [[MTKeyMapEntry alloc] initAction: ACTION_DOCK_PERMISSION
                                     withKey:'e' 
-                              modifierFlags: 0 
+                              modifierFlags: NSDeviceIndependentModifierFlagsMask 
                                 description: @"Toggle docking permission"];
     [keyMap setObject:entry forKey:[NSNumber numberWithInt:[entry action]]];                                     
                                       
     entry = [[MTKeyMapEntry alloc] initAction: ACTION_INFO
                                     withKey:'i' 
-                              modifierFlags: 0 
+                              modifierFlags: NSDeviceIndependentModifierFlagsMask 
                                 description: @"Get information on object near mouse"];
     [keyMap setObject:entry forKey:[NSNumber numberWithInt:[entry action]]];       
                                             
     entry = [[MTKeyMapEntry alloc] initAction: ACTION_REFIT
                                     withKey:'r' 
-                              modifierFlags: 0 
+                              modifierFlags: NSDeviceIndependentModifierFlagsMask 
                                 description: @"Refit to different shiptype"];    
     [keyMap setObject:entry forKey:[NSNumber numberWithInt:[entry action]]];
         
     entry = [[MTKeyMapEntry alloc] initAction: ACTION_REPAIR
                                     withKey:'R' 
-                              modifierFlags: 0 
+                              modifierFlags: NSDeviceIndependentModifierFlagsMask 
                                 description: @"Shut down for repairs"];    
     [keyMap setObject:entry forKey:[NSNumber numberWithInt:[entry action]]]; 
      
     entry = [[MTKeyMapEntry alloc] initAction: ACTION_QUIT
                                     withKey:'q' 
-                              modifierFlags: 0 
+                              modifierFlags: NSDeviceIndependentModifierFlagsMask 
                                 description: @"Quit"];    
     [keyMap setObject:entry forKey:[NSNumber numberWithInt:[entry action]]];                                                        
 
     //Window And Display Functions:
     entry = [[MTKeyMapEntry alloc] initAction: ACTION_HELP
                                     withKey:'h' 
-                              modifierFlags: 0 
+                              modifierFlags: NSDeviceIndependentModifierFlagsMask 
                                 description: @"Show help window"];    
     [keyMap setObject:entry forKey:[NSNumber numberWithInt:[entry action]]];
     
 #ifdef DEBUG
     entry = [[MTKeyMapEntry alloc] initAction: ACTION_DEBUG
                                       withKey:'?' 
-                                modifierFlags: 0 
+                                modifierFlags: NSDeviceIndependentModifierFlagsMask 
                                   description: @"Activate debug labels"];    
     [keyMap setObject:entry forKey:[NSNumber numberWithInt:[entry action]]];
 #endif
 	
     entry = [[MTKeyMapEntry alloc] initAction: ACTION_SCREENSHOT
                                       withKey:'\\' 
-                                modifierFlags: 0 
+                                modifierFlags: NSDeviceIndependentModifierFlagsMask 
                                   description: @"Take screenshot"];    
     [keyMap setObject:entry forKey:[NSNumber numberWithInt:[entry action]]];
 
 	entry = [[MTKeyMapEntry alloc] initAction: ACTION_WAR
                                       withKey:'W' 
-                                modifierFlags: 0 
+                                modifierFlags: NSDeviceIndependentModifierFlagsMask 
                                   description: @"Declare war on nearest planet"];    
     [keyMap setObject:entry forKey:[NSNumber numberWithInt:[entry action]]];
 	
 	entry = [[MTKeyMapEntry alloc] initAction: ACTION_COUP
                                       withKey:'C' 
-                                modifierFlags: 0 
+                                modifierFlags: NSDeviceIndependentModifierFlagsMask 
                                   description: @"Coup homeplanet"];    
     [keyMap setObject:entry forKey:[NSNumber numberWithInt:[entry action]]];
 	
@@ -447,14 +447,19 @@
 - (int) actionForKey:(char) key withModifierFlags:(unsigned int) flags {
     NSEnumerator *enumerator = [keyMap keyEnumerator];
     MTKeyMapEntry *keyEntry;
-      
+	
     while ((keyEntry = [keyMap objectForKey:[enumerator nextObject]])) {
         if (keyEntry != nil) { 
-            if (([keyEntry key] == key)  
-                // && ([keyEntry modifierFlags] == flags)  // ignoring modifiers for now $$
-                ) {
-                return [keyEntry action];
-            } 
+			if ([keyEntry modifierFlags] != NSDeviceIndependentModifierFlagsMask) {
+				// special mask
+				if (([keyEntry key] == key) && ([keyEntry modifierFlags] & flags)) {
+					return [keyEntry action];
+				}				
+			} else {
+				if ([keyEntry key] == key) {  // ignore flags
+					return [keyEntry action];
+				} 
+			}					
         }
     }
     return ACTION_UNKNOWN;
