@@ -40,8 +40,9 @@ bool serverRuns = NO;
     robots = [[RobotsController alloc] initWithTextView:serverLogView];   
 }
 
-- (IBAction)startServer:(id)sender
-{
+
+- (IBAction)startServer:(id)sender {
+	
     [server startServer];
     serverRuns = YES;
     
@@ -82,5 +83,6 @@ bool serverRuns = NO;
 {
     [robots stopRobots];
 }
+
 
 @end

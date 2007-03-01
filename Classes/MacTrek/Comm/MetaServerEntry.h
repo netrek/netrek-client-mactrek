@@ -19,7 +19,8 @@ enum ServerStatusType {
     NO_VALUE = 5,  
     CANNOT_CONNECT = 6, 
     DEFAULT = 7,
-    ERROR = 8
+    ERROR = 8, 
+	RENDEZVOUS = 9
 };
 
 enum ServerGameType {

@@ -22,6 +22,7 @@
 #import "PainterFactoryForTac.h"
 #import "ServerControllerNew.h"
 #import "GameView.h"
+#import "LLNetServiceDelegate.h"
 
 // wait for:
 //  PF_IMAGES_CACHED (3xgal + 1xmap) 
@@ -77,7 +78,7 @@ enum GAME_STATE {
 	bool multiThreaded; 
 	MetaServerEntry *currentServer;
 	NSTimer *timer;
-
+	NSNetService *service;
 }
 
 - (NSApplicationTerminateReply)applicationShouldTerminate:(NSApplication *)sender;
