@@ -11,7 +11,7 @@
 #import "MessageConstants.h"
 #import "MTMacro.h"
 #import "FeatureList.h"
-#import "MTKeyMap.h"
+//#import "MTKeyMap.h"
 #import "Data.h"
 #import "MTDistress.h"
 
@@ -21,19 +21,19 @@
 @interface MTMacroHandler : BaseClass {
 	NSMutableDictionary *macros;
 	FeatureList *featureList;
-	MTKeyMap *keyMap;
+	//MTKeyMap *keyMap;
 	MTMacro *storedMacro; 
 	NSPoint gameViewPointOfCursor;
 }
 
 // setup
-- (void) setKeyMap:(MTKeyMap *)list;
+//- (void) setKeyMap:(MTKeyMap *)list;
 - (void) setFeatureList:(FeatureList *)list;
 - (void) setGameViewPointOfCursor:(NSPoint)p;
 
 // internal storage of macros
 - (void) initializeMacros;
-- (MTMacro *)getMacroForKey:(char)key;
+//- (MTMacro *)getMacroForKey:(char)key;
 
 // external
 - (bool) handleMacroForKey:(char) key;

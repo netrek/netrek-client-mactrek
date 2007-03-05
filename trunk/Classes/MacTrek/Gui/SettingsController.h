@@ -42,7 +42,7 @@
 - (int)   graphicsModel;
 - (void)  setPreviousValues;
 - (void)  saveSettings;
-- (int) actionForButton:(NSPopUpButton *) button;
+- (int)   actionForButton:(NSPopUpButton *) button;
 - (NSString *) stringForAction:(int) action;
 - (MTMouseMap *)mouseMap;
   

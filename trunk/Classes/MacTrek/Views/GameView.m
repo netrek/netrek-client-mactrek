@@ -185,6 +185,22 @@ whichRepresentsGameBounds:gameBounds
         
         int action = [keyMap actionForKey:theChar withModifierFlags:modifierFlags];
         
+		// current implementation for macros does not allow for multi key
+		// macros, This means that all macros are single shot <CNTL> + hotkey
+		// this allows them to be handled in normal key handling mode
+		if (modifierFlags & NSControlKeyMask) {
+			// convert the mouse pointer to a point in the game grid
+            NSPoint targetGamePoint = [painter gamePointFromViewPoint:[self mousePos] 
+                                                     viewRect:[self bounds]
+                                        gamePosInCentreOfView:[self gamePointRepresentingCentreOfView] 
+                                                    withScale:scale];
+			// first tell the handler where our mouse is
+			[macroHandler setGameViewPointOfCursor:targetGamePoint];
+			// handle the key as a macro
+			[macroHandler handleSingleMacroForKey:theChar];
+			return;
+		}
+		
         // only valid keys
         if (action == ACTION_UNKNOWN) {
             [super keyDown:theEvent];

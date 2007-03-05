@@ -49,6 +49,10 @@ bool forceBarUpdate = NO;
 	return gameView;
 }
 
+- (MapView *)mapView {
+	return mapView;
+}
+
 - (void) setSpeakComputerMessages:(bool)speak {
     shouldSpeak = speak;
 }

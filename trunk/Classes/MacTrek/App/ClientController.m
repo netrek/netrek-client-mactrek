@@ -34,6 +34,10 @@ bool ghostStart = NO;
 	return self;
 }
 
+- (Communication *) communication {
+	return communication;
+}
+
 - (void) checkForDeath:(Player *)player {
     // did i die?
     if ([player isMe]) {

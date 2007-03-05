@@ -578,7 +578,14 @@ int startUpEvents = 0;
             [self serverDeSelected];
             [menuCntrl raiseMenu:self];            
             break;
-        case GS_OUTFIT_ACCEPTED:     
+        case GS_OUTFIT_ACCEPTED:
+			// -----------------------------------------------------
+			// let the games begin, but first setup all the data
+			// we require
+			// -----------------------------------------------------		
+			// set the featurelist of this server (current settings)
+			[[gameCntrl gameView] setFeatureList:[[client communication] featureList]];
+			[[gameCntrl mapView] setFeatureList:[[client communication] featureList]];
             // save the keymap if it was changed
             [[settingsCntrl keyMap] writeToDefaultFileIfChanged];
             // first pass on the keyMap that was created in the settings
