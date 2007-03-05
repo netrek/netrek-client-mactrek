@@ -65,6 +65,7 @@
 }
 
 - (GameView *)gameView;
+- (MapView *)mapView;
 - (void) repaint;
 - (void) startGame;
 - (void) stopGame;

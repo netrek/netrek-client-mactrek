@@ -17,6 +17,7 @@
 	Communication *communication;
 }
 
+- (Communication *) communication;
 - (void)iDied:(Player *)me;
 - (id)  initWithUniverse:(Universe*)newUniverse;
 - (void)singleReadFromServer;

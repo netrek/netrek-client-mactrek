@@ -18,7 +18,7 @@ int  line_length = 0;
 	self = [super init];
 	if (self != nil) {
 		featureList = nil;
-		keyMap = nil;
+		//keyMap = nil;
 		storedMacro = nil;
 		gameViewPointOfCursor = NSZeroPoint;
 		macros = [[NSMutableDictionary alloc] init];
@@ -62,12 +62,13 @@ int  line_length = 0;
 	}
 }
 
-- (void) setKeyMap:(MTKeyMap *)list {
-	keyMap = list;
-}
-
 - (void) setFeatureList:(FeatureList *)list {
 	featureList = list;
+}
+
+/*
+- (void) setKeyMap:(MTKeyMap *)list {
+	keyMap = list;
 }
 
 - (MTMacro *)getMacroForKey:(char)key {
@@ -75,7 +76,7 @@ int  line_length = 0;
 	NSString *description = [keyMap descriptionForAction:action];
 	return [macros objectForKey:description];
 }
-
+*/
 /** handleMacro */
 - (bool) handleMacroForKey:(char) key {
 	
@@ -85,7 +86,8 @@ int  line_length = 0;
 		return YES;
 	}
 	
-	MTMacro *macro = [self getMacroForKey:key];
+	//MTMacro *macro = [self getMacroForKey:key];
+	MTMacro *macro = [macros objectForKey:[NSString stringWithFormat:@"%c", key]];	
 	
 	if(macro == nil) {
 		
@@ -110,8 +112,10 @@ int  line_length = 0;
 /** handleSingleMacro */
 - (bool) handleSingleMacroForKey:(char) key {
 	
-	MTMacro *macro = [self getMacroForKey:key];
+	//MTMacro *macro = [self getMacroForKey:key];
+	MTMacro *macro = [macros objectForKey:[NSString stringWithFormat:@"%c", key]];
 	if(macro == nil) {
+		[notificationCenter postNotificationName:@"MH_UNKNOWN_MACRO" userInfo:[NSNumber numberWithChar:key]];
 		return YES; 
 	}
 	return [self executeMacro:macro];
@@ -126,7 +130,8 @@ int  line_length = 0;
 	}
 	if([macro type] == MACRO_NEWM) {
 		storedMacro = macro;
-		[notificationCenter postNotificationName:@"MH_UNKNOWN_DESTINATION_MACRO"];
+		// wait until we are assigned a destination
+		//[notificationCenter postNotificationName:@"MH_UNKNOWN_DESTINATION_MACRO"];
 		return NO;
 	}
 	[self sendMacro:macro];

@@ -15,11 +15,14 @@
 @interface BaseView : NSView {
     LLNotificationCenter *notificationCenter;
     Universe *universe;
+	MTMacroHandler *macroHandler;
     NSTrackingRectTag myCursorRect;
 }
 
 - (NSPoint) mousePos;
 - (void) stopTrackingMouse;
 - (void) startTrackingMouse;
+// macroHandler needs this
+- (void) setFeatureList:(FeatureList *)list;
 
 @end

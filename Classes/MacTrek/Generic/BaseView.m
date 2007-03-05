@@ -15,7 +15,13 @@
     
     notificationCenter = [LLNotificationCenter defaultCenter];
     universe = [Universe defaultInstance];
+	macroHandler = [[MTMacroHandler alloc] init];
     [self allocateGState]; // efficient, but memory hog
+}
+
+// pass on
+- (void) setFeatureList:(FeatureList *)list {
+	[macroHandler setFeatureList:list];
 }
 
 // view and window exist, add rects

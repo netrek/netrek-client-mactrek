@@ -182,6 +182,10 @@
 		return ACTION_ZOOM;
 	} else {
 		LLLog(@"SettingsController.actionForButton item %@ unknown", [[button selectedItem] title]);
+		// @@@ dirty hack BUG 1674341
+		// this gets called by accident if the back button is pressed in the settings pane
+		// (probably more often) easy place to save the settings though
+		[[self keyMap] writeToDefaultFileIfChanged];
 		return -1;
 	}
 }
