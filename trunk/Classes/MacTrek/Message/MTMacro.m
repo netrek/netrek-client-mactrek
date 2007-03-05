@@ -11,6 +11,9 @@
 
 @implementation MTMacro
 
+// name should be something like mac.b.T meaning macro when pressed b send to Team
+// macros should be something like @"Help!  Carrying %a!!"
+//  or something as crazy as: @"(%S+%a) %?%f<30%{ LOW%!%} fuel(%f%%) %?%s<30%{ POOR%!%}%?%s<80%{ Shds(%s%%) %!%}%?%d>60%{ BAD%!%}%?%d>10%{ DMG(%d%%) %!%}%?%E=1%{ ETEMPED %!%?%e>60%{ Etmp(%e%%) %!%}%}%?%W=1%{ WTEMPED %!%?%w>80%{ Wtmp(%w%%) %!%}%}"
 - (id) initWithName:(NSString*)name macro:(NSString*)newMacro {
 	self = [super init];
 	if (self != nil) {

@@ -32,11 +32,34 @@ int  line_length = 0;
 }
 
 - (void) initializeMacros {
-	// $$$ should read from a file here
-	
-	// the key should be identical to the description used in MTKeyMap to create a key to activate this macro
-	// be sure to specify NSControlKeyMask too
-	[macros setObject:[[MTMacro alloc] initWithName:@"mac.F.T" macro:@"Help!  Carrying %a!!"] forKey:@"MACRO_CARRYING"];
+	// Read from a file here
+	// syntax conforms to netrek standard... (wauw!)
+	NSString *pathToResources = [[NSBundle mainBundle] resourcePath];
+	NSString *pathToMacros = [NSString stringWithFormat:@"%@/macros.txt", pathToResources];
+	NSString *stringWithAllMacros = [[NSString alloc]
+                                      initWithContentsOfFile:pathToMacros
+													encoding:NSUTF8StringEncoding
+													   error:nil];
+	if (stringWithAllMacros == nil) {
+		// setup some defaults
+		// the key should be identical to the description used in MTKeyMap to create a key to activate this macro
+		// be sure to specify NSControlKeyMask too
+		[macros setObject:[[MTMacro alloc] initWithName:@"mac.F.T" macro:@"Help!  Carrying %a!!"] forKey:@"T"];		
+	} else {
+		// parse the macro file (let's hope it is there)
+		NSArray *lines = [stringWithAllMacros componentsSeparatedByString:@"\n"];
+		unsigned int i, count = [lines count];
+		for (i = 0; i < count; i++) {
+			NSString *macroLine = [lines objectAtIndex:i];
+			NSArray *macroElements = [macroLine componentsSeparatedByString:@":"];
+			if ([macroElements count] == 2) {
+				MTMacro *macro = [[MTMacro alloc] initWithName:[macroElements objectAtIndex:0] macro:[macroElements objectAtIndex:1]];
+				[macros setObject:macro forKey:[macro keyAsString]];
+			} else {
+				LLLog(@"MTMacroHandler.initializeMacros illigal macro %@", macroLine);
+			}
+		}
+	}
 }
 
 - (void) setKeyMap:(MTKeyMap *)list {
