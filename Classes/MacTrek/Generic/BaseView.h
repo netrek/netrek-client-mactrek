@@ -9,6 +9,7 @@
 #import <Cocoa/Cocoa.h>
 #import "Luky.h"
 #import "Universe.h"
+#import "MTMacroHandler.h"
 
 
 @interface BaseView : NSView {
