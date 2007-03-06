@@ -177,13 +177,12 @@ whichRepresentsGameBounds:gameBounds
 - (void) normalModeKeyDown:(NSEvent *)theEvent  {
     
     // check all characters in the event
+	// $$$ why not use charactersIgnoringModifiers???
     NSString *characters = [theEvent characters];
     
     for (int i = 0; i < [characters length]; i++) {
         unichar theChar = [characters characterAtIndex:i];
         unsigned int modifierFlags = [theEvent modifierFlags];
-        
-        int action = [keyMap actionForKey:theChar withModifierFlags:modifierFlags];
         
 		// current implementation for macros does not allow for multi key
 		// macros, This means that all macros are single shot <CNTL> + hotkey
@@ -196,10 +195,14 @@ whichRepresentsGameBounds:gameBounds
                                                     withScale:scale];
 			// first tell the handler where our mouse is
 			[macroHandler setGameViewPointOfCursor:targetGamePoint];
-			// handle the key as a macro
-			[macroHandler handleSingleMacroForKey:theChar];
+			// handle the key as a macro (first remove the modifiers...)
+			char c = [[theEvent charactersIgnoringModifiers] characterAtIndex:0];
+			[macroHandler handleSingleMacroForKey:c];
 			return;
 		}
+		
+		// lookup which action this should be
+        int action = [keyMap actionForKey:theChar withModifierFlags:modifierFlags];
 		
         // only valid keys
         if (action == ACTION_UNKNOWN) {

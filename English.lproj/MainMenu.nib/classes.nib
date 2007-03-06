@@ -207,9 +207,14 @@
                 accelerateButton = NSButton; 
                 fxLevel = NSSlider; 
                 graphicsModel = NSSegmentedControl; 
+                leftMouse = NSPopUpButton; 
+                middleMouse = NSPopUpButton; 
                 musicLevel = NSSlider; 
+                rightMouse = NSPopUpButton; 
                 trackingEnabledButton = NSButton; 
+                voiceCmds = NSButton; 
                 voiceOver = NSButton; 
+                wheelMouse = NSPopUpButton; 
             }; 
             SUPERCLASS = KeyMapTableDataSource; 
         }, 

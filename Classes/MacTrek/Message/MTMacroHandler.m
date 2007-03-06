@@ -44,7 +44,7 @@ int  line_length = 0;
 		// setup some defaults
 		// the key should be identical to the description used in MTKeyMap to create a key to activate this macro
 		// be sure to specify NSControlKeyMask too
-		[macros setObject:[[MTMacro alloc] initWithName:@"mac.F.T" macro:@"Help!  Carrying %a!!"] forKey:@"T"];		
+		[macros setObject:[[MTMacro alloc] initWithName:@"mac.f.T" macro:@"Help!  Carrying %a!!"] forKey:@"f"];		
 	} else {
 		// parse the macro file (let's hope it is there)
 		NSArray *lines = [stringWithAllMacros componentsSeparatedByString:@"\n"];
@@ -188,7 +188,14 @@ int  line_length = 0;
 	}
 	
 	// use clean macro's or create a distress call..
-	NSString *message = ([macro type] != MACRO_NBTM) ? [self parseMacro:[[MTDistress alloc] initWithType:0 gamePointForMousePosition:gameViewPointOfCursor]] : [macro macroString];
+	NSString *message;
+	if ([macro type] != MACRO_NBTM) {
+		MTDistress *distress = [[MTDistress alloc] initWithType:0 gamePointForMousePosition:gameViewPointOfCursor];
+		message = [self parseMacro:distress];
+		[distress release];
+	} else {
+		message = [macro macroString];
+	}
 	
 	// iterate message for newlines
 	NSRange range = [message rangeOfString:@"\n"];
@@ -209,7 +216,23 @@ int  line_length = 0;
 	
 	[distress setDestinationGroup: (TEAM | DISTR)
 					   individual: [[[universe playerThatIsMe] team] bitMask]];
-	[notificationCenter postNotificationName:@"MT_DISTRESS" userInfo:distress];
+	
+	NSString *message = [self parseMacro:distress];
+	[distress release];
+	
+	// iterate message for newlines
+	NSRange range = [message rangeOfString:@"\n"];
+	if (range.location == NSNotFound) {
+		[notificationCenter postNotificationName:@"MT_MESSAGE" userInfo:message];
+	} else {
+		while (range.location != NSNotFound) {
+			NSRange lineRange = NSMakeRange(0, range.location);
+			[notificationCenter postNotificationName:@"MT_MESSAGE" userInfo:[message substringWithRange:lineRange]];
+			message = [message substringFromIndex:range.location+1];
+		}
+	}	
+	
+	//[notificationCenter postNotificationName:@"MT_DISTRESS" userInfo:distress];
 }
 
 /** parseMacro */
@@ -281,7 +304,7 @@ int  line_length = 0;
 							[buffer replaceCharactersInRange:NSMakeRange(bpos, 1) withString:@"1"];
 							LLLog(@"MTMacroHandler.parseTests Bad operation %c", operation);
 					}
-					[buffer deleteCharactersInRange:NSMakeRange(bpos + 1, (end - bpos - 2))];
+					[buffer deleteCharactersInRange:NSMakeRange(bpos + 1, (end - bpos - 1))];
 				}
 					break;
 				default :
@@ -301,7 +324,7 @@ int  line_length = 0;
 		if([buffer characterAtIndex:bpos] == '%' && [buffer characterAtIndex:bpos + 1] == '{') {
 			char c = [buffer characterAtIndex:bpos - 1];
 			if(c == '0' || c == '1') {
-				[buffer deleteCharactersInRange:NSMakeRange(bpos - 1, 3)]; //	deleteChars(bpos - 1, bpos + 1);
+				[buffer deleteCharactersInRange:NSMakeRange(bpos - 1, 2)]; //	deleteChars(bpos - 1, bpos + 1);
 				bpos = [self evaluateConditionalBlockStartingAt:(bpos - 1) inBuffer:buffer include:(c == '1')];
 				continue;
 			}

@@ -249,6 +249,10 @@
     return abbrev;
 }
 
+- (NSString*)shortName {
+    return [NSString stringWithFormat:@"%@", abbrev];
+}
+
 - (NSString*)longName {
     return [NSString stringWithFormat:@"[%@]", abbrev];
 }

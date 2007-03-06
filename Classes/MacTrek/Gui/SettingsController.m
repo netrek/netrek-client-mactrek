@@ -185,7 +185,8 @@
 		// @@@ dirty hack BUG 1674341
 		// this gets called by accident if the back button is pressed in the settings pane
 		// (probably more often) easy place to save the settings though
-		[[self keyMap] writeToDefaultFileIfChanged];
+		// $$$ side effect cannot fire torps with mouse .... (strange)
+		//[[self keyMap] writeToDefaultFileIfChanged];
 		return -1;
 	}
 }
