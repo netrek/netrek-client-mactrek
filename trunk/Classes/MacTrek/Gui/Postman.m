@@ -22,18 +22,18 @@
 	// check for hog request
 	[notificationCenter addObserver:self selector:@selector(newMessage:) name:@"MV_NEW_MESSAGE"];
 	// handle macros
-	[notificationCenter addObserver:self selector:@selector(macroEvent:) name:@"MT_MESSAGE"];
+	[notificationCenter addObserver:self selector:@selector(macroEvent:) name:@"MH_MESSAGE"];
 }
 
 // handle macro
 - (void) macroEvent:(NSString*) str {
 	// $$$ macros are unstable, do not yet send but display for ourselfs
 	// $$$ Also should prepend the first three characters with a destination!
-	LLLog(@"Postman.macroEvent [%@]", str);
+	//LLLog(@"Postman.macroEvent [%@]", str);
 	NSString *dest = [str substringToIndex:3];
 	NSString *macro = [str substringFromIndex:3];
 	LLLog(@"Postman.macroEvent sending [%@] to %@", macro, dest);
-	//[self sendMessage:macro to:dest];
+	[self sendMessage:macro to:dest];
 }
 
 // check for hog request
