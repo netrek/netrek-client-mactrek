@@ -224,8 +224,6 @@
 			<key>Layout</key>
 			<array>
 				<dict>
-					<key>BecomeActive</key>
-					<true/>
 					<key>ContentConfiguration</key>
 					<dict>
 						<key>PBXBottomSmartGroupGIDs</key>
@@ -285,7 +283,7 @@
 								</array>
 							</array>
 							<key>PBXSmartGroupTreeModuleOutlineStateVisibleRectKey</key>
-							<string>{{0, 1234}, {320, 1148}}</string>
+							<string>{{0, 0}, {320, 1148}}</string>
 						</dict>
 						<key>PBXTopSmartGroupGIDs</key>
 						<array/>
@@ -315,6 +313,8 @@
 					<key>Dock</key>
 					<array>
 						<dict>
+							<key>BecomeActive</key>
+							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>
@@ -332,7 +332,7 @@
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>5236490A0B9E28D700B410C4</string>
+										<string>52364C3A0B9E2A4B00B410C4</string>
 										<key>history</key>
 										<array>
 											<string>528658210B386C8200355164</string>
@@ -452,7 +452,7 @@
 											<string>523648E60B9E26C100B410C4</string>
 											<string>523648E80B9E26C100B410C4</string>
 											<string>523649040B9E288F00B410C4</string>
-											<string>523648E70B9E26C100B410C4</string>
+											<string>5236490A0B9E28D700B410C4</string>
 										</array>
 										<key>prevStack</key>
 										<array>
@@ -565,36 +565,9 @@
 											<string>52F21E3B0B9CAC7E008C7E65</string>
 											<string>52F21E3F0B9CAC7E008C7E65</string>
 											<string>52F21F930B9CCC2B008C7E65</string>
-											<string>5236484E0B9E144D00B410C4</string>
 											<string>523648930B9E1C2300B410C4</string>
-											<string>523648940B9E1C2300B410C4</string>
-											<string>523648CD0B9E254500B410C4</string>
 											<string>523648CE0B9E254500B410C4</string>
-											<string>523648CF0B9E254500B410C4</string>
-											<string>523648D00B9E254500B410C4</string>
-											<string>523648D10B9E254500B410C4</string>
-											<string>523648D20B9E254500B410C4</string>
-											<string>523648D30B9E254500B410C4</string>
-											<string>523648D40B9E254500B410C4</string>
 											<string>523648D50B9E254500B410C4</string>
-											<string>523648D60B9E254500B410C4</string>
-											<string>523648D70B9E254500B410C4</string>
-											<string>523648D80B9E254500B410C4</string>
-											<string>523648D90B9E254500B410C4</string>
-											<string>523648EA0B9E26C100B410C4</string>
-											<string>523648EB0B9E26C100B410C4</string>
-											<string>523648EC0B9E26C100B410C4</string>
-											<string>523648ED0B9E26C100B410C4</string>
-											<string>523648EE0B9E26C100B410C4</string>
-											<string>523648EF0B9E26C100B410C4</string>
-											<string>523648F00B9E26C100B410C4</string>
-											<string>523648F10B9E26C100B410C4</string>
-											<string>523648F20B9E26C100B410C4</string>
-											<string>523648F30B9E26C100B410C4</string>
-											<string>523648F40B9E26C100B410C4</string>
-											<string>523648F50B9E26C100B410C4</string>
-											<string>523648F60B9E26C100B410C4</string>
-											<string>523649050B9E288F00B410C4</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -652,9 +625,9 @@
 			</array>
 			<key>TableOfContents</key>
 			<array>
-				<string>523648460B9E122400B410C4</string>
+				<string>52364C3B0B9E2A4B00B410C4</string>
 				<string>1CE0B1FE06471DED0097A5F4</string>
-				<string>523648470B9E122400B410C4</string>
+				<string>52364C3C0B9E2A4B00B410C4</string>
 				<string>1CE0B20306471E060097A5F4</string>
 				<string>1CE0B20506471E060097A5F4</string>
 			</array>
@@ -803,13 +776,6 @@
 	<integer>5</integer>
 	<key>WindowOrderList</key>
 	<array>
-		<string>1C0AD2B3069F1EA900FABCE6</string>
-		<string>1C530D57069F1CE1000CFCEE</string>
-		<string>5236485B0B9E144D00B410C4</string>
-		<string>5236485C0B9E144D00B410C4</string>
-		<string>1CD10A99069EF8BA00B06720</string>
-		<string>523648590B9E144D00B410C4</string>
-		<string>52EDECE60A1DD98600FD7731</string>
 		<string>/Users/aqua/Documents/Projects/MacTrek/Client/trunk/MacTrek.xcodeproj</string>
 	</array>
 	<key>WindowString</key>

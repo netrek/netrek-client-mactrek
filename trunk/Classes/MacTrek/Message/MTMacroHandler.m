@@ -42,9 +42,8 @@ int  line_length = 0;
 													   error:nil];
 	if (stringWithAllMacros == nil) {
 		// setup some defaults
-		// the key should be identical to the description used in MTKeyMap to create a key to activate this macro
-		// be sure to specify NSControlKeyMask too
-		[macros setObject:[[MTMacro alloc] initWithName:@"mac.f.T" macro:@"Help!  Carrying %a!!"] forKey:@"f"];		
+		[macros setObject:[[MTMacro alloc] initWithName:@"mac.e.T" macro:@"Help!  Damage %d!!"] forKey:@"e"];
+		[macros setObject:[[MTMacro alloc] initWithName:@"mac.f.T" macro:@"Help!  Carrying %a!!"] forKey:@"f"];	
 	} else {
 		// parse the macro file (let's hope it is there)
 		NSArray *lines = [stringWithAllMacros componentsSeparatedByString:@"\n"];
@@ -189,6 +188,7 @@ int  line_length = 0;
 	
 	// use clean macro's or create a distress call..
 	// $$$ very strange should support MACRO_NEWMSPEC too
+	// $$$ should put this in the macro itself and not in the handler
 	NSString *message;
 	if ([macro type] != MACRO_NBTM) {
 		MTDistress *distress = [[MTDistress alloc] initWithType:DC_GENERIC gamePointForMousePosition:gameViewPointOfCursor];
