@@ -305,7 +305,7 @@
 	// parse it and replace the values
 	NSString *string;
 	int bpos = 0;
-	LLLog(@"MTDistress.fillMacroString source [%@]", buffer);
+	//LLLog(@"MTDistress.fillMacroString source [%@]", buffer);
 	while(bpos < [buffer length]) {
 		if([buffer characterAtIndex:bpos] == '%') {
 			switch([buffer characterAtIndex:(bpos + 1)]) {
@@ -537,7 +537,7 @@
 			++bpos;
 		}
 	}
-	LLLog(@"MTDistress.fillMacroString result [%@]", buffer);
+	//LLLog(@"MTDistress.fillMacroString result [%@]", buffer);
 	return buffer; // watch out is autoretained!
 }
 

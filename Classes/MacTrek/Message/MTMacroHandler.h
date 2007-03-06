@@ -41,6 +41,7 @@
 - (void) sendDistress:(int) type;
 
 // protected
+- (void) deleteCharsFromBuffer:(NSMutableString*)buffer start:(int)start end:(int)end;
 - (bool) executeMacro:(MTMacro *) macro;
 - (void) sendMacro:(MTMacro*) macro;
 - (void) sendMacro:(MTMacro*) macro toPlayer:(char) who;

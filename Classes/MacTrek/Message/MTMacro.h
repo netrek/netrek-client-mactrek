@@ -34,6 +34,7 @@
 - (int) type;
 - (char) key;
 - (char) who;
+- (NSString*) whoLongFormat;
 - (NSString *)macroString;
 
 @end

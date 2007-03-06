@@ -132,6 +132,40 @@
 	return who;
 }
 
+- (NSString*) whoLongFormat {
+	
+	if        (who == 'T') {
+		return [[[[universe playerThatIsMe] team] abbreviation] uppercaseString];
+	} else if (who == 'A') {
+		return @"ALL";
+	} else if (who == 'F') {
+		return @"FED";
+	} else if (who == 'K') {
+		return @"KLI";
+	} else if (who == 'O') {
+		return @"ORI";
+	} else if (who == 'R') {
+		return @"ROM";
+	} else if (who == 'G') {
+		return @"GOD";
+	} else {
+		// it must be a player [F|O|R|K][0..f]
+		// find out the player id
+		char playerId = who;
+		if (playerId >= '0' && playerId <= '9') {
+			playerId -= '0';
+		} else if (playerId >= 'a' && playerId <= 'f'){
+			playerId -= 'a';
+			playerId += 10;
+		} else {
+			LLLog(@"MTMacro.whoLongFormat Unknown player %@", who);
+			return nil;  
+		}
+		// append a space
+		return [NSString stringWithFormat:@"%@ ", [[universe playerWithId:playerId] mapChars]];		
+	}
+}
+
 -(NSString *)macroString {
 	return macro;
 }

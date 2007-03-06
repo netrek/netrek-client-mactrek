@@ -188,9 +188,10 @@ int  line_length = 0;
 	}
 	
 	// use clean macro's or create a distress call..
+	// $$$ very strange should support MACRO_NEWMSPEC too
 	NSString *message;
 	if ([macro type] != MACRO_NBTM) {
-		MTDistress *distress = [[MTDistress alloc] initWithType:0 gamePointForMousePosition:gameViewPointOfCursor];
+		MTDistress *distress = [[MTDistress alloc] initWithType:DC_GENERIC gamePointForMousePosition:gameViewPointOfCursor];
 		message = [self parseMacro:distress];
 		[distress release];
 	} else {
@@ -200,12 +201,20 @@ int  line_length = 0;
 	// iterate message for newlines
 	NSRange range = [message rangeOfString:@"\n"];
 	if (range.location == NSNotFound) {
-		[notificationCenter postNotificationName:@"MT_MESSAGE" userInfo:message];
+		// prepend the destination
+		NSMutableString *temp = [NSMutableString stringWithString:[macro whoLongFormat]];
+		[temp appendString:message];
+		[notificationCenter postNotificationName:@"MH_MESSAGE" userInfo:temp];
 	} else {
 		while (range.location != NSNotFound) {
 			NSRange lineRange = NSMakeRange(0, range.location);
-			[notificationCenter postNotificationName:@"MT_MESSAGE" userInfo:[message substringWithRange:lineRange]];
+			// prepend the destination
+			NSMutableString *temp = [NSMutableString stringWithString:[macro whoLongFormat]];
+			[temp appendString:[message substringWithRange:lineRange]];
+			[notificationCenter postNotificationName:@"MH_MESSAGE" userInfo:temp];
+			// remove string and search again
 			message = [message substringFromIndex:range.location+1];
+			range = [message rangeOfString:@"\n"];
 		}
 	}
 }
@@ -223,11 +232,11 @@ int  line_length = 0;
 	// iterate message for newlines
 	NSRange range = [message rangeOfString:@"\n"];
 	if (range.location == NSNotFound) {
-		[notificationCenter postNotificationName:@"MT_MESSAGE" userInfo:message];
+		[notificationCenter postNotificationName:@"MH_MESSAGE" userInfo:message];
 	} else {
 		while (range.location != NSNotFound) {
 			NSRange lineRange = NSMakeRange(0, range.location);
-			[notificationCenter postNotificationName:@"MT_MESSAGE" userInfo:[message substringWithRange:lineRange]];
+			[notificationCenter postNotificationName:@"MH_MESSAGE" userInfo:[message substringWithRange:lineRange]];
 			message = [message substringFromIndex:range.location+1];
 		}
 	}	
@@ -251,6 +260,16 @@ int  line_length = 0;
 	[self parseRemaining:buffer];
 	
 	return buffer; // watch out is autoretained
+}
+
+
+/* support function */
+- (void) deleteCharsFromBuffer:(NSMutableString*)buffer start:(int)start end:(int)end {
+	
+	NSRange range = NSMakeRange(start, end - start + 1);
+	//NSString *temp = [buffer substringWithRange:range];
+	//LLLog(@"MTMacroHandler.deleteCharsFromBuffer deleting [%@] at %d from [%@]", temp, start, buffer);
+	[buffer deleteCharactersInRange:range];
 }
 
 
@@ -304,13 +323,13 @@ int  line_length = 0;
 							[buffer replaceCharactersInRange:NSMakeRange(bpos, 1) withString:@"1"];
 							LLLog(@"MTMacroHandler.parseTests Bad operation %c", operation);
 					}
-					[buffer deleteCharactersInRange:NSMakeRange(bpos + 1, (end - bpos - 1))];
+					[self deleteCharsFromBuffer:buffer start:(bpos+1) end: (end - 1)]; // was end - 1
 				}
 					break;
 				default :
 					LLLog(@"MTMacroHandler.parseTests Bad character %c", [buffer characterAtIndex:(bpos + 1)]);
 					// remove the bad tokens
-					[buffer deleteCharactersInRange:NSMakeRange(bpos, 2)];
+					[self deleteCharsFromBuffer:buffer start:bpos end: (bpos+1)];
 					break;
 			}
 		}
@@ -324,7 +343,7 @@ int  line_length = 0;
 		if([buffer characterAtIndex:bpos] == '%' && [buffer characterAtIndex:bpos + 1] == '{') {
 			char c = [buffer characterAtIndex:bpos - 1];
 			if(c == '0' || c == '1') {
-				[buffer deleteCharactersInRange:NSMakeRange(bpos - 1, 2)]; //	deleteChars(bpos - 1, bpos + 1);
+				[self deleteCharsFromBuffer:buffer start:(bpos - 1) end: (bpos + 1)];
 				bpos = [self evaluateConditionalBlockStartingAt:(bpos - 1) inBuffer:buffer include:(c == '1')];
 				continue;
 			}
@@ -333,25 +352,29 @@ int  line_length = 0;
 	}
 }
 
+
 /** evaluateConditionalBlock */
 -  (int) evaluateConditionalBlockStartingAt:(int) bpos inBuffer:(NSMutableString *)buffer include: (bool) include {
 	
 	int remove_start = bpos;
+	NSString *temp, *temp2;
 	while(bpos < [buffer length] - 1) {
+		temp = [buffer substringFromIndex:bpos];
+		temp2 = [buffer substringFromIndex:remove_start];
 		if([buffer characterAtIndex:bpos] == '%') {
 			switch([buffer characterAtIndex:bpos + 1]) {
 				case '}' :					// done with this conditional, return
 					if(!include) {
-						[buffer deleteCharactersInRange:NSMakeRange(remove_start, bpos + 1 - remove_start)]; //	deleteChars(remove_start, bpos + 1);
+						[self deleteCharsFromBuffer:buffer start:remove_start end: (bpos + 1)];
 						return remove_start;
 					}
-					[buffer deleteCharactersInRange:NSMakeRange(bpos, 1)];
+					[self deleteCharsFromBuffer:buffer start:bpos end: (bpos+1)];
 					return bpos;
 				case '{' :					// handle new conditional
 					if(include) {
 						char c = [buffer characterAtIndex:bpos - 1];
 						if(c == '0' || c == '1') {
-							[buffer deleteCharactersInRange:NSMakeRange(bpos - 1, 2)];
+							[self deleteCharsFromBuffer:buffer start:(bpos - 1) end: (bpos + 1)];
 							// $$$ wauw recursion
 							bpos = [self evaluateConditionalBlockStartingAt:bpos - 1 inBuffer:buffer include:c == '1'];
 							continue;
@@ -365,7 +388,7 @@ int  line_length = 0;
 						++bpos;
 					}
 					else {
-						[buffer deleteCharactersInRange:NSMakeRange(remove_start, bpos + 1 - remove_start)]; 
+						[self deleteCharsFromBuffer:buffer start:remove_start end: (bpos + 1)];
 						bpos = remove_start;
 					}
 					include = !include;
@@ -379,7 +402,7 @@ int  line_length = 0;
 		}
 	}
 	if(!include) {
-		[buffer deleteCharactersInRange:NSMakeRange(remove_start, [buffer length] - 1 - remove_start)]; //	deleteChars(remove_start, [buffer length] - 1);			
+		[self deleteCharsFromBuffer:buffer start:remove_start end: ([buffer length] - 1)];
 	}
 	
 	return [buffer length];	
