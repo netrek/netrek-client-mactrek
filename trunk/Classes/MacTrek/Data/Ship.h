@@ -53,6 +53,7 @@
 - (int) maxArmies;
 - (int) type;
 - (NSString*)longName;
+- (NSString*)shortName;
 - (NSSize) size;
 - (NSSize) explosionSize;
 

@@ -297,10 +297,16 @@
 /** parseVariables */
 - (NSString *) filledMacroString {
 	
-	NSMutableString *buffer = [NSMutableString stringWithString:[self defaultMacro]];
+	// get the default and put it in a buffer
+	NSString *defaultMacroValue = [self defaultMacro];
+	NSMutableString *buffer = [NSMutableString stringWithCapacity:[defaultMacroValue length]];
+	[buffer setString:defaultMacroValue];
+	
+	// parse it and replace the values
 	NSString *string;
 	int bpos = 0;
-	while(bpos < [buffer length] - 1) {
+	LLLog(@"MTDistress.fillMacroString source [%@]", buffer);
+	while(bpos < [buffer length]) {
 		if([buffer characterAtIndex:bpos] == '%') {
 			switch([buffer characterAtIndex:(bpos + 1)]) {
 				case ' ':
@@ -400,7 +406,7 @@
 					string = [NSString stringWithFormat:@"%c", [[target_player team] letterForTeam]];
 					break;
 				case 'c':				// push my id char into buf
-					string = [[sender mapChars] substringToIndex:1];				
+					string = [[[sender mapChars] substringFromIndex:1] substringToIndex:1];				
 					break;
 				case 'W':				// push WTEMP flag into buf
 					if(distress_type == DC_RCM) {
@@ -498,7 +504,7 @@
 					break;
 					*/
 				case 'S' :					// push ship type into buf 
-					string = [[sender ship] longName];
+					string = [[sender ship] shortName];
 					break;
 				case '*' :					// push %* into buf 
 					string = @"%*";
@@ -531,6 +537,7 @@
 			++bpos;
 		}
 	}
+	LLLog(@"MTDistress.fillMacroString result [%@]", buffer);
 	return buffer; // watch out is autoretained!
 }
 
