@@ -197,6 +197,7 @@ int  line_length = 0;
 	} else {
 		message = [macro macroString];
 	}
+
 	
 	// iterate message for newlines
 	NSRange range = [message rangeOfString:@"\n"];
@@ -232,16 +233,22 @@ int  line_length = 0;
 	// iterate message for newlines
 	NSRange range = [message rangeOfString:@"\n"];
 	if (range.location == NSNotFound) {
-		[notificationCenter postNotificationName:@"MH_MESSAGE" userInfo:message];
+		// prepend the destination
+		NSMutableString *temp = [NSMutableString stringWithString:[macro whoLongFormat]];
+		[temp appendString:message];
+		[notificationCenter postNotificationName:@"MH_MESSAGE" userInfo:temp];
 	} else {
 		while (range.location != NSNotFound) {
 			NSRange lineRange = NSMakeRange(0, range.location);
-			[notificationCenter postNotificationName:@"MH_MESSAGE" userInfo:[message substringWithRange:lineRange]];
+			// prepend the destination
+			NSMutableString *temp = [NSMutableString stringWithString:[macro whoLongFormat]];
+			[temp appendString:[message substringWithRange:lineRange]];
+			[notificationCenter postNotificationName:@"MH_MESSAGE" userInfo:temp];
+			// remove string and search again
 			message = [message substringFromIndex:range.location+1];
+			range = [message rangeOfString:@"\n"];
 		}
 	}	
-	
-	//[notificationCenter postNotificationName:@"MT_DISTRESS" userInfo:distress];
 }
 
 /** parseMacro */

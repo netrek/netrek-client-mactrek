@@ -328,28 +328,19 @@
     return self;
 }
 
-/*
 - (id) initWithDefaultFile {
-    NSString *pathToResources = [[NSBundle mainBundle] resourcePath];
-    pathToKeyMap = [NSString stringWithFormat:@"%@/keymap.xml", pathToResources];
     
     self = [self initWithFile:pathToKeyMap];
     if (self != nil) {
-        if ([keyMap count] == 0) {
-            // something went wrong
-            LLLog(@"MTKeyMap.initWithDefaultFile keymap file is empty, loading defaults");
-            [self fillWithDefaults];
-        } else {
-            LLLog(@"MTKeyMap.initWithDefaultFile keymap file loaded %d", [keyMap count]);
-        }
+		// moved to initWithFile
         
     }
     return self;
 }
 
-
+// to run in seperate thread do init and call readDefaultKeyMap!
 - (id) initWithFile:(NSString *) file {
-    self = [super init];
+    self = [self init];
     if (self != nil) {
         // load keymap as dict in dict
         NSMutableDictionary *temp = [[NSMutableDictionary alloc] initWithContentsOfFile:file];
@@ -362,17 +353,25 @@
         while ((entryAsDict = [temp objectForKey:[enumerator nextObject]])) {
             MTKeyMapEntry *keyEntry = [[MTKeyMapEntry alloc] initWithDictionairy:entryAsDict];
             [keyMap setObject:keyEntry forKey:[NSNumber numberWithInt:[keyEntry action]]];
-        }        
-        
+        }       
+		
+        // check
+		if ([keyMap count] == 0) {
+            // something went wrong
+            LLLog(@"MTKeyMap.initWithFile keymap file is empty, loading defaults");
+            [self fillWithDefaults];
+        } else {
+            LLLog(@"MTKeyMap.initWithFile keymap file loaded %d items from %@", [keyMap count], file);
+        }
+		
         // set vars
         changedSinceLastWrite = NO;
-        NSString *pathToResources = [[NSBundle mainBundle] resourcePath];
-        pathToKeyMap = [NSString stringWithFormat:@"%@/keymap.xml", pathToResources];
+		[pathToKeyMap release];
+        pathToKeyMap = file;
         [pathToKeyMap retain];
     }
     return self;
 }
-*/
 
 - (void) readDefaultKeyMap {
     // create a private pool for this thread

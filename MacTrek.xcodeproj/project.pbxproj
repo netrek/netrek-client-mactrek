@@ -91,6 +91,7 @@
 		527E05030AF3666000B5D37F /* OmniNetworking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 527E05010AF3666000B5D37F /* OmniNetworking.framework */; };
 		527E05040AF3666000B5D37F /* OmniBase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 527E05020AF3666000B5D37F /* OmniBase.framework */; };
 		527E08930AF3766A00B5D37F /* QuickTime.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 527E08920AF3766A00B5D37F /* QuickTime.framework */; };
+		528CF1A90BA07FF30001B4D0 /* MTDistressKeyMap.m in Sources */ = {isa = PBXBuildFile; fileRef = 528CF1A80BA07FF30001B4D0 /* MTDistressKeyMap.m */; };
 		528E7E0C0B0A649E00B22943 /* LLDOReceiver.m in Sources */ = {isa = PBXBuildFile; fileRef = 528E7DD50B0A649E00B22943 /* LLDOReceiver.m */; };
 		528E7E0D0B0A649E00B22943 /* LLDOSender.m in Sources */ = {isa = PBXBuildFile; fileRef = 528E7DD70B0A649E00B22943 /* LLDOSender.m */; };
 		528E7E0E0B0A649E00B22943 /* LLNotificationCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 528E7DD90B0A649E00B22943 /* LLNotificationCenter.m */; };
@@ -685,6 +686,8 @@
 		527E05010AF3666000B5D37F /* OmniNetworking.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OmniNetworking.framework; path = ../Release/OmniNetworking.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		527E05020AF3666000B5D37F /* OmniBase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = OmniBase.framework; path = ../Release/OmniBase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		527E08920AF3766A00B5D37F /* QuickTime.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuickTime.framework; path = /System/Library/Frameworks/QuickTime.framework; sourceTree = "<absolute>"; };
+		528CF1A70BA07FF30001B4D0 /* MTDistressKeyMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTDistressKeyMap.h; sourceTree = "<group>"; };
+		528CF1A80BA07FF30001B4D0 /* MTDistressKeyMap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTDistressKeyMap.m; sourceTree = "<group>"; };
 		528E7DD30B0A649E00B22943 /* LLDOProxy.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = LLDOProxy.h; sourceTree = "<group>"; };
 		528E7DD40B0A649E00B22943 /* LLDOReceiver.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = LLDOReceiver.h; sourceTree = "<group>"; };
 		528E7DD50B0A649E00B22943 /* LLDOReceiver.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = LLDOReceiver.m; sourceTree = "<group>"; };
@@ -1325,6 +1328,8 @@
 				5212EFC30B08FFB80059A8B1 /* MetaServerTableDataSource.m */,
 				5212EFC40B08FFB80059A8B1 /* MTKeyMap.h */,
 				5212EFC50B08FFB80059A8B1 /* MTKeyMap.m */,
+				528CF1A70BA07FF30001B4D0 /* MTDistressKeyMap.h */,
+				528CF1A80BA07FF30001B4D0 /* MTDistressKeyMap.m */,
 				52F8197E0B8EDB73003ED1BE /* MTMouseMap.h */,
 				52F8197F0B8EDB73003ED1BE /* MTMouseMap.m */,
 				5212EFC60B08FFB80059A8B1 /* MTKeyMapEntry.h */,
@@ -2668,6 +2673,7 @@
 				5256E0B20B9320D80078C491 /* MTMacro.m in Sources */,
 				522F9F4C0B96C842001C4896 /* MTDistress.m in Sources */,
 				52604A9B0B97016B0097D103 /* LLNetServiceDelegate.m in Sources */,
+				528CF1A90BA07FF30001B4D0 /* MTDistressKeyMap.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
