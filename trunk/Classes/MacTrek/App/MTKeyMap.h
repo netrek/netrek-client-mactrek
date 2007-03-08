@@ -83,16 +83,14 @@
 #define ACTION_PING_STATS		68
 #define ACTION_SOUND_CONTROL	69
 
-
-
 @interface MTKeyMap : BaseClass {
     NSMutableDictionary *keyMap;
     bool changedSinceLastWrite;
     NSString *pathToKeyMap;
 }
 
-//- (id) initWithDefaultFile;
-//- (id) initWithFile:(NSString *) file;
+- (id) initWithDefaultFile;
+- (id) initWithFile:(NSString *) file;
 - (void) writeToFile:(NSString *)file;
 - (void) readDefaultKeyMap;
 - (int) actionForKey:(char) key withModifierFlags:(unsigned int) flags;
