@@ -222,7 +222,7 @@ int  line_length = 0;
 
 /** sendDistress */
 -(void) sendDistress:(int) type {
-	MTDistress *distress = [[MTDistress alloc] initWithType:type];
+	MTDistress *distress = [[MTDistress alloc] initWithType:type gamePointForMousePosition:gameViewPointOfCursor];
 	
 	[distress setDestinationGroup: (TEAM | DISTR)
 					   individual: [[[universe playerThatIsMe] team] bitMask]];

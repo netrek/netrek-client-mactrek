@@ -102,8 +102,7 @@
 		distress_type = (char)type;
 		if(distress_type < DC_TAKE || distress_type > DC_GENERIC) {
 			distress_type = DC_GENERIC;
-		}
-		
+		}		
 		
 		damage = (100 * [sender damage]) / [[sender ship] maxDamage];
 		shields = (100 * [sender shield]) / [[sender ship] maxShield];
