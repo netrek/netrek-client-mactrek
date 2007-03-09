@@ -113,8 +113,17 @@
         [imgShips drawInRect:Rect fromRect:shipRect operation: NSCompositeSourceOver fraction:1.0];   
         return;
     }
-	else {
-		[self drawShipType:[[player ship] type] forTeamId:[[player team] teamId] withCloakPhase:[player cloakPhase] inRect:Rect]; 
+	else {		
+		//bool fullyCloaked = ([player flags] & PLAYER_CLOAK);
+		bool fullyCloaked = ([player cloakPhase] == (PLAYER_CLOAK_PHASES - 1));
+		if ([player isMe] && fullyCloaked) { 
+			// i am cloaked
+			//LLLog(@"PainterFactoryForNetrek.drawPlayer CLOAK PHASE %d", [player cloakPhase]);
+			[imgShipCloak drawInRect:Rect fromRect:NSMakeRect( 0, 0, [imgShipCloak size].width, [imgShipCloak size].width) 
+						   operation:NSCompositeSourceOver fraction:1.0];			
+		} else {			
+			[self drawShipType:[[player ship] type] forTeamId:[[player team] teamId] withCloakPhase:[player cloakPhase] inRect:Rect]; 
+		}
 	}
 
 }
@@ -154,6 +163,8 @@
         // 1.0 means fully uncloaked
         alpha -= (((1.0 - PF_MIN_ALPHA_VALUE) * cloakPhase) / PLAYER_CLOAK_PHASES);
     }
+
+	// normal draw
     if (shipRect.origin.x < [imgShips size].width) {
 		[imgShips drawInRect:Rect fromRect:shipRect operation: NSCompositeSourceOver fraction:alpha];   
 	} else {

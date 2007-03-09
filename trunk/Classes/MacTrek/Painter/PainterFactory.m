@@ -516,9 +516,9 @@
         
         // draw name
 		// unless cloaked
-		if (!([player flags] & PLAYER_CLOAK)) {        
+		if ((!([player flags] & PLAYER_CLOAK)) || [player isMe]) { // me always       
 				[self drawLabelForPlayer:player belowRect:playerViewBounds];
-		} else { // when cloaked
+		} else { // when cloaked (but not me)
 			if (simple) {   
 				[self drawLabelForPlayer:player belowRect:playerViewBounds];
 			}
@@ -551,8 +551,11 @@
             float shieldStrenght = 100.0;
             if ([player isMe]) {
                 shieldStrenght = [player shield] * 100 / [[player ship] maxShield];
-            }
-            [self drawShieldWithStrenght: shieldStrenght inRect:playerViewBounds andAlpha:[self alphaForPlayer:player]];            
+				[self drawShieldWithStrenght: shieldStrenght inRect:playerViewBounds andAlpha:1.0]; // i always want to see my shield
+            } else {
+				[self drawShieldWithStrenght: shieldStrenght inRect:playerViewBounds andAlpha:[self alphaForPlayer:player]];
+			}
+                        
         }
         
         // save this value, we may need it again
@@ -1523,8 +1526,8 @@
 	
 	NSString *label = [NSString stringWithFormat:@"%@", [player mapCharsWithKillIndicator]];
 
-	// bug 1666845 Cloaked ships should be ??
-	if (([player flags] & PLAYER_CLOAK)) {
+	// bug 1666845 Cloaked ships should be ?? (unless it is me)
+	if (([player flags] & PLAYER_CLOAK) && (![player isMe])) {
 		return @"??";
 	}
 	
@@ -1552,7 +1555,7 @@
 - (NSString*) label2ForPlayer:(Player*)player {	
 	
 	// bug 1666845 Cloaked ships should be ??
-	if (([player flags] & PLAYER_CLOAK)) {
+	if (([player flags] & PLAYER_CLOAK) && (![player isMe])) {
 		return nil;
 	}
 	
@@ -1576,10 +1579,10 @@
 
 - (NSString*) label3ForPlayer:(Player*)player {
 	
-	// bug 1666845 Cloaked ships should be ??
-	if (([player flags] & PLAYER_CLOAK)) {
+	// bug 1666845 Cloaked ships should be ?? (unless it is me)
+	if (([player flags] & PLAYER_CLOAK) && (![player isMe])) {
 		return nil;
-	}	
+	}
 	
 	if (debugLabels) {
 		// prepare another line		 			

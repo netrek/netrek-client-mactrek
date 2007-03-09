@@ -49,6 +49,8 @@
 	imgArmy       = [self cacheImage:@"/Planets/army.png"]; 
     [imgRepair release];
 	imgRepair     = [self cacheImage:@"/Planets/wrench.png"]; 
+	[imgShipCloak release];
+	imgShipCloak  = [self cacheImage:@"/Misc/cloak.png"];
 	
 }
 
@@ -65,8 +67,8 @@
 
 - (NSString*) labelForPlayer:(Player*)player {
 	
-	// bug 1666845 Cloaked ships should be ??
-	if (([player flags] & PLAYER_CLOAK)) {
+	// bug 1666845 Cloaked ships should be ?? (unless it is me)
+	if (([player flags] & PLAYER_CLOAK) && (![player isMe])) {
 		return @"??";
 	}
 	
@@ -82,9 +84,9 @@
 }
 
 - (NSString*) label2ForPlayer:(Player*)player {
-	
-	// bug 1666845 Cloaked ships should be ??
-	if (([player flags] & PLAYER_CLOAK)) {
+		
+	// bug 1666845 Cloaked ships should be ?? (unless it is me)
+	if (([player flags] & PLAYER_CLOAK) && (![player isMe])) {
 		return nil;
 	}
 	

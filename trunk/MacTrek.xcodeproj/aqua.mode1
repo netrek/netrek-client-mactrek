@@ -224,8 +224,6 @@
 			<key>Layout</key>
 			<array>
 				<dict>
-					<key>BecomeActive</key>
-					<true/>
 					<key>ContentConfiguration</key>
 					<dict>
 						<key>PBXBottomSmartGroupGIDs</key>
@@ -285,11 +283,15 @@
 							<key>PBXSmartGroupTreeModuleOutlineStateSelectionKey</key>
 							<array>
 								<array>
-									<integer>175</integer>
+									<integer>102</integer>
+									<integer>96</integer>
+									<integer>21</integer>
+									<integer>1</integer>
+									<integer>0</integer>
 								</array>
 							</array>
 							<key>PBXSmartGroupTreeModuleOutlineStateVisibleRectKey</key>
-							<string>{{0, 1963}, {302, 1148}}</string>
+							<string>{{0, 1334}, {302, 1148}}</string>
 						</dict>
 						<key>PBXTopSmartGroupGIDs</key>
 						<array/>
@@ -319,12 +321,14 @@
 					<key>Dock</key>
 					<array>
 						<dict>
+							<key>BecomeActive</key>
+							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>
 								<string>1CE0B20306471E060097A5F4</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>PainterFactoryForMacTrek.m</string>
+								<string>PainterFactoryForNetrek.m</string>
 								<key>PBXSplitModuleInNavigatorKey</key>
 								<dict>
 									<key>Split0</key>
@@ -332,11 +336,11 @@
 										<key>PBXProjectModuleGUID</key>
 										<string>1CE0B20406471E060097A5F4</string>
 										<key>PBXProjectModuleLabel</key>
-										<string>PainterFactoryForMacTrek.m</string>
+										<string>PainterFactoryForNetrek.m</string>
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>5200E5470BA1A6DC00E3D9A7</string>
+										<string>5200E5A60BA1B14700E3D9A7</string>
 										<key>history</key>
 										<array>
 											<string>528658210B386C8200355164</string>
@@ -458,14 +462,14 @@
 											<string>52EA30500BA19E1400FF9F74</string>
 											<string>52EA30510BA19E1400FF9F74</string>
 											<string>52EA30520BA19E1400FF9F74</string>
-											<string>52EA30550BA19E1400FF9F74</string>
 											<string>5200E5320BA1A6DC00E3D9A7</string>
 											<string>5200E5340BA1A6DC00E3D9A7</string>
 											<string>5200E5360BA1A6DC00E3D9A7</string>
 											<string>5200E5370BA1A6DC00E3D9A7</string>
 											<string>5200E5380BA1A6DC00E3D9A7</string>
-											<string>5200E5390BA1A6DC00E3D9A7</string>
-											<string>5200E53A0BA1A6DC00E3D9A7</string>
+											<string>5200E5870BA1AC9100E3D9A7</string>
+											<string>5200E5A20BA1B14700E3D9A7</string>
+											<string>5200E5A30BA1B14700E3D9A7</string>
 										</array>
 										<key>prevStack</key>
 										<array>
@@ -598,6 +602,21 @@
 											<string>5200E5440BA1A6DC00E3D9A7</string>
 											<string>5200E5450BA1A6DC00E3D9A7</string>
 											<string>5200E5460BA1A6DC00E3D9A7</string>
+											<string>5200E5740BA1ABFD00E3D9A7</string>
+											<string>5200E5750BA1ABFD00E3D9A7</string>
+											<string>5200E5760BA1ABFD00E3D9A7</string>
+											<string>5200E5770BA1ABFD00E3D9A7</string>
+											<string>5200E5780BA1ABFD00E3D9A7</string>
+											<string>5200E5790BA1ABFD00E3D9A7</string>
+											<string>5200E57A0BA1ABFD00E3D9A7</string>
+											<string>5200E57B0BA1ABFD00E3D9A7</string>
+											<string>5200E57C0BA1ABFD00E3D9A7</string>
+											<string>5200E57D0BA1ABFD00E3D9A7</string>
+											<string>5200E57E0BA1ABFD00E3D9A7</string>
+											<string>5200E5890BA1AC9100E3D9A7</string>
+											<string>5200E5970BA1ADCF00E3D9A7</string>
+											<string>5200E5A40BA1B14700E3D9A7</string>
+											<string>5200E5A50BA1B14700E3D9A7</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -812,6 +831,7 @@
 		<string>52EDECE60A1DD98600FD7731</string>
 		<string>5200E5240BA1A48C00E3D9A7</string>
 		<string>1CD10A99069EF8BA00B06720</string>
+		<string>1C530D57069F1CE1000CFCEE</string>
 		<string>/Users/aqua/Documents/Projects/MacTrek/Client/trunk/MacTrek.xcodeproj</string>
 		<string>1C0AD2B3069F1EA900FABCE6</string>
 	</array>
@@ -1042,7 +1062,7 @@
 										<key>PBXProjectModuleGUID</key>
 										<string>1CDD528C0622207200134675</string>
 										<key>PBXProjectModuleLabel</key>
-										<string>PainterFactoryForTac.m</string>
+										<string>Player.h</string>
 										<key>StatusBarVisibility</key>
 										<true/>
 									</dict>
@@ -1051,7 +1071,7 @@
 										<key>Frame</key>
 										<string>{{0, 0}, {1282, 936}}</string>
 										<key>RubberWindowFrame</key>
-										<string>913 215 1282 1323 0 0 2560 1578 </string>
+										<string>1028 138 1282 1323 0 0 2560 1578 </string>
 									</dict>
 									<key>Module</key>
 									<string>PBXNavigatorGroup</string>
@@ -1075,7 +1095,7 @@
 								<key>Frame</key>
 								<string>{{0, 941}, {1282, 341}}</string>
 								<key>RubberWindowFrame</key>
-								<string>913 215 1282 1323 0 0 2560 1578 </string>
+								<string>1028 138 1282 1323 0 0 2560 1578 </string>
 							</dict>
 							<key>Module</key>
 							<string>PBXProjectFindModule</string>
@@ -1098,13 +1118,13 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>1C530D57069F1CE1000CFCEE</string>
-				<string>52EA2EF70BA17A5B00FF9F74</string>
-				<string>52EA2EF80BA17A5B00FF9F74</string>
+				<string>5200E5800BA1ABFD00E3D9A7</string>
+				<string>5200E5810BA1ABFD00E3D9A7</string>
 				<string>1CDD528C0622207200134675</string>
 				<string>1CD0528E0623707200166675</string>
 			</array>
 			<key>WindowString</key>
-			<string>913 215 1282 1323 0 0 2560 1578 </string>
+			<string>1028 138 1282 1323 0 0 2560 1578 </string>
 			<key>WindowToolGUID</key>
 			<string>1C530D57069F1CE1000CFCEE</string>
 			<key>WindowToolIsVisible</key>

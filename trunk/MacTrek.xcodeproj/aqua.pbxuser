@@ -251,6 +251,34 @@
 			5200E5450BA1A6DC00E3D9A7 /* PBXTextBookmark */ = 5200E5450BA1A6DC00E3D9A7 /* PBXTextBookmark */;
 			5200E5460BA1A6DC00E3D9A7 /* PBXTextBookmark */ = 5200E5460BA1A6DC00E3D9A7 /* PBXTextBookmark */;
 			5200E5470BA1A6DC00E3D9A7 /* PBXTextBookmark */ = 5200E5470BA1A6DC00E3D9A7 /* PBXTextBookmark */;
+			5200E5710BA1ABFD00E3D9A7 /* PBXTextBookmark */ = 5200E5710BA1ABFD00E3D9A7 /* PBXTextBookmark */;
+			5200E5720BA1ABFD00E3D9A7 /* PBXTextBookmark */ = 5200E5720BA1ABFD00E3D9A7 /* PBXTextBookmark */;
+			5200E5730BA1ABFD00E3D9A7 /* PBXTextBookmark */ = 5200E5730BA1ABFD00E3D9A7 /* PBXTextBookmark */;
+			5200E5740BA1ABFD00E3D9A7 /* PBXTextBookmark */ = 5200E5740BA1ABFD00E3D9A7 /* PBXTextBookmark */;
+			5200E5750BA1ABFD00E3D9A7 /* PBXTextBookmark */ = 5200E5750BA1ABFD00E3D9A7 /* PBXTextBookmark */;
+			5200E5760BA1ABFD00E3D9A7 /* PBXTextBookmark */ = 5200E5760BA1ABFD00E3D9A7 /* PBXTextBookmark */;
+			5200E5770BA1ABFD00E3D9A7 /* PBXTextBookmark */ = 5200E5770BA1ABFD00E3D9A7 /* PBXTextBookmark */;
+			5200E5780BA1ABFD00E3D9A7 /* PBXTextBookmark */ = 5200E5780BA1ABFD00E3D9A7 /* PBXTextBookmark */;
+			5200E5790BA1ABFD00E3D9A7 /* PBXTextBookmark */ = 5200E5790BA1ABFD00E3D9A7 /* PBXTextBookmark */;
+			5200E57A0BA1ABFD00E3D9A7 /* PBXTextBookmark */ = 5200E57A0BA1ABFD00E3D9A7 /* PBXTextBookmark */;
+			5200E57B0BA1ABFD00E3D9A7 /* PBXTextBookmark */ = 5200E57B0BA1ABFD00E3D9A7 /* PBXTextBookmark */;
+			5200E57C0BA1ABFD00E3D9A7 /* PBXTextBookmark */ = 5200E57C0BA1ABFD00E3D9A7 /* PBXTextBookmark */;
+			5200E57D0BA1ABFD00E3D9A7 /* PBXTextBookmark */ = 5200E57D0BA1ABFD00E3D9A7 /* PBXTextBookmark */;
+			5200E57E0BA1ABFD00E3D9A7 /* PBXTextBookmark */ = 5200E57E0BA1ABFD00E3D9A7 /* PBXTextBookmark */;
+			5200E57F0BA1ABFD00E3D9A7 /* PBXTextBookmark */ = 5200E57F0BA1ABFD00E3D9A7 /* PBXTextBookmark */;
+			5200E5870BA1AC9100E3D9A7 /* PBXTextBookmark */ = 5200E5870BA1AC9100E3D9A7 /* PBXTextBookmark */;
+			5200E5880BA1AC9100E3D9A7 /* PBXTextBookmark */ = 5200E5880BA1AC9100E3D9A7 /* PBXTextBookmark */;
+			5200E5890BA1AC9100E3D9A7 /* PBXTextBookmark */ = 5200E5890BA1AC9100E3D9A7 /* PBXTextBookmark */;
+			5200E58A0BA1AC9100E3D9A7 /* PBXTextBookmark */ = 5200E58A0BA1AC9100E3D9A7 /* PBXTextBookmark */;
+			5200E5950BA1ADCF00E3D9A7 /* PBXTextBookmark */ = 5200E5950BA1ADCF00E3D9A7 /* PBXTextBookmark */;
+			5200E5960BA1ADCF00E3D9A7 /* PBXTextBookmark */ = 5200E5960BA1ADCF00E3D9A7 /* PBXTextBookmark */;
+			5200E5970BA1ADCF00E3D9A7 /* PBXTextBookmark */ = 5200E5970BA1ADCF00E3D9A7 /* PBXTextBookmark */;
+			5200E5980BA1ADCF00E3D9A7 /* PBXTextBookmark */ = 5200E5980BA1ADCF00E3D9A7 /* PBXTextBookmark */;
+			5200E5A20BA1B14700E3D9A7 /* PBXTextBookmark */ = 5200E5A20BA1B14700E3D9A7 /* PBXTextBookmark */;
+			5200E5A30BA1B14700E3D9A7 /* PBXTextBookmark */ = 5200E5A30BA1B14700E3D9A7 /* PBXTextBookmark */;
+			5200E5A40BA1B14700E3D9A7 /* PBXTextBookmark */ = 5200E5A40BA1B14700E3D9A7 /* PBXTextBookmark */;
+			5200E5A50BA1B14700E3D9A7 /* PBXTextBookmark */ = 5200E5A50BA1B14700E3D9A7 /* PBXTextBookmark */;
+			5200E5A60BA1B14700E3D9A7 /* PBXTextBookmark */ = 5200E5A60BA1B14700E3D9A7 /* PBXTextBookmark */;
 			52164B1A0B88D49700BA46F1 = 52164B1A0B88D49700BA46F1 /* PBXTextBookmark */;
 			52164B1E0B88D49700BA46F1 = 52164B1E0B88D49700BA46F1 /* PBXTextBookmark */;
 			52164E970B88DAA300BA46F1 = 52164E970B88DAA300BA46F1 /* PBXTextBookmark */;
@@ -700,7 +728,7 @@
 		fRef = 5212F0340B08FFB80059A8B1 /* PainterFactoryForNetrek.m */;
 		name = "PainterFactoryForNetrek.m: 411";
 		rLen = 0;
-		rLoc = 15132;
+		rLoc = 15621;
 		rType = 0;
 		vrLen = 1677;
 		vrLoc = 0;
@@ -810,7 +838,7 @@
 		fRef = 5212F0340B08FFB80059A8B1 /* PainterFactoryForNetrek.m */;
 		name = "PainterFactoryForNetrek.m: 411";
 		rLen = 0;
-		rLoc = 15132;
+		rLoc = 15621;
 		rType = 0;
 		vrLen = 1677;
 		vrLoc = 0;
@@ -824,6 +852,292 @@
 		rType = 0;
 		vrLen = 1640;
 		vrLoc = 0;
+	};
+	5200E56B0BA1ABEE00E3D9A7 /* PainterFactoryForMacTrek.m */ = {
+		isa = PBXFileReference;
+		name = PainterFactoryForMacTrek.m;
+		path = /Users/aqua/Documents/Projects/MacTrek/Client/trunk/Classes/MacTrek/Painter/PainterFactoryForMacTrek.m;
+		sourceTree = "<absolute>";
+	};
+	5200E5710BA1ABFD00E3D9A7 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 5212F0340B08FFB80059A8B1 /* PainterFactoryForNetrek.m */;
+		name = "PainterFactoryForNetrek.m: 121";
+		rLen = 0;
+		rLoc = 4878;
+		rType = 0;
+		vrLen = 1871;
+		vrLoc = 3444;
+	};
+	5200E5720BA1ABFD00E3D9A7 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 5212F0300B08FFB80059A8B1 /* PainterFactory.m */;
+		name = "PainterFactory.m: 1527";
+		rLen = 0;
+		rLoc = 58461;
+		rType = 0;
+		vrLen = 2246;
+		vrLoc = 57114;
+	};
+	5200E5730BA1ABFD00E3D9A7 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 5200E56B0BA1ABEE00E3D9A7 /* PainterFactoryForMacTrek.m */;
+		rLen = 1;
+		rLoc = 88;
+		rType = 1;
+	};
+	5200E5740BA1ABFD00E3D9A7 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 5212F0320B08FFB80059A8B1 /* PainterFactoryForMacTrek.m */;
+		name = "PainterFactoryForMacTrek.m: 17";
+		rLen = 0;
+		rLoc = 335;
+		rType = 0;
+		vrLen = 1640;
+		vrLoc = 0;
+	};
+	5200E5750BA1ABFD00E3D9A7 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 5212F0340B08FFB80059A8B1 /* PainterFactoryForNetrek.m */;
+		name = "imgShipCloak       = [self cacheImage:@\"/Misc/cloak.bmp\"];";
+		rLen = 58;
+		rLoc = 1602;
+		rType = 0;
+		vrLen = 2941;
+		vrLoc = 1355;
+	};
+	5200E5760BA1ABFD00E3D9A7 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 5212F0320B08FFB80059A8B1 /* PainterFactoryForMacTrek.m */;
+		name = "PainterFactoryForMacTrek.m: 53";
+		rLen = 0;
+		rLoc = 1455;
+		rType = 0;
+		vrLen = 1718;
+		vrLoc = 0;
+	};
+	5200E5770BA1ABFD00E3D9A7 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 5212F0340B08FFB80059A8B1 /* PainterFactoryForNetrek.m */;
+		name = "PainterFactoryForNetrek.m: 157";
+		rLen = 0;
+		rLoc = 6194;
+		rType = 0;
+		vrLen = 1923;
+		vrLoc = 4560;
+	};
+	5200E5780BA1ABFD00E3D9A7 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 5212F0320B08FFB80059A8B1 /* PainterFactoryForMacTrek.m */;
+		name = "PainterFactoryForMacTrek.m: 38";
+		rLen = 0;
+		rLoc = 955;
+		rType = 0;
+		vrLen = 1713;
+		vrLoc = 0;
+	};
+	5200E5790BA1ABFD00E3D9A7 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 5212F0340B08FFB80059A8B1 /* PainterFactoryForNetrek.m */;
+		name = imgShipCloak;
+		rLen = 12;
+		rLoc = 1602;
+		rType = 0;
+		vrLen = 3010;
+		vrLoc = 484;
+	};
+	5200E57A0BA1ABFD00E3D9A7 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 5212F0320B08FFB80059A8B1 /* PainterFactoryForMacTrek.m */;
+		name = "PainterFactoryForMacTrek.m: 53";
+		rLen = 0;
+		rLoc = 1419;
+		rType = 0;
+		vrLen = 1717;
+		vrLoc = 0;
+	};
+	5200E57B0BA1ABFD00E3D9A7 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 5212F0340B08FFB80059A8B1 /* PainterFactoryForNetrek.m */;
+		name = imgShipCloak;
+		rLen = 12;
+		rLoc = 1602;
+		rType = 0;
+		vrLen = 2940;
+		vrLoc = 554;
+	};
+	5200E57C0BA1ABFD00E3D9A7 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 5212F0300B08FFB80059A8B1 /* PainterFactory.m */;
+		name = 1666845;
+		rLen = 7;
+		rLoc = 58404;
+		rType = 0;
+		vrLen = 2359;
+		vrLoc = 56900;
+	};
+	5200E57D0BA1ABFD00E3D9A7 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 5212F0340B08FFB80059A8B1 /* PainterFactoryForNetrek.m */;
+		name = "PainterFactoryForNetrek.m: 121";
+		rLen = 0;
+		rLoc = 4878;
+		rType = 0;
+		vrLen = 1871;
+		vrLoc = 3444;
+	};
+	5200E57E0BA1ABFD00E3D9A7 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 5212F0300B08FFB80059A8B1 /* PainterFactory.m */;
+		name = "PainterFactory.m: 1527";
+		rLen = 0;
+		rLoc = 58461;
+		rType = 0;
+		vrLen = 2246;
+		vrLoc = 57114;
+	};
+	5200E57F0BA1ABFD00E3D9A7 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 5212F0320B08FFB80059A8B1 /* PainterFactoryForMacTrek.m */;
+		name = "PainterFactoryForMacTrek.m: 89";
+		rLen = 0;
+		rLoc = 2407;
+		rType = 0;
+		vrLen = 1720;
+		vrLoc = 1565;
+	};
+	5200E5870BA1AC9100E3D9A7 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 5212F0320B08FFB80059A8B1 /* PainterFactoryForMacTrek.m */;
+		name = "PainterFactoryForMacTrek.m: 78";
+		rLen = 0;
+		rLoc = 2116;
+		rType = 0;
+		vrLen = 1574;
+		vrLoc = 1717;
+	};
+	5200E5880BA1AC9100E3D9A7 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 5212F0300B08FFB80059A8B1 /* PainterFactory.m */;
+		name = "PainterFactory.m: 1527";
+		rLen = 0;
+		rLoc = 58461;
+		rType = 0;
+		vrLen = 2246;
+		vrLoc = 57114;
+	};
+	5200E5890BA1AC9100E3D9A7 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 5212F0320B08FFB80059A8B1 /* PainterFactoryForMacTrek.m */;
+		name = "PainterFactoryForMacTrek.m: 78";
+		rLen = 0;
+		rLoc = 2116;
+		rType = 0;
+		vrLen = 1574;
+		vrLoc = 1717;
+	};
+	5200E58A0BA1AC9100E3D9A7 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 5212F0300B08FFB80059A8B1 /* PainterFactory.m */;
+		name = "PainterFactory.m: 554";
+		rLen = 0;
+		rLoc = 20079;
+		rType = 0;
+		vrLen = 2465;
+		vrLoc = 18549;
+	};
+	5200E5910BA1ADC100E3D9A7 /* PainterFactoryForNetrek.m */ = {
+		isa = PBXFileReference;
+		name = PainterFactoryForNetrek.m;
+		path = /Users/aqua/Documents/Projects/MacTrek/Client/trunk/Classes/MacTrek/Painter/PainterFactoryForNetrek.m;
+		sourceTree = "<absolute>";
+	};
+	5200E5950BA1ADCF00E3D9A7 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 5212F0300B08FFB80059A8B1 /* PainterFactory.m */;
+		name = "PainterFactory.m: 517";
+		rLen = 0;
+		rLoc = 18595;
+		rType = 0;
+		vrLen = 2623;
+		vrLoc = 18323;
+	};
+	5200E5960BA1ADCF00E3D9A7 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 5200E5910BA1ADC100E3D9A7 /* PainterFactoryForNetrek.m */;
+		rLen = 1;
+		rLoc = 117;
+		rType = 1;
+	};
+	5200E5970BA1ADCF00E3D9A7 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 5212F0300B08FFB80059A8B1 /* PainterFactory.m */;
+		name = "PainterFactory.m: 517";
+		rLen = 0;
+		rLoc = 18595;
+		rType = 0;
+		vrLen = 2623;
+		vrLoc = 18323;
+	};
+	5200E5980BA1ADCF00E3D9A7 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 5212F0340B08FFB80059A8B1 /* PainterFactoryForNetrek.m */;
+		name = "PainterFactoryForNetrek.m: 117";
+		rLen = 0;
+		rLoc = 4487;
+		rType = 0;
+		vrLen = 2322;
+		vrLoc = 2900;
+	};
+	5200E5A20BA1B14700E3D9A7 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 5212F0300B08FFB80059A8B1 /* PainterFactory.m */;
+		name = "PainterFactory.m: 521";
+		rLen = 0;
+		rLoc = 18801;
+		rType = 0;
+		vrLen = 2393;
+		vrLoc = 18281;
+	};
+	5200E5A30BA1B14700E3D9A7 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 5212F0340B08FFB80059A8B1 /* PainterFactoryForNetrek.m */;
+		name = "PainterFactoryForNetrek.m: 117";
+		rLen = 0;
+		rLoc = 4487;
+		rType = 0;
+		vrLen = 2253;
+		vrLoc = 2969;
+	};
+	5200E5A40BA1B14700E3D9A7 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 5212F0340B08FFB80059A8B1 /* PainterFactoryForNetrek.m */;
+		name = "PainterFactoryForNetrek.m: 117";
+		rLen = 0;
+		rLoc = 4487;
+		rType = 0;
+		vrLen = 2322;
+		vrLoc = 2900;
+	};
+	5200E5A50BA1B14700E3D9A7 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 5212F0300B08FFB80059A8B1 /* PainterFactory.m */;
+		name = "PainterFactory.m: 521";
+		rLen = 0;
+		rLoc = 18801;
+		rType = 0;
+		vrLen = 2393;
+		vrLoc = 18281;
+	};
+	5200E5A60BA1B14700E3D9A7 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 5212F0340B08FFB80059A8B1 /* PainterFactoryForNetrek.m */;
+		name = "PainterFactoryForNetrek.m: 118";
+		rLen = 0;
+		rLoc = 4559;
+		rType = 0;
+		vrLen = 2316;
+		vrLoc = 2969;
 	};
 	52059B970B0E2643001785FF /* Communication.m:1412 */ = {
 		isa = PBXFileBreakpoint;
@@ -1658,9 +1972,9 @@
 	};
 	5212F0300B08FFB80059A8B1 /* PainterFactory.m */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1077, 22960}}";
-			sepNavSelRange = "{58309, 0}";
-			sepNavVisRect = "{{0, 0}, {1077, 853}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1077, 23002}}";
+			sepNavSelRange = "{18801, 0}";
+			sepNavVisRect = "{{0, 7065}, {1077, 853}}";
 		};
 	};
 	5212F0310B08FFB80059A8B1 /* PainterFactoryForMacTrek.h */ = {
@@ -1672,9 +1986,9 @@
 	};
 	5212F0320B08FFB80059A8B1 /* PainterFactoryForMacTrek.m */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1077, 1680}}";
-			sepNavSelRange = "{335, 0}";
-			sepNavVisRect = "{{0, 0}, {1077, 853}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1235, 1708}}";
+			sepNavSelRange = "{2341, 0}";
+			sepNavVisRect = "{{0, 0}, {1235, 904}}";
 		};
 	};
 	5212F0330B08FFB80059A8B1 /* PainterFactoryForNetrek.h */ = {
@@ -1686,9 +2000,9 @@
 	};
 	5212F0340B08FFB80059A8B1 /* PainterFactoryForNetrek.m */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1077, 5950}}";
-			sepNavSelRange = "{15132, 0}";
-			sepNavVisRect = "{{0, 0}, {1077, 853}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1077, 6104}}";
+			sepNavSelRange = "{4559, 0}";
+			sepNavVisRect = "{{0, 1065}, {1077, 853}}";
 		};
 	};
 	5212F0350B08FFB80059A8B1 /* PainterFactoryForTac.h */ = {
@@ -2427,7 +2741,7 @@
 		fRef = 5212F0300B08FFB80059A8B1 /* PainterFactory.m */;
 		name = "PainterFactory.m: 1256";
 		rLen = 0;
-		rLoc = 49894;
+		rLoc = 50077;
 		rType = 0;
 		vrLen = 3422;
 		vrLoc = 29568;
@@ -3530,7 +3844,7 @@
 		fRef = 5212F0340B08FFB80059A8B1 /* PainterFactoryForNetrek.m */;
 		name = NSLog;
 		rLen = 5;
-		rLoc = 12470;
+		rLoc = 12959;
 		rType = 0;
 		vrLen = 3517;
 		vrLoc = 11934;
@@ -5138,7 +5452,7 @@
 		fRef = 5212F0300B08FFB80059A8B1 /* PainterFactory.m */;
 		name = "PainterFactory.m: 1528";
 		rLen = 0;
-		rLoc = 58309;
+		rLoc = 58530;
 		rType = 0;
 		vrLen = 1581;
 		vrLoc = 0;
@@ -5148,7 +5462,7 @@
 		fRef = 5212F0320B08FFB80059A8B1 /* PainterFactoryForMacTrek.m */;
 		name = "PainterFactoryForMacTrek.m: 60";
 		rLen = 0;
-		rLoc = 2144;
+		rLoc = 2262;
 		rType = 0;
 		vrLen = 1600;
 		vrLoc = 1095;
@@ -5158,7 +5472,7 @@
 		fRef = 5212F0340B08FFB80059A8B1 /* PainterFactoryForNetrek.m */;
 		name = "PainterFactoryForNetrek.m: 374";
 		rLen = 0;
-		rLoc = 13358;
+		rLoc = 13847;
 		rType = 0;
 		vrLen = 2882;
 		vrLoc = 1215;
@@ -5209,7 +5523,7 @@
 		fRef = 5212F0340B08FFB80059A8B1 /* PainterFactoryForNetrek.m */;
 		name = "PainterFactoryForNetrek.m: 374";
 		rLen = 0;
-		rLoc = 13358;
+		rLoc = 13847;
 		rType = 0;
 		vrLen = 2883;
 		vrLoc = 1214;
@@ -5219,7 +5533,7 @@
 		fRef = 5212F0320B08FFB80059A8B1 /* PainterFactoryForMacTrek.m */;
 		name = "PainterFactoryForMacTrek.m: 60";
 		rLen = 0;
-		rLoc = 2144;
+		rLoc = 2262;
 		rType = 0;
 		vrLen = 1716;
 		vrLoc = 0;
@@ -5229,7 +5543,7 @@
 		fRef = 5212F0340B08FFB80059A8B1 /* PainterFactoryForNetrek.m */;
 		name = "PainterFactoryForNetrek.m: 374";
 		rLen = 0;
-		rLoc = 13358;
+		rLoc = 13847;
 		rType = 0;
 		vrLen = 2882;
 		vrLoc = 1215;
@@ -5239,7 +5553,7 @@
 		fRef = 5212F0320B08FFB80059A8B1 /* PainterFactoryForMacTrek.m */;
 		name = "PainterFactoryForMacTrek.m: 60";
 		rLen = 0;
-		rLoc = 2144;
+		rLoc = 2262;
 		rType = 0;
 		vrLen = 1497;
 		vrLoc = 1198;
@@ -5249,7 +5563,7 @@
 		fRef = 5212F0340B08FFB80059A8B1 /* PainterFactoryForNetrek.m */;
 		name = "PainterFactoryForNetrek.m: 374";
 		rLen = 0;
-		rLoc = 13358;
+		rLoc = 13847;
 		rType = 0;
 		vrLen = 2882;
 		vrLoc = 1215;
@@ -5259,7 +5573,7 @@
 		fRef = 5212F0300B08FFB80059A8B1 /* PainterFactory.m */;
 		name = "PainterFactory.m: 1528";
 		rLen = 0;
-		rLoc = 58309;
+		rLoc = 58530;
 		rType = 0;
 		vrLen = 1581;
 		vrLoc = 0;
@@ -5269,7 +5583,7 @@
 		fRef = 5212F0320B08FFB80059A8B1 /* PainterFactoryForMacTrek.m */;
 		name = "PainterFactoryForMacTrek.m: 60";
 		rLen = 0;
-		rLoc = 2144;
+		rLoc = 2262;
 		rType = 0;
 		vrLen = 1600;
 		vrLoc = 1095;
@@ -5579,7 +5893,7 @@
 		fRef = 5212F0320B08FFB80059A8B1 /* PainterFactoryForMacTrek.m */;
 		name = labelForPlayer;
 		rLen = 14;
-		rLoc = 1723;
+		rLoc = 1803;
 		rType = 0;
 		vrLen = 1859;
 		vrLoc = 836;
