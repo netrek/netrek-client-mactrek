@@ -32,7 +32,8 @@
 #define GV_WAR_MODE		4
 
 @interface GameView : BaseView {
-    MTKeyMap *keyMap;
+    MTKeyMap *actionKeyMap;
+	MTKeyMap *distressKeyMap;
 	MTMouseMap *mouseMap;
 	char warMask;
 	Team *warTeam;
@@ -54,7 +55,8 @@
 - (void) setScale:(int)scale;
 - (int)  scale;
 
-- (void) setKeyMap:(MTKeyMap *)newKeyMap;
+- (void) setDistressKeyMap:(MTKeyMap *)newKeyMap;
+- (void) setActionKeyMap:(MTKeyMap *)newKeyMap;
 - (void) setMouseMap:(MTMouseMap *)newMouseMap;
 
 -(float) mouseDir;

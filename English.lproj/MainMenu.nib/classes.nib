@@ -205,6 +205,8 @@
             LANGUAGE = ObjC; 
             OUTLETS = {
                 accelerateButton = NSButton; 
+                actionKeyMapDataSource = KeyMapTableDataSource; 
+                distressKeyMapDataSource = KeyMapTableDataSource; 
                 fxLevel = NSSlider; 
                 graphicsModel = NSSegmentedControl; 
                 leftMouse = NSPopUpButton; 
@@ -216,7 +218,7 @@
                 voiceOver = NSButton; 
                 wheelMouse = NSPopUpButton; 
             }; 
-            SUPERCLASS = KeyMapTableDataSource; 
+            SUPERCLASS = BaseClass; 
         }, 
         {
             ACTIONS = {

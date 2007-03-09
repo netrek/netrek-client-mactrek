@@ -71,7 +71,8 @@
 - (void) stopGame;
 - (void) newMessage:(NSString*)message;
 - (void) updateDashboard:(Player*) me;
-- (void) setKeyMap:(MTKeyMap *)newKeyMap;
+- (void) setDistressKeyMap:(MTKeyMap *)newKeyMap;
+- (void) setActionKeyMap:(MTKeyMap *)newKeyMap;
 - (void) setMouseMap:(MTMouseMap *)newMouseMap;
 - (void) updateBar:(LLBar*) bar andTextValue:(NSTextField*)field 
          withValue:(int)value max:(int)maxValue inverseWarning:(bool)inverse;

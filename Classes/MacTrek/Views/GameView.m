@@ -18,7 +18,8 @@
 	warMask = 0; // at peace with all
 	warTeam = nil; // no team selected 
     step = GV_SCALE_STEP;
-    keyMap = nil;
+    actionKeyMap = nil;
+	distressKeyMap = nil;
 	mouseMap = nil;
     scale = 40; // default
     trigonometry = [LLTrigonometry defaultInstance];
@@ -130,16 +131,22 @@ whichRepresentsGameBounds:gameBounds
 	[mouseMap retain];
 }
 
-- (void) setKeyMap:(MTKeyMap *)newKeyMap {
-	[keyMap release];
-    keyMap = newKeyMap;
-	[keyMap retain];
+- (void) setDistressKeyMap:(MTKeyMap *)newKeyMap {
+	[distressKeyMap release];
+    distressKeyMap = newKeyMap;
+	[distressKeyMap retain];
+}
+
+- (void) setActionKeyMap:(MTKeyMap *)newKeyMap {
+	[actionKeyMap release];
+    actionKeyMap = newKeyMap;
+	[actionKeyMap retain];
 }
 
 // view functions
 - (void) keyDown:(NSEvent *)theEvent {
     
-    if (keyMap == nil) {
+    if (actionKeyMap == nil) {
         LLLog(@"GameView.keyDown have no keymap");
         [super keyDown:theEvent];
         return;
@@ -202,7 +209,7 @@ whichRepresentsGameBounds:gameBounds
 		}
 		
 		// lookup which action this should be
-        int action = [keyMap actionForKey:theChar withModifierFlags:modifierFlags];
+        int action = [actionKeyMap actionForKey:theChar withModifierFlags:modifierFlags];
 		
         // only valid keys
         if (action == ACTION_UNKNOWN) {
