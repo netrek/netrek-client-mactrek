@@ -27,6 +27,7 @@
 	IBOutlet NSButton              *voiceCmds;
 	IBOutlet NSButton              *accelerateButton;
 	IBOutlet NSButton              *trackingEnabledButton;
+	IBOutlet NSButton              *logToConsole;
 	
 	IBOutlet NSPopUpButton		   *leftMouse;
 	IBOutlet NSPopUpButton		   *rightMouse;

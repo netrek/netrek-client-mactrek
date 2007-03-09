@@ -103,6 +103,14 @@
 		
 	// set internal tracker state
 	[[SimpleTracker defaultTracker] setEnabled:[self trackingEnabled]];
+	
+	// log to console is special (should have done all like this)
+	bool state = [[NSUserDefaults standardUserDefaults]boolForKey:@"LLLogDisabled"];
+	if(state == NO) { // log not disabled
+		[logToConsole setState:NSOnState];
+	} else {
+		[logToConsole setState:NSOffState];
+	}
 }
 
 - (void) saveSettings {
@@ -134,6 +142,10 @@
 	// BUG 1674341
 	[[self actionKeyMap] writeToDefaultFileIfChanged];
 	[[self distressKeyMap] writeToDefaultFileIfChanged];
+	
+	// log to console is special.. log is off means disabled is true
+	bool state = ([logToConsole state] != NSOnState);
+	[[NSUserDefaults standardUserDefaults] setBool:state forKey:@"LLLogDisabled"];
 }
 
 

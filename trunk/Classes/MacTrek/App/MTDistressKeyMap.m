@@ -30,7 +30,7 @@
 	entry = [[MTKeyMapEntry alloc] initAction: DC_DOING3
 									  withKey:'F' 
 								modifierFlags: NSControlKeyMask 
-								  description: @"Status report"];
+								  description: @"General status report"];
     [keyMap setObject:entry forKey:[NSNumber numberWithInt:[entry action]]];
 	
 	// my actions
@@ -55,7 +55,7 @@
 	entry = [[MTKeyMapEntry alloc] initAction: DC_BOMBING 
 									  withKey:'b' 
 								modifierFlags: NSControlKeyMask 
-								  description: @"I am bombinb planet x"];
+								  description: @"I am bombing planet x"];
     [keyMap setObject:entry forKey:[NSNumber numberWithInt:[entry action]]];
 	
 	entry = [[MTKeyMapEntry alloc] initAction: DC_ASBOMB 
@@ -113,37 +113,37 @@
 								  description: @"Planet y has armies"];
     [keyMap setObject:entry forKey:[NSNumber numberWithInt:[entry action]]];
 	
-	// commands	
-	entry = [[MTKeyMapEntry alloc] initAction: DC_OGG 
-									  withKey:'1' 
-								modifierFlags: NSControlKeyMask 
-								  description: @"We shoud ogg player x"];
-    [keyMap setObject:entry forKey:[NSNumber numberWithInt:[entry action]]];
-	
+	// commands		
 	entry = [[MTKeyMapEntry alloc] initAction: DC_BOMB 
-									  withKey:'2' 
+									  withKey:'1' 
 								modifierFlags: NSControlKeyMask 
 								  description: @"We shoud bomb planet x"];
     [keyMap setObject:entry forKey:[NSNumber numberWithInt:[entry action]]];
 	
 	entry = [[MTKeyMapEntry alloc] initAction: DC_SPACE_CONTROL 
-									  withKey:'3' 
+									  withKey:'2' 
 								modifierFlags: NSControlKeyMask 
 								  description: @"We shoud control space near x"];
     [keyMap setObject:entry forKey:[NSNumber numberWithInt:[entry action]]];
 	
-	entry = [[MTKeyMapEntry alloc] initAction: DC_SAVE_PLANET 
-									  withKey:'4' 
-								modifierFlags: NSControlKeyMask 
-								  description: @"We shoud save planet x"];
-    [keyMap setObject:entry forKey:[NSNumber numberWithInt:[entry action]]];
-	
 	entry = [[MTKeyMapEntry alloc] initAction: DC_BASE_OGG 
-									  withKey:'5' 
+									  withKey:'3' 
 								modifierFlags: NSControlKeyMask 
 								  description: @"We shoud ogg base x"];
     [keyMap setObject:entry forKey:[NSNumber numberWithInt:[entry action]]];
+	
+	entry = [[MTKeyMapEntry alloc] initAction: DC_OGG 
+									  withKey:'4' 
+								modifierFlags: NSControlKeyMask 
+								  description: @"We shoud ogg player x"];
+    [keyMap setObject:entry forKey:[NSNumber numberWithInt:[entry action]]];
 
+	
+	entry = [[MTKeyMapEntry alloc] initAction: DC_SAVE_PLANET 
+									  withKey:'5' 
+								modifierFlags: NSControlKeyMask 
+								  description: @"We shoud save planet x"];
+    [keyMap setObject:entry forKey:[NSNumber numberWithInt:[entry action]]];
 }
 
 - (id) init {
