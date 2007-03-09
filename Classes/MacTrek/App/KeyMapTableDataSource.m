@@ -55,8 +55,8 @@
     return 0;
 }
 
-int intSort(id num1, id num2, void *context)
-{
+// copy from manual
+int intSort(id num1, id num2, void *context) {
     int v1 = [num1 intValue];
     int v2 = [num2 intValue];
     if (v1 < v2)
@@ -67,6 +67,19 @@ int intSort(id num1, id num2, void *context)
         return NSOrderedSame;
 }
 
+int keyMapEntrySort(id num1, id num2, void *context) {
+	
+	MTKeyMap *myMap = context;
+	
+    int v1 = [num1 intValue];
+    int v2 = [num2 intValue];
+	
+	NSString *d1 = [myMap descriptionForAction:v1];
+	NSString *d2 = [myMap descriptionForAction:v2];
+	
+    return [d1 compare:d2];
+}
+
 - (id)tableView:(NSTableView *)aTableView
     objectValueForTableColumn:(NSTableColumn *)aTableColumn
             row:(int)rowIndex {
@@ -75,7 +88,15 @@ int intSort(id num1, id num2, void *context)
     if (keyMapTableView == aTableView) {
         NSArray *actionKeys = [myMap allKeys];
 		// sort the array (much nicer)
-		[actionKeys sortedArrayUsingFunction:intSort context:NULL];
+		actionKeys = [actionKeys sortedArrayUsingFunction:keyMapEntrySort context:myMap];
+		
+		/*
+		// dump the array to check the sort
+		unsigned int i, count = [actionKeys count];
+		for (i = 0; i < count; i++) {
+			LLLog(@"KeyMapTableDataSource.objectValueForTableColumn key %d, value %d", i, [[actionKeys objectAtIndex:i] intValue]);
+		}
+		*/
         int action = [[actionKeys objectAtIndex:rowIndex] intValue];
         if ([[aTableColumn identifier] isEqualTo: @"description"]) {
             return [myMap descriptionForAction:action];

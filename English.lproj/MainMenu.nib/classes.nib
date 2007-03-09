@@ -210,6 +210,7 @@
                 fxLevel = NSSlider; 
                 graphicsModel = NSSegmentedControl; 
                 leftMouse = NSPopUpButton; 
+                logToConsole = NSButton; 
                 middleMouse = NSPopUpButton; 
                 musicLevel = NSSlider; 
                 rightMouse = NSPopUpButton; 
