@@ -11,6 +11,7 @@
 #import "Luky.h"
 #import "Data.h"
 
+#define DC_UNKNOWN			-1
 #define DC_TAKE				1
 #define DC_OGG				2
 #define DC_BOMB				3

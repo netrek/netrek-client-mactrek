@@ -191,9 +191,8 @@ whichRepresentsGameBounds:gameBounds
         unichar theChar = [characters characterAtIndex:i];
         unsigned int modifierFlags = [theEvent modifierFlags];
         
-		// current implementation for macros does not allow for multi key
-		// macros, This means that all macros are single shot <CNTL> + hotkey
-		// this allows them to be handled in normal key handling mode
+		// current implementation allows the sending of distress calls by
+		// holding down the control key
 		if (modifierFlags & NSControlKeyMask) {
 			// convert the mouse pointer to a point in the game grid
             NSPoint targetGamePoint = [painter gamePointFromViewPoint:[self mousePos] 
@@ -202,24 +201,33 @@ whichRepresentsGameBounds:gameBounds
                                                     withScale:scale];
 			// first tell the handler where our mouse is
 			[macroHandler setGameViewPointOfCursor:targetGamePoint];
-			// handle the key as a macro (first remove the modifiers...)
+			// handle the distress as a macro (first remove the modifiers...)
 			char c = [[theEvent charactersIgnoringModifiers] characterAtIndex:0];
-			[macroHandler handleSingleMacroForKey:c];
+			
+			// lookup which distress this should be
+			int distressCode = [distressKeyMap actionForKey:c withModifierFlags:modifierFlags];
+			// only valid keys
+			if (distressCode == DC_UNKNOWN) {
+				[super keyDown:theEvent];
+			}
+			else {
+				[macroHandler sendDistress:distressCode];
+			}
 			return;
+		} else {	
+			// lookup which action this should be
+			int action = [actionKeyMap actionForKey:theChar withModifierFlags:modifierFlags];
+			
+			// only valid keys
+			if (action == ACTION_UNKNOWN) {
+				[super keyDown:theEvent];
+			}
+			else {
+				if ([self performAction: action] == NO) {
+					[super keyDown:theEvent];
+				}
+			}   
 		}
-		
-		// lookup which action this should be
-        int action = [actionKeyMap actionForKey:theChar withModifierFlags:modifierFlags];
-		
-        // only valid keys
-        if (action == ACTION_UNKNOWN) {
-            [super keyDown:theEvent];
-        }
-        else {
-            if ([self performAction: action] == NO) {
-                [super keyDown:theEvent];
-            }
-        }        
     }  
 }
 
