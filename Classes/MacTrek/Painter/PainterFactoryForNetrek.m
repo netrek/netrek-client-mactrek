@@ -15,6 +15,7 @@
     self = [super init];
     if (self != nil) {
         filter = [[LLColorFilter alloc] init];
+		iconStaticScaler = 2; // icons are small
     }
     return self;
 }
@@ -366,10 +367,10 @@
         NSRect targetRect = Rect;
         // get the aspect ratio
         float delta = [imgRepair size].height / frameRect.size.height; // eg repair is 1/4 the planet
-        delta *= 2; // i find the icons very small
+        delta *= iconStaticScaler; // i find the icons very small
         targetRect.size.height *= delta;
         delta = [imgRepair size].width / frameRect.size.width; // eg repair is half the planet
-        delta *= 2; // i find the icons very small
+        delta *= iconStaticScaler; // i find the icons very small
         targetRect.size.width *= delta;
         
         // center rect above planet
@@ -385,10 +386,10 @@
         NSRect targetRect = Rect;
         // get the aspect ratio
         float delta = [imgFuel size].height / frameRect.size.height; // eg repair is 1/4 the planet
-        delta *= 2; // i find the icons very small
+        delta *= iconStaticScaler; // i find the icons very small
         targetRect.size.height *= delta;
         delta = [imgFuel size].width / frameRect.size.width; // eg repair is half the planet
-        delta *= 2; // i find the icons very small
+        delta *= iconStaticScaler; // i find the icons very small
         targetRect.size.width *= delta;
         
         // rect next to planet
@@ -404,10 +405,10 @@
         NSRect targetRect = Rect;
         // get the aspect ratio
         float delta = [imgArmy size].height / frameRect.size.height; // eg repair is 1/4 the planet
-        delta *= 2; // i find the icons very small
+        delta *= iconStaticScaler; // i find the icons very small
         targetRect.size.height *= delta;
         delta = [imgArmy size].width / frameRect.size.width; // eg repair is half the planet
-        delta *= 2; // i find the icons very small
+        delta *= iconStaticScaler; // i find the icons very small
         targetRect.size.width *= delta;
         
         // rect next to planet
