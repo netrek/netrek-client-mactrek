@@ -43,7 +43,7 @@
     NSImage *imgRepair;
     
     LLColorFilter *filter;
-    
+    int      iconStaticScaler;
 }
 
 - (NSImage *)loadImage:(NSString*)imageName;

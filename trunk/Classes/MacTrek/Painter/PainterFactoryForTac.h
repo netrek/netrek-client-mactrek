@@ -9,7 +9,7 @@
 #import <Cocoa/Cocoa.h>
 #import "PainterFactoryForMacTrek.h"
 
-@interface PainterFactoryForTac : PainterFactoryForMacTrek {
+@interface PainterFactoryForTac : PainterFactoryForNetrek {
 	
 	NSMutableDictionary *extraImages;
 }

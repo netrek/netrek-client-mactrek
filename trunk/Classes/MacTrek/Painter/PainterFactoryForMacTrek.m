@@ -11,6 +11,15 @@
 
 @implementation PainterFactoryForMacTrek
 
+- (id) init {
+	self = [super init];
+	if (self != nil) {
+		iconStaticScaler = 1; // keep icons small
+	}
+	return self;
+}
+
+
 - (NSImage *)loadImage:(NSString*)imageName {
     
     // try new image first
@@ -30,7 +39,17 @@
 
 - (void) cacheImages {
     [super cacheImages];
-    imgBackground = [self cacheImage:@"/background.gif"];
+	
+	// we have some different types of files 
+	[imgBackground release];    
+	imgBackground = [self cacheImage:@"/background.gif"];
+	[imgFuel release];
+	imgFuel       = [self cacheImage:@"/Planets/fuel.png"]; 
+    [imgArmy release];
+	imgArmy       = [self cacheImage:@"/Planets/army.png"]; 
+    [imgRepair release];
+	imgRepair     = [self cacheImage:@"/Planets/wrench.png"]; 
+	
 }
 
 - (void)   drawBackgroundImageInRect:(NSRect) Rect {
