@@ -19,6 +19,7 @@
     MTKeyMap *myMap;   
 }
 
+- (void) setKeyMap:(MTKeyMap*) keyMap;
 - (int)numberOfRowsInTableView:(NSTableView *)aTableView;
 - (id)tableView:(NSTableView *)aTableView
     objectValueForTableColumn:(NSTableColumn *)aTableColumn

@@ -196,11 +196,17 @@ bool forceBarUpdate = NO;
           inverseWarning:NO];
 }
 
-- (void) setKeyMap:(MTKeyMap *)newKeyMap {
+- (void) setDistressKeyMap:(MTKeyMap *)newKeyMap {
     // pass it on
-    [gameView setKeyMap:newKeyMap];
+    [gameView setDistressKeyMap:newKeyMap];
+	[mapView setDistressKeyMap:newKeyMap];
+}
+
+- (void) setActionKeyMap:(MTKeyMap *)newKeyMap {
+    // pass it on
+    [gameView setActionKeyMap:newKeyMap];
 	// 1636263 support interaction on main map
-	[mapView setKeyMap:newKeyMap];
+	[mapView setActionKeyMap:newKeyMap];
 }
 
 - (void) setMouseMap:(MTMouseMap *)newMouseMap {

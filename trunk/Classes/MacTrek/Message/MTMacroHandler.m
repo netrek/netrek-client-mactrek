@@ -232,16 +232,18 @@ int  line_length = 0;
 	
 	// iterate message for newlines
 	NSRange range = [message rangeOfString:@"\n"];
+	// $$$ SEND ALL to my TEAM
+	NSString *destination = [[[[universe playerThatIsMe] team] abbreviation] uppercaseString];
 	if (range.location == NSNotFound) {
-		// prepend the destination
-		NSMutableString *temp = [NSMutableString stringWithString:[macro whoLongFormat]];
+		// prepend the destination 
+		NSMutableString *temp = [NSMutableString stringWithString:destination];
 		[temp appendString:message];
 		[notificationCenter postNotificationName:@"MH_MESSAGE" userInfo:temp];
 	} else {
 		while (range.location != NSNotFound) {
 			NSRange lineRange = NSMakeRange(0, range.location);
 			// prepend the destination
-			NSMutableString *temp = [NSMutableString stringWithString:[macro whoLongFormat]];
+			NSMutableString *temp = [NSMutableString stringWithString:destination];
 			[temp appendString:[message substringWithRange:lineRange]];
 			[notificationCenter postNotificationName:@"MH_MESSAGE" userInfo:temp];
 			// remove string and search again

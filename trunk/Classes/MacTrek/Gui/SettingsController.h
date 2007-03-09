@@ -11,12 +11,15 @@
 #import "LLPersistantSettings.h"
 #import "MTMouseMap.h"
 #import "Luky.h"
+#import "BaseClass.h"
+#import "MTDistressKeyMap.h"
+#import "MenuController.h"
 
 #define GRAPHICS_MODEL_NETREK  0
 #define GRAPHICS_MODEL_MACTREK 1
 #define GRAPHICS_MODEL_TAC     2
 
-@interface SettingsController : KeyMapTableDataSource {
+@interface SettingsController : BaseClass {
     IBOutlet NSSlider              *musicLevel;
     IBOutlet NSSlider              *fxLevel;
     IBOutlet NSSegmentedControl    *graphicsModel;  
@@ -29,8 +32,13 @@
 	IBOutlet NSPopUpButton		   *rightMouse;
 	IBOutlet NSPopUpButton		   *middleMouse;
 	IBOutlet NSPopUpButton		   *wheelMouse;
-    // the Back button is covered by the menu controller
+	
+	IBOutlet KeyMapTableDataSource *actionKeyMapDataSource;
+	IBOutlet KeyMapTableDataSource *distressKeyMapDataSource;
 }
+
+- (MTKeyMap*) distressKeyMap;
+- (MTKeyMap*) actionKeyMap;
 
 - (bool)  trackingEnabled;
 - (bool)  soundEnabled;

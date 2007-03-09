@@ -14,6 +14,24 @@
 - (void) awakeFromNib {
     [notificationCenter addObserver:self selector:@selector(saveSettings) name:@"MC_LEAVING_SETTINGS"];
     [self setPreviousValues];
+	
+	// actionKeyMap uses default KeyMap
+	MTKeyMap *actionKeyMap = [[MTKeyMap alloc] init];
+	[actionKeyMap readDefaultKeyMap];
+	[actionKeyMapDataSource setKeyMap:actionKeyMap];
+	
+	// distressMap uses default KeyMap
+	MTDistressKeyMap *distressKeyMap = [[MTDistressKeyMap alloc] init];
+	[distressKeyMap readDefaultKeyMap];
+	[distressKeyMapDataSource setKeyMap:distressKeyMap];	
+}
+
+- (MTKeyMap*) actionKeyMap {
+	return [actionKeyMapDataSource keyMap];
+}
+
+- (MTKeyMap*) distressKeyMap {
+	return [distressKeyMapDataSource keyMap];
 }
 
 - (void) setPreviousValues {
@@ -89,6 +107,7 @@
 
 - (void) saveSettings {
     
+	LLLog(@"SettingsController.saveSettings called");
     LLPersistantSettings *settings = [LLPersistantSettings defaultSettings];
     
     [settings setLazyValue:[NSNumber numberWithFloat:[self musicLevel]] forKey:@"MUSIC_LEVEL"];
@@ -110,6 +129,11 @@
 	
 	// an excellent place to tell the tracker what the status is
 	[[SimpleTracker defaultTracker] setEnabled:[self trackingEnabled]];
+	
+	// and the keymaps of course
+	// BUG 1674341
+	[[self actionKeyMap] writeToDefaultFileIfChanged];
+	[[self distressKeyMap] writeToDefaultFileIfChanged];
 }
 
 
@@ -202,6 +226,5 @@
 	
 	return mouseMap;	
 }
-    
 
 @end

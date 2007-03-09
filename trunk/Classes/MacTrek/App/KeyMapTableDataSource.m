@@ -25,6 +25,14 @@
     return self;
 }
 
+- (void) setKeyMap:(MTKeyMap*) keyMap {
+    if (keyMap != nil) {
+		[myMap release];
+        myMap = keyMap;
+		[keyMapTableView performSelector: @selector(reloadData) withObject:nil afterDelay: 1.0];		
+    }
+}
+
 - (void) awakeFromNib {
 	// hmmm seems not to be called at all ?
 	// -> yes! but if changed, delete and reinstantiate the SettingsController in the
@@ -47,6 +55,18 @@
     return 0;
 }
 
+int intSort(id num1, id num2, void *context)
+{
+    int v1 = [num1 intValue];
+    int v2 = [num2 intValue];
+    if (v1 < v2)
+        return NSOrderedAscending;
+    else if (v1 > v2)
+        return NSOrderedDescending;
+    else
+        return NSOrderedSame;
+}
+
 - (id)tableView:(NSTableView *)aTableView
     objectValueForTableColumn:(NSTableColumn *)aTableColumn
             row:(int)rowIndex {
@@ -54,6 +74,8 @@
 	
     if (keyMapTableView == aTableView) {
         NSArray *actionKeys = [myMap allKeys];
+		// sort the array (much nicer)
+		[actionKeys sortedArrayUsingFunction:intSort context:NULL];
         int action = [[actionKeys objectAtIndex:rowIndex] intValue];
         if ([[aTableColumn identifier] isEqualTo: @"description"]) {
             return [myMap descriptionForAction:action];
@@ -81,6 +103,8 @@
     // only the key column is editable
     if (tableView == keyMapTableView) {           
         NSArray *actionKeys = [myMap allKeys];
+		// sort the array (much nicer)
+		[actionKeys sortedArrayUsingFunction:intSort context:NULL];
         int action = [[actionKeys objectAtIndex:row] intValue];
         // only accept a single character
         // use of a formatter would be better

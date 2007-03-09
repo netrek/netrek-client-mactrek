@@ -587,9 +587,10 @@ int startUpEvents = 0;
 			[[gameCntrl gameView] setFeatureList:[[client communication] featureList]];
 			[[gameCntrl mapView] setFeatureList:[[client communication] featureList]];
             // save the keymap if it was changed
-            [[settingsCntrl keyMap] writeToDefaultFileIfChanged];
+            [[settingsCntrl actionKeyMap] writeToDefaultFileIfChanged];
             // first pass on the keyMap that was created in the settings
-            [gameCntrl setKeyMap:[settingsCntrl keyMap]]; 
+            [gameCntrl setActionKeyMap:[settingsCntrl actionKeyMap]]; 
+			[gameCntrl setDistressKeyMap:[settingsCntrl distressKeyMap]]; 
 			// 1666849 and the mouse
 			[gameCntrl setMouseMap:[settingsCntrl mouseMap]];
 			[self fillKeyMapPanel];
@@ -701,7 +702,7 @@ int startUpEvents = 0;
 	LLLog(@"GuiManager.fillKeyMapPanel setting keymap in help panel");
 
 	NSMutableString *result = [[[NSMutableString alloc] init] autorelease];
-	MTKeyMap *keyMap = [settingsCntrl keyMap];
+	MTKeyMap *keyMap = [settingsCntrl actionKeyMap];
 	NSArray *actionKeys = [keyMap allKeys];
 
 	for (int i = 0; i < [actionKeys count]; i++) {
