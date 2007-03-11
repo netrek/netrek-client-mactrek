@@ -8,7 +8,6 @@
 
 #import <Cocoa/Cocoa.h>
 #import "KeyMapTableDataSource.h"
-#import "LLPersistantSettings.h"
 #import "MTMouseMap.h"
 #import "Luky.h"
 #import "BaseClass.h"
@@ -33,14 +32,20 @@
 	IBOutlet NSPopUpButton		   *rightMouse;
 	IBOutlet NSPopUpButton		   *middleMouse;
 	IBOutlet NSPopUpButton		   *wheelMouse;
+	IBOutlet NSPopUpButton		   *resolution;
 	
 	IBOutlet KeyMapTableDataSource *actionKeyMapDataSource;
 	IBOutlet KeyMapTableDataSource *distressKeyMapDataSource;
+	
+	IBOutlet NSWindow              *mainWindow;
+	LLScreenResolution             *displaySetter;
 }
 
 - (MTKeyMap*) distressKeyMap;
 - (MTKeyMap*) actionKeyMap;
 
+- (void) setResolutionByString:(NSString*) resolutionString;
+- (void) resolutionChanged:(NSNotification *)notification;
 - (bool)  trackingEnabled;
 - (bool)  soundEnabled;
 - (bool)  voiceEnabled;

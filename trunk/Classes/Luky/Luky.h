@@ -29,6 +29,8 @@
 #import "LLGradientRect.h"
 #import "LLLog.h"
 #import "LLNetServiceDelegate.h"
+#import "LLScreenResolution.h"
+#import "LLPersistantSettings.h"
 
 
 

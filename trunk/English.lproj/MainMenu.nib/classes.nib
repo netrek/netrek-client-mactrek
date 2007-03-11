@@ -211,8 +211,10 @@
                 graphicsModel = NSSegmentedControl; 
                 leftMouse = NSPopUpButton; 
                 logToConsole = NSButton; 
+                mainWindow = NSWindow; 
                 middleMouse = NSPopUpButton; 
                 musicLevel = NSSlider; 
+                resolution = NSPopUpButton; 
                 rightMouse = NSPopUpButton; 
                 trackingEnabledButton = NSButton; 
                 voiceCmds = NSButton; 

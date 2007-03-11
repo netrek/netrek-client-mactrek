@@ -59,7 +59,7 @@
 		} else {
 			NSString *origin = [[str substringToIndex:range.location] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
 			LLLog(@"Postman.newMessage responding to %@ with version", origin);
-			[self sendMessage:[NSString stringWithFormat:@"Running: %@ %@", APP_NAME, VERSION] to:origin];
+			[self sendMessage:[NSString stringWithFormat:@"%@ %@", APP_NAME, VERSION] to:origin];
 		}		
 	} 
 }

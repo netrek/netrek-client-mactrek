@@ -8,6 +8,7 @@
 
 #import <Cocoa/Cocoa.h>
 #import "LLObject.h"
+#import "LLScreenResolution.h"
 
 @interface LLFullScreenBackgroundWindow : NSWindow {
 	bool canBecomeKeyWindow;
