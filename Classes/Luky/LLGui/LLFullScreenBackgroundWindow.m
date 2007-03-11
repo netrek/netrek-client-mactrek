@@ -8,7 +8,7 @@
 
 #import "LLFullScreenBackgroundWindow.h"
 
-#define DEBUG 
+//#define DEBUG 
 
 @implementation LLFullScreenBackgroundWindow
 
@@ -71,12 +71,13 @@
     //-----------------------------------------------------------
     // Disable this to debug normal size
     //-----------------------------------------------------------
-     [self setFrame:[[NSScreen mainScreen] frame] display:YES];
+	NSRect frame1 = [[LLScreenResolution defaultScreenResolution] frameForPrimairyDisplay];	
+	//NSRect frame2 = [[NSScreen mainScreen] frame];
+	[self setFrame:frame1 display:YES];
     //-----------------------------------------------------------
 #endif
 	
 }
-
 
 - (BOOL) canBecomeKeyWindow
 {

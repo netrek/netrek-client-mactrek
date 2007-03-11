@@ -1047,8 +1047,7 @@ int shortFromPacket(char *buffer, int offset) {
                 [notificationCenter postNotificationName:@"SP_MESSAGE" object:self userInfo:obj];  
             }
             @catch (NSException * e) {
-                LLLog(@"ServerReader.handlePacket: SP_MESSAGE error");
-                LLLog([NSString stringWithFormat:@"%@: %@", [e name], [e reason]]);
+                LLLog(@"ServerReader.handlePacket: SP_MESSAGE error: %@: %@", [e name], [e reason]);
             }        
 			break; 
 		case SP_PLAYER_INFO :
@@ -1434,6 +1433,9 @@ int shortFromPacket(char *buffer, int offset) {
                             //we did boom
                         case PLAYER_EXPLODE :
                             [player setExplode: 0];
+							if ([player isMe]) {
+								LLLog(@"ServerReader.handlePacket: SP_PSTATUS i seem to have exploded!");
+							}
                             break;
                         case PLAYER_DEAD :
                             // if we become dead, we should explode
@@ -1958,17 +1960,28 @@ int shortFromPacket(char *buffer, int offset) {
 
 - (NSString*) stringFromBuffer:(char*)buffer startFrom:(int)start maxLength:(int)max {
     
+	// check
+	bool okay = NO;
+	for (int i = start; i < (start+max); i++) {
+        if (buffer[i] == '\0') {
+			okay = YES;
+		}
+	}
+	if (!okay) {
+		buffer[start+max] = '\0';
+	}
     // looks for null temination it self, i could check maxlength, but it's okay
     NSString *line = [NSString stringWithUTF8String:(buffer + start)];
-    //LLLog(@"ServerReader.stringFromBuffer (%@)", line);
+    LLLog(@"ServerReader.stringFromBuffer (%@)", line);
     return line;
-    /*
     
+    // $$$ crashed runtime, fix here use old code...
+	/*
     int end = max;
     for (int i = start; i < max; i++) {
         if (buffer[i] == '\0') {
             end = i;
-            NSString *line = [NSString stringWithCString:(buffer + start) length:end + 1];
+            NSString *line = [NSString stringWithUTF8String:(buffer + start) length:end + 1];
             LLLog(@"ServerReader.stringFromBuffer (%@)", line);
             return line;
         }

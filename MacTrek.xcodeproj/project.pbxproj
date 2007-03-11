@@ -75,6 +75,7 @@
 		5212F0AA0B08FFB80059A8B1 /* MapView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5212F0460B08FFB80059A8B1 /* MapView.m */; };
 		5212F0AB0B08FFB80059A8B1 /* MessagesListView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5212F0480B08FFB80059A8B1 /* MessagesListView.m */; };
 		5212F0AC0B08FFB80059A8B1 /* PlayerListView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5212F04A0B08FFB80059A8B1 /* PlayerListView.m */; };
+		521B0B3F0BA4166700CCE3EB /* LLScreenResolution.m in Sources */ = {isa = PBXBuildFile; fileRef = 521B0B3E0BA4166700CCE3EB /* LLScreenResolution.m */; };
 		5220A6C80A598D2900ADAD05 /* QTKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5220A6C70A598D2900ADAD05 /* QTKit.framework */; };
 		522F30AF0B0B1D6200E7DDED /* RSAWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 522F30AE0B0B1D6200E7DDED /* RSAWrapper.m */; };
 		522F30B80B0B1E2C00E7DDED /* rsa_box_0.c in Sources */ = {isa = PBXBuildFile; fileRef = 522F30B20B0B1E2C00E7DDED /* rsa_box_0.c */; };
@@ -665,6 +666,8 @@
 		5212F0480B08FFB80059A8B1 /* MessagesListView.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = MessagesListView.m; sourceTree = "<group>"; };
 		5212F0490B08FFB80059A8B1 /* PlayerListView.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = PlayerListView.h; sourceTree = "<group>"; };
 		5212F04A0B08FFB80059A8B1 /* PlayerListView.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = PlayerListView.m; sourceTree = "<group>"; };
+		521B0B3D0BA4166700CCE3EB /* LLScreenResolution.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLScreenResolution.h; sourceTree = "<group>"; };
+		521B0B3E0BA4166700CCE3EB /* LLScreenResolution.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLScreenResolution.m; sourceTree = "<group>"; };
 		5220A6C70A598D2900ADAD05 /* QTKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QTKit.framework; path = /System/Library/Frameworks/QTKit.framework; sourceTree = "<absolute>"; };
 		522F30AD0B0B1D6200E7DDED /* RSAWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RSAWrapper.h; path = RSA/RSAWrapper.h; sourceTree = "<group>"; };
 		522F30AE0B0B1D6200E7DDED /* RSAWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RSAWrapper.m; path = RSA/RSAWrapper.m; sourceTree = "<group>"; };
@@ -1637,6 +1640,8 @@
 				528E7DFB0B0A649E00B22943 /* LLStringTable.m */,
 				528E7DFC0B0A649E00B22943 /* LLTransparentWindow.h */,
 				528E7DFD0B0A649E00B22943 /* LLTransparentWindow.m */,
+				521B0B3D0BA4166700CCE3EB /* LLScreenResolution.h */,
+				521B0B3E0BA4166700CCE3EB /* LLScreenResolution.m */,
 			);
 			path = LLGui;
 			sourceTree = "<group>";
@@ -2674,6 +2679,7 @@
 				522F9F4C0B96C842001C4896 /* MTDistress.m in Sources */,
 				52604A9B0B97016B0097D103 /* LLNetServiceDelegate.m in Sources */,
 				528CF1A90BA07FF30001B4D0 /* MTDistressKeyMap.m in Sources */,
+				521B0B3F0BA4166700CCE3EB /* LLScreenResolution.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2709,6 +2715,7 @@
 					/Volumes/Pear/xcode/Builds/Debug,
 					/Volumes/Pear/xcode/Builds/Release,
 					"$(FRAMEWORK_SEARCH_PATHS_QUOTED_1)",
+					"$(FRAMEWORK_SEARCH_PATHS_QUOTED_2)",
 				);
 				FRAMEWORK_SEARCH_PATHS_QUOTED_1 = "\"$(SYSTEM_DEVELOPER_DIR)/SDKs/MacOSX10.4u.sdk/System/Library/Frameworks\"";
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -2747,6 +2754,7 @@
 					/Volumes/Pear/xcode/Builds/Debug,
 					/Volumes/Pear/xcode/Builds/Release,
 					"$(FRAMEWORK_SEARCH_PATHS_QUOTED_1)",
+					"$(FRAMEWORK_SEARCH_PATHS_QUOTED_2)",
 				);
 				FRAMEWORK_SEARCH_PATHS_QUOTED_1 = "\"$(SYSTEM_DEVELOPER_DIR)/SDKs/MacOSX10.4u.sdk/System/Library/Frameworks\"";
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;

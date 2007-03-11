@@ -11,7 +11,32 @@
 
 @implementation SettingsController
 
+struct screenMode originalMode;
+
+- (id) init {
+	self = [super init];
+	if (self != nil) {
+		displaySetter = [LLScreenResolution defaultScreenResolution];
+		
+		// store this
+		originalMode = [displaySetter screenModeOnPrimairyDisplay];
+		
+		
+		// set initial screen size		
+		id val = [[LLPersistantSettings defaultSettings] valueForKey:@"RESOLUTION"];
+		if (val != nil) {
+			NSString *resolutionValue = (NSString *)val;
+			[resolution selectItemWithTitle:resolutionValue];
+			[self setResolutionByString:resolutionValue];		
+		}
+	}
+	return self;
+}
+
+
 - (void) awakeFromNib {
+
+	
     [notificationCenter addObserver:self selector:@selector(saveSettings) name:@"MC_LEAVING_SETTINGS"];
     [self setPreviousValues];
 	
@@ -24,6 +49,84 @@
 	MTDistressKeyMap *distressKeyMap = [[MTDistressKeyMap alloc] init];
 	[distressKeyMap readDefaultKeyMap];
 	[distressKeyMapDataSource setKeyMap:distressKeyMap];	
+	
+	// act directly when the resolution is changed	
+	[[NSNotificationCenter defaultCenter] addObserver:self
+											 selector:@selector(resolutionChanged:) 
+												 name:NSMenuDidChangeItemNotification 
+											   object:[resolution menu]]; 
+	 
+	// shutdown
+	[notificationCenter addObserver:self selector:@selector(shutdown) name:@"MC_MACTREK_SHUTDOWN"];
+}
+
+- (void) shutdown {
+	// reset screen
+	LLLog(@"SettingsController.shutdown setting to (%dx%d), %d bpp", originalMode.height, originalMode.width, originalMode.bitsPerPixel);
+	[displaySetter setPrimairyDisplayToMode:originalMode];
+}
+
+- (void) resolutionChanged:(NSNotification *)notification {
+	
+	NSMenu *source = [notification object];
+	
+	NSMenuItem *item = [source itemAtIndex:[[[notification userInfo] valueForKey:@"NSMenuItemIndex"] intValue]];
+	NSMenuItem *selectedItem = [resolution selectedItem];
+	
+	if (item != selectedItem) {
+		LLLog(@"SettingsController.resolutionChanged: ignoring %@, menu [%@]", [notification name], [item title]);
+		return;	
+	}
+	
+	LLLog(@"SettingsController.resolutionChanged: %@, menu [%@]", [notification name], [item title]);	
+
+	// seems only to work at startup ? 
+	// oh well
+	//[self setResolutionByString:[item title]];
+	
+	// at least save it 
+	[self saveSettings];	
+}
+
+- (void) setResolutionByString:(NSString*) resolutionString {
+	
+	struct screenMode newMode;
+	struct screenMode oldMode;
+	
+	if (resolutionString == nil) {
+		return;
+	}
+	
+	if (![resolutionString isKindOfClass:[NSString class]]) {
+		return;
+    }
+	
+	LLLog(@"SettingsController.setResolutionByString request for %@", resolutionString); 
+	
+	NSArray *elements = [resolutionString componentsSeparatedByString:@"x"];
+	newMode.width   = [[elements objectAtIndex:0] intValue];
+	newMode.height  = [[elements objectAtIndex:1] intValue];
+	newMode.bitsPerPixel = 32; // fixed
+	
+	oldMode = [displaySetter screenModeOnPrimairyDisplay];
+
+	if ((newMode.height != oldMode.height) ||
+		(newMode.width != oldMode.width) ||
+		(newMode.bitsPerPixel != oldMode.bitsPerPixel)) {
+		LLLog(@"SettingsController.setResolutionByString setting to (%dx%d), %d bpp", newMode.width, newMode.height, newMode.bitsPerPixel);
+		[displaySetter setPrimairyDisplayToMode:newMode];	
+		// pass the knowledge to the window
+		struct screenMode realMode = [displaySetter screenModeOnPrimairyDisplay];
+		NSRect frame = NSMakeRect(0, 0, realMode.width, realMode.height);
+		//[mainWindow setFrame:frame display:YES];
+		LLLog(@"SettingsController.setResolutionByString FRAME (%fx%f)", frame.size.width, frame.size.height); 
+		[mainWindow setFrame:frame display:NO];
+		// $$$ very strange, must wait and 1 second is not enough !!!
+		[mainWindow zoom:self];
+		//[[[NSApplication sharedApplication] mainWindow] performSelector:@selector(zoom:) withObject:self afterDelay:10.0];
+		[mainWindow performSelector:@selector(zoom:) withObject:self afterDelay:2.0];
+		//[mainWindow performSelector:@selector(performZoom:) withObject:self afterDelay:15.0];
+	}
 }
 
 - (MTKeyMap*) actionKeyMap {
@@ -100,6 +203,13 @@
     if (val != nil) {
         [wheelMouse selectItemWithTitle:[self stringForAction:[val intValue]]];
     }
+	// can select resolution now
+	val = [settings valueForKey:@"RESOLUTION"];
+    if (val != nil) {
+		NSString *resolutionValue = (NSString *)val;
+        [resolution selectItemWithTitle:resolutionValue];
+		[self setResolutionByString:resolutionValue];
+    }
 		
 	// set internal tracker state
 	[[SimpleTracker defaultTracker] setEnabled:[self trackingEnabled]];
@@ -132,6 +242,9 @@
 	[settings setLazyValue:[NSNumber numberWithInt:[mouseMap actionMouseMiddle]] forKey:@"MIDDLE_MOUSE"];
 	[settings setLazyValue:[NSNumber numberWithInt:[mouseMap actionMouseRight]] forKey:@"RIGHT_MOUSE"];
 	[settings setLazyValue:[NSNumber numberWithInt:[mouseMap actionMouseWheel]] forKey:@"WHEEL_MOUSE"];
+	
+	// add the resolution
+	[settings setLazyValue:[[resolution selectedItem] title]  forKey:@"RESOLUTION"];
 	
     [settings update];
 	
