@@ -27,7 +27,8 @@ struct screenMode originalMode;
 		if (val != nil) {
 			NSString *resolutionValue = (NSString *)val;
 			[resolution selectItemWithTitle:resolutionValue];
-			[self setResolutionByString:resolutionValue];		
+			[self setResolutionByString:resolutionValue];
+			[mainWindow performSelector:@selector(zoom:) withObject:self afterDelay:2.0];
 		}
 	}
 	return self;
