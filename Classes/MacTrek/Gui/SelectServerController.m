@@ -24,6 +24,9 @@ bool validServer;
 
 - (void) awakeFromNib {
 
+	// do super too 
+	[super awakeFromNib];
+	
     // verify did end typinh
     [[NSNotificationCenter defaultCenter] addObserver:self
 											 selector:@selector(manualEntryDidEndEditing:)

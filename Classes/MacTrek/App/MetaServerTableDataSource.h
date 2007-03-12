@@ -11,17 +11,20 @@
 #import "MetaServerParser.h"
 
 @interface MetaServerTableDataSource : BaseClass {
-
+	
     // must be tied to the tableview in question
     IBOutlet NSTableView *serverTableView;
     
     // internal data
     MetaServerParser *meta;
-    NSMutableArray *entries;  
-    NSMutableArray *bonjourServers; 
     
     // selected entry
     MetaServerEntry *selectedServer;
+	NSNetServiceBrowser *serviceBrowser;
+	LLRendezvousController *rendezvousController;
+	NSMutableArray *bonjourServers;
+	NSMutableArray *metaServerServers;
+	NSArray *availableServices;
 }
 
 - (IBAction)refreshServers:(id)sender;
@@ -36,7 +39,8 @@
 - (void) addRendezVousServerToArray:(NSMutableArray*) result;
 
 // rendezvous delegate functions
+/*
 - (void)netServiceBrowser:(NSNetServiceBrowser *)netServiceBrowser didRemoveService:(NSNetService *)netService moreComing:(BOOL)moreServicesComing;
 - (void)netServiceBrowser:(NSNetServiceBrowser *)netServiceBrowser didFindService:(NSNetService *)netService moreComing:(BOOL)moreServicesComing;
-
+*/
 @end

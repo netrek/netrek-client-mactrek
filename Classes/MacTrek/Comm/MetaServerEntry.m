@@ -131,7 +131,10 @@
             break;
         case CANNOT_CONNECT:
             return @"Cannot Connect";
-            break;        
+            break;  
+		case RENDEZVOUS:
+            return @"RENDEZVOUS";
+            break; 
         default:
             return @"ERROR";
             break;
