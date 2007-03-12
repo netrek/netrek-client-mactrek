@@ -102,7 +102,13 @@ struct screenMode originalMode;
     }
 	
 	LLLog(@"SettingsController.setResolutionByString request for %@", resolutionString); 
+
+	if ([resolutionString isEqualToString:@"Native"]) {
+		LLLog(@"SettingsController.setResolutionByString sticking to native resolution"); 
+	    return;
+	}
 	
+	// its something like width x height
 	NSArray *elements = [resolutionString componentsSeparatedByString:@"x"];
 	newMode.width   = [[elements objectAtIndex:0] intValue];
 	newMode.height  = [[elements objectAtIndex:1] intValue];

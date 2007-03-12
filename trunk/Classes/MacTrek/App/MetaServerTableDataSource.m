@@ -16,23 +16,80 @@
     if (self != nil) {
         selectedServer = nil;
         meta = [[MetaServerParser alloc] init];
-		entries = [[NSMutableArray alloc] init];
+		metaServerServers = [[NSMutableArray alloc] init];
 		bonjourServers = [[NSMutableArray alloc] init];
-        // initial query is in seperate thread
+        // initial query is in seperate thread		
         [NSThread detachNewThreadSelector:@selector(refreshServersInSeperateThread:) toTarget:self withObject:nil];
     }
     return self;
 }
 
+- (void)awakeFromNib {
+	
+	// 1667734 add rendezvous servers
+	
+	/*
+	 should work, but does not
+	 
+	serviceBrowser = [[NSNetServiceBrowser alloc] init];
+	[serviceBrowser setDelegate:self];
+	//[serviceBrowser setDelegate:[[LLNetServiceDelegate alloc] init]];  // test
+	[serviceBrowser searchForServicesOfType:@"_netrek._tcp." inDomain:@""];	
+	 
+	 */
+	
+	availableServices = nil;
+	 
+	rendezvousController = [[LLRendezvousController alloc] initWithName:@"MacTrek" type:@"_netrek._tcp." port:2592];
+	[rendezvousController setDelegate:self];
+	[rendezvousController activateBrowsing:YES];
+	[rendezvousController activatePublishing:YES];	 
+	
+	// try again in 1 second
+	[rendezvousController performSelector:@selector(refreshBrowsing) withObject:nil afterDelay:1.0];
+}
+
+- (void)discoveredServicesDidChange:(id)sender {
+	[availableServices autorelease];
+	availableServices = [[rendezvousController discoveredServicesWithInfo] retain];
+	
+	// clean up
+	[bonjourServers removeAllObjects];
+	
+	unsigned int i, count = [availableServices count];
+	for (i = 0; i < count; i++) {
+		NSDictionary *dict = [availableServices objectAtIndex:i];
+		
+		// get data
+		NSString *name = [dict objectForKey:@"name"];
+		int port = [[dict objectForKey:@"port"] intValue];		
+		NSNetService *service = [dict objectForKey:@"service"];
+		NSString *ip = [service hostName]; //[dict objectForKey:@"ip"];
+		
+		LLLog(@"MetaServerTableDataSource.discoveredServicesDidChange adding service: %@ name: %@ at: %@:%d", 
+			  service, name, ip, port);
+		
+		// we are called twice (once through localhost, and once through network adaptor, list only one
+		if ([self findServer:ip] == nil) {
+			// create a new entry
+			MetaServerEntry *entry = [[MetaServerEntry alloc] init];
+			[entry setAddress: ip];
+			[entry setPort:    2592];  // use fixed ports
+			[entry setStatus:  RENDEZVOUS];
+			[entry setGameType:    BRONCO];	
+			
+			[bonjourServers insertObject:entry atIndex:0];  
+		}
+ 		
+	}
+	
+	// and reload
+	[serverTableView reloadData];
+}
+
 - (void) refreshServersInSeperateThread:(id)sender {
     // technically this should be done with locks since
     // it can be invoked from init and by user if he is very very fast...
-    
-	// 1667734 add rendezvous servers
-	NSNetServiceBrowser *serviceBrowser;
-	serviceBrowser = [[NSNetServiceBrowser alloc] init];
-	[serviceBrowser setDelegate:self];
-	[serviceBrowser searchForServicesOfType:@"_netrek._tcp" inDomain:@""];	
 	
     // create a private pool for this thread
     NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
@@ -48,9 +105,10 @@
 }
 
 // 1667734 add rendezvous servers
+/*
 - (void)netServiceBrowser:(NSNetServiceBrowser *)netServiceBrowser didFindService:(NSNetService *)netService moreComing:(BOOL)moreServicesComing {
 	
-	if ([[netService type] isEqualToString:@"_netrek._tcp"]){
+	if ([[netService type] isEqualToString:@"_netrek._tcp."]){
 		
 		// create a new entry
 		MetaServerEntry *entry = [[MetaServerEntry alloc] init];
@@ -85,7 +143,7 @@
 		LLLog(@"MetaServerTableDataSource.netServiceBrowser:(rem) unknown service %@", [netService type]); 
 	}
 }
-
+*/
 - (IBAction)refreshServers:(id)sender {  
 	
 	NSMutableArray *result;
@@ -102,16 +160,17 @@
 	if (result != nil) {
 		// check for localhost before releaseing
 		MetaServerEntry *localhost = [self findServer:@"localhost"];
-		[entries release];
-		entries = result;
+		[metaServerServers release];
+		metaServerServers = result;
 		if (localhost != nil) {
 			LLLog(@"MetaServerTableDataSource.refreshServers: keeping localhost");
 			[self addServerPassivly:localhost];
 		}
 	}
-	// 1667734 add rendezvous servers
-	[self addRendezVousServerToArray:result];
+	// rendezvous too
+	[rendezvousController refreshBrowsing];
 	
+	// show it
     [serverTableView reloadData];
 }
 
@@ -121,7 +180,7 @@
 
 - (int)numberOfRowsInTableView:(NSTableView *)aTableView {
     if (serverTableView == aTableView) {
-        return [entries count];
+        return ([metaServerServers count] + [bonjourServers count]);
     }
     return 0;
 }
@@ -130,6 +189,10 @@
     objectValueForTableColumn:(NSTableColumn *)aTableColumn
             row:(int)rowIndex {
     
+	// create temp array with both
+	NSMutableArray *entries = [NSMutableArray arrayWithArray:bonjourServers];
+	[entries addObjectsFromArray:metaServerServers];
+	
     if (serverTableView == aTableView) {
         MetaServerEntry *entry = [entries objectAtIndex:rowIndex];
         
@@ -166,6 +229,10 @@
 // delegate functions
 - (BOOL)tableView:(NSTableView *)aTableView shouldSelectRow:(int)rowIndex {
     
+	// create temp array with both
+	NSMutableArray *entries = [NSMutableArray arrayWithArray:bonjourServers];
+	[entries addObjectsFromArray:metaServerServers];
+	
     // we abuse shouldSelectRow since it is a delegate function and not
     // a notification. (simpler)
     
@@ -184,6 +251,10 @@
 }
 
 - (MetaServerEntry *) findServer:(NSString *)name {
+	
+	// create temp array with both
+	NSMutableArray *entries = [NSMutableArray arrayWithArray:bonjourServers];
+	[entries addObjectsFromArray:metaServerServers];
     
     for (int i = 0; i < [entries count]; i++) {
         MetaServerEntry *entry = [entries objectAtIndex:i];
@@ -195,12 +266,12 @@
 }
 
 - (void) addServerPassivly:(MetaServerEntry *) entry {
-    [entries insertObject:entry atIndex:0];    
+    [metaServerServers insertObject:entry atIndex:0];    
     [serverTableView reloadData];
 }
 
 - (void) addServer:(MetaServerEntry *) entry {
-    [entries insertObject:entry atIndex:0];    
+    [metaServerServers insertObject:entry atIndex:0];    
     [serverTableView reloadData];
     // and select it
     [self setServerSelected:entry];
@@ -210,7 +281,7 @@
     
     MetaServerEntry *entry = [self findServer:name];
     if (entry != nil) {
-        [entries removeObject:entry];
+        [metaServerServers removeObject:entry];
         [serverTableView reloadData];
         if (entry == selectedServer) {
             [self deselectServer];

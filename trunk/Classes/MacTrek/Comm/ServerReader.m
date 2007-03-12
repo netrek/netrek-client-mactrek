@@ -1972,7 +1972,7 @@ int shortFromPacket(char *buffer, int offset) {
 	}
     // looks for null temination it self, i could check maxlength, but it's okay
     NSString *line = [NSString stringWithUTF8String:(buffer + start)];
-    LLLog(@"ServerReader.stringFromBuffer (%@)", line);
+    //LLLog(@"ServerReader.stringFromBuffer (%@)", line);
     return line;
     
     // $$$ crashed runtime, fix here use old code...

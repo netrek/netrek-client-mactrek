@@ -195,11 +195,12 @@ int startUpEvents = 0;
 		[entry setGameType:    BRONCO];	
 		[selectServerCntrl addServerPassivly:entry];  // gets selected automatically  
 		
+		/*
 		// 1667734 add RendezVous
 		service = [[NSNetService alloc] initWithDomain:@""
 												  type:@"_netrek._tcp"
 												  name:@"" 
-												  port:2593];
+												  port:2592];
 		if(service) {
 			[service setDelegate:[[LLNetServiceDelegate alloc] init]];
 			[service publish];
@@ -208,8 +209,9 @@ int startUpEvents = 0;
 		else {
 			LLLog(@"GuiManager.awakeFromNib An error occurred initializing the NSNetService object.");
 		}
+		 */
 	}
-	
+		
 	// register for quit
 	[[NSNotificationCenter defaultCenter] addObserver:self
 											 selector:@selector(killed:) 
@@ -702,15 +704,28 @@ int startUpEvents = 0;
 	LLLog(@"GuiManager.fillKeyMapPanel setting keymap in help panel");
 
 	NSMutableString *result = [[[NSMutableString alloc] init] autorelease];
+	
+	// add the actions
+	[result appendString:@"-----------Controls-----------\n"];
 	MTKeyMap *keyMap = [settingsCntrl actionKeyMap];
 	NSArray *actionKeys = [keyMap allKeys];
-
 	for (int i = 0; i < [actionKeys count]; i++) {
 		int action = [[actionKeys objectAtIndex:i] intValue];
 		[result appendString:[NSString stringWithFormat:@"%c - %@\n", 
 			[keyMap keyForAction:action], [keyMap descriptionForAction:action]]];
     }
-		
+	// add the distress macros too
+	[result appendString:@"---------Communication--------\n"];
+	keyMap = [settingsCntrl distressKeyMap];
+	actionKeys = [keyMap allKeys];
+	
+	for (int i = 0; i < [actionKeys count]; i++) {
+		int action = [[actionKeys objectAtIndex:i] intValue];
+		[result appendString:[NSString stringWithFormat:@"%c - %@\n", 
+			[keyMap keyForAction:action], [keyMap descriptionForAction:action]]];
+    }
+	
+	
 	[keyMapList setString:result];
 }
 
