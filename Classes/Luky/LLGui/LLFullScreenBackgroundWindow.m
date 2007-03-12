@@ -72,7 +72,7 @@
     // Disable this to debug normal size
     //-----------------------------------------------------------
 	NSRect frame1 = [[LLScreenResolution defaultScreenResolution] frameForPrimairyDisplay];	
-	//NSRect frame2 = [[NSScreen mainScreen] frame];
+	NSRect frame2 = [[NSScreen mainScreen] frame];
 	[self setFrame:frame1 display:YES];
     //-----------------------------------------------------------
 #endif
