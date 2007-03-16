@@ -1165,7 +1165,7 @@
 		52F819900B8F1280003ED1BE /* mouse.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = mouse.png; path = "../../Design Stuff/Images MacTrek/mouse.png"; sourceTree = SOURCE_ROOT; };
 		52FC6C8A0B45A8CD0052CC8B /* licence.txt */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text; path = licence.txt; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Info.plist; sourceTree = "<group>"; };
-		8D1107320486CEB800E47090 /* MacTrek.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MacTrek.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		8D1107320486CEB800E47090 /* MacTrek.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = MacTrek.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
