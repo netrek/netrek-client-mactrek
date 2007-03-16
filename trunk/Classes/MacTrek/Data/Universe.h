@@ -42,8 +42,10 @@
 
 + (Universe*) defaultInstance;
 
--(NSLock *)synchronizeAccess;
--(int)remappedTeamIdWithId:(int)teamId;
+- (void) resetShowInfoPlanets;
+- (void) resetShowInfoPlayers;
+- (NSLock *)synchronizeAccess;
+- (int)remappedTeamIdWithId:(int)teamId;
 - (Rank *) rankWithId:(int)rankId;
 - (bool) entity:(Entity*)obj1 closerToPos:(NSPoint)pos than:(Entity*)obj2;
 - (bool) entity:(Entity*)obj1 closerToPlayer:(Player*)player than:(Entity*)obj2;

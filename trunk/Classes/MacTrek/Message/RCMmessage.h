@@ -9,18 +9,10 @@
 #import <Cocoa/Cocoa.h>
 #import "Data.h"
 #import "BaseClass.h"
+#import "MTDistress.h"
 
-@interface RCMmessage : BaseClass {
-    int flags;
+@interface RCMmessage : MTDistress {
     int to;
-    int type;
-    Player *sender;
-    Player *targetPlayer;
-    int armies;
-    int damage;
-    int shields;
-    Planet *targetPlanet;
-    int weaponTemp;    
 }
 
 - (void) setFlags: (int) flags;

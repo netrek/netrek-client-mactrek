@@ -98,7 +98,7 @@ int karg5;
             @"Your new starbase is still under construction",
             @"Your team's stuggling economy cannot support such an expenditure!",
             @"You are being transported to your new vessel .... @",
-            @"Engineering:  Energize. [ SFX: chimes ]",
+            @"Engineering:  Energize. ",
             @"Wait, you forgot your toothbrush!",  // 64
             @"Nothing like turning in a used ship for a new one.",
             @"First officer:  Oh no, not you again... we're doomed!",

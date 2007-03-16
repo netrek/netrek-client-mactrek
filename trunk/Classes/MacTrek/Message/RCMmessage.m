@@ -14,33 +14,22 @@
 - (id) init {
     self = [super init];
     if (self != nil) {
-        flags = 0;
         to = 0;
-        type = 0;
-        sender = nil;
-        targetPlayer = nil;
-        armies = 0;
-        damage = 0;
-        shields = 0;
-        targetPlanet = nil;
-        weaponTemp = 0;
     }
     return self;
 }
 
 - (void) setFlags: (int) newFlags {
-    flags = newFlags;
+    macro_flag = newFlags;
 }
 
 - (void) setTo: (int) newTo{
     to = newTo;
 }
 
-
 - (void) setType: (int) newType{
-    type = newType;
+    distress_type = newType;
 }
-
 
 - (void) setSender: (Player *)newSender{
     sender = newSender;
@@ -48,7 +37,7 @@
 
 
 - (void) setTargetPlayer: (Player *)newTargetPlayer{
-    targetPlayer = newTargetPlayer;
+    target_player = newTargetPlayer;
 }
 
 
@@ -56,24 +45,20 @@
     armies = newArmies;
 }
 
-
 - (void) setDamage: (int) newDamage{
     damage = newDamage;
 }
-
 
 - (void) setShields: (int) newShields{
     shields = newShields;
 }
 
-
 - (void) setTargetPlanet: (Planet *)newTargetPlanet{
-    targetPlanet = newTargetPlanet;
+    target_planet = newTargetPlanet;
 }
 
-
 - (void) setWeaponTemp: (int) newWeaponTemp {
-    weaponTemp = newWeaponTemp;
+    wtemp = newWeaponTemp;
 }
 
 @end
