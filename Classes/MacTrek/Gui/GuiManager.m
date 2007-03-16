@@ -158,7 +158,9 @@ int startUpEvents = 0;
         [menuButton setNeedsDisplay:YES];
         // or go automaticaly after 10 seconds (use obj nil since menu does not know us
         [menuCntrl  performSelector:@selector(leaveSplashScreen) withObject:nil afterDelay: 10];
-        [splashView performSelector:@selector(stop:) withObject:self afterDelay: 10];
+		if (splashView != nil) {
+			[splashView performSelector:@selector(stop:) withObject:self afterDelay: 10];
+		}
         
     } else if (startUpEvents > NR_OF_EVENTS_BEFORE_SHOWING_MENU) {
         

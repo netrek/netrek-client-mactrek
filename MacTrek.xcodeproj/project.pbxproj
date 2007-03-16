@@ -89,6 +89,7 @@
 		5256E09F0B931D560078C491 /* MTMacroHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 5256E09E0B931D560078C491 /* MTMacroHandler.m */; };
 		5256E0B20B9320D80078C491 /* MTMacro.m in Sources */ = {isa = PBXBuildFile; fileRef = 5256E0B10B9320D80078C491 /* MTMacro.m */; };
 		52604A9B0B97016B0097D103 /* LLNetServiceDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 52604A9A0B97016B0097D103 /* LLNetServiceDelegate.m */; };
+		5270A4A60BAB0F9600635F95 /* SpockTorpedo.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 5270A4A50BAB0F9600635F95 /* SpockTorpedo.jpg */; };
 		52756F210B3554CA00631149 /* PRECOMPILED in Resources */ = {isa = PBXBuildFile; fileRef = 52756EA90B3554CA00631149 /* PRECOMPILED */; };
 		527E05030AF3666000B5D37F /* OmniNetworking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 527E05010AF3666000B5D37F /* OmniNetworking.framework */; };
 		527E05040AF3666000B5D37F /* OmniBase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 527E05020AF3666000B5D37F /* OmniBase.framework */; };
@@ -688,6 +689,7 @@
 		5256E0B10B9320D80078C491 /* MTMacro.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTMacro.m; sourceTree = "<group>"; };
 		52604A990B97016B0097D103 /* LLNetServiceDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLNetServiceDelegate.h; sourceTree = "<group>"; };
 		52604A9A0B97016B0097D103 /* LLNetServiceDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLNetServiceDelegate.m; sourceTree = "<group>"; };
+		5270A4A50BAB0F9600635F95 /* SpockTorpedo.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = SpockTorpedo.jpg; path = Resources/Backgrounds/SpockTorpedo.jpg; sourceTree = "<group>"; };
 		52756EA90B3554CA00631149 /* PRECOMPILED */ = {isa = PBXFileReference; lastKnownFileType = folder; name = PRECOMPILED; path = Resources/PRECOMPILED; sourceTree = "<group>"; };
 		527E05010AF3666000B5D37F /* OmniNetworking.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OmniNetworking.framework; path = ../Release/OmniNetworking.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		527E05020AF3666000B5D37F /* OmniBase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = OmniBase.framework; path = ../Release/OmniBase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1276,6 +1278,7 @@
 				528E7EF40B0A6CAC00B22943 /* Screenshot_1.png */,
 				52C7A7EF0B17800900F2D523 /* mactrek-mosaic.jpg */,
 				52F819900B8F1280003ED1BE /* mouse.png */,
+				5270A4A50BAB0F9600635F95 /* SpockTorpedo.jpg */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -2192,6 +2195,7 @@
 				52756F210B3554CA00631149 /* PRECOMPILED in Resources */,
 				52FC6C8B0B45A8CD0052CC8B /* licence.txt in Resources */,
 				52F819910B8F1280003ED1BE /* mouse.png in Resources */,
+				5270A4A60BAB0F9600635F95 /* SpockTorpedo.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
