@@ -44,6 +44,10 @@
 	
 	// Bug 1625370 hog calls do not end on 5 spaces, but consist of 5 spaces
 	// thus stringlength is 15
+	if ([str length] < 15) {
+		return; // smaller strings only cause out of range execptions
+	}
+	
 	NSString *hog = [str substringWithRange:NSMakeRange(10, 5)];
 	if ( ([hog isEqualToString:@"     "]) && ([str length] == 15) ){
 		// found 5 spaces at starting at right spot in a string with the right length
@@ -166,14 +170,22 @@
         group, @"group", indiv, @"indiv", msg, @"message", nil]];
     
     // it won't be echoed by the server, show it here
-	/*
-	 
-	 bugfix, apperently it _is_ echoed on the server..
-	 
-    NSString *localEcho = [NSString stringWithFormat:@"%@ -> %@ %@", 
-        [[universe playerThatIsMe] mapChars], dst, msg];
-    [notificationCenter postNotificationName:@"PM_MESSAGE" userInfo:localEcho];    
-	 */
+	// unless send to my team, all
+	Player *me = [universe playerThatIsMe];
+	NSString *myTeam = [[[me team] abbreviation] uppercaseString];
+	
+	if ([dst isEqualToString:@"TEAM"] ||
+		[dst isEqualToString:@"ALL"] ||
+		[dst isEqualToString:@"GOD"] ||
+		[dst isEqualToString:myTeam] ||
+		[dst isEqualToString:[me mapChars]] )  { // that would be quite useless but he!
+		LLLog(@"Postman.sendMessage no need to echo, message will return from server");
+	} else {
+		LLLog(@"Postman.sendMessage DO need to echo, message will NOT return from server");
+		NSString *localEcho = [NSString stringWithFormat:@" %@ -> %@ %@", [me mapChars], dst, msg];
+		[notificationCenter postNotificationName:@"PM_MESSAGE" userInfo:localEcho];   
+	}  	
+	
 }
 
 - (NSNumber *) individualIdOfAdress:(NSString*) address {
@@ -242,21 +254,23 @@
     if ([[self message] length] > 0) {
         LLLog(@"Postman.controlTextDidEndEditing sending message [%@]", [self message]);
         [self sendCurrentMessage];
-        // clean up since the change of focus when the mouse moves creates a 
-        // second event that we do not wish to send.
-        // $$ alternatively check if we are losing first responder status since that is not
-        // the same as pressing enter
         [self setMessage:@""];  
-		// try to return the focus
-		NSWindow *win = [gameView window];
-		if ([win makeFirstResponder:gameView]) {
-			LLLog(@"Postman.controlTextDidEndEditing returned focus");
-		} else {
-			LLLog(@"Postman.controlTextDidEndEditing ERROR returning focus");
-		}
     } else {
         LLLog(@"Postman.controlTextDidEndEditing ignoring message %@", [self message]);
     }
+	// clean up since the change of focus when the mouse moves creates a 
+	// second event that we do not wish to send.
+	// $$ alternatively check if we are losing first responder status since that is not
+	// the same as pressing enter
+	// try to return the focus
+	NSWindow *win = [gameView window];
+	if ([win makeFirstResponder:gameView]) {
+		LLLog(@"Postman.controlTextDidEndEditing returned focus");
+	} else {
+		LLLog(@"Postman.controlTextDidEndEditing ERROR returning focus");
+		// try again
+		[gameView mouseEntered:nil]; // pretty hard
+	}
 }
 
 @end
