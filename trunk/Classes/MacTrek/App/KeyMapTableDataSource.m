@@ -69,6 +69,11 @@ int intSort(id num1, id num2, void *context) {
 
 int keyMapEntrySort(id num1, id num2, void *context) {
 	
+	if (context == NULL) {
+		LLLog(@"KeyMapTableDataSource.keyMapEntrySort error, cannot sort without a context");
+		return -1;
+	}
+	
 	MTKeyMap *myMap = context;
 	
     int v1 = [num1 intValue];
@@ -88,16 +93,18 @@ int keyMapEntrySort(id num1, id num2, void *context) {
     if (keyMapTableView == aTableView) {
         NSArray *actionKeys = [myMap allKeys];
 		// sort the array (much nicer)
-		actionKeys = [actionKeys sortedArrayUsingFunction:keyMapEntrySort context:myMap];
-		
+		NSArray *sortedKeys = [actionKeys sortedArrayUsingFunction:keyMapEntrySort context:myMap];
 		/*
 		// dump the array to check the sort
 		unsigned int i, count = [actionKeys count];
 		for (i = 0; i < count; i++) {
-			LLLog(@"KeyMapTableDataSource.objectValueForTableColumn key %d, value %d", i, [[actionKeys objectAtIndex:i] intValue]);
+			LLLog(@"KeyMapTableDataSource.objectValueForTableColumn key %d, value %d", i, [[sortedKeys objectAtIndex:i] intValue]);
 		}
 		*/
-        int action = [[actionKeys objectAtIndex:rowIndex] intValue];
+        int action = [[sortedKeys objectAtIndex:rowIndex] intValue];
+		
+	    LLLog(@"KeyMapTableDataSource.objectValueForTableColumn row %d action key %d key %c description %@", rowIndex, action, [myMap keyForAction:action], [myMap descriptionForAction:action]);
+				
         if ([[aTableColumn identifier] isEqualTo: @"description"]) {
             return [myMap descriptionForAction:action];
         } else if ([[aTableColumn identifier] isEqualTo: @"key"]) {
@@ -125,9 +132,25 @@ int keyMapEntrySort(id num1, id num2, void *context) {
     if (tableView == keyMapTableView) {           
         NSArray *actionKeys = [myMap allKeys];
 		// sort the array (much nicer)
-		[actionKeys sortedArrayUsingFunction:intSort context:NULL];
-        int action = [[actionKeys objectAtIndex:row] intValue];
-        // only accept a single character
+		/*
+		unsigned int i, count = [actionKeys count];
+		for (i = 0; i < count; i++) {
+			int j = [[actionKeys objectAtIndex:i] intValue];
+
+			LLLog(@"KeyMapTableDataSource.setObjectValue before action index %d, key %d key %c description %@",i, j, [myMap keyForAction:j], [myMap descriptionForAction:j]);
+		}*/
+		
+		NSArray *sortedKeys = [actionKeys sortedArrayUsingFunction:keyMapEntrySort context:myMap];
+		/*
+		for (i = 0; i < count; i++) {
+			int j = [[sortedKeys objectAtIndex:i] intValue];
+			LLLog(@"KeyMapTableDataSource.setObjectValue after action index %d, key %d key %c description %@",i, j, [myMap keyForAction:j], [myMap descriptionForAction:j]);
+		}
+		*/
+        int action = [[sortedKeys objectAtIndex:row] intValue];				
+		LLLog(@"KeyMapTableDataSource.setObjectValue row %d action key %d key %c description %@", row, action, [myMap keyForAction:action], [myMap descriptionForAction:action]);
+		
+		        // only accept a single character
         // use of a formatter would be better
         if ([object length] == 1) {
             NSString *newkey = object;
