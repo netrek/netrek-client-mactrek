@@ -92,6 +92,21 @@ static Player *me;
     return defaultInstance;
 }
 
+- (void) resetShowInfoPlanets {
+	for (int i = 0; i < UNIVERSE_MAX_PLANETS; i++) {
+		[[planets objectAtIndex:i] setShowInfo:NO];
+	}
+}
+
+- (void) resetShowInfoPlayers {
+	for (int i = 0; i < UNIVERSE_MAX_PLAYERS; i++) {
+		Player *p = [players objectAtIndex:i];
+		if (![p isMe]) {     // except me
+			[p setShowInfo:NO];
+		}
+	}
+}
+
 - (int) distanceToEntity:(Entity*)obj1 from:(Entity*)obj2 {
     return [trigonometry hypotOfBase:([obj2 position].x - [obj1 position].x) heigth: ([obj2 position].y - [obj1 position].y)];
 }
