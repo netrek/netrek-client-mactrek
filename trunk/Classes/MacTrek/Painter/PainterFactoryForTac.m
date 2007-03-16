@@ -88,6 +88,8 @@
 
 	
 }
+/* new graphics for TAC use same format as other graphics,
+   thus no longer need to go through the gifs
 
 - (void) drawShipType:(int)type forTeamId:(int) teamId withCloakPhase:(int)cloakPhase inRect:(NSRect)Rect {
     
@@ -128,6 +130,7 @@
    [imgShip drawInRect:Rect fromRect:shipRect operation: NSCompositeSourceOver fraction:alpha];      
 }
 
+*/
 
 - (void)   drawPlanet:(Planet*) planet inRect:(NSRect) Rect { 
 	
