@@ -370,11 +370,15 @@ whichRepresentsGameBounds:gameBounds
 		warMask |= [warTeam bitMask];
 		LLLog(@"GameView.warModeKeyDown declaring hostile on %@", [warTeam abbreviation]);
 		[notificationCenter postNotificationName:@"COMM_SEND_WAR_REQ" userInfo:[NSNumber numberWithChar:warMask]];    
+		// update warning BUG 1682448
+		[notificationCenter postNotificationName:@"GV_MODE_INFO" userInfo:[NSString stringWithFormat:@"Declaring war on %@", [warTeam abbreviation]]];
 	} else if (theChar == 'p') {
 		// they really want to decleare peace
 		warMask &= ~([warTeam bitMask]);
         LLLog(@"GameView.warModeKeyDown declaring peace on %@", [warTeam abbreviation]);
 		[notificationCenter postNotificationName:@"COMM_SEND_WAR_REQ" userInfo:[NSNumber numberWithChar:warMask]];
+		// update warning BUG 1682448
+		[notificationCenter postNotificationName:@"GV_MODE_INFO" userInfo:[NSString stringWithFormat:@"Sending peace treaty to %@", [warTeam abbreviation]]];
 	} 
 	// always clear the team
 	warTeam = nil;
