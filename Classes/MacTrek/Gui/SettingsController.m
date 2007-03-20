@@ -61,11 +61,7 @@ struct screenMode originalMode;
 	
 	// pass on the properties	
 	// initial version
-	[settings setProperties];
-	[properties setValue:[self actionKeyMap] forKey:@"ACTION_KEYMAP"];
-	[properties setValue:[self distressKeyMap] forKey:@"DISTRESS_KEYMAP"];	
-	[properties setValue:[self mouseMap] forKey:@"MOUSE_MAP"];	
-	[notificationCenter postNotificationName:@"SC_NEW_SETTINGS" userInfo:self];
+	[self saveSettingsToFile:NO];
 }
 
 - (void) shutdown {
@@ -93,7 +89,7 @@ struct screenMode originalMode;
 	//[self setResolutionByString:[item title]];
 	
 	// at least save it 
-	[self saveSettings];	
+	[self saveSettingsToFile:YES];	
 }
 
 - (void) setResolutionByString:(NSString*) resolutionString {
@@ -247,8 +243,12 @@ struct screenMode originalMode;
 }
 
 - (void) saveSettings {
+	[self saveSettingsToFile:YES];
+}
+
+- (void) saveSettingsToFile:(bool)toFile {
     
-	LLLog(@"SettingsController.saveSettings called");
+	LLLog(@"SettingsController.saveSettingsToFile called");
     LLPersistantSettings *settings = [LLPersistantSettings defaultSettings];
     
     [settings setLazyValue:[NSNumber numberWithFloat:[self musicLevel]] forKey:@"MUSIC_LEVEL"];
@@ -270,7 +270,9 @@ struct screenMode originalMode;
 	[settings setLazyValue:[[resolution selectedItem] title]  forKey:@"RESOLUTION"];	
 	[settings setLazyValue:[NSNumber numberWithBool:[self useRCD]] forKey:@"USE_RCD"];
 	
-    [settings update];
+	if (toFile) {
+		[settings update];
+	}
 	
 	// an excellent place to tell the tracker what the status is
 	[[SimpleTracker defaultTracker] setEnabled:[self trackingEnabled]];

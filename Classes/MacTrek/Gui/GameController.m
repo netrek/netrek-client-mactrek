@@ -196,6 +196,8 @@ bool forceBarUpdate = NO;
           inverseWarning:NO];
 }
 
+/* FR 1682996 refactor settings
+
 - (void) setDistressKeyMap:(MTKeyMap *)newKeyMap {
     // pass it on
     [gameView setDistressKeyMap:newKeyMap];
@@ -214,6 +216,7 @@ bool forceBarUpdate = NO;
 	[gameView setMouseMap:newMouseMap];
 	[mapView setMouseMap:newMouseMap];
 }
+*/
 
 - (void) setPainter:(PainterFactory*)newPainter {
     [gameView setPainter:newPainter];
