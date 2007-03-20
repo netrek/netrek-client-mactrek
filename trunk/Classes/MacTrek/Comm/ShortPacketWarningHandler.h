@@ -10,6 +10,7 @@
 #import "Universe.h"
 #import "LLNotificationCenter.h"
 #import "BaseClass.h"
+#import "MTMacroHandler.h"
 
 #define SPW_TEXTE					 0
 #define SPW_PHASER_HIT_TEXT		 1
@@ -60,6 +61,7 @@
     NSArray  *deamonMessages;
     NSArray  *warningMessages;
     NSMutableArray *serverSentStrings;
+	MTMacroHandler *macroHandler;
 }
 
 - (NSString*) handleSWarning: (char*)buffer;
