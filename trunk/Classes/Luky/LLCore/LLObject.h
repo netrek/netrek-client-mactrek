@@ -11,7 +11,9 @@
 
 
 @interface LLObject : NSObject {
-
+	NSMutableDictionary* properties;
 }
+
++ (NSMutableDictionary*) properties;
 
 @end

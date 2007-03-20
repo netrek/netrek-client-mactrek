@@ -29,5 +29,6 @@
 - (NSEnumerator *)objectEnumerator;
 - (id)objectForKey:(id)aKey;
 - (id)valueForKey:(NSString *)key;
+- (void)setProperties;
 
 @end

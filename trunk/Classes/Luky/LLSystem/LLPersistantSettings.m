@@ -103,5 +103,10 @@ LLPersistantSettings* defaultSettings;
     return [settings valueForKey:key];
 }
 
+- (void)setProperties {
+	// set all settings we have to the properties object
+	// this object is global accessable in all LLObject
+	[properties addEntriesFromDictionary:settings];
+}
 
 @end

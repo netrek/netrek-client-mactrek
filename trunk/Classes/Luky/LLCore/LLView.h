@@ -7,10 +7,11 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "LLObject.h"
 
 
-@interface LLView : NSView {
-
+@interface LLView : NSView  {
+	NSMutableDictionary* properties;
 }
 
 @end

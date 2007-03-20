@@ -12,7 +12,7 @@
 #import "MTMacroHandler.h"
 
 
-@interface BaseView : NSView {
+@interface BaseView : LLView {
     LLNotificationCenter *notificationCenter;
     Universe *universe;
 	MTMacroHandler *macroHandler;

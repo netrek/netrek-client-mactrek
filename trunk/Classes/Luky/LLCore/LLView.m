@@ -8,7 +8,17 @@
 
 #import "LLView.h"
 
+NSMutableDictionary* globalProperties;
 
 @implementation LLView
+
+- (id) init {
+	self = [super init];
+	if (self != nil) {
+		properties = [LLObject properties];
+	}
+	return self;
+}
+
 
 @end
