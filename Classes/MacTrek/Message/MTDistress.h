@@ -88,12 +88,13 @@
 - (id) initWithSender:(Player*) sndr targetPlayer:(Player*) trgtPlyr armies:(int) arms 
 			   damage:(int) dmg shields:(int) shlds targetPlanet:(Planet*)trgtPlnt
 		   weaponTemp:(int) wtmp;
-- (NSString*) toMessage;
 - (void) setDestinationGroup:(int)grp individual:(int)indiv;
 - (int) destinationIndiv;
 - (int) destinationGroup;
 - (NSString *)defaultMacro;
 - (NSString *)defaultMacroForType:(int)type;
 - (NSString *) filledMacroString;
+- (NSString*) rcdString;
+
 
 @end
