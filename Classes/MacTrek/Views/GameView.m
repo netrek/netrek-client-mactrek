@@ -32,8 +32,14 @@
 		
 	// listen to voice commands here
 	[notificationCenter addObserver:self selector:@selector(voiceCommand:) name:@"VC_VOICE_COMMAND"];
+	[notificationCenter addObserver:self selector:@selector(settingsChanged:) name:@"SC_NEW_SETTINGS"];
 }
 
+- (void) settingsChanged:(SettingsController*) settingsController {
+	actionKeyMap = [properties objectForKey:@"ACTION_KEYMAP"];
+	distressKeyMap = [properties objectForKey:@"DISTRESS_KEYMAP"];
+	mouseMap = [properties objectForKey:@"MOUSE_MAP"];
+}
 
 - (void) voiceCommand:(NSNumber *) action {
 	

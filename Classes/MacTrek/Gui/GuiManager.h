@@ -51,7 +51,7 @@ enum GAME_STATE {
     IBOutlet GameController         *gameCntrl;
     IBOutlet NSWindow               *mainWindow;
     IBOutlet NSLevelIndicator       *startUpProgress;
-    IBOutlet QCView                 *splashView;
+    //IBOutlet QCView                 *splashView;
     IBOutlet NSButton               *menuButton;
 	IBOutlet NSPanel			    *keyMapPanel;
 	IBOutlet NSTextView             *keyMapList;

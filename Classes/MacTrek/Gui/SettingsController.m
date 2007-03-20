@@ -58,6 +58,14 @@ struct screenMode originalMode;
 	 
 	// shutdown
 	[notificationCenter addObserver:self selector:@selector(shutdown) name:@"MC_MACTREK_SHUTDOWN"];
+	
+	// pass on the properties	
+	// initial version
+	[settings setProperties];
+	[properties setValue:[self actionKeyMap] forKey:@"ACTION_KEYMAP"];
+	[properties setValue:[self distressKeyMap] forKey:@"DISTRESS_KEYMAP"];	
+	[properties setValue:[self mouseMap] forKey:@"MOUSE_MAP"];	
+	[notificationCenter postNotificationName:@"SC_NEW_SETTINGS" userInfo:self];
 }
 
 - (void) shutdown {

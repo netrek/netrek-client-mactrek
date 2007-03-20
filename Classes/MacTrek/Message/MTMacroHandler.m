@@ -65,17 +65,6 @@ int  line_length = 0;
 	featureList = list;
 }
 
-/*
-- (void) setKeyMap:(MTKeyMap *)list {
-	keyMap = list;
-}
-
-- (MTMacro *)getMacroForKey:(char)key {
-	int action = [keyMap actionForKey:key withModifierFlags: NSControlKeyMask]; // $$ hoops? what flags to use?
-	NSString *description = [keyMap descriptionForAction:action];
-	return [macros objectForKey:description];
-}
-*/
 /** handleMacro */
 - (bool) handleMacroForKey:(char) key {
 	
