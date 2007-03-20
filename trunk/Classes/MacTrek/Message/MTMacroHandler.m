@@ -221,12 +221,27 @@ int  line_length = 0;
 }
 
 /** sendDistress */
+-(void) sendReceiverConfigureableDistress:(int) type {
+	MTDistress *distress = [[MTDistress alloc] initWithType:type gamePointForMousePosition:gameViewPointOfCursor];
+	
+	[distress setDestinationGroup: (TEAM | DISTR)
+					   individual: [[[universe playerThatIsMe] team] bitMask]];
+	
+	// create RCD String
+	NSString *message = [distress rcdString];
+	[distress release];
+	[notificationCenter postNotificationName:@"MH_RCD_MESSAGE" userInfo:message];
+}
+
+/** sendDistress */
 -(void) sendDistress:(int) type {
 	MTDistress *distress = [[MTDistress alloc] initWithType:type gamePointForMousePosition:gameViewPointOfCursor];
 	
 	[distress setDestinationGroup: (TEAM | DISTR)
 					   individual: [[[universe playerThatIsMe] team] bitMask]];
 	
+	// initial version sends a distress parsed as a macro,
+	// not as a true RCD
 	NSString *message = [self parseMacro:distress];
 	[distress release];
 	

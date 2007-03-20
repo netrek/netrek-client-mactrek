@@ -38,7 +38,8 @@
 // external
 - (bool) handleMacroForKey:(char) key;
 - (bool) handleSingleMacroForKey:(char) key;
-- (void) sendDistress:(int) type;
+- (void) sendDistress:(int) type; // as string
+- (void) sendReceiverConfigureableDistress:(int) type; // as RCD
 
 // protected
 - (void) deleteCharsFromBuffer:(NSMutableString*)buffer start:(int)start end:(int)end;

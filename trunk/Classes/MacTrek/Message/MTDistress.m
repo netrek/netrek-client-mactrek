@@ -150,7 +150,7 @@
 	return self;
 }
 
-- (NSString*) toMessage {
+- (NSString*) rcdString {
 	
 	NSMutableString *message;
 	int length = 16;
