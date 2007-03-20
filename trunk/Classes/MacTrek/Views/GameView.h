@@ -16,9 +16,10 @@
 #import "Carbon/Carbon.h"
 #import "LLScreenShotController.h"
 #import "MTMouseMap.h"
+#import "SettingsController.h"
 
 // dropped to 10 reduces async update problem by factor 2 *still not perfect though*
-#define FRAME_RATE  10 
+#define FRAME_RATE  20 
 #define MAX_WAIT_BEFORE_DRAW  (1/(2*FRAME_RATE)) 
 
 // 10%

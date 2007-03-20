@@ -54,7 +54,6 @@
                 outfitCntrl = OutfitMenuController; 
                 selectServerCntrl = SelectServerController; 
                 settingsCntrl = SettingsController; 
-                splashView = QCView; 
                 startUpProgress = NSLevelIndicator; 
                 versionString = NSTextField; 
             }; 
@@ -217,6 +216,7 @@
                 resolution = NSPopUpButton; 
                 rightMouse = NSPopUpButton; 
                 trackingEnabledButton = NSButton; 
+                useRCD = NSButton; 
                 voiceCmds = NSButton; 
                 voiceOver = NSButton; 
                 wheelMouse = NSPopUpButton; 

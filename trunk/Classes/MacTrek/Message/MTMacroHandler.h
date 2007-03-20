@@ -27,7 +27,6 @@
 }
 
 // setup
-//- (void) setKeyMap:(MTKeyMap *)list;
 - (void) setFeatureList:(FeatureList *)list;
 - (void) setGameViewPointOfCursor:(NSPoint)p;
 
