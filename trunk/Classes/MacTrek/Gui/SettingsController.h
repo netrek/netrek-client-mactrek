@@ -57,7 +57,7 @@
 - (float) fxLevel;
 - (int)   graphicsModel;
 - (void)  setPreviousValues;
-- (void)  saveSettings;
+- (void)  saveSettingsToFile:(bool)useFile;
 - (int)   actionForButton:(NSPopUpButton *) button;
 - (NSString *) stringForAction:(int) action;
 - (MTMouseMap *)mouseMap;

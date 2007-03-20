@@ -593,11 +593,14 @@ int startUpEvents = 0;
 			[[gameCntrl mapView] setFeatureList:[[client communication] featureList]];
             // save the keymap if it was changed
             [[settingsCntrl actionKeyMap] writeToDefaultFileIfChanged];
+			/* FR 1682996 refactor settings
+			
             // first pass on the keyMap that was created in the settings
             [gameCntrl setActionKeyMap:[settingsCntrl actionKeyMap]]; 
 			[gameCntrl setDistressKeyMap:[settingsCntrl distressKeyMap]]; 
 			// 1666849 and the mouse
 			[gameCntrl setMouseMap:[settingsCntrl mouseMap]];
+			*/
 			[self fillKeyMapPanel];
             // and the volume setting
             [soundPlayerActiveTheme setVolumeFx:[settingsCntrl fxLevel]];

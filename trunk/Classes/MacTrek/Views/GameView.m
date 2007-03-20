@@ -130,6 +130,8 @@ whichRepresentsGameBounds:gameBounds
     busyDrawing = NO;
 }
 
+/* FR 1682996 refactor settings
+
 // 1666849 selectable mouse buttons
 - (void) setMouseMap:(MTMouseMap *)newMouseMap {
 	[mouseMap release];
@@ -148,7 +150,7 @@ whichRepresentsGameBounds:gameBounds
     actionKeyMap = newKeyMap;
 	[actionKeyMap retain];
 }
-
+*/
 // view functions
 - (void) keyDown:(NSEvent *)theEvent {
     

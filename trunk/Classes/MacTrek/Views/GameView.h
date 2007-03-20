@@ -56,9 +56,12 @@
 - (void) setScale:(int)scale;
 - (int)  scale;
 
+/* FR 1682996 refactor settings
+
 - (void) setDistressKeyMap:(MTKeyMap *)newKeyMap;
 - (void) setActionKeyMap:(MTKeyMap *)newKeyMap;
 - (void) setMouseMap:(MTMouseMap *)newMouseMap;
+*/
 
 -(float) mouseDir;
 
