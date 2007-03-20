@@ -10,7 +10,7 @@
 #import "Version.h"
 #import "Luky.h"
 
-@interface SimpleBaseClass : NSObject {
+@interface SimpleBaseClass : LLObject {
 
 }
 

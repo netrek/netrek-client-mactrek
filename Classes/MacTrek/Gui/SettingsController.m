@@ -34,7 +34,6 @@ struct screenMode originalMode;
 	return self;
 }
 
-
 - (void) awakeFromNib {
 
 	
@@ -228,6 +227,15 @@ struct screenMode originalMode;
 	} else {
 		[logToConsole setState:NSOffState];
 	}
+	
+	val = [settings valueForKey:@"USE_RCD"];
+    if (val != nil) {
+        if ([val boolValue]) {
+			[useRCD setState:NSOnState];   
+        } else {
+            [useRCD setState:NSOffState];
+        }        
+    }
 }
 
 - (void) saveSettings {
@@ -251,7 +259,8 @@ struct screenMode originalMode;
 	[settings setLazyValue:[NSNumber numberWithInt:[mouseMap actionMouseWheel]] forKey:@"WHEEL_MOUSE"];
 	
 	// add the resolution
-	[settings setLazyValue:[[resolution selectedItem] title]  forKey:@"RESOLUTION"];
+	[settings setLazyValue:[[resolution selectedItem] title]  forKey:@"RESOLUTION"];	
+	[settings setLazyValue:[NSNumber numberWithBool:[self useRCD]] forKey:@"USE_RCD"];
 	
     [settings update];
 	
@@ -266,6 +275,14 @@ struct screenMode originalMode;
 	// log to console is special.. log is off means disabled is true
 	bool state = ([logToConsole state] != NSOnState);
 	[[NSUserDefaults standardUserDefaults] setBool:state forKey:@"LLLogDisabled"];
+	
+	// pass on the properties	
+	[settings setProperties];
+	[properties setValue:[self actionKeyMap] forKey:@"ACTION_KEYMAP"];
+	[properties setValue:[self distressKeyMap] forKey:@"DISTRESS_KEYMAP"];	
+	[properties setValue:[self mouseMap] forKey:@"MOUSE_MAP"];
+	
+	[notificationCenter postNotificationName:@"SC_NEW_SETTINGS" userInfo:self];
 }
 
 
@@ -325,6 +342,10 @@ struct screenMode originalMode;
 		return nil;
 		break;
 	}
+}
+
+- (bool) useRCD {
+	return ([useRCD state] == NSOnState);
 }
 
 - (int) actionForButton:(NSPopUpButton *) button {

@@ -27,6 +27,7 @@
 	IBOutlet NSButton              *accelerateButton;
 	IBOutlet NSButton              *trackingEnabledButton;
 	IBOutlet NSButton              *logToConsole;
+	IBOutlet NSButton              *useRCD;
 	
 	IBOutlet NSPopUpButton		   *leftMouse;
 	IBOutlet NSPopUpButton		   *rightMouse;
@@ -51,6 +52,7 @@
 - (bool)  voiceEnabled;
 - (bool)  voiceCommands;
 - (bool)  accelerate;
+- (bool)  useRCD;
 - (float) musicLevel;
 - (float) fxLevel;
 - (int)   graphicsModel;

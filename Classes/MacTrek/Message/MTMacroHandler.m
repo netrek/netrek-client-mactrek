@@ -230,7 +230,7 @@ int  line_length = 0;
 	// create RCD String
 	NSString *message = [distress rcdString];
 	[distress release];
-	[notificationCenter postNotificationName:@"MH_RCD_MESSAGE" userInfo:message];
+	[notificationCenter postNotificationName:@"MH_MESSAGE" userInfo:message];
 }
 
 /** sendDistress */
