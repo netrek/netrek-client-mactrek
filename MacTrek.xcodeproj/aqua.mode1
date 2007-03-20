@@ -224,8 +224,6 @@
 			<key>Layout</key>
 			<array>
 				<dict>
-					<key>BecomeActive</key>
-					<true/>
 					<key>ContentConfiguration</key>
 					<dict>
 						<key>PBXBottomSmartGroupGIDs</key>
@@ -315,7 +313,7 @@
 							<real>302</real>
 						</array>
 						<key>RubberWindowFrame</key>
-						<string>821 259 1785 1119 0 0 2560 1578 </string>
+						<string>475 330 1785 1119 0 0 2560 1578 </string>
 					</dict>
 					<key>Module</key>
 					<string>PBXSmartGroupTreeModule</string>
@@ -326,6 +324,8 @@
 					<key>Dock</key>
 					<array>
 						<dict>
+							<key>BecomeActive</key>
+							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>
@@ -343,7 +343,7 @@
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>52F07D4C0BAD329800678FFC</string>
+										<string>52F07D510BAD3B2A00678FFC</string>
 										<key>history</key>
 										<array>
 											<string>528658210B386C8200355164</string>
@@ -646,7 +646,7 @@
 								<key>Frame</key>
 								<string>{{0, 0}, {1461, 788}}</string>
 								<key>RubberWindowFrame</key>
-								<string>821 259 1785 1119 0 0 2560 1578 </string>
+								<string>475 330 1785 1119 0 0 2560 1578 </string>
 							</dict>
 							<key>Module</key>
 							<string>PBXNavigatorGroup</string>
@@ -666,7 +666,7 @@
 								<key>Frame</key>
 								<string>{{0, 793}, {1461, 264}}</string>
 								<key>RubberWindowFrame</key>
-								<string>821 259 1785 1119 0 0 2560 1578 </string>
+								<string>475 330 1785 1119 0 0 2560 1578 </string>
 							</dict>
 							<key>Module</key>
 							<string>XCDetailModule</string>
@@ -843,10 +843,11 @@
 	<array>
 		<string>52EDECE60A1DD98600FD7731</string>
 		<string>1C530D57069F1CE1000CFCEE</string>
+		<string>1C0AD2B3069F1EA900FABCE6</string>
 		<string>/Users/aqua/Documents/Projects/MacTrek/Client/trunk/MacTrek.xcodeproj</string>
 	</array>
 	<key>WindowString</key>
-	<string>821 259 1785 1119 0 0 2560 1578 </string>
+	<string>475 330 1785 1119 0 0 2560 1578 </string>
 	<key>WindowTools</key>
 	<array>
 		<dict>
@@ -1287,9 +1288,9 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>1C0AD2B3069F1EA900FABCE6</string>
-				<string>52967D220BAB13A3008AE0AC</string>
+				<string>52F07D520BAD3B2A00678FFC</string>
 				<string>1CD0528B0623707200166675</string>
-				<string>52967D230BAB13A3008AE0AC</string>
+				<string>52F07D530BAD3B2A00678FFC</string>
 			</array>
 			<key>ToolbarConfiguration</key>
 			<string>xcode.toolbar.config.run</string>
@@ -1298,7 +1299,7 @@
 			<key>WindowToolGUID</key>
 			<string>1C0AD2B3069F1EA900FABCE6</string>
 			<key>WindowToolIsVisible</key>
-			<false/>
+			<true/>
 		</dict>
 		<dict>
 			<key>FirstTimeWindowDisplayed</key>

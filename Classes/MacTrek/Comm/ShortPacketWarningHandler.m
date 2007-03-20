@@ -142,6 +142,7 @@ int karg5;
             nil ];
         [warningMessages retain];
         serverSentStrings = [[NSMutableArray alloc] init];
+		macroHandler = [[MTMacroHandler alloc] init];
     }
     return self;
 }
@@ -470,9 +471,11 @@ int karg5;
 		}	
 	
         // Generic post of message
-        // $$ note that RCMmessages are not correctly transformed, they are nil !
-        [notificationCenter postNotificationName:@"SPW_MESSAGE" object:self userInfo:message];
-    
+		if ((message == nil) && (rcm != nil)) { // message is an RCM
+			message = [macroHandler parseMacro:rcm];
+		}        
+		[notificationCenter postNotificationName:@"SPW_MESSAGE" object:self userInfo:message];	
+	
         return message;
 }
 
