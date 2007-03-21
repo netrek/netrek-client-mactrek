@@ -1044,6 +1044,10 @@ int shortFromPacket(char *buffer, int offset) {
                 NSNumber *to      = [NSNumber numberWithInt: buffer[2] & 0xFF]; 
                 NSDictionary *obj = [NSDictionary dictionaryWithObjectsAndKeys:
                     message, @"message", flags, @"flags", from, @"from", to, @"to", nil];
+				LLLog(@"ServerReader.handlePacket: SP_MESSAGE %@ from %@ to %@ flags %@", message, from, to, flags);
+				// $$$ if flags are 5 it means it is an RCD and should not be parsed as string,
+				// it means that message will be nil BUG 1684823 to be fixed code is in dmessage.c in cow, not in JTREK
+				// probably create a distress here
                 [notificationCenter postNotificationName:@"SP_MESSAGE" object:self userInfo:obj];  
             }
             @catch (NSException * e) {
