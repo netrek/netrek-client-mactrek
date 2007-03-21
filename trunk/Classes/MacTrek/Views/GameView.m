@@ -219,7 +219,12 @@ whichRepresentsGameBounds:gameBounds
 				[super keyDown:theEvent];
 			}
 			else {
-				[macroHandler sendDistress:distressCode];
+				bool useRCD = [[properties valueForKey:@"USE_RCD"] boolValue];
+				if (useRCD) {
+					[macroHandler sendReceiverConfigureableDistress:distressCode];
+				} else {  // normal
+					[macroHandler sendDistress:distressCode];
+				}
 			}
 			return;
 		} else {	
