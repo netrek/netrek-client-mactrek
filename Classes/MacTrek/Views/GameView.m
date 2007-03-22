@@ -33,6 +33,9 @@
 	// listen to voice commands here
 	[notificationCenter addObserver:self selector:@selector(voiceCommand:) name:@"VC_VOICE_COMMAND"];
 	[notificationCenter addObserver:self selector:@selector(settingsChanged:) name:@"SC_NEW_SETTINGS"];
+	
+	// and take over any defaults that there may be
+	[self settingsChanged:nil];
 }
 
 - (void) settingsChanged:(SettingsController*) settingsController {

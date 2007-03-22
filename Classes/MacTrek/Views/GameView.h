@@ -49,7 +49,7 @@
 }
 
 - (void) setPainter:(PainterFactory*)newPainter;
-
+- (void) settingsChanged:(SettingsController*) settingsController;
 - (NSPoint) gamePointRepresentingCentreOfView; // override if i am not in center
 
 - (void) setScaleFullView;  // overrules scale setting
