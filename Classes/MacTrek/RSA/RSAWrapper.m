@@ -20,11 +20,7 @@
 }
 
 - (bool) gmpIsInstalled {
-	NSString *pathToResources = @"/usr/local/lib";
-    NSString *pathToServer = [NSString stringWithFormat:@"%@/libgmp.a", pathToResources];
-	
-	NSFileManager *fm = [NSFileManager defaultManager];
-    return [fm fileExistsAtPath:pathToServer];
+	return YES;
 }
 
 // creates a response to the RSA data block, the comm handler needs to send it
