@@ -35,11 +35,18 @@
         
         normalStateAttribute =[[NSMutableDictionary dictionaryWithObjectsAndKeys:
         [NSColor whiteColor],NSForegroundColorAttributeName,nil] retain];
-        // initial cache is in seperate thread
-        [NSThread detachNewThreadSelector:@selector(cacheImagesInSeperateThread:) toTarget:self withObject:nil];
-
     }
     return self;
+}
+
+- (void) awakeFromNib {
+	// initial cache is in seperate thread
+	//[NSThread detachNewThreadSelector:@selector(cacheImagesInSeperateThread:) toTarget:self withObject:nil];
+	
+	// nasty startup threading bug, remove as many threads as possible..
+	[self cacheImages]; 
+	[notificationCenter postNotificationName:@"PF_IMAGES_CACHED"];
+	LLLog(@"PainterFactory.awakeFromNib: images cached");
 }
 
 - (void) setSimplifyDrawing:(bool)simpleDraw {
