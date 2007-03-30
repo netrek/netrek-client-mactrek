@@ -53,12 +53,18 @@
 			nil];
 		[codes retain];
 		
-        speechRecognizer = [[NSSpeechRecognizer alloc] init]; 
-        [speechRecognizer setCommands:cmds];
-        [speechRecognizer setDelegate:self];
-		
     }
     return self;
+}
+
+
+// [ 1691205 ] 1.2.0RC1 sometimes hangs during launch
+// moved from init to awakeFromNib (call it a hunch)
+- (void) awakeFromNib {
+	
+	speechRecognizer = [[NSSpeechRecognizer alloc] init]; 
+	[speechRecognizer setCommands:cmds];
+	[speechRecognizer setDelegate:self];
 }
 
 - (void)setEnableListening:(bool)onOff {

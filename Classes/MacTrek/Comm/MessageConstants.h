@@ -12,6 +12,12 @@
 #define GOD			  0x10 
 #define MOO			  0x12 
 
+#define MVALID 0x01
+#define MINDIV 0x02
+#define MTEAM  0x04
+#define MALL   0x08
+#define MDISTR 0xC0
+
 // order flags by importance (0x100 - 0x400) 
 // restructuring of message flags to squeeze them all #defineo 1 #define - jmn 
 // hopefully quasi-back-compatible:

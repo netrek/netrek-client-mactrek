@@ -93,7 +93,7 @@
 - (int) destinationGroup;
 - (NSString *)defaultMacro;
 - (NSString *)defaultMacroForType:(int)type;
-- (NSString *) filledMacroString;
+- (NSString *)filledMacroString;
 - (NSString*) rcdString;
 
 

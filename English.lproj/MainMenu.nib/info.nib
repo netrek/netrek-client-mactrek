@@ -86,10 +86,12 @@
 	<array>
 		<integer>731</integer>
 	</array>
+	<key>IBOldestOS</key>
+	<integer>4</integer>
 	<key>IBOpenObjects</key>
 	<array>
-		<integer>242</integer>
 		<integer>1077</integer>
+		<integer>242</integer>
 		<integer>238</integer>
 	</array>
 	<key>IBSystem Version</key>

@@ -32,7 +32,7 @@
 + (NSString *)powerPCTypeString;
 
 + (NSString *)computerName;
-+ (NSString *)computerSerialNumber;
+//+ (NSString *)computerSerialNumber;
 
 + (NSString *)operatingSystemString;
 + (NSString *)systemVersionString;
