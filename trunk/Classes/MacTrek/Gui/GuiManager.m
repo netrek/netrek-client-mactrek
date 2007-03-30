@@ -171,6 +171,11 @@ int startUpEvents = 0;
 }
 
 - (void) awakeFromNib { 
+	// initate painters
+	[painterTheme1 awakeFromNib];
+	[painterTheme2 awakeFromNib];
+	[painterTheme3 awakeFromNib];
+	
     // set the startup bar value
     [startUpProgress setMaxValue:NR_OF_EVENTS_BEFORE_SHOWING_MENU];
     

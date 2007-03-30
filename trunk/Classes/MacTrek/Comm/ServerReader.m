@@ -1052,6 +1052,7 @@ int shortFromPacket(char *buffer, int offset) {
 				/* aha! A new type distress/macro call came in. parse it appropriately */
 				if ( ([flags intValue] == (MTEAM | MDISTR | MVALID)) ||
 					 ([flags intValue] == (MTEAM | MVALID)) ) {
+					message = [NSString stringWithUTF8String:buffer];
 					MTDistress *distress = [[[MTDistress alloc] initWithSender:[universe playerThatIsMe] message: message] autorelease];
 					NSString *rcmMessage = [distress rcdString];
 					[obj setValue:rcmMessage forKey:@"message"];
