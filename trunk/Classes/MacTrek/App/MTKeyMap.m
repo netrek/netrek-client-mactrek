@@ -272,7 +272,7 @@
     [keyMap setObject:entry forKey:[NSNumber numberWithInt:[entry action]]]; 
      
     entry = [[MTKeyMapEntry alloc] initAction: ACTION_QUIT
-                                    withKey:'q' 
+                                    withKey:'Q' 
                               modifierFlags: NSDeviceIndependentModifierFlagsMask 
                                 description: @"Quit"];    
     [keyMap setObject:entry forKey:[NSNumber numberWithInt:[entry action]]];                                                        
