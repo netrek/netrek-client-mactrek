@@ -224,8 +224,6 @@
 			<key>Layout</key>
 			<array>
 				<dict>
-					<key>BecomeActive</key>
-					<true/>
 					<key>ContentConfiguration</key>
 					<dict>
 						<key>PBXBottomSmartGroupGIDs</key>
@@ -283,13 +281,11 @@
 							<key>PBXSmartGroupTreeModuleOutlineStateSelectionKey</key>
 							<array>
 								<array>
-									<integer>153</integer>
-									<integer>140</integer>
-									<integer>0</integer>
+									<integer>179</integer>
 								</array>
 							</array>
 							<key>PBXSmartGroupTreeModuleOutlineStateVisibleRectKey</key>
-							<string>{{0, 1985}, {302, 1177}}</string>
+							<string>{{0, 2002}, {302, 1177}}</string>
 						</dict>
 						<key>PBXTopSmartGroupGIDs</key>
 						<array/>
@@ -319,6 +315,8 @@
 					<key>Dock</key>
 					<array>
 						<dict>
+							<key>BecomeActive</key>
+							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>
@@ -336,7 +334,7 @@
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>52550C5B0BB3E776005A6E7E</string>
+										<string>52550C6C0BB3E8FC005A6E7E</string>
 										<key>history</key>
 										<array>
 											<string>528658210B386C8200355164</string>
@@ -853,6 +851,8 @@
 	<integer>5</integer>
 	<key>WindowOrderList</key>
 	<array>
+		<string>1C0AD2B3069F1EA900FABCE6</string>
+		<string>52EDECE60A1DD98600FD7731</string>
 		<string>52AD520E0B26D637007A4B93</string>
 		<string>/Users/aqua/Documents/Projects/MacTrek/Client/trunk/MacTrek.xcodeproj</string>
 	</array>
@@ -936,7 +936,7 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>52EDECE60A1DD98600FD7731</string>
-				<string>525505C20BB3E681005A6E7E</string>
+				<string>52550C620BB3E897005A6E7E</string>
 				<string>1CD0528F0623707200166675</string>
 				<string>XCMainBuildResultsModuleGUID</string>
 			</array>
@@ -1298,9 +1298,9 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>1C0AD2B3069F1EA900FABCE6</string>
-				<string>525505C30BB3E681005A6E7E</string>
+				<string>52550C630BB3E897005A6E7E</string>
 				<string>1CD0528B0623707200166675</string>
-				<string>525505C40BB3E681005A6E7E</string>
+				<string>52550C640BB3E897005A6E7E</string>
 			</array>
 			<key>ToolbarConfiguration</key>
 			<string>xcode.toolbar.config.run</string>
