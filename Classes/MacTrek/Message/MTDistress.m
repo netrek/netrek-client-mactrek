@@ -48,12 +48,13 @@
 	return self;
 }
 
-- (id) initWithSender:(Player*)player message:(NSString*) message {
+- (id) initWithSender:(Player*)player buffer:(char *)buffer {
 	self = [self init];
 	if (self != nil) {
 		sender = player;
 		
-		const char *mtext = [[message substringFromIndex:10] cString];
+		const char *mtext = &buffer[10]; 
+		
 		distress_type = mtext[0] & 0x1F;
 		macro_flag = ((mtext[0] & 0x20) > 0);
 		fuel_percentage = mtext[1] & 0x7F;
@@ -86,9 +87,8 @@
 		cclist[i] = mtext[16 + i];
 		prepend = ((cclist[i] & 0xFF) == 0x80);
 		int end = 17 + i;
-		if([message length] > end) {
-			NSRange range = NSMakeRange(end,  [message length] - end);
-			prepend_append = [message substringWithRange:range];
+		if(buffer[end] != '\0') {
+			prepend_append = [NSString stringWithCString:&mtext[end] length:(80 - end)];
 		}
 	}
 	return self;
@@ -538,6 +538,179 @@
 	}
 	//LLLog(@"MTDistress.fillMacroString result [%@]", buffer);
 	return buffer; // watch out is autoretained!
+}
+
+/** parseMacro */
+- (NSString*) parsedMacroString {
+	
+	// first step is to substitute variables
+	NSMutableString *buffer = [NSMutableString stringWithString:[self filledMacroString]];
+	
+	// second step is to evaluate tests
+	[self parseTests:buffer];
+	
+	// third step is to include conditional text
+	[self parseConditionals:buffer];
+	
+	// fourth step is to remove all the rest of the control characters
+	[self parseRemaining:buffer];
+	
+	return buffer; // watch out is autoretained
+}
+
+
+/* support function */
+- (void) deleteCharsFromBuffer:(NSMutableString*)buffer start:(int)start end:(int)end {
+	
+	NSRange range = NSMakeRange(start, end - start + 1);
+	//NSString *temp = [buffer substringWithRange:range];
+	//LLLog(@"MTMacroHandler.deleteCharsFromBuffer deleting [%@] at %d from [%@]", temp, start, buffer);
+	[buffer deleteCharactersInRange:range];
+}
+
+
+/** parseTests */
+- (void) parseTests:(NSMutableString *)buffer {
+	
+	for(int bpos = 0; bpos < [buffer length] - 1; ++bpos) {
+		if([buffer characterAtIndex:bpos] == '%') {
+			switch([buffer characterAtIndex:bpos + 1]) {
+				case '*' :
+				case '%' :
+				case '{' :
+				case '}' :
+				case '!' :
+					++bpos;
+					break;
+				case '?' : { 					// solve the conditional
+					
+					int op_pos = bpos + 2;
+					while([buffer characterAtIndex:op_pos] != '<' && [buffer characterAtIndex:op_pos] != '>' && [buffer characterAtIndex:op_pos] != '=') {
+						if(op_pos >= [buffer length]) {
+							// $$$ MIGHT WANT TO DO SOMETHING SMART HERE!!!
+							return;
+						}
+						op_pos++;
+					}
+					char operation = [buffer characterAtIndex:op_pos];
+					
+					int end = op_pos;
+					while(++end < [buffer length] - 1) {
+						if([buffer characterAtIndex:end] == '%' && ([buffer characterAtIndex:end + 1] == '?' || [buffer characterAtIndex:end + 1] == '{')) {
+							break;
+						}
+					}
+					
+					NSString *left = [buffer substringWithRange:NSMakeRange(bpos + 2, op_pos - bpos - 2)];
+					NSString *right = [buffer substringWithRange:NSMakeRange(op_pos + 1, end - op_pos - 1)];
+					
+					int compare = [left compare:right]; // $$ assuming this is the 
+					switch(operation) {
+						case '=' :					// character by character equality
+							[buffer replaceCharactersInRange:NSMakeRange(bpos, 1) withString: ((compare ==  NSOrderedSame) ? @"1" : @"0")];
+							break;
+						case '<' :
+							[buffer replaceCharactersInRange:NSMakeRange(bpos, 1) withString: ((compare < NSOrderedAscending) ? @"1" : @"0")];
+							break;
+						case '>' :
+							[buffer replaceCharactersInRange:NSMakeRange(bpos, 1) withString: ((compare > NSOrderedDescending) ? @"1" : @"0")];
+							break;
+						default :
+							[buffer replaceCharactersInRange:NSMakeRange(bpos, 1) withString:@"1"];
+							LLLog(@"MTMTDistress.parseTests Bad operation %c", operation);
+					}
+					[self deleteCharsFromBuffer:buffer start:(bpos+1) end: (end - 1)]; // was end - 1
+				}
+					break;
+				default :
+					LLLog(@"MTMTDistress.parseTests Bad character %c", [buffer characterAtIndex:(bpos + 1)]);
+					// remove the bad tokens
+					[self deleteCharsFromBuffer:buffer start:bpos end: (bpos+1)];
+					break;
+			}
+		}
+	}	
+}
+
+/** parseConditionals */
+- (void) parseConditionals:(NSMutableString *)buffer {
+	
+	for(int bpos = 1; bpos < [buffer length] - 1;) {
+		if([buffer characterAtIndex:bpos] == '%' && [buffer characterAtIndex:bpos + 1] == '{') {
+			char c = [buffer characterAtIndex:bpos - 1];
+			if(c == '0' || c == '1') {
+				[self deleteCharsFromBuffer:buffer start:(bpos - 1) end: (bpos + 1)];
+				bpos = [self evaluateConditionalBlockStartingAt:(bpos - 1) inBuffer:buffer include:(c == '1')];
+				continue;
+			}
+		} 
+		++bpos;		
+	}
+}
+
+
+/** evaluateConditionalBlock */
+-  (int) evaluateConditionalBlockStartingAt:(int) bpos inBuffer:(NSMutableString *)buffer include: (bool) include {
+	
+	int remove_start = bpos;
+	NSString *temp, *temp2;
+	while(bpos < [buffer length] - 1) {
+		temp = [buffer substringFromIndex:bpos];
+		temp2 = [buffer substringFromIndex:remove_start];
+		if([buffer characterAtIndex:bpos] == '%') {
+			switch([buffer characterAtIndex:bpos + 1]) {
+				case '}' :					// done with this conditional, return
+					if(!include) {
+						[self deleteCharsFromBuffer:buffer start:remove_start end: (bpos + 1)];
+						return remove_start;
+					}
+					[self deleteCharsFromBuffer:buffer start:bpos end: (bpos+1)];
+					return bpos;
+				case '{' :					// handle new conditional
+					if(include) {
+						char c = [buffer characterAtIndex:bpos - 1];
+						if(c == '0' || c == '1') {
+							[self deleteCharsFromBuffer:buffer start:(bpos - 1) end: (bpos + 1)];
+							// $$$ wauw recursion
+							bpos = [self evaluateConditionalBlockStartingAt:bpos - 1 inBuffer:buffer include:c == '1'];
+							continue;
+						}
+					}
+					bpos += 2;
+					break;
+				case '!' :					// handle not indicator
+					if(include) {
+						remove_start = bpos;
+						++bpos;
+					}
+					else {
+						[self deleteCharsFromBuffer:buffer start:remove_start end: (bpos + 1)];
+						bpos = remove_start;
+					}
+					include = !include;
+					break;
+				default :
+					++bpos;
+			}
+		}
+		else {
+			++bpos;
+		}
+	}
+	if(!include) {
+		[self deleteCharsFromBuffer:buffer start:remove_start end: ([buffer length] - 1)];
+	}
+	
+	return [buffer length];	
+}
+
+/** parseRemaining */
+- (void) parseRemaining:(NSMutableString *)buffer {
+	for(int bpos = 0; bpos < [buffer length]; ++bpos) {
+		if([buffer characterAtIndex:bpos] == '%') {
+			[buffer deleteCharactersInRange:NSMakeRange(bpos, 1)];
+		}
+	}
 }
 
 

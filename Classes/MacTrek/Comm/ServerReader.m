@@ -1052,10 +1052,12 @@ int shortFromPacket(char *buffer, int offset) {
 				/* aha! A new type distress/macro call came in. parse it appropriately */
 				if ( ([flags intValue] == (MTEAM | MDISTR | MVALID)) ||
 					 ([flags intValue] == (MTEAM | MVALID)) ) {
-					message = [NSString stringWithUTF8String:buffer];
-					MTDistress *distress = [[[MTDistress alloc] initWithSender:[universe playerThatIsMe] message: message] autorelease];
-					NSString *rcmMessage = [distress rcdString];
-					[obj setValue:rcmMessage forKey:@"message"];
+					// buffer contains data not a string
+					MTDistress *distress = [[[MTDistress alloc] initWithSender:[universe playerThatIsMe] buffer: (buffer+4)] autorelease];
+					NSString *rcmMessage = [distress parsedMacroString]; // string in default macro format
+					LLLog(@"ServerReader.handlePacket: SP_MESSAGE decoded %@ ", rcmMessage);
+					obj = [NSDictionary dictionaryWithObjectsAndKeys:
+						rcmMessage, @"message", flags, @"flags", from, @"from", to, @"to", nil];
 				} 
 				
                 [notificationCenter postNotificationName:@"SP_MESSAGE" object:self userInfo:obj];  

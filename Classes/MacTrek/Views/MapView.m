@@ -33,6 +33,7 @@ NSRect gameBounds;
     // use the default painter here, we could use the same theme....
     // $$ are we sure?
     painter = [[PainterFactoryForTac alloc] init];
+	[painter awakeFromNib];
     
     // use simpler drawing (eg omit weapons)
     [painter setSimplifyDrawing:YES];

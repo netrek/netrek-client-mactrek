@@ -41,14 +41,10 @@
 - (void) sendReceiverConfigureableDistress:(int) type; // as RCD
 
 // protected
-- (void) deleteCharsFromBuffer:(NSMutableString*)buffer start:(int)start end:(int)end;
 - (bool) executeMacro:(MTMacro *) macro;
 - (void) sendMacro:(MTMacro*) macro;
 - (void) sendMacro:(MTMacro*) macro toPlayer:(char) who;
 - (NSString*) parseMacro:(MTDistress*) distress;
-- (void) parseTests:(NSMutableString *)buffer;
-- (void) parseConditionals:(NSMutableString *)buffer;
-- (int) evaluateConditionalBlockStartingAt:(int) bpos inBuffer:(NSMutableString *)buffer include: (bool) include;
-- (void) parseRemaining:(NSMutableString *)buffer;
+
 
 @end
