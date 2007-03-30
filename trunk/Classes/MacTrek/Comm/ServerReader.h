@@ -127,6 +127,7 @@
 #import "PacketTypes.h"
 #import "MessageConstants.h"
 #import "BaseClass.h"
+#import "MTDistress.h"
 
 #define  SPWINSIDE       500
 #define  SHORT_WARNING    33

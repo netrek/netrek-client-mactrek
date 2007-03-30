@@ -28,7 +28,7 @@
 		[NSNumber numberWithInt:[self countProcessors]],
 		@"CountProcessors",
 		[self computerName],@"ComputerName",
-		[self computerSerialNumber],@"ComputerSerialNumber",
+		//[self computerSerialNumber],@"ComputerSerialNumber",
 		[self operatingSystemString],@"OperatingSystem",
 		[self systemVersionString],@"SystemVersion",		
 		nil];
@@ -310,6 +310,7 @@ static NSDictionary *translationDictionary=nil;
 /* copied from http://cocoa.mamasam.com/COCOADEV/2003/07/1/68334.php */
 /* and modified by http://nilzero.com/cgi-bin/mt-comments.cgi?entry_id=1300 */
 /* and by http://cocoa.mamasam.com/COCOADEV/2003/07/1/68337.php/ */
+/*
 + (NSString *)computerSerialNumber
 {
 	NSString         *result = @"";
@@ -382,7 +383,7 @@ static NSDictionary *translationDictionary=nil;
 	}
 	return(result);
 }
-
+*/
 #pragma mark *** System version ***
 
 + (NSString *)operatingSystemString

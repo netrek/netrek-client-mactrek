@@ -40,8 +40,9 @@
 	[server setLaunchPath:pathToServer];
 	[server launch];	
 	LLLog(@"ServerControllerNew.startServer launched %@", pathToServer);
+	/* 1691205 1.2.0RC1 sometimes hangs during launch
 	[server waitUntilExit];
-	[server release];
+	[server release]; */
 }
 
 - (void)stopServer {
