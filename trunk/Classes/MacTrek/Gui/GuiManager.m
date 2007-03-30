@@ -156,8 +156,8 @@ int startUpEvents = 0;
         [menuButton setHidden:NO]; // enable going to the memu
         [menuButton setEnabled:YES];
         [menuButton setNeedsDisplay:YES];
-        // or go automaticaly after 10 seconds (use obj nil since menu does not know us
-        [menuCntrl  performSelector:@selector(leaveSplashScreen) withObject:nil afterDelay: 10];
+        // or go automaticaly after 1 seconds (use obj nil since menu does not know us
+        [menuCntrl  performSelector:@selector(leaveSplashScreen) withObject:nil afterDelay: 1];
 		/*
 		if (splashView != nil) {
 			[splashView performSelector:@selector(stop:) withObject:self afterDelay: 10];

@@ -83,7 +83,7 @@
 	int  destinationIndiv;
 }
 
-- (id) initWithSender:(Player*)player message:(NSString*) message;
+- (id) initWithSender:(Player*)player buffer:(char *)buffer;
 - (id) initWithType:(int)type gamePointForMousePosition:(NSPoint)mouse;
 - (id) initWithSender:(Player*) sndr targetPlayer:(Player*) trgtPlyr armies:(int) arms 
 			   damage:(int) dmg shields:(int) shlds targetPlanet:(Planet*)trgtPlnt
@@ -94,7 +94,13 @@
 - (NSString *)defaultMacro;
 - (NSString *)defaultMacroForType:(int)type;
 - (NSString *)filledMacroString;
+- (NSString*) parsedMacroString;
 - (NSString*) rcdString;
+
+- (void) parseTests:(NSMutableString *)buffer;
+- (void) parseConditionals:(NSMutableString *)buffer;
+- (int) evaluateConditionalBlockStartingAt:(int) bpos inBuffer:(NSMutableString *)buffer include: (bool) include;
+- (void) parseRemaining:(NSMutableString *)buffer;
 
 
 @end
