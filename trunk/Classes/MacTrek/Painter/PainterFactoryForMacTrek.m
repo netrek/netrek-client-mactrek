@@ -19,7 +19,6 @@
 	return self;
 }
 
-
 - (NSImage *)loadImage:(NSString*)imageName {
     
     // try new image first
@@ -65,53 +64,6 @@
     return [imgBackground size];
 }
 
-- (NSString*) labelForPlayer:(Player*)player {
-	
-	// bug 1666845 Cloaked ships should be ?? (unless it is me)
-	if (([player flags] & PLAYER_CLOAK) && (![player isMe])) {
-		return @"??";
-	}
-	
-	NSString *label = [NSString stringWithFormat:@"%@ (%@)", [player mapCharsWithKillIndicator],
-		[player name]];
-	
-    // extended label?
-	if ([player showInfo] || debugLabels) {
-		label = [NSString stringWithFormat:@"%@ (%@)", [player mapCharsWithKillIndicator],
-			[player nameWithRank]];
-	}
-	return label;
-}
-
-- (NSString*) label2ForPlayer:(Player*)player {
-		
-	// bug 1666845 Cloaked ships should be ?? (unless it is me)
-	if (([player flags] & PLAYER_CLOAK) && (![player isMe])) {
-		return nil;
-	}
-	
-	// extended label?
-	if ([player showInfo] || debugLabels) {
-		return [NSString stringWithFormat:@"S%d K%d A%d T%d [%c%c%c%c%c%c]", 
-			[player speed],
-            [player kills],
-            [player armies],
-			[player availableTorps],
-            ([player flags] & PLAYER_REPAIR ? 'R' : '-'),
-            ([player flags] & PLAYER_BOMB ?   'B' : '-'),
-            ([player flags] & PLAYER_ORBIT ?  'O' : '-'),
-            ([player flags] & PLAYER_CLOAK ?  'C' : '-'),
-            ([player flags] & PLAYER_BEAMUP ?  'U' : '-'),
-            ([player flags] & PLAYER_BEAMDOWN ?  'D' : '-') ];
-	} else {
-		return nil;
-	}
-}
-
-- (NSString*) label3ForPlayer:(Player*)player {
-	
-	return nil;
-}
 
 - (void) drawLabelBackgroundForRect:(NSRect)aRect {
 	
