@@ -1483,8 +1483,18 @@
 		return;
 	}
 	
+	// key must contain owner since name will not change
+	NSString *owner = [[planet owner] abbreviation];
+	NSString *key;
+	
+	if (owner != nil) {
+		key = [label stringByAppendingString:owner];
+	} else {
+		key = label; 
+	}
+	
     // check if we already have an image for this label
-    NSImage *labelImage = [planet labelForKey:label];
+    NSImage *labelImage = [planet labelForKey:key];
     
     // nope, make one
     if (labelImage == nil) {
@@ -1506,10 +1516,10 @@
         [labelImage unlockFocus];        
         
         // and store it
-        [planet setLabel:labelImage forKey:label];
-        LLLog(@"PainterFactory.drawLabelForPlanet created label: %@", label);
+        [planet setLabel:labelImage forKey:key];
+        LLLog(@"PainterFactory.drawLabelForPlanet created label: %@", key);
     } else {
-        //LLLog(@"PainterFactory.drawLabelForPlanet using cached label: %@", label);
+        //LLLog(@"PainterFactory.drawLabelForPlanet using cached label: %@", key);
     }
 
     NSRect destRect;
@@ -1528,6 +1538,9 @@
 	[labelImage compositeToPoint:destRect.origin operation:NSCompositeSourceOver];
     //[labelImage drawInRect:destRect fromRect:sourceRect operation:NSCompositeSourceOver fraction:1.0];
 }
+
+
+/* use Same labels every where
 
 - (NSString*) labelForPlayer:(Player*)player {
 	
@@ -1582,6 +1595,64 @@
 		return label;
 	}
 	return nil;
+}
+
+*/
+
+- (NSString*) labelForPlayer:(Player*)player {
+	
+	// bug 1666845 Cloaked ships should be ?? (unless it is me)
+	if (([player flags] & PLAYER_CLOAK) && (![player isMe])) {
+		return @"??";
+	}
+	
+	NSString *label = [NSString stringWithFormat:@"%@ (%@)", [player mapCharsWithKillIndicator],
+		[player name]];
+	
+    // extended label?
+	if ([player showInfo] || debugLabels) {
+		label = [NSString stringWithFormat:@"%@ (%@)", [player mapCharsWithKillIndicator],
+			[player nameWithRank]];
+	}
+	return label;
+}
+
+- (NSString*) label2ForPlayer:(Player*)player {
+	
+	bool isMe = [player isMe];
+	
+	// bug 1666845 Cloaked ships should be ?? (unless it is me)
+	if (([player flags] & PLAYER_CLOAK) && (!isMe)) {
+		return nil;
+	}
+	
+	// extended label?
+	if ([player showInfo] || debugLabels) {
+		if (isMe) { // show als requested speed
+			return [NSString stringWithFormat:@"S%d(%d) K%d A%d T%d [%c%c%c%c%c%c]", 
+				[player speed],
+				[player requestedSpeed],
+				[player kills],
+				[player armies],
+				[player availableTorps],
+				([player flags] & PLAYER_REPAIR ? 'R' : '-'),
+				([player flags] & PLAYER_BOMB ?   'B' : '-'),
+				([player flags] & PLAYER_ORBIT ?  'O' : '-'),
+				([player flags] & PLAYER_CLOAK ?  'C' : '-'),
+				([player flags] & PLAYER_BEAMUP ?  'U' : '-'),
+				([player flags] & PLAYER_BEAMDOWN ?  'D' : '-') ];
+		} else {
+			return [NSString stringWithFormat:@"S%d K%d T%d [%c%c%c]", 
+				[player speed],
+				[player kills],
+				[player availableTorps],
+				([player flags] & PLAYER_REPAIR ? 'R' : '-'),
+				([player flags] & PLAYER_BOMB ?   'B' : '-'),
+				([player flags] & PLAYER_ORBIT ?  'O' : '-') ];	
+		}
+	} else {
+		return nil;
+	}
 }
 
 - (NSString*) label3ForPlayer:(Player*)player {
