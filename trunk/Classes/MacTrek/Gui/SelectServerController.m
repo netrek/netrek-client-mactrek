@@ -90,9 +90,15 @@ bool validServer;
     [entry setGameType:    BRONCO];	
 
 	// to allow for manual selection of server
-    LLLog(@"SelectServerController.manualEntryDidEndEditing should connect to %@", [serverNameTextField stringValue]);    
+    LLLog(@"SelectServerController.manualEntryDidEndEditing should connect to %@", [serverNameTextField stringValue]);  
+	
 	// try and find the port number
 	NSString *name = [serverNameTextField stringValue];
+	if ([name isEqualToString:@""]) {
+		LLLog(@"SelectServerController.manualEntryDidEndEditing refuse to connect to empty server");
+		return;
+	}	
+	
 	NSRange dot = [name rangeOfString:@":"];
 	if (dot.location != NSNotFound) {
 		// use port

@@ -193,7 +193,7 @@ int startUpEvents = 0;
 		
 	// new server controller. No longer managed with buttons but allways running!
 	server = [[ServerControllerNew alloc] init];
-	[server startServer];		// stop only on shutdown...
+	[server restartServer];		// stop only on shutdown... (but restart in case we were badly shutdowned)
 								// add localhost if it is not already there
 	if ([selectServerCntrl findServer:@"localhost"] == nil) {
 		MetaServerEntry *entry = [[MetaServerEntry alloc] init];
