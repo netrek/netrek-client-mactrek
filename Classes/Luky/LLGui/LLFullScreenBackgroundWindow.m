@@ -8,7 +8,7 @@
 
 #import "LLFullScreenBackgroundWindow.h"
 
-//#define DEBUG 
+#define DEBUG 
 
 @implementation LLFullScreenBackgroundWindow
 

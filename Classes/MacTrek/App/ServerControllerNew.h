@@ -18,4 +18,6 @@
     NSString *pathToServer;
 }
 
+- (void)restartServer;
+
 @end

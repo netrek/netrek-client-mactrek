@@ -18,8 +18,6 @@
         meta = [[MetaServerParser alloc] init];
 		metaServerServers = [[NSMutableArray alloc] init];
 		bonjourServers = [[NSMutableArray alloc] init];
-        // initial query is in seperate thread		
-        [NSThread detachNewThreadSelector:@selector(refreshServersInSeperateThread:) toTarget:self withObject:nil];
     }
     return self;
 }
@@ -47,6 +45,9 @@
 	
 	// try again in 1 second
 	[rendezvousController performSelector:@selector(refreshBrowsing) withObject:nil afterDelay:1.0];
+	
+	// initial query is in seperate thread		
+	[NSThread detachNewThreadSelector:@selector(refreshServersInSeperateThread:) toTarget:self withObject:nil];
 }
 
 - (void)discoveredServicesDidChange:(id)sender {
@@ -168,6 +169,8 @@
 		}
 	}
 	// rendezvous too
+	[rendezvousController activateBrowsing:YES];
+	[rendezvousController activatePublishing:YES];
 	[rendezvousController refreshBrowsing];
 	
 	// show it
@@ -217,7 +220,7 @@
 
 - (void) setServerSelected:(MetaServerEntry *) server {
 
-    LLLog(@"MetaServerTableDataSource.setServerSelected called");
+    LLLog(@"MetaServerTableDataSource.setServerSelected called, selecting %@", [server address]);
     [selectedServer release];
     selectedServer = server;
     [selectedServer retain];

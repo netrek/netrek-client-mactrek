@@ -32,6 +32,11 @@
 	return self;
 }
 
+- (void)restartServer {
+	[self stopServer];
+	[self startServer];
+}
+
 - (void)startServer {
         
 	NSTask *server = [[NSTask alloc] init];
