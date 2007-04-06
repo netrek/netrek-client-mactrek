@@ -224,8 +224,6 @@
 			<key>Layout</key>
 			<array>
 				<dict>
-					<key>BecomeActive</key>
-					<true/>
 					<key>ContentConfiguration</key>
 					<dict>
 						<key>PBXBottomSmartGroupGIDs</key>
@@ -277,9 +275,7 @@
 							<key>PBXSmartGroupTreeModuleOutlineStateSelectionKey</key>
 							<array>
 								<array>
-									<integer>56</integer>
-									<integer>41</integer>
-									<integer>0</integer>
+									<integer>82</integer>
 								</array>
 							</array>
 							<key>PBXSmartGroupTreeModuleOutlineStateVisibleRectKey</key>
@@ -313,12 +309,14 @@
 					<key>Dock</key>
 					<array>
 						<dict>
+							<key>BecomeActive</key>
+							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>
 								<string>1CE0B20306471E060097A5F4</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>GuiManager.m</string>
+								<string>Info.plist</string>
 								<key>PBXSplitModuleInNavigatorKey</key>
 								<dict>
 									<key>Split0</key>
@@ -326,11 +324,11 @@
 										<key>PBXProjectModuleGUID</key>
 										<string>1CE0B20406471E060097A5F4</string>
 										<key>PBXProjectModuleLabel</key>
-										<string>GuiManager.m</string>
+										<string>Info.plist</string>
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>52E2A5DF0BC458D8007EFACF</string>
+										<string>52E2A7A80BC45B34007EFACF</string>
 										<key>history</key>
 										<array>
 											<string>52D7041F0B386D1100CD124C</string>
@@ -485,8 +483,8 @@
 											<string>52E2A5C00BC45861007EFACF</string>
 											<string>52E2A5C10BC45861007EFACF</string>
 											<string>52E2A5C20BC45861007EFACF</string>
+											<string>52E2A7A60BC45B34007EFACF</string>
 											<string>52E2A5C30BC45861007EFACF</string>
-											<string>52E2A5C40BC45861007EFACF</string>
 										</array>
 										<key>prevStack</key>
 										<array>
@@ -629,6 +627,7 @@
 											<string>52E2A5C80BC45861007EFACF</string>
 											<string>52E2A5C90BC45861007EFACF</string>
 											<string>52E2A5CA0BC45861007EFACF</string>
+											<string>52E2A7A70BC45B34007EFACF</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -839,13 +838,14 @@
 	<array>
 		<string>52E2A5D40BC45861007EFACF</string>
 		<string>52E2A5D50BC45861007EFACF</string>
-		<string>52E2A5D20BC45861007EFACF</string>
-		<string>52AD520E0B26D637007A4B93</string>
-		<string>1C530D57069F1CE1000CFCEE</string>
-		<string>52EDECE60A1DD98600FD7731</string>
-		<string>526DAF450A4C381200BC5E95</string>
 		<string>1CD10A99069EF8BA00B06720</string>
+		<string>52E2A5D20BC45861007EFACF</string>
+		<string>1C530D57069F1CE1000CFCEE</string>
+		<string>526DAF450A4C381200BC5E95</string>
+		<string>52EDECE60A1DD98600FD7731</string>
+		<string>52AD520E0B26D637007A4B93</string>
 		<string>/Users/aqua/Documents/Projects/MacTrek/Client/trunk/MacTrek.xcodeproj</string>
+		<string>1C0AD2B3069F1EA900FABCE6</string>
 	</array>
 	<key>WindowString</key>
 	<string>624 140 1530 1257 0 0 2560 1578 </string>
@@ -1051,7 +1051,7 @@
 			<key>WindowToolGUID</key>
 			<string>1CD10A99069EF8BA00B06720</string>
 			<key>WindowToolIsVisible</key>
-			<true/>
+			<false/>
 		</dict>
 		<dict>
 			<key>FirstTimeWindowDisplayed</key>
@@ -1069,8 +1069,6 @@
 							<key>Dock</key>
 							<array>
 								<dict>
-									<key>BecomeActive</key>
-									<true/>
 									<key>ContentConfiguration</key>
 									<dict>
 										<key>PBXProjectModuleGUID</key>
@@ -1085,7 +1083,7 @@
 										<key>Frame</key>
 										<string>{{0, 0}, {1248, 607}}</string>
 										<key>RubberWindowFrame</key>
-										<string>730 519 1248 974 0 0 2560 1578 </string>
+										<string>729 519 1248 974 0 0 2560 1578 </string>
 									</dict>
 									<key>Module</key>
 									<string>PBXNavigatorGroup</string>
@@ -1097,6 +1095,8 @@
 							<string>607pt</string>
 						</dict>
 						<dict>
+							<key>BecomeActive</key>
+							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>
@@ -1109,7 +1109,7 @@
 								<key>Frame</key>
 								<string>{{0, 612}, {1248, 321}}</string>
 								<key>RubberWindowFrame</key>
-								<string>730 519 1248 974 0 0 2560 1578 </string>
+								<string>729 519 1248 974 0 0 2560 1578 </string>
 							</dict>
 							<key>Module</key>
 							<string>PBXProjectFindModule</string>
@@ -1138,11 +1138,11 @@
 				<string>1CD0528E0623707200166675</string>
 			</array>
 			<key>WindowString</key>
-			<string>730 519 1248 974 0 0 2560 1578 </string>
+			<string>729 519 1248 974 0 0 2560 1578 </string>
 			<key>WindowToolGUID</key>
 			<string>1C530D57069F1CE1000CFCEE</string>
 			<key>WindowToolIsVisible</key>
-			<true/>
+			<false/>
 		</dict>
 		<dict>
 			<key>Identifier</key>
@@ -1293,9 +1293,9 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>1C0AD2B3069F1EA900FABCE6</string>
-				<string>52E2A2230BC452DB007EFACF</string>
+				<string>52E2A7A00BC45968007EFACF</string>
 				<string>1CD0528B0623707200166675</string>
-				<string>52E2A2240BC452DB007EFACF</string>
+				<string>52E2A7A10BC45968007EFACF</string>
 			</array>
 			<key>ToolbarConfiguration</key>
 			<string>xcode.toolbar.config.run</string>
@@ -1304,7 +1304,7 @@
 			<key>WindowToolGUID</key>
 			<string>1C0AD2B3069F1EA900FABCE6</string>
 			<key>WindowToolIsVisible</key>
-			<false/>
+			<true/>
 		</dict>
 		<dict>
 			<key>FirstTimeWindowDisplayed</key>
