@@ -223,7 +223,7 @@ int  line_length = 0;
 	// prepend the destination 
 	NSMutableString *temp = [NSMutableString stringWithString:destination];
 	[temp appendString:message];
-	[notificationCenter postNotificationName:@"MH_MESSAGE" userInfo:temp];
+	[notificationCenter postNotificationName:@"MH_RCD_MESSAGE" userInfo:temp];
 }
 
 /** sendDistress */

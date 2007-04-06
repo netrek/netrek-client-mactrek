@@ -1050,8 +1050,8 @@ int shortFromPacket(char *buffer, int offset) {
 				// it means that message will be nil BUG 1684823 to be fixed code is in dmessage.c in cow, not in JTREK
 				
 				/* aha! A new type distress/macro call came in. parse it appropriately */
-				if ( ([flags intValue] == (MTEAM | MDISTR | MVALID)) ||
-					 ([flags intValue] == (MTEAM | MVALID)) ) {
+				if ( ([flags intValue] == (MTEAM | MDISTR | MVALID)) ) { //||
+					// ([flags intValue] == (MTEAM | MVALID)) ) {
 					// buffer contains data not a string
 					MTDistress *distress = [[[MTDistress alloc] initWithSender:[universe playerThatIsMe] buffer: (buffer+4)] autorelease];
 					NSString *rcmMessage = [distress parsedMacroString]; // string in default macro format

@@ -222,10 +222,12 @@ whichRepresentsGameBounds:gameBounds
 				[super keyDown:theEvent];
 			}
 			else {
-				bool useRCD = [[properties valueForKey:@"USE_RCD"] boolValue];
+				bool useRCD = [[properties valueForKey:@"USE_RCD"] boolValue];				
 				if (useRCD) {
+					LLLog(@"GameView.keyDown sending RCD %d", distressCode);
 					[macroHandler sendReceiverConfigureableDistress:distressCode];
 				} else {  // normal
+					LLLog(@"GameView.keyDown sending MACRO %d", distressCode);
 					[macroHandler sendDistress:distressCode];
 				}
 			}
@@ -714,12 +716,12 @@ whichRepresentsGameBounds:gameBounds
             }
             break;
         case ACTION_DISTRESS_CALL:
-			[macroHandler sendDistress:DC_GENERIC];
             LLLog(@"GameView.performAction send distress"); 
+			[macroHandler sendDistress:DC_GENERIC];
             break;
         case ACTION_ARMIES_CARRIED_REPORT:
-			[macroHandler sendDistress:DC_CARRYING];
             LLLog(@"GameView.performAction send carry report"); 
+			[macroHandler sendDistress:DC_CARRYING];
             break;
         case ACTION_MESSAGE:
             //LLLog(@"GameView.performAction MESSAGE not implemented"); 
