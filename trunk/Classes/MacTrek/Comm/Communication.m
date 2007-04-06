@@ -869,6 +869,7 @@ bool goSleeping;
 	buffer[1] = [[mess valueForKey:@"group"] charValue];
 	buffer[2] = [[mess valueForKey:@"indiv"] charValue];
 	NSString *message = [mess valueForKey:@"message"];
+	LLLog(@"Communication.sendMessage %@ from %x to %x", message, [[mess valueForKey:@"indiv"] charValue], [[mess valueForKey:@"group"] charValue]);
     [self insertString:message inBuffer:buffer offset:4 maxLength:79];
 	[self sendServerPacketWithBuffer:buffer length:84];
 }

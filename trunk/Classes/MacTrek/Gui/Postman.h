@@ -29,7 +29,7 @@
 - (NSString*) message;
 // send it when enter is pressed or on macro event
 - (void)      sendCurrentMessage;
-- (void)      sendMessage:(NSString*)msg to:(NSString*) dst;
+- (void) sendMessage:(NSString*)msg to:(NSString*) dst isRCD:(bool)rcd;
 // internal stuff
 - (NSNumber *) individualIdOfAdress:(NSString*) address;
 - (NSNumber *) groupOfAdress:(NSString*) address;

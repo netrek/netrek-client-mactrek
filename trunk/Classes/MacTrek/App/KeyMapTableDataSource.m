@@ -103,7 +103,7 @@ int keyMapEntrySort(id num1, id num2, void *context) {
 		*/
         int action = [[sortedKeys objectAtIndex:rowIndex] intValue];
 		
-	    LLLog(@"KeyMapTableDataSource.objectValueForTableColumn row %d action key %d key %c description %@", rowIndex, action, [myMap keyForAction:action], [myMap descriptionForAction:action]);
+	    //LLLog(@"KeyMapTableDataSource.objectValueForTableColumn row %d action key %d key %c description %@", rowIndex, action, [myMap keyForAction:action], [myMap descriptionForAction:action]);
 				
         if ([[aTableColumn identifier] isEqualTo: @"description"]) {
             return [myMap descriptionForAction:action];

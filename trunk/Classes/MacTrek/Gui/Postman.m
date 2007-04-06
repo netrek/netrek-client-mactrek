@@ -23,17 +23,25 @@
 	[notificationCenter addObserver:self selector:@selector(newMessage:) name:@"MV_NEW_MESSAGE"];
 	// handle macros
 	[notificationCenter addObserver:self selector:@selector(macroEvent:) name:@"MH_MESSAGE"];
+	// handle RCD
+	[notificationCenter addObserver:self selector:@selector(rcdEvent:) name:@"MH_RCD_MESSAGE"];
 }
 
 // handle macro
 - (void) macroEvent:(NSString*) str {
-	// $$$ macros are unstable, do not yet send but display for ourselfs
-	// $$$ Also should prepend the first three characters with a destination!
 	//LLLog(@"Postman.macroEvent [%@]", str);
 	NSString *dest = [str substringToIndex:3];
 	NSString *macro = [str substringFromIndex:3];
 	LLLog(@"Postman.macroEvent sending [%@] to %@", macro, dest);
-	[self sendMessage:macro to:dest];
+	[self sendMessage:macro to:dest isRCD:NO];
+}
+
+- (void) rcdEvent:(NSString*) str {
+	//LLLog(@"Postman.rcdEvent [%@]", str);
+	NSString *dest = [str substringToIndex:3];
+	NSString *macro = [str substringFromIndex:3];
+	LLLog(@"Postman.rcdEvent sending [%@] to %@", macro, dest);
+	[self sendMessage:macro to:dest isRCD:YES];
 }
 
 // check for hog request
@@ -63,7 +71,7 @@
 		} else {
 			NSString *origin = [[str substringToIndex:range.location] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
 			LLLog(@"Postman.newMessage responding to %@ with version", origin);
-			[self sendMessage:[NSString stringWithFormat:@"%@ %@", APP_NAME, VERSION] to:origin];
+			[self sendMessage:[NSString stringWithFormat:@"%@ %@", APP_NAME, VERSION] to:origin isRCD:NO];
 		}		
 	} 
 }
@@ -149,10 +157,10 @@
 
 // sending logic
 - (void) sendCurrentMessage {
-    [self sendMessage:[self message] to:[self destination]];
+    [self sendMessage:[self message] to:[self destination] isRCD:NO];
 }
 
-- (void) sendMessage:(NSString*)msg to:(NSString*) dst {
+- (void) sendMessage:(NSString*)msg to:(NSString*) dst isRCD:(bool)rcd {
     
     NSNumber *group = [self groupOfAdress:dst];
     NSNumber *indiv = [self individualIdOfAdress:dst];
@@ -165,6 +173,14 @@
 		LLLog(@"Postman.sendMessage refuse to send empty message");
         return;
     }
+	
+	// RCD use a flag in the group field
+	if (rcd) {
+		char c = [group charValue];
+		c |= MDISTR;
+		LLLog(@"Postman.sendMessage Setting RCD flag %d, %d", [group charValue], c);
+		group = [NSNumber numberWithChar:c];
+	}
 	
     [notificationCenter postNotificationName:@"COMM_SEND_MESSAGE" userInfo: [NSDictionary dictionaryWithObjectsAndKeys:
         group, @"group", indiv, @"indiv", msg, @"message", nil]];
