@@ -714,10 +714,12 @@ whichRepresentsGameBounds:gameBounds
             }
             break;
         case ACTION_DISTRESS_CALL:
-            LLLog(@"GameView.performAction Marcro's not implemented"); // $$ todo
+			[macroHandler sendDistress:DC_GENERIC];
+            LLLog(@"GameView.performAction send distress"); 
             break;
         case ACTION_ARMIES_CARRIED_REPORT:
-            LLLog(@"GameView.performAction Marcro's not implemented"); // $$ todo
+			[macroHandler sendDistress:DC_CARRYING];
+            LLLog(@"GameView.performAction send carry report"); 
             break;
         case ACTION_MESSAGE:
             //LLLog(@"GameView.performAction MESSAGE not implemented"); 
