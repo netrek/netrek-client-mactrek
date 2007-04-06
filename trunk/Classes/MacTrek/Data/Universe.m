@@ -269,7 +269,7 @@ static Player *me;
 
 - (Player *) playerWithId:(int)playerId {
 	if (playerId > [players count]) {
-		LLLog([NSString stringWithFormat: @"Universe.playerWithId: %d", playerId]);
+		LLLog([NSString stringWithFormat: @"Universe.playerWithId: %d outside index", playerId]);
 		return nil;
 	}
     return [players objectAtIndex:playerId];
