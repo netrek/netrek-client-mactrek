@@ -512,7 +512,6 @@
 		52F5DB2D0B1A69E000B8B9C5 /* version.c in Sources */ = {isa = PBXBuildFile; fileRef = 52F5D9C20B1A69E000B8B9C5 /* version.c */; };
 		52F819800B8EDB73003ED1BE /* MTMouseMap.m in Sources */ = {isa = PBXBuildFile; fileRef = 52F8197F0B8EDB73003ED1BE /* MTMouseMap.m */; };
 		52F819910B8F1280003ED1BE /* mouse.png in Resources */ = {isa = PBXBuildFile; fileRef = 52F819900B8F1280003ED1BE /* mouse.png */; };
-		52FC6C8B0B45A8CD0052CC8B /* licence.txt in Resources */ = {isa = PBXBuildFile; fileRef = 52FC6C8A0B45A8CD0052CC8B /* licence.txt */; };
 		8D11072A0486CEB800E47090 /* MainMenu.nib in Resources */ = {isa = PBXBuildFile; fileRef = 29B97318FDCFA39411CA2CEA /* MainMenu.nib */; };
 		8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
 		8D11072D0486CEB800E47090 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
@@ -1167,7 +1166,6 @@
 		52F8197E0B8EDB73003ED1BE /* MTMouseMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTMouseMap.h; sourceTree = "<group>"; };
 		52F8197F0B8EDB73003ED1BE /* MTMouseMap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTMouseMap.m; sourceTree = "<group>"; };
 		52F819900B8F1280003ED1BE /* mouse.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = mouse.png; path = "../../Design Stuff/Images MacTrek/mouse.png"; sourceTree = SOURCE_ROOT; };
-		52FC6C8A0B45A8CD0052CC8B /* licence.txt */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text; path = licence.txt; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Info.plist; sourceTree = "<group>"; };
 		8D1107320486CEB800E47090 /* MacTrek.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MacTrek.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -1252,7 +1250,6 @@
 			isa = PBXGroup;
 			children = (
 				5253D56E0BCF790E0075E0D5 /* licence.rtf */,
-				52FC6C8A0B45A8CD0052CC8B /* licence.txt */,
 				52756EA90B3554CA00631149 /* PRECOMPILED */,
 				529F08850B06935F00255735 /* LLResources */,
 				529F078D0B06934F00255735 /* Backgrounds */,
@@ -2196,7 +2193,6 @@
 				528E7EF50B0A6CAC00B22943 /* Screenshot_1.png in Resources */,
 				52C7A7F00B17800900F2D523 /* mactrek-mosaic.jpg in Resources */,
 				52756F210B3554CA00631149 /* PRECOMPILED in Resources */,
-				52FC6C8B0B45A8CD0052CC8B /* licence.txt in Resources */,
 				52F819910B8F1280003ED1BE /* mouse.png in Resources */,
 				5270A4A60BAB0F9600635F95 /* SpockTorpedo.jpg in Resources */,
 				5253D56F0BCF790E0075E0D5 /* licence.rtf in Resources */,
