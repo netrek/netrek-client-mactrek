@@ -617,8 +617,10 @@ bool goSleeping;
         
 		/* MacTrek 1.1.0 resurection rarely works and usually locks down the 
 			entire program because this thread does a blocking read 
-			why actually? 
-			
+			why actually? */
+		// ------ GHOSTBUST RESURECT ------ 
+		/*
+		
         if([self connectToServerUsingNextPort]) {
             [notificationCenter postNotificationName:@"COMM_RESURRECTED" object:self 
                                             userInfo:@"Yea!  We've been resurrected!"];
@@ -631,7 +633,8 @@ bool goSleeping;
 			LLLog(@"Communication.readFromServer Sorry,  We could not be resurrected!");
 			readOk = NO;
         }
-		*/
+		 */
+		// ------ GHOSTBUST RESURECT ------
     }
     
     //stop = [NSDate timeIntervalSinceReferenceDate];  
@@ -1378,9 +1381,14 @@ bool goSleeping;
 	goSleeping = YES;
 	
 	// wait for thread to sleep
+	int count = 0;
 	while (!isSleeping)  {
 		LLLog(@"Communication.suspendCommunicationThread: waiting for sleep");
+		count++;
 		sleep(COMM_NETWORK_TIMEOUT);
+		if (count > MAX_WAIT_BEFORE_CONTINUE){
+			isSleeping = YES;
+		}
 	}
     LLLog(@"Communication.suspendCommunicationThread: thread sleeping");
     return YES;

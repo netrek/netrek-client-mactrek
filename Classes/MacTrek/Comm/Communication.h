@@ -29,6 +29,8 @@
 // one second
 #define COMM_NETWORK_TIMEOUT 1.0
 
+#define MAX_WAIT_BEFORE_CONTINUE 10
+
 @interface Communication : BaseClass {
     int  commMode;         // COMM_TCP or COMM_UDP
     int  commStatus;
