@@ -86,6 +86,7 @@
 		522F30BC0B0B1E2C00E7DDED /* rsa_box_3.c in Sources */ = {isa = PBXBuildFile; fileRef = 522F30B60B0B1E2C00E7DDED /* rsa_box_3.c */; };
 		522F30BD0B0B1E2C00E7DDED /* rsa_box_2.c in Sources */ = {isa = PBXBuildFile; fileRef = 522F30B70B0B1E2C00E7DDED /* rsa_box_2.c */; };
 		522F9F4C0B96C842001C4896 /* MTDistress.m in Sources */ = {isa = PBXBuildFile; fileRef = 522F9F4B0B96C842001C4896 /* MTDistress.m */; };
+		5253D56F0BCF790E0075E0D5 /* licence.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 5253D56E0BCF790E0075E0D5 /* licence.rtf */; };
 		5256E09F0B931D560078C491 /* MTMacroHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 5256E09E0B931D560078C491 /* MTMacroHandler.m */; };
 		5256E0B20B9320D80078C491 /* MTMacro.m in Sources */ = {isa = PBXBuildFile; fileRef = 5256E0B10B9320D80078C491 /* MTMacro.m */; };
 		52604A9B0B97016B0097D103 /* LLNetServiceDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 52604A9A0B97016B0097D103 /* LLNetServiceDelegate.m */; };
@@ -683,6 +684,7 @@
 		522F30B70B0B1E2C00E7DDED /* rsa_box_2.c */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.c; name = rsa_box_2.c; path = ../../../../RSA/MacTrek/rsa_box_2.c; sourceTree = "<group>"; };
 		522F9F4A0B96C842001C4896 /* MTDistress.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTDistress.h; sourceTree = "<group>"; };
 		522F9F4B0B96C842001C4896 /* MTDistress.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTDistress.m; sourceTree = "<group>"; };
+		5253D56E0BCF790E0075E0D5 /* licence.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = licence.rtf; sourceTree = "<group>"; };
 		5256E09D0B931D560078C491 /* MTMacroHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTMacroHandler.h; sourceTree = "<group>"; };
 		5256E09E0B931D560078C491 /* MTMacroHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTMacroHandler.m; sourceTree = "<group>"; };
 		5256E0B00B9320D80078C491 /* MTMacro.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTMacro.h; sourceTree = "<group>"; };
@@ -1249,6 +1251,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				5253D56E0BCF790E0075E0D5 /* licence.rtf */,
 				52FC6C8A0B45A8CD0052CC8B /* licence.txt */,
 				52756EA90B3554CA00631149 /* PRECOMPILED */,
 				529F08850B06935F00255735 /* LLResources */,
@@ -2196,6 +2199,7 @@
 				52FC6C8B0B45A8CD0052CC8B /* licence.txt in Resources */,
 				52F819910B8F1280003ED1BE /* mouse.png in Resources */,
 				5270A4A60BAB0F9600635F95 /* SpockTorpedo.jpg in Resources */,
+				5253D56F0BCF790E0075E0D5 /* licence.rtf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
