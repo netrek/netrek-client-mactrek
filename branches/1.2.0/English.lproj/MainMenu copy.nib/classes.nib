@@ -1,0 +1,41 @@
+{
+    IBClasses = (
+        {CLASS = FirstResponder; LANGUAGE = ObjC; SUPERCLASS = NSObject; }, 
+        {CLASS = FullScreenBackgroundWindow; LANGUAGE = ObjC; SUPERCLASS = NSWindow; }, 
+        {CLASS = LLCharFormatter; LANGUAGE = ObjC; SUPERCLASS = NSFormatter; }, 
+        {CLASS = NSLevelIndicator; LANGUAGE = ObjC; SUPERCLASS = NSControl; }, 
+        {CLASS = RoundedView; LANGUAGE = ObjC; SUPERCLASS = NSView; }, 
+        {
+            ACTIONS = {
+                play = id; 
+                quit = id; 
+                refreshServers = id; 
+                startRobots = id; 
+                startServer = id; 
+                stopRobots = id; 
+                stopServer = id; 
+            }; 
+            CLASS = SetupWindowController; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {
+                backgroundWindow = NSWindow; 
+                keymapTableView = NSTableView; 
+                loginClock = NSTextField; 
+                loginInstruction = NSTextField; 
+                numberOfRobots = NSTextField; 
+                playButton = NSButton; 
+                playerName = NSTextField; 
+                playerPassword = NSTextField; 
+                playerPasswordVerify = NSTextField; 
+                serverLogView = NSTextView; 
+                serverNameTextField = NSTextField; 
+                serverTableView = NSTableView; 
+                setupWindow = NSWindow; 
+                tabView = NSTabView; 
+            }; 
+            SUPERCLASS = NSObject; 
+        }, 
+        {CLASS = TransparentWindow; LANGUAGE = ObjC; SUPERCLASS = NSWindow; }
+    ); 
+    IBVersion = 1; 
+}
