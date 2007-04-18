@@ -8,7 +8,7 @@
 
 #import <Cocoa/Cocoa.h>
 #import "BaseClass.h"
-#import <OmniNetworking/OmniNetworking.h>
+#import "LLNetwork.h"
 
 // implicitly linked
 void rsa_black_box(unsigned char *out, unsigned char *in,
@@ -18,7 +18,7 @@ void rsa_black_box(unsigned char *out, unsigned char *in,
 	bool gmpInstalled;
 }
 
-- (NSData *) encode:(NSMutableData *)data forHost:(ONHost*)host onPort:(int)port;
+- (NSData *) encode:(NSMutableData *)data forHost:(LLHost*)host onPort:(int)port;
 - (bool) gmpIsInstalled;
 
 @end

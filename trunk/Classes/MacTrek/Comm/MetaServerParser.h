@@ -7,7 +7,7 @@
 //-------------------------------------------
 
 #import <Cocoa/Cocoa.h>
-#import <OmniNetworking/OmniNetworking.h>
+#import "LLNetwork.h"
 #import "MetaServerEntry.h"
 #import "BaseClass.h"
 
@@ -16,6 +16,6 @@
 } 
  
 - (NSMutableArray *) readFromMetaServer:(NSString *) server atPort:(int)port;
-- (NSMutableArray *) parseInputFromStream:(ONSocketStream *) stream;
+- (NSMutableArray *) parseInputFromStream:(LLSocketStream *) stream;
  
 @end

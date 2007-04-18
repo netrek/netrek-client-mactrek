@@ -39,9 +39,9 @@ int startUpEvents = 0;
     self = [super init];
     if (self != nil) {
 		
-		// ROOT PLACE to turn Luky Softhreading off, only tested for guest login
+		// ROOT PLACE to turn MULTITHREADING off, only tested for guest login
 		// turn only off for testing!
-		multiThreaded = YES; 
+		multiThreaded = NO; 
 		
         // setup our client
         //client = [[ClientController alloc] initWithUniverse:universe];

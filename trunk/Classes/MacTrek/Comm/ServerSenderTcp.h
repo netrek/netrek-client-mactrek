@@ -7,16 +7,16 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import <OmniNetworking/OmniNetworking.h>
+#import "LLNetwork.h"
 #import "ServerSender.h"
 
 
 @interface ServerSenderTcp : ServerSender {
-    ONTCPSocket *socket;
+    LLTCPSocket *socket;
 }
 
-- (id) initWithSocket:(ONTCPSocket*) socket;
+- (id) initWithSocket:(LLTCPSocket*) socket;
 - (int) serverPort;
-- (ONHost*) serverHost;
+- (LLHost*) serverHost;
 
 @end

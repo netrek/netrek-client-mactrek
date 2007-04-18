@@ -20,11 +20,12 @@
     return self;
 }
 
-- (id)initWithUniverse:(Universe*)newUniverse communication:(Communication*)comm socket:(ONUDPSocket *)socket udpStats:(UdpStats*)stats{
+- (id)initWithUniverse:(Universe*)newUniverse communication:(Communication*)comm socket:(LLUDPSocket *)socket udpStats:(UdpStats*)stats{
     self = [self initWithUniverse:newUniverse communication:comm];
     if (self != nil) {
         udpStats = stats;
         udpSocket = socket;
+		[udpSocket setReadBufferSize:SRV_UDP_MAX_DATA_LENGTH];
     }
     return self;
 }
@@ -52,7 +53,7 @@
     // try to read
 	// wait with timeout if needed
     if (timeOut > 0.0) {
-		if ([udpSocket waitForInputWithTimeout:timeOut] == NO) {
+		if ([udpSocket waitForReadableWithTimeout:timeOut] == NO) {
 			// trouble!
 			LLLog(@"ServerReaderUdp.doRead TIMEOUT! more than %f sec passed", timeOut);
 			return nil;
@@ -60,8 +61,7 @@
 	}	
 	// actual read
     @try {        
-        int length = [udpSocket readBytes: SRV_UDP_MAX_DATA_LENGTH
-                               intoBuffer: [data mutableBytes]];
+        int length = [udpSocket readData:data];
         [data setLength: length];    
     }
     @catch (NSException * e) {
@@ -77,7 +77,7 @@
     
     // debug
     LLLog([NSString stringWithFormat: @"ServerReaderUpd.doRead got packet from %@:%d:\n", 
-        [udpSocket remoteAddressHost], [udpSocket remoteAddressPort]]);
+        [udpSocket remoteHost], [udpSocket remotePort]]);
     
     return data;
 }

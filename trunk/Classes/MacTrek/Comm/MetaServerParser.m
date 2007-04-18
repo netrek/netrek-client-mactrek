@@ -15,11 +15,14 @@
 		
     NSMutableArray *entries = nil;
     
+	LLLog(@"MetaServerParser.readFromMetaServer %@", server);
+	
     // connect and create a stream
-    ONTCPSocket *socket = [ONTCPSocket tcpSocket];
-    ONHost *hostName = [ONHost hostForHostname:server];
+    LLTCPSocket *socket = [[LLTCPSocket alloc] init];
+    LLHost *hostName = [LLHost hostWithName:server];
     [socket connectToHost:hostName port:port];
-    ONSocketStream *stream = [ONSocketStream streamWithSocket:socket];
+    LLSocketStream *stream = [LLSocketStream streamWithSocket:socket];
+	[stream setBlocking:YES]; // we want to wait
 
 	entries = [self parseInputFromStream:stream];
     
@@ -31,7 +34,7 @@
     return entries;
 }
 	
-- (NSMutableArray *) parseInputFromStream:(ONSocketStream *) stream  {
+- (NSMutableArray *) parseInputFromStream:(LLSocketStream *) stream  {
     
     NSMutableArray *entries = [[NSMutableArray alloc] init];
     
@@ -44,10 +47,12 @@
     [entry setStatus:  DEFAULT];
     [entry setGameType:    BRONCO];	
     [entries addObject:entry];  */
-		
+	LLLog(@"MetaServerParser.parseInputFromStream started");
+	
     NSString *line = nil;		
     while ((line = [stream readLine]) != nil) {
         // make sure this is a line with server info on it
+		LLLog(@"MetaServerParser.parseInputFromStream: [%@], size %d", line, [line length]);
         if ([line length] == 79 && 
             [[line substringWithRange:NSMakeRange(0,3)] isEqualToString:@"-h "] && 
             [[line substringWithRange:NSMakeRange(40, 3)] isEqualToString:@"-p "]) {

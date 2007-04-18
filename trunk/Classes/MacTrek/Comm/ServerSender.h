@@ -7,7 +7,7 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import <OmniNetworking/OmniNetworking.h>
+#import "LLNetwork.h"
 #import "PacketTypesDebug.h"
 #import "BaseClass.h"
 
@@ -15,7 +15,7 @@
     PacketTypesDebug *pktConv;
 }
 
-- (id)   initWithSocket:(ONInternetSocket*) socket;
+- (id)   initWithSocket:(LLSocket*) socket;
 - (bool) sendBuffer:(char*) buffer length:(int)size;
 - (void) close;
 
