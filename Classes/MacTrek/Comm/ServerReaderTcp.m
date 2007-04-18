@@ -21,12 +21,12 @@
 }
 
 - (id)initWithUniverse:(Universe*)newUniverse communication:(Communication*)comm
-                socket:(ONTCPSocket*) socket {
+                socket:(LLTCPSocket*) socket {
 
     self = [super initWithUniverse:newUniverse communication:comm];
     if (self != nil) {
         // connect has already been done and create a stream
-        stream = [ONSocketStream streamWithSocket:socket];
+        stream = [LLSocketStream streamWithSocket:socket];
         [stream retain];
 		sock = socket;
 		[sock retain];
@@ -37,7 +37,7 @@
 - (NSData *) doRead {
 	// wait with timeout if needed
     if (timeOut > 0.0) {
-		if ([sock waitForInputWithTimeout:timeOut] == NO) {
+		if ([sock waitForReadableWithTimeout:timeOut] == NO) {
 			// trouble!
 			LLLog(@"ServerReaderTcp.doRead TIMEOUT! more than %f sec passed", timeOut);
 			return nil;

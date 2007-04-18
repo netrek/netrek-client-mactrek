@@ -7,7 +7,7 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import <OmniNetworking/OmniNetworking.h>
+#import "LLNetwork.h"
 @class ServerReader;
 #import "ServerReader.h"
 @class Communication;
@@ -19,10 +19,10 @@
 
 @interface ServerReaderUdp : ServerReader {
     UdpStats *udpStats;
-	ONUDPSocket *udpSocket;
+	LLUDPSocket *udpSocket;
 }
 
-- (id)initWithUniverse:(Universe*)newUniverse communication:(Communication*)comm socket:(ONUDPSocket *)socket udpStats:(UdpStats*)stats;
--(UdpStats*)udpStats;
+- (id)initWithUniverse:(Universe*)newUniverse communication:(Communication*)comm socket:(LLUDPSocket *)socket udpStats:(UdpStats*)stats;
+- (UdpStats*)udpStats;
 
 @end

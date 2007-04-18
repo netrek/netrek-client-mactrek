@@ -11,7 +11,7 @@
 
 @implementation ServerSenderTcp
 
-- (id) initWithSocket:(ONTCPSocket*) newSocket {
+- (id) initWithSocket:(LLTCPSocket*) newSocket {
         
     self = [super init];
     if (self != nil) {
@@ -54,12 +54,12 @@
     socket = nil;
 }
 
-- (ONHost*) serverHost {
+- (LLHost*) serverHost {
     if (socket == nil) {
 		return nil; 
     }
 	
-	return [socket remoteAddressHost];
+	return [socket remoteHost];
 }
 
 - (int) serverPort {
@@ -67,7 +67,7 @@
 		return -1; 
     }
 	
-	return [socket remoteAddressPort];
+	return [socket remotePort];
 }
 
 

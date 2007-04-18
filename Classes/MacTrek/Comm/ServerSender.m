@@ -20,7 +20,7 @@
 }
 
 
-- (id) initWithSocket:(ONInternetSocket*) newSocket {   
+- (id) initWithSocket:(LLSocket*) newSocket {   
     self = [super init];
     if (self != nil) {
         LLLog(@"ServerSender.initWithSocket should have been subclassed!");

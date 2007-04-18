@@ -32,7 +32,7 @@
 }
 
 // creates a response to the RSA data block, the comm handler needs to send it
-- (NSData *) encode:(NSMutableData *)data forHost:(ONHost*)host onPort:(int)port {
+- (NSData *) encode:(NSMutableData *)data forHost:(LLHost*)host onPort:(int)port {
 	
 	if (!gmpInstalled) {
 		LLLog(@"RSAWrapper.handleRSA: ERROR, RSA not installed, gmp not found");
@@ -45,8 +45,12 @@
 	unsigned char *pData = (unsigned char*)[data bytes];
 	
 	// put the adress in the first 4 bytes
+	/* in LLNetwork we can optimize
 	ONHostAddress *address = [[host addresses] objectAtIndex:0];
-	unsigned char *pAddress = (unsigned char*)[[address addressData] bytes];
+	unsigned char *pAddress = (unsigned char*)[[address addressData] bytes]; */
+	
+	unsigned char *pAddress = (unsigned char*)[[host firstAddressData] bytes];
+	
 	memcpy(pData, pAddress, 4);
 	
 	// then the port

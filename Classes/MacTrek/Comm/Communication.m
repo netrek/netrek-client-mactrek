@@ -835,7 +835,7 @@ bool goSleeping;
     buffer[0] = CP_RSA_KEY;
 	
     int port = [tcpSender serverPort]; // get the port from the socket
-    ONHost *server = [tcpSender serverHost];
+    LLHost *server = [tcpSender serverHost];
 	
 	LLLog(@"Communication.sendRSAResponse responding with: %@:%d",
 		[server hostname], port);
@@ -1086,13 +1086,13 @@ bool goSleeping;
 //------------------------------------------------------------------------------
 - (bool) callServer:(NSString *)server port:(int) port {
     
-    ONHost *hostName;
-	ONTCPSocket *socket;
+    LLHost *hostName;
+	LLTCPSocket *socket;
     
     LLLog([NSString stringWithFormat:@"Communication.callServer: %@ at %d", server, port]);
     @try {
         // try this
-        hostName = [ONHost hostForHostname:server];
+        hostName = [LLHost hostWithName:server];
     }
     @catch (NSException * e) {
         LLLog([NSString stringWithFormat:@"Communication.callServer: %@", [e reason]]);
@@ -1101,7 +1101,7 @@ bool goSleeping;
 	
     @try {
         // connect and create a stream
-        socket = [ONTCPSocket tcpSocket];
+        socket = [[LLTCPSocket alloc] init];
         [socket connectToHost:hostName port:port];
         LLLog(@"Communication.callServer: got connection parameters");
         // create a sender and receiver
@@ -1143,16 +1143,16 @@ bool goSleeping;
 // not sure if we need the hostname at all? it is only used in log statements
 - (bool) connectToServerUsingPort:(int) port expectedHost:(NSString *) host {
     
-    ONHost *hostName;
+    LLHost *hostName;
     
     LLLog([NSString stringWithFormat:@"Communication.connectToServer: (%@) Waiting for connection at port %d", host, port]);
     
     // setup a TCP server, and accept the first incomming connection
-    ONTCPSocket *serverTCPSocket, *connectionTCPSocket;
+    LLTCPSocket *serverTCPSocket, *connectionTCPSocket;
     
     @try {        
-        serverTCPSocket = (ONTCPSocket *)[ONTCPSocket tcpSocket];
-        [serverTCPSocket startListeningOnLocalPort:port allowingAddressReuse:YES];    
+        serverTCPSocket = [[LLTCPSocket alloc] init];
+        [serverTCPSocket listenOnPort:port];    
     }
     @catch (NSException * e) {
         LLLog(@"Communication.connectToServer: error creating socket %d", port);
@@ -1160,7 +1160,7 @@ bool goSleeping;
     }
     
     @try {
-        connectionTCPSocket = [serverTCPSocket acceptConnectionOnNewSocket];
+        connectionTCPSocket = [serverTCPSocket acceptConnectionAndKeepListening];
         LLLog(@"Communication.connectToServer: got connection");
     }
     @catch (NSException * e) {
@@ -1171,9 +1171,9 @@ bool goSleeping;
     // use the passed hostname or else get it from the connection
     // (why not always get it from the connection?)
     if(host == nil) {
-        hostName = [connectionTCPSocket remoteAddressHost];
+        hostName = [connectionTCPSocket remoteHost];
     } else {
-        hostName = [ONHost hostForHostname:host];
+        hostName = [LLHost hostWithName:host];
     }
     
     @try {
@@ -1213,11 +1213,11 @@ bool goSleeping;
         
         @try {
             // connect and create a socket
-            ONUDPSocket *udpSocket = (ONUDPSocket *)[ONUDPSocket socket];
-            [udpSocket setLocalPortNumber: localUdpPort allowingAddressReuse: YES];
-            [udpSocket setAllowsBroadcast: YES]; // In  case we are sending to the broadcast address
+            LLUDPSocket *udpSocket = [[LLUDPSocket alloc] init];
+            [udpSocket listenOnPort: localUdpPort];
+            //[udpSocket setAllowsBroadcast: YES]; // In  case we are sending to the broadcast address
             
-                        LLLog([NSString stringWithFormat:@"Communication.openUdp: UDP: port is %d", localUdpPort]);
+			LLLog([NSString stringWithFormat:@"Communication.openUdp: UDP: port is %d", localUdpPort]);
             
             // setup the reader and writer
             [udpReader release];

@@ -11,7 +11,7 @@
 
 @implementation ServerSenderUdp
 
-- (id) initWithSocket:(ONUDPSocket*) newSocket {
+- (id) initWithSocket:(LLUDPSocket*) newSocket {
         
     self = [super init];
     if (self != nil) {

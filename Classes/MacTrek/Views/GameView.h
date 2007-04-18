@@ -19,7 +19,7 @@
 #import "SettingsController.h"
 
 // dropped to 10 reduces async update problem by factor 2 *still not perfect though*
-#define FRAME_RATE  10 
+#define FRAME_RATE  5 
 #define MAX_WAIT_BEFORE_DRAW  (1/(2*FRAME_RATE)) 
 
 // 10%

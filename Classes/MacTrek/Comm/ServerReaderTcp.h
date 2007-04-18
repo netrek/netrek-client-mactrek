@@ -12,15 +12,15 @@
 
 @class Communication;
 #import "Communication.h"
-#import <OmniNetworking/OmniNetworking.h>
+#import "LLNetwork.h"
 
 @interface ServerReaderTcp : ServerReader {
 	
-	ONSocketStream *stream;
-	ONTCPSocket *sock;
+	LLSocketStream *stream;
+	LLTCPSocket *sock;
 }
 
 - (id)initWithUniverse:(Universe*)newUniverse communication:(Communication*)comm
-                socket:(ONTCPSocket*) socket;
+                socket:(LLTCPSocket*) socket;
 
 @end

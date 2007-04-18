@@ -47,7 +47,10 @@
 	[rendezvousController performSelector:@selector(refreshBrowsing) withObject:nil afterDelay:1.0];
 	
 	// initial query is in seperate thread		
-	[NSThread detachNewThreadSelector:@selector(refreshServersInSeperateThread:) toTarget:self withObject:nil];
+	//[NSThread detachNewThreadSelector:@selector(refreshServersInSeperateThread:) toTarget:self withObject:nil];
+	[self refreshServers:self];
+	// try again in 1 second
+	[self performSelector:@selector(refreshServers:) withObject:self afterDelay:1.0];
 }
 
 - (void)discoveredServicesDidChange:(id)sender {

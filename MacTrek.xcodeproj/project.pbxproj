@@ -78,6 +78,11 @@
 		521B0B3F0BA4166700CCE3EB /* LLScreenResolution.m in Sources */ = {isa = PBXBuildFile; fileRef = 521B0B3E0BA4166700CCE3EB /* LLScreenResolution.m */; };
 		521F4D960BA5E8CB00EC77AF /* LLRendezvousController.m in Sources */ = {isa = PBXBuildFile; fileRef = 521F4D950BA5E8CB00EC77AF /* LLRendezvousController.m */; };
 		5220A6C80A598D2900ADAD05 /* QTKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5220A6C70A598D2900ADAD05 /* QTKit.framework */; };
+		52248D1A0BD568A500B80C6B /* LLHost.m in Sources */ = {isa = PBXBuildFile; fileRef = 52248D190BD568A500B80C6B /* LLHost.m */; };
+		52248D1D0BD568B600B80C6B /* LLSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 52248D1C0BD568B600B80C6B /* LLSocket.m */; };
+		52248D200BD568C400B80C6B /* LLUDPSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 52248D1F0BD568C400B80C6B /* LLUDPSocket.m */; };
+		52248D230BD568CD00B80C6B /* LLTCPSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 52248D220BD568CD00B80C6B /* LLTCPSocket.m */; };
+		52248D260BD568E000B80C6B /* LLSocketStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 52248D250BD568E000B80C6B /* LLSocketStream.m */; };
 		522F30AF0B0B1D6200E7DDED /* RSAWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 522F30AE0B0B1D6200E7DDED /* RSAWrapper.m */; };
 		522F30B80B0B1E2C00E7DDED /* rsa_box_0.c in Sources */ = {isa = PBXBuildFile; fileRef = 522F30B20B0B1E2C00E7DDED /* rsa_box_0.c */; };
 		522F30B90B0B1E2C00E7DDED /* rsa_box_4.c in Sources */ = {isa = PBXBuildFile; fileRef = 522F30B30B0B1E2C00E7DDED /* rsa_box_4.c */; };
@@ -139,6 +144,7 @@
 		528E7EC90B0A680A00B22943 /* romulan.png in Resources */ = {isa = PBXBuildFile; fileRef = 528E7EC80B0A680A00B22943 /* romulan.png */; };
 		528E7EF50B0A6CAC00B22943 /* Screenshot_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 528E7EF40B0A6CAC00B22943 /* Screenshot_1.png */; };
 		528E83680B0A8F5600B22943 /* SimpleBaseClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 528E83670B0A8F5600B22943 /* SimpleBaseClass.m */; };
+		528FEEC00BD6D0C40092C121 /* LLMutableDataExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 528FEEBF0BD6D0C40092C121 /* LLMutableDataExtension.m */; };
 		529847F20A7E909C00918799 /* Quartz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 529847F10A7E909C00918799 /* Quartz.framework */; };
 		529F087E0B06934F00255735 /* Backgrounds in Resources */ = {isa = PBXBuildFile; fileRef = 529F078D0B06934F00255735 /* Backgrounds */; };
 		529F087F0B06934F00255735 /* Buttons in Resources */ = {isa = PBXBuildFile; fileRef = 529F07970B06934F00255735 /* Buttons */; };
@@ -673,6 +679,17 @@
 		521F4D940BA5E8CB00EC77AF /* LLRendezvousController.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = LLRendezvousController.h; sourceTree = "<group>"; };
 		521F4D950BA5E8CB00EC77AF /* LLRendezvousController.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = LLRendezvousController.m; sourceTree = "<group>"; };
 		5220A6C70A598D2900ADAD05 /* QTKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QTKit.framework; path = /System/Library/Frameworks/QTKit.framework; sourceTree = "<absolute>"; };
+		52248D140BD5684100B80C6B /* LLNetwork.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LLNetwork.h; path = LLNetwork/LLNetwork.h; sourceTree = "<group>"; };
+		52248D180BD568A500B80C6B /* LLHost.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LLHost.h; path = LLNetwork/LLHost.h; sourceTree = "<group>"; };
+		52248D190BD568A500B80C6B /* LLHost.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LLHost.m; path = LLNetwork/LLHost.m; sourceTree = "<group>"; };
+		52248D1B0BD568B600B80C6B /* LLSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LLSocket.h; path = LLNetwork/LLSocket.h; sourceTree = "<group>"; };
+		52248D1C0BD568B600B80C6B /* LLSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LLSocket.m; path = LLNetwork/LLSocket.m; sourceTree = "<group>"; };
+		52248D1E0BD568C400B80C6B /* LLUDPSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LLUDPSocket.h; path = LLNetwork/LLUDPSocket.h; sourceTree = "<group>"; };
+		52248D1F0BD568C400B80C6B /* LLUDPSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LLUDPSocket.m; path = LLNetwork/LLUDPSocket.m; sourceTree = "<group>"; };
+		52248D210BD568CD00B80C6B /* LLTCPSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LLTCPSocket.h; path = LLNetwork/LLTCPSocket.h; sourceTree = "<group>"; };
+		52248D220BD568CD00B80C6B /* LLTCPSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LLTCPSocket.m; path = LLNetwork/LLTCPSocket.m; sourceTree = "<group>"; };
+		52248D240BD568E000B80C6B /* LLSocketStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LLSocketStream.h; path = LLNetwork/LLSocketStream.h; sourceTree = "<group>"; };
+		52248D250BD568E000B80C6B /* LLSocketStream.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LLSocketStream.m; path = LLNetwork/LLSocketStream.m; sourceTree = "<group>"; };
 		522F30AD0B0B1D6200E7DDED /* RSAWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RSAWrapper.h; path = RSA/RSAWrapper.h; sourceTree = "<group>"; };
 		522F30AE0B0B1D6200E7DDED /* RSAWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RSAWrapper.m; path = RSA/RSAWrapper.m; sourceTree = "<group>"; };
 		522F30B20B0B1E2C00E7DDED /* rsa_box_0.c */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.c; name = rsa_box_0.c; path = ../../../../RSA/MacTrek/rsa_box_0.c; sourceTree = "<group>"; };
@@ -767,6 +784,8 @@
 		528E7EF40B0A6CAC00B22943 /* Screenshot_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Screenshot_1.png; path = Resources/Backgrounds/Screenshot_1.png; sourceTree = "<group>"; };
 		528E83660B0A8F5600B22943 /* SimpleBaseClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimpleBaseClass.h; sourceTree = "<group>"; };
 		528E83670B0A8F5600B22943 /* SimpleBaseClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SimpleBaseClass.m; sourceTree = "<group>"; };
+		528FEEBE0BD6D0C40092C121 /* LLMutableDataExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLMutableDataExtension.h; sourceTree = "<group>"; };
+		528FEEBF0BD6D0C40092C121 /* LLMutableDataExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLMutableDataExtension.m; sourceTree = "<group>"; };
 		5294F6EE0B679A1400DE60C6 /* LLLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLLog.h; sourceTree = "<group>"; };
 		529847F10A7E909C00918799 /* Quartz.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quartz.framework; path = /System/Library/Frameworks/Quartz.framework; sourceTree = "<absolute>"; };
 		529F078D0B06934F00255735 /* Backgrounds */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Backgrounds; path = Resources/Backgrounds; sourceTree = "<group>"; };
@@ -1539,6 +1558,24 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		52248D130BD567FE00B80C6B /* LLNetwork */ = {
+			isa = PBXGroup;
+			children = (
+				52248D140BD5684100B80C6B /* LLNetwork.h */,
+				52248D180BD568A500B80C6B /* LLHost.h */,
+				52248D190BD568A500B80C6B /* LLHost.m */,
+				52248D1B0BD568B600B80C6B /* LLSocket.h */,
+				52248D1C0BD568B600B80C6B /* LLSocket.m */,
+				52248D1E0BD568C400B80C6B /* LLUDPSocket.h */,
+				52248D1F0BD568C400B80C6B /* LLUDPSocket.m */,
+				52248D210BD568CD00B80C6B /* LLTCPSocket.h */,
+				52248D220BD568CD00B80C6B /* LLTCPSocket.m */,
+				52248D240BD568E000B80C6B /* LLSocketStream.h */,
+				52248D250BD568E000B80C6B /* LLSocketStream.m */,
+			);
+			name = LLNetwork;
+			sourceTree = "<group>";
+		};
 		522F30AC0B0B1D4500E7DDED /* RSA */ = {
 			isa = PBXGroup;
 			children = (
@@ -1562,6 +1599,7 @@
 				528E7DDF0B0A649E00B22943 /* LLCore */,
 				528E7DE00B0A649E00B22943 /* LLGeo */,
 				528E7DE90B0A649E00B22943 /* LLGui */,
+				52248D130BD567FE00B80C6B /* LLNetwork */,
 				528E7DFE0B0A649E00B22943 /* LLResources */,
 				528E7E040B0A649E00B22943 /* LLSystem */,
 				528E7E0B0B0A649E00B22943 /* Luky.h */,
@@ -1606,6 +1644,8 @@
 				528E7E2F0B0A650800B22943 /* LLObject.m */,
 				528E7E360B0A660800B22943 /* LLView.h */,
 				528E7E370B0A660800B22943 /* LLView.m */,
+				528FEEBE0BD6D0C40092C121 /* LLMutableDataExtension.h */,
+				528FEEBF0BD6D0C40092C121 /* LLMutableDataExtension.m */,
 			);
 			path = LLCore;
 			sourceTree = "<group>";
@@ -2690,6 +2730,12 @@
 				528CF1A90BA07FF30001B4D0 /* MTDistressKeyMap.m in Sources */,
 				521B0B3F0BA4166700CCE3EB /* LLScreenResolution.m in Sources */,
 				521F4D960BA5E8CB00EC77AF /* LLRendezvousController.m in Sources */,
+				52248D1A0BD568A500B80C6B /* LLHost.m in Sources */,
+				52248D1D0BD568B600B80C6B /* LLSocket.m in Sources */,
+				52248D200BD568C400B80C6B /* LLUDPSocket.m in Sources */,
+				52248D230BD568CD00B80C6B /* LLTCPSocket.m in Sources */,
+				52248D260BD568E000B80C6B /* LLSocketStream.m in Sources */,
+				528FEEC00BD6D0C40092C121 /* LLMutableDataExtension.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

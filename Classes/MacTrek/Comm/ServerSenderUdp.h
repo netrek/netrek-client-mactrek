@@ -7,15 +7,15 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import <OmniNetworking/OmniNetworking.h>
+#import "LLNetwork.h"
 #import "ServerSender.h"
 
 
 @interface ServerSenderUdp : ServerSender {
-    ONUDPSocket *socket;
+    LLUDPSocket *socket;
 }
 
-- (id) initWithSocket:(ONUDPSocket*) socket;
+- (id) initWithSocket:(LLUDPSocket*) socket;
 - (void) close;
 
 @end
