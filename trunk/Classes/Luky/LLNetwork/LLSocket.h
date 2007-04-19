@@ -51,6 +51,11 @@
 
 #import <Foundation/Foundation.h>
 
+// Concurrency timeout, time waiting for an action by another thread to 
+// complete before returning
+
+#define SOCKET_DEFAULT_CONCURRENCY_TIMEOUT 0.5
+
 // SMALLSOCKETS_VERSION is the version number of SmallSockets in binary-coded
 // decimal.  (ie; version 1.3.2 == 0x0132)
 
@@ -107,7 +112,6 @@
 #define SOCKET_EX_SETSOCKOPT_FAILED_F		@"Socket: Setsockopt failed: %s"
 
 // Default, uninitialized values for instance variables
-
 #define SOCKET_INVALID_PORT	0
 #define SOCKET_INVALID_DESCRIPTOR -1
 
@@ -119,6 +123,8 @@
     int 			socketfd;
 	BOOL 			connected;
 	BOOL			listening;
+	NSLock			*mutex;
+	int				timeOut;
 }
 
 	// Designated initializer
@@ -127,6 +133,9 @@
 	// Accessor functions
 - (LLHost*)remoteHost;
 - (unsigned short) remotePort;
+
+	// Concurrency Functions
+- (BOOL)isBusy;
 
 	// Reading and writing data
 - (BOOL)isReadable;

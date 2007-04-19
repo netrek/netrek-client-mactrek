@@ -35,8 +35,11 @@
     struct hostent* remoteHost;
     struct sockaddr_in remoteAddr;
 	
-    // Socket must be created, and not already connected
+	if (![mutex lockBeforeDate:[NSDate dateWithTimeIntervalSinceNow:timeOut]]) {
+		return; // no lock obtained, so no need to unlock
+	}
 	
+    // Socket must be created, and not already connected	
     if ( socketfd == SOCKET_INVALID_DESCRIPTOR )
         [NSException raise:SOCKET_EX_BAD_SOCKET_DESCRIPTOR 
 					format:SOCKET_EX_BAD_SOCKET_DESCRIPTOR];
@@ -66,6 +69,8 @@
     remotePort = port;
 	
     connected = YES;
+	
+	[mutex unlock];
 }
 
 //
@@ -83,11 +88,17 @@
 	
     [self _bindTo:INADDR_ANY port:port];
 	
+	if (![mutex lockBeforeDate:[NSDate dateWithTimeIntervalSinceNow:timeOut]]) {
+		return; // no lock obtained, so no need to unlock
+	}
+	
     if ( listen(socketfd, maxPendingConnections) < 0 )
         [NSException raise:SOCKET_EX_LISTEN_FAILED 
 					format:SOCKET_EX_LISTEN_FAILED_F, strerror(errno)];
 	
     listening = YES;
+	
+	[mutex unlock];
 }
 
 //
@@ -103,8 +114,11 @@
     int socketfd2 = SOCKET_INVALID_DESCRIPTOR;
     unsigned int addrSize = sizeof(acceptAddr);
 	
-    // Socket must be created, not connected, and listening
-    
+	if (![mutex lockBeforeDate:[NSDate dateWithTimeIntervalSinceNow:timeOut]]) {
+		return; // no lock obtained, so no need to unlock
+	}
+	
+    // Socket must be created, not connected, and listening    
     if ( socketfd == SOCKET_INVALID_DESCRIPTOR )
         [NSException raise:SOCKET_EX_BAD_SOCKET_DESCRIPTOR 
 					format:SOCKET_EX_BAD_SOCKET_DESCRIPTOR];
@@ -117,8 +131,7 @@
         [NSException raise:SOCKET_EX_NOT_LISTENING 
 					format:SOCKET_EX_NOT_LISTENING];
 	
-    // Accept a remote connection.  Raise on failure
-    
+    // Accept a remote connection.  Raise on failure    
     socketfd2 = accept(socketfd, (struct sockaddr*)&acceptAddr, &addrSize);
     
     if ( socketfd2 < 0 )
@@ -134,6 +147,8 @@
     socketfd = socketfd2;
     connected = YES;
     listening = NO;
+	
+	[mutex unlock];
 }
 
 //
@@ -149,6 +164,10 @@
     struct sockaddr_in acceptAddr;
     int socketfd2 = SOCKET_INVALID_DESCRIPTOR;
     unsigned int addrSize = sizeof(acceptAddr);
+	
+	if (![mutex lockBeforeDate:[NSDate dateWithTimeIntervalSinceNow:timeOut]]) {
+		return nil; // no lock obtained, so no need to unlock
+	}
 	
     // Socket must be created, not connected, and listening    
     if ( socketfd == SOCKET_INVALID_DESCRIPTOR )
@@ -170,6 +189,8 @@
         [NSException raise:SOCKET_EX_ACCEPT_FAILED 
                     format:SOCKET_EX_ACCEPT_FAILED_F, strerror(errno)];
     
+	[mutex unlock];
+	
     return [[[LLTCPSocket alloc] _initWithFD:socketfd2 remoteAddress:&acceptAddr] autorelease];
 }
 
@@ -189,14 +210,16 @@
 - (int)readData:(NSMutableData*)data {
     ssize_t count;
 	
-	// data must not be null ptr
+	if (![mutex lockBeforeDate:[NSDate dateWithTimeIntervalSinceNow:timeOut]]) {
+		return 0; // no lock obtained, so no need to unlock
+	}
 	
+	// data must not be null ptr	
 	if ( data == NULL )
 		[NSException raise:SOCKET_EX_INVALID_BUFFER 
 					format:SOCKET_EX_INVALID_BUFFER];
 	
-    // Socket must be created and connected
-    
+    // Socket must be created and connected    
     if ( socketfd == SOCKET_INVALID_DESCRIPTOR )
         [NSException raise:SOCKET_EX_BAD_SOCKET_DESCRIPTOR 
 					format:SOCKET_EX_BAD_SOCKET_DESCRIPTOR];
@@ -205,8 +228,7 @@
         [NSException raise:SOCKET_EX_NOT_CONNECTED 
 					format:SOCKET_EX_NOT_CONNECTED];
     
-    // Request a read of as much as we can.  Should return immediately if no data.
-	
+    // Request a read of as much as we can.  Should return immediately if no data.	
     count = recv(socketfd, readBuffer, readBufferSize, 0);
     
     if ( count > 0 )
@@ -216,14 +238,12 @@
     }
     else if ( count == 0 )
     {
-        // Other side has disconnected, so close down our socket
-		
+        // Other side has disconnected, so close down our socket		
         [self _close];
     }
     else if ( count < 0 )
     {
-        // recv() returned an error. 
-		
+        // recv() returned an error. 		
         if ( errno == EAGAIN )
         {
             // No data available to read (and socket is non-blocking)
@@ -234,6 +254,8 @@
 						format:SOCKET_EX_RECV_FAILED_F, strerror(errno)];
     }
     
+	[mutex unlock];
+	
     return count;
 }
 
@@ -246,8 +268,11 @@
     int len = [data length];
     int sent;
     
-    // Socket must be created and connected
-    
+	if (![mutex lockBeforeDate:[NSDate dateWithTimeIntervalSinceNow:timeOut]]) {
+		return; // no lock obtained, so no need to unlock
+	}
+	
+    // Socket must be created and connected    
     if ( socketfd == SOCKET_INVALID_DESCRIPTOR )
         [NSException raise:SOCKET_EX_BAD_SOCKET_DESCRIPTOR 
 					format:SOCKET_EX_BAD_SOCKET_DESCRIPTOR];
@@ -256,8 +281,7 @@
         [NSException raise:SOCKET_EX_NOT_CONNECTED 
 					format:SOCKET_EX_NOT_CONNECTED];
     
-    // Send the data
-    
+    // Send the data    
     while ( len > 0 )
     {
         sent = send(socketfd, bytes, len, 0);
@@ -269,6 +293,8 @@
         bytes += sent;
         len -= sent;
     }
+	
+	[mutex unlock];
 }
 
 //

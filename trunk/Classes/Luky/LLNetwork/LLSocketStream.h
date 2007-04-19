@@ -42,20 +42,13 @@
 //        distribution.
 //        
 
-
-/*
- * The Socket class must be supplied with an NSMutableData object
- * on each read and appends the data that was read from the 
- * BSD-socket, but will often return with more or less data than
- * the caller requires. This forces the programmer to keep track of 
- * additional data that is read.
- *
- * The BufferedSocket class internally buffers the data read from 
- * the Socket and implements messages that can
- * a) read a specified amount of data
- * b) read data until a secified pattern is found
- *
- */
+// Usage:
+//
+//		Create or init a stream with a socket
+//		the socket will be set to non-blocking, change this if you want
+//		by calling setBlocking
+//
+//		read from the stream
 
 @interface LLSocketStream : LLObject {
 	LLSocket *sock;

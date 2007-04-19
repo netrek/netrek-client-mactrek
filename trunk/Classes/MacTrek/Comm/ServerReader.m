@@ -144,10 +144,12 @@ NSMutableData *leftOverPacket;
 
 - (void) readFromServer {
     
-    NSData *dataReceived = [self doRead];
+    NSData *dataReceived = [self doRead];	 
     if (dataReceived == nil) {  
+		//LLLog(@"ServerReader.readFromServer nil bytes");
         return;
     }
+	//LLLog(@"ServerReader.readFromServer %d bytes", [dataReceived length]);
     
     int count = 0;
     char *buffer = nil;
@@ -168,9 +170,9 @@ NSMutableData *leftOverPacket;
     /*
     LLLog(@"ServerReader.readFromServer raw block read start:");
     [pktConv printPacketInBuffer:buffer size:count];
-    LLLog(@"ServerReader.readFromServer raw block read end");
+    LLLog(@"ServerReader.readFromServer raw block read end");    
     */
-    
+	
     while(count > 0)  {
         // the first char in the buffer should tell us the type of the message
         int ptype = buffer[0] & 0xFF;
@@ -312,10 +314,10 @@ NSMutableData *leftOverPacket;
         // exact fit in frame, no leftover
         [leftOverPacket release];
         leftOverPacket = nil;
-		
-		// report end of read cycle, COW will redraw screen now
-		[notificationCenter postNotificationName:@"SERVER_READER_READ_SYNC"];
     }
+	
+	// report end of read cycle, COW will redraw screen now
+	[notificationCenter postNotificationName:@"SERVER_READER_READ_SYNC"];
 }
 
 

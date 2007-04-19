@@ -13,6 +13,18 @@
 
 }
 
+// Usage:
+//
+//		As Server:
+//			- call listenOnPort to start listening for connections
+//			- read data (this will set the remoteHost upon reception)
+//			- write data (wil use this remote host)
+//
+//		As Client:
+//			- call connectToHost to establish a connection
+//			- write data to tell the host who you are
+//			- read data 
+
 	// Making connections
 - (void)connectToHost:(LLHost*)host port:(unsigned short)port;
 

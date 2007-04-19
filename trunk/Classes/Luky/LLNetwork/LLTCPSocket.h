@@ -13,6 +13,17 @@
 	
 }
 
+// Usage:
+//
+//		As Server:
+//			- call listenOnPort to start listening for connections
+//		    - call acceptConnection to wait for an incomming request
+//			- read data or write data
+//
+//		As Client:
+//			- call connectToHost to establish a connection
+//			- read data or write data 
+
 	// Connection management
 - (BOOL)isConnected;
 

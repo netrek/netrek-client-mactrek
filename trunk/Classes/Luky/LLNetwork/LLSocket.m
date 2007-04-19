@@ -38,6 +38,8 @@
     remoteHostName = NULL;
     remotePort = SOCKET_INVALID_PORT;
 	socketfd = SOCKET_INVALID_DESCRIPTOR;
+	mutex = [[NSLock alloc] init];
+	timeOut = SOCKET_DEFAULT_CONCURRENCY_TIMEOUT;
 	
     [self allocReadBuffer];
     
@@ -58,8 +60,11 @@
     fd_set readfds;
     struct timeval timeout;
     
-    // Socket must be created and connected
-    
+	if (![mutex lockBeforeDate:[NSDate dateWithTimeIntervalSinceNow:timeOut]]) {
+		return NO; // no lock obtained, so no need to unlock
+	}
+	
+    // Socket must be created and connected    
     if ( socketfd == SOCKET_INVALID_DESCRIPTOR )
         [NSException raise:SOCKET_EX_BAD_SOCKET_DESCRIPTOR 
 					format:SOCKET_EX_BAD_SOCKET_DESCRIPTOR];
@@ -68,8 +73,7 @@
         [NSException raise:SOCKET_EX_NOT_CONNECTED 
 					format:SOCKET_EX_NOT_CONNECTED];
 	
-    // Create a file descriptor set for just this socket
-	
+    // Create a file descriptor set for just this socket	
     FD_ZERO(&readfds);
     FD_SET(socketfd, &readfds);
 	
@@ -77,8 +81,7 @@
     timeout.tv_sec = (int) waittime;
     timeout.tv_usec = (int)(((double)(waittime * 1000000)) - ((double)(timeout.tv_sec * 1000000.0)));
 	
-    // Check socket for data
-	
+    // Check socket for data	
     count = select(socketfd + 1, &readfds, NULL, NULL, &timeout);
     
     // Return value of less than 0 indicates error	
@@ -86,8 +89,8 @@
         [NSException raise:SOCKET_EX_SELECT_FAILED 
 					format:SOCKET_EX_SELECT_FAILED_F, strerror(errno)];
     
-    // select() returns number of descriptors that matched, so 1 == has data, 0 == no data
-    
+	[mutex unlock];
+    // select() returns number of descriptors that matched, so 1 == has data, 0 == no data    
     return (count == 1);
 }
 
@@ -99,9 +102,12 @@
     int count;
     fd_set writefds;
     struct timeval timeout;
-    
-    // Socket must be created and connected
-    
+	
+	if (![mutex lockBeforeDate:[NSDate dateWithTimeIntervalSinceNow:timeOut]]) {
+		return NO; // no lock obtained, so no need to unlock
+	}
+	
+    // Socket must be created and connected    
     if ( socketfd == SOCKET_INVALID_DESCRIPTOR )
         [NSException raise:SOCKET_EX_BAD_SOCKET_DESCRIPTOR 
 					format:SOCKET_EX_BAD_SOCKET_DESCRIPTOR];
@@ -115,23 +121,21 @@
     FD_ZERO(&writefds);
     FD_SET(socketfd, &writefds);
 	
-    // Create a timeout of zero (don't wait)
-	
+    // Create a timeout of zero (don't wait)	
     timeout.tv_sec = 0;
     timeout.tv_usec = 0;
 	
-    // Check socket for data
-	
+    // Check socket for data	
     count = select(socketfd + 1, NULL, &writefds, NULL, &timeout);
     
-    // Return value of less than 0 indicates error
-	
+    // Return value of less than 0 indicates error	
     if ( count < 0 )
         [NSException raise:SOCKET_EX_SELECT_FAILED 
 					format:SOCKET_EX_SELECT_FAILED_F, strerror(errno)];
     
-    // select() returns number of descriptors that matched, so 1 == write OK
-    
+	[mutex unlock];
+	
+    // select() returns number of descriptors that matched, so 1 == write OK    
     return (count == 1);
 }
 
@@ -161,6 +165,10 @@
     int flags;
     int result;
     
+	if (![mutex lockBeforeDate:[NSDate dateWithTimeIntervalSinceNow:timeOut]]) {
+		return; // no lock obtained, so no need to unlock
+	}
+	
     flags = fcntl(socketfd, F_GETFL, 0);
 	
     if ( flags < 0 )
@@ -181,12 +189,19 @@
     if ( result < 0 )
         [NSException raise:SOCKET_EX_FCNTL_FAILED 
 					format:SOCKET_EX_FCNTL_FAILED_F, strerror(errno)];
+	
+	[mutex unlock];
 }
 
 //
 // Change the size of the read buffer at runtime
 //
 - (void)setReadBufferSize:(unsigned int)size {
+	
+	if (![mutex lockBeforeDate:[NSDate dateWithTimeIntervalSinceNow:timeOut]]) {
+		return; // no lock obtained, so no need to unlock
+	}
+	
     readBufferSize = size;
 	
     if ( readBuffer ) 
@@ -196,6 +211,8 @@
     }
     
     [self allocReadBuffer];
+
+	[mutex unlock];
 }
 
 //
@@ -205,7 +222,6 @@
 	
     return readBufferSize;
 }
-
 
 //
 // Utility function that returns a dotted IP address string from a
@@ -247,6 +263,10 @@
     struct sockaddr_in localAddr;
     int on = 1;
 	
+	if (![mutex lockBeforeDate:[NSDate dateWithTimeIntervalSinceNow:timeOut]]) {
+		return; // no lock obtained, so no need to unlock
+	}
+	
     // Set a flag so that this address can be re-used immediately after the connection
     // closes.  (TCP normally imposes a delay before an address can be re-used.)    
     if ( setsockopt(socketfd, SOL_SOCKET, SO_REUSEADDR, (void*)&on, sizeof(on)) < 0 )
@@ -262,6 +282,8 @@
     if ( bind(socketfd, (struct sockaddr*)&localAddr, sizeof(localAddr)) < 0 )
 		[NSException raise:SOCKET_EX_BIND_FAILED 
 					format:SOCKET_EX_BIND_FAILED_F, strerror(errno)];
+	
+	[mutex unlock];
 }
 
 //
@@ -269,14 +291,17 @@
 // will be automatically closed when it is released.
 //
 - (void)_close {
-    if ( socketfd != SOCKET_INVALID_DESCRIPTOR )
-    {
+	
+	if (![mutex lockBeforeDate:[NSDate dateWithTimeIntervalSinceNow:timeOut]]) {
+		return; // no lock obtained, so no need to unlock
+	}
+	
+    if ( socketfd != SOCKET_INVALID_DESCRIPTOR ) {
         close(socketfd);
         socketfd = SOCKET_INVALID_DESCRIPTOR;
     }
     
-    if ( remoteHostName != NULL )
-    {
+    if ( remoteHostName != NULL ) {
         [remoteHostName release];
         remoteHostName = NULL;
     }
@@ -284,6 +309,18 @@
     connected = NO;
     listening = NO;
     remotePort = SOCKET_INVALID_PORT;
+	
+	[mutex unlock];
+}
+
+- (BOOL) isBusy {
+	// if we are busy we can not get a lock
+	if ([mutex tryLock]) {
+		[mutex unlock];
+		return NO;
+	} else {
+		return YES;
+	}
 }
 
 //
@@ -307,6 +344,7 @@
 // Do not call this method directly!  Use retain & release.
 //
 - (void)dealloc {
+	
     [self _close];
 	
     if ( readBuffer )
