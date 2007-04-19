@@ -42,6 +42,7 @@ int startUpEvents = 0;
 		// ROOT PLACE to turn MULTITHREADING off, only tested for guest login
 		// turn only off for testing!
 		multiThreaded = NO; 
+		mutex = [[NSLock alloc] init];
 		
         // setup our client
         //client = [[ClientController alloc] initWithUniverse:universe];
@@ -139,6 +140,37 @@ int startUpEvents = 0;
 	return NSTerminateNow;
 }
 
+- (NSString*)gameStateAsString {
+	switch (gameState) {
+	
+		case GS_NO_SERVER_SELECTED:
+			return @"GS_NO_SERVER_SELECTED";
+			break;
+		case GS_SERVER_SELECTED:
+			return @"GS_SERVER_SELECTED";
+			break;
+		case GS_SERVER_CONNECTED:
+			return @"GS_SERVER_CONNECTED";
+			break;
+		case GS_SERVER_SLOT_FOUND:
+			return @"GS_SERVER_SLOT_FOUND";
+			break;
+		case GS_LOGIN_ACCEPTED:
+			return @"GS_LOGIN_ACCEPTED";
+			break;
+		case GS_OUTFIT_ACCEPTED:
+			return @"GS_OUTFIT_ACCEPTED";
+			break;
+		case GS_GAME_ACTIVE:
+			return @"GS_GAME_ACTIVE";
+			break;
+		case GS_MAX_STATE:
+			return @"GS_MAX_STATE";
+			break;
+	}
+	return @"GS_ERROR";
+}
+
 - (void) increaseStartUpCounter {
     
     startUpEvents++;
@@ -182,6 +214,8 @@ int startUpEvents = 0;
     // set up a timer to redraw at FRAME_RATE 
     // since some data is updated outside the main loop and in the receive 
     // thread (default is still with timer (so not sync))
+	// will probably not work since there is a blocking wait
+	// in the main draw loop when not multithreading
 	[self setSyncScreenUpdateWithRead:NO];
 	
     // does the controller wait, or asks for reads herself...
@@ -287,39 +321,68 @@ int startUpEvents = 0;
 	if (enable) {
 		[notificationCenter addObserver:self selector:@selector(screenRefreshTimerFired:) name:@"SERVER_READER_READ_SYNC"
 								 object:nil useLocks:NO useMainRunLoop:NO]; 
+		[notificationCenter addObserver:self selector:@selector(screenRefreshTimerFired:) name:@"GM_GAME_ENTERED"
+								 object:nil useLocks:NO useMainRunLoop:NO]; 
+		[notificationCenter addObserver:self selector:@selector(screenRefreshTimerFired:) name:@"COMM_SEND_TEAM_REQ"
+								 object:nil useLocks:NO useMainRunLoop:NO]; 
 	}
 	else {		
-		timer = [NSTimer scheduledTimerWithTimeInterval: (1 / FRAME_RATE)
-												 target:self selector:@selector(screenRefreshTimerFired:)
-											   userInfo:nil 
-												repeats:YES];
+		if (multiThreaded) {
+			timer = [NSTimer scheduledTimerWithTimeInterval: (1 / FRAME_RATE)
+													 target:self selector:@selector(screenRefreshTimerFired:)
+												   userInfo:nil 
+													repeats:YES];
+		} else {
+			// singleTreaded
+			[self performSelector:@selector(screenRefreshTimerFired:) withObject:nil afterDelay:(1 / FRAME_RATE)];
+		}
+
 	}
 
 }
 
+//#define SHOWTIME 0
+
 - (void)screenRefreshTimerFired:(NSTimer*)theTimer {
     
+	int interval; 
+	
+#ifdef SHOWTIME
    static NSTimeInterval start, stop;
 	
-   //start = [NSDate timeIntervalSinceReferenceDate]; 
-   ///LLLog(@"GuiManager.screenRefreshTimerFired(slept): %f sec", (start-stop));        
+   start = [NSDate timeIntervalSinceReferenceDate]; 
+   LLLog(@"GuiManager.screenRefreshTimerFired(slept): %f sec", (start-stop));     
+#endif
 
     if (gameState == GS_GAME_ACTIVE) {
-        // $$ this will work, but what about when we are killed?
-        if (!multiThreaded) {
-            //[\icationCenter setEnable:NO];
-            [client singleReadFromServer]; // single threaded 
-        }
-
+		 //[notificationCenter setEnable:NO];
         // after that, repaint
+		interval = (1 / FRAME_RATE);
         [gameCntrl repaint];        
     } else {
+		interval = 1; // every second? it's quite blocking
         //[notificationCenter setEnable:YES];
     }
 	
-    //stop = [NSDate timeIntervalSinceReferenceDate];  
-    //LLLog(@"GuiManager.screenRefreshTimerFired(spent): %f sec", (stop-start));
-    
+#ifdef SHOWTIME
+    stop = [NSDate timeIntervalSinceReferenceDate];  
+    LLLog(@"GuiManager.screenRefreshTimerFired(spent): %f sec", (stop-start));
+#endif
+	
+	// $$ this will work, but what about when we are killed?
+	if (!multiThreaded) {
+		if (![mutex lockBeforeDate:[NSDate dateWithTimeIntervalSinceNow:0.5]]) {
+			LLLog(@"GuiManager.screenRefreshTimerFired cannot access client"); // no lock obtained, so no need to unlock
+		} else {
+			//lock obtained
+			[client singleReadFromServer]; // single threaded 
+			[mutex unlock];
+		}
+		
+		// not using timers for events
+		[self performSelector:@selector(screenRefreshTimerFired:) withObject:nil afterDelay:interval];
+	}
+	
 	//[mainWindow displayIfNeeded];   // not needed comm is now threadsafe 
 }
 
@@ -379,16 +442,16 @@ int startUpEvents = 0;
             break;
         case GS_OUTFIT_ACCEPTED:
         case GS_GAME_ACTIVE:
-            LLLog(@"GuiManager.serverSelected unexpected gameState %d, reseting", gameState);
+            LLLog(@"GuiManager.serverSelected unexpected gameState %@, reseting", [self gameStateAsString]);
             [self serverDeSelected];
             [menuCntrl raiseMenu:self];
             break;
         default:
-            LLLog(@"GuiManager.serverSelected unknown gameState %d", gameState);
+            LLLog(@"GuiManager.serverSelected unknown gameState %@", [self gameStateAsString]);
             break;
     }  	
     
-    LLLog(@"GuiManager.serverSelected GAMESTATE = %d", gameState);
+    LLLog(@"GuiManager.serverSelected GAMESTATE = %@", [self gameStateAsString]);
 }
 
 - (void) serverDeSelected {
@@ -411,7 +474,7 @@ int startUpEvents = 0;
     // so make sure nothing is selected after all
     [selectServerCntrl deselectServer:self];
     
-    LLLog(@"GuiManager.serverDeSelected GAMESTATE = %d", gameState);
+    LLLog(@"GuiManager.serverDeSelected GAMESTATE = %@", [self gameStateAsString]);
 }
 
 - (void) serverConnected {
@@ -431,17 +494,17 @@ int startUpEvents = 0;
         case GS_GAME_ACTIVE:
         case GS_LOGIN_ACCEPTED:
         case GS_NO_SERVER_SELECTED:
-            LLLog(@"GuiManager.serverConnected unexpected gameState %d, reseting", gameState);
+            LLLog(@"GuiManager.serverConnected unexpected gameState %@, reseting", [self gameStateAsString]);
             [self serverDeSelected];
             [menuCntrl raiseMenu:self];            
             break;
         default:
-            LLLog(@"GuiManager.serverConnected unknown gameState %d", gameState);
+            LLLog(@"GuiManager.serverConnected unknown gameState %@", [self gameStateAsString]);
             break;
     }
  
     
-    LLLog(@"GuiManager.serverConnected GAMESTATE = %d", gameState);
+    LLLog(@"GuiManager.serverConnected GAMESTATE = %@", [self gameStateAsString]);
 }
 
 - (void) serverSlotFound {
@@ -449,7 +512,7 @@ int startUpEvents = 0;
         case GS_NO_SERVER_SELECTED:
 
         case GS_OUTFIT_ACCEPTED:
-            LLLog(@"GuiManager.serverSlotFound unexpected gameState %d, reseting", gameState);
+            LLLog(@"GuiManager.serverSlotFound unexpected gameState %@, reseting", [self gameStateAsString]);
             [self serverDeSelected];
             [menuCntrl raiseMenu:self];            
             break;
@@ -475,11 +538,11 @@ int startUpEvents = 0;
             }
             break;
         default:
-            LLLog(@"GuiManager.serverSlotFound unknown gameState %d", gameState);
+            LLLog(@"GuiManager.serverSlotFound unknown gameState %@", [self gameStateAsString]);
             break;
     }
     
-    LLLog(@"GuiManager.serverSlotFound GAMESTATE = %d", gameState);
+    LLLog(@"GuiManager.serverSlotFound GAMESTATE = %@", [self gameStateAsString]);
 }
 
 - (void) iDied {
@@ -498,7 +561,7 @@ int startUpEvents = 0;
         case GS_SERVER_SELECTED:
         case GS_SERVER_CONNECTED:
         case GS_OUTFIT_ACCEPTED:
-            LLLog(@"GuiManager.loginComplete unexpected gameState %d, reseting", gameState);
+            LLLog(@"GuiManager.loginComplete unexpected gameState %@, reseting", [self gameStateAsString]);
             [self serverDeSelected];
             [menuCntrl raiseMenu:self]; 
             break;
@@ -539,10 +602,10 @@ int startUpEvents = 0;
             // a successfull outfit moves us to the next state
             break;
         default:
-            LLLog(@"GuiManager.loginComplete unknown gameState %d", gameState);
+            LLLog(@"GuiManager.loginComplete unknown gameState %@", [self gameStateAsString]);
             break;
     }
-    LLLog(@"GuiManager.loginComplete GAMESTATE = %d", gameState);
+    LLLog(@"GuiManager.loginComplete GAMESTATE = %@", [self gameStateAsString]);
 }
 
 - (void) outfitAccepted {
@@ -553,7 +616,7 @@ int startUpEvents = 0;
         case GS_OUTFIT_ACCEPTED:
         case GS_SERVER_SLOT_FOUND:
         case GS_GAME_ACTIVE:
-            LLLog(@"GuiManager.outfitAccepted unexpected gameState %d, reseting", gameState);
+            LLLog(@"GuiManager.outfitAccepted unexpected gameState %@, reseting", [self gameStateAsString]);
             [self serverDeSelected];
 			[menuCntrl setCanPlay:NO];
             [menuCntrl raiseMenu:self];            
@@ -569,10 +632,10 @@ int startUpEvents = 0;
  
             break;
         default:
-            LLLog(@"GuiManager.outfitAccepted unknown gameState %d", gameState);
+            LLLog(@"GuiManager.outfitAccepted unknown gameState %@", [self gameStateAsString]);
             break;
     }
-    LLLog(@"GuiManager.outfitAccepted GAMESTATE = %d", gameState);
+    LLLog(@"GuiManager.outfitAccepted GAMESTATE = %@", [self gameStateAsString]);
 }
 
 - (void) gameEntered { 
@@ -584,7 +647,7 @@ int startUpEvents = 0;
         case GS_LOGIN_ACCEPTED:
         case GS_SERVER_SLOT_FOUND:
         case GS_GAME_ACTIVE:
-            LLLog(@"GuiManager.gameEntered unexpected gameState %d, reseting", gameState);
+            LLLog(@"GuiManager.gameEntered unexpected gameState %@, reseting", [self gameStateAsString]);
             [self serverDeSelected];
             [menuCntrl raiseMenu:self];            
             break;
@@ -619,10 +682,10 @@ int startUpEvents = 0;
 			[notificationCenter postNotificationName:@"GM_GAME_ENTERED"];
             break;
         default:
-            LLLog(@"GuiManager.gameEntered unknown gameState %d", gameState);
+            LLLog(@"GuiManager.gameEntered unknown gameState %@", [self gameStateAsString]);
             break;
     }
-    LLLog(@"GuiManager.gameEntered GAMESTATE = %d", gameState);
+    LLLog(@"GuiManager.gameEntered GAMESTATE = %@", [self gameStateAsString]);
 }
 
 - (void) commError { 
@@ -635,17 +698,17 @@ int startUpEvents = 0;
         case GS_SERVER_SLOT_FOUND:
         case GS_GAME_ACTIVE:
         case GS_OUTFIT_ACCEPTED:
-            LLLog(@"GuiManager.commError unexpected (gameState %d), reseting", gameState);
+            LLLog(@"GuiManager.commError unexpected (gameState %@), reseting", [self gameStateAsString]);
 			[keyMapPanel close]; // remove the help screen
             [self serverDeSelected];
 			[menuCntrl disableLogin];
             [menuCntrl raiseMenu:self];            
             break;
         default:
-            LLLog(@"GuiManager.gameEntered unknown gameState %d", gameState);
+            LLLog(@"GuiManager.gameEntered unknown gameState %@", [self gameStateAsString]);
             break;
     }
-    LLLog(@"GuiManager.commError GAMESTATE = %d", gameState);
+    LLLog(@"GuiManager.commError GAMESTATE = %@", [self gameStateAsString]);
 }
 
 - (void) setTheme {

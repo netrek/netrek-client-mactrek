@@ -43,6 +43,8 @@
 	
 	// for UDP we do not actually listen, just bind to the port	
     listening = YES;
+	[remoteHostName release];
+	remoteHostName = nil; // reset remote host
 }
 
 //
@@ -66,6 +68,10 @@
 	struct sockaddr_in remoteAddress;
 	unsigned int length;
 	
+	if (![mutex lockBeforeDate:[NSDate dateWithTimeIntervalSinceNow:timeOut]]) {
+		return 0; // no lock obtained, so no need to unlock
+	}
+	
 	// data must not be null ptr	
 	if ( data == NULL )
 		[NSException raise:SOCKET_EX_INVALID_BUFFER 
@@ -82,10 +88,17 @@
 	
 	// translate the remote hostname to byte order
 	struct in_addr address;
-	if ( inet_aton([remoteHostName cString], &address) == 0 ) 
-		[NSException raise:SOCKET_EX_HOST_NOT_FOUND 
-					format:SOCKET_EX_HOST_NOT_FOUND_F, strerror(errno)];
 	
+	if (listening == NO) {
+		// i am client of a remote host
+		if ( inet_aton([remoteHostName cString], &address) == 0 ) 
+			[NSException raise:SOCKET_EX_HOST_NOT_FOUND 
+						format:SOCKET_EX_HOST_NOT_FOUND_F, strerror(errno)];
+	} else {
+		 // i am server
+		address.s_addr = INADDR_ANY;
+	}
+
 	// build the target address
 	bzero(&remoteAddress, sizeof(remoteAddress));
     remoteAddress.sin_family      = AF_INET;
@@ -124,6 +137,8 @@
 						format:SOCKET_EX_RECV_FAILED_F, strerror(errno)];
     }
     
+	[mutex unlock];
+	
     return count;
 }
 
@@ -137,6 +152,10 @@
     int sent;
 	struct sockaddr_in remoteAddress;
     
+	if (![mutex lockBeforeDate:[NSDate dateWithTimeIntervalSinceNow:timeOut]]) {
+		return; // no lock obtained, so no need to unlock
+	}
+	
     // Socket must be created and connected    
     if ( socketfd == SOCKET_INVALID_DESCRIPTOR )
         [NSException raise:SOCKET_EX_BAD_SOCKET_DESCRIPTOR 
@@ -166,6 +185,8 @@
         bytes += sent;
         len -= sent;
     }
+	
+	[mutex unlock];
 }
 
 //

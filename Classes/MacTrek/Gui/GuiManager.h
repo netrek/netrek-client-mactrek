@@ -79,8 +79,10 @@ enum GAME_STATE {
 	MetaServerEntry *currentServer;
 	NSTimer *timer;
 	NSNetService *service;
+	NSLock *mutex;
 }
 
+- (NSString*)gameStateAsString;
 - (NSApplicationTerminateReply)applicationShouldTerminate:(NSApplication *)sender;
 - (void) testLog:(NSNotification *)notification;
 - (void) serverDeSelected;

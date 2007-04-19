@@ -35,7 +35,7 @@
 - (NSData *) encode:(NSMutableData *)data forHost:(LLHost*)host onPort:(int)port {
 	
 	if (!gmpInstalled) {
-		LLLog(@"RSAWrapper.handleRSA: ERROR, RSA not installed, gmp not found");
+		LLLog(@"RSAWrapper.encode: ERROR, RSA not installed, gmp not found");
 		return nil;
 	}	
 	
@@ -63,7 +63,7 @@
 	unsigned char *pResponse = (unsigned char*)[response mutableBytes];
 	
 	// decode the key
-	LLLog(@"RSAWrapper.handleRSA: decoding RSA request");
+	LLLog(@"RSAWrapper.encode: decoding RSA request");
 	// void rsa_black_box(unsigned char *out, unsigned char *in, unsigned char *public, unsigned char *global) 
 	
 	/* 
