@@ -26,8 +26,8 @@
 #define COMM_SHORTVERSION    11
 // S_P2
 #define COMM_OLDSHORTVERSION 10		
-// one second
-#define COMM_NETWORK_TIMEOUT 1.0
+// 10 milli second for LLNetwork vs 1 second for OmniNetwork
+#define COMM_NETWORK_TIMEOUT 0.01
 
 #define MAX_WAIT_BEFORE_CONTINUE 10
 

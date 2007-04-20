@@ -18,7 +18,7 @@
 }
 
 - (Communication *) communication;
-- (void)iDied:(Player *)me;
+//- (void)iDied:(Player *)me;
 - (id)  initWithUniverse:(Universe*)newUniverse;
 - (void)singleReadFromServer;
 - (bool)startClientAt:(NSString *)server port:(int)port seperate:(bool)multiThread;

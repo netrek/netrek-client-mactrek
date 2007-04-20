@@ -39,17 +39,23 @@ bool ghostStart = NO;
 }
 
 - (void) checkForDeath:(Player *)player {
+	
+	static bool exploding = NO;
+	
     // did i die?
     if ([player isMe]) {
         LLLog(@"ClientController.checkForDeath status = %@", [player statusString]);
+		if ( exploding ) {
+			LLLog(@"ClientController.checkForDeath: today was a good day to die (status: %@)", [player statusString]);
+			exploding = NO;
+			[notificationCenter postNotificationName:@"CC_GO_OUTFIT" 
+											  object:self 
+											userInfo:nil]; 
+		}
         if (([player status] == PLAYER_EXPLODE) ) {
             LLLog(@"ClientController.checkForDeath: firing delayed death warrent");
-            // wait for the drawing to end 
-            // $$ then generate an event on the drawing of the explosion!
-            // [self performSelector: @selector(iDied:) withObject:player afterDelay: 2.0];
-            // $$ doesn't happen.. after delay?
-            [self iDied:player];
-        }
+			exploding = YES;
+        } 
     }
 }
 
@@ -60,15 +66,22 @@ bool ghostStart = NO;
    [self performSelector: @selector(iDied:) withObject:me afterDelay: 0.1]; 
 }
 
-
+/*
 - (void) iDied:(Player *)me {
     // go to outfitting
-    LLLog(@"ClientController.iDied: today was a good day to die");
-    [me setStatus:PLAYER_OUTFIT];
-    [notificationCenter postNotificationName:@"CC_GO_OUTFIT" 
-                                      object:self 
-                                    userInfo:nil];    
+   	if ([me status] != PLAYER_OUTFIT) {
+		
+		LLLog(@"ClientController.iDied: today was a good day to die (status: %@)", [me statusString]);
+
+		[me setStatus:PLAYER_OUTFIT];
+		[notificationCenter postNotificationName:@"CC_GO_OUTFIT" 
+										  object:self 
+										userInfo:nil];    
+	} else {
+		// already dead
+	}
 }
+*/
 
 - (bool) slotObtained {
     

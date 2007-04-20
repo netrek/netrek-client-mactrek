@@ -35,14 +35,17 @@
 }
 
 - (NSData *) doRead {
+	
 	// wait with timeout if needed
     if (timeOut > 0.0) {
+		
 		if ([sock waitForReadableWithTimeout:timeOut] == NO) {
 			// trouble!
 			LLLog(@"ServerReaderTcp.doRead TIMEOUT! more than %f sec passed", timeOut);
 			return nil;
 		}
-	}	
+	}
+	
 	// read max one TCP frame per time
 	// note this could still go wrong if the buffer contains less bytes then 1536 ?
     NSData *result = [stream readDataWithMaxLength:1536];
