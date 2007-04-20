@@ -300,10 +300,14 @@ int startUpEvents = 0;
     // the mask may change. So we keep an eye out for a change.
     if ((gameState == GS_LOGIN_ACCEPTED) && (!multiThreaded)) {
         // no outit done yet try 10ms delay
+		/*
+		 better implementation of singletrhread will query anyway
+		 
         LLLog(@"GuiManager.handleTeamMask firing up a read");
         [client performSelector: @selector(singleReadFromServer) 
                      withObject: self 
                      afterDelay: 1];
+		 */
     }
 }
 

@@ -295,11 +295,12 @@ NSMutableData *leftOverPacket;
         
         // during the handling we cannot allow others to modify or access
         // the universal data
-        [[universe synchronizeAccess] lock];
-        // directly unlock, we wait for the painter, but the painter does not wait for us
-        [[universe synchronizeAccess] unlock];
+		if ([[universe synchronizeAccess] lockBeforeDate:[NSDate dateWithTimeIntervalSinceNow:timeOut]]) {
+			// directly unlock, we wait for the painter, but the painter does not wait for us
+			[[universe synchronizeAccess] unlock];
+		}
+
         bool result = [self handlePacket:ptype withSize:size inBuffer:buffer];
-        //[[universe synchronizeAccess] unlock];
         
         if (result) {
             // successfull? then on to the next
