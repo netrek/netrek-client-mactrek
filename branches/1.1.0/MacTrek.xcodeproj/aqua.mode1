@@ -271,9 +271,7 @@
 							<key>PBXSmartGroupTreeModuleOutlineStateSelectionKey</key>
 							<array>
 								<array>
-									<integer>13</integer>
-									<integer>3</integer>
-									<integer>0</integer>
+									<integer>37</integer>
 								</array>
 							</array>
 							<key>PBXSmartGroupTreeModuleOutlineStateVisibleRectKey</key>
@@ -312,7 +310,7 @@
 								<key>PBXProjectModuleGUID</key>
 								<string>1CE0B20306471E060097A5F4</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>Version.h</string>
+								<string>Info.plist</string>
 								<key>PBXSplitModuleInNavigatorKey</key>
 								<dict>
 									<key>Split0</key>
@@ -320,11 +318,11 @@
 										<key>PBXProjectModuleGUID</key>
 										<string>1CE0B20406471E060097A5F4</string>
 										<key>PBXProjectModuleLabel</key>
-										<string>Version.h</string>
+										<string>Info.plist</string>
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>525509050BB3E769005A6E7E</string>
+										<string>52B927700BDD20DA00359AB8</string>
 										<key>history</key>
 										<array>
 											<string>528658210B386C8200355164</string>
@@ -334,7 +332,8 @@
 											<string>52BEFDD10BB2EEE6000722CB</string>
 											<string>52BEFDE00BB2F630000722CB</string>
 											<string>52BEFDF30BB2F654000722CB</string>
-											<string>52BE01230BB2FDB4000722CB</string>
+											<string>52B927680BDD205200359AB8</string>
+											<string>52B927690BDD205200359AB8</string>
 										</array>
 										<key>prevStack</key>
 										<array>
@@ -346,6 +345,7 @@
 											<string>52DC1FB10B9711D600EA9D7C</string>
 											<string>52BEFDE40BB2F630000722CB</string>
 											<string>52BEFDE50BB2F630000722CB</string>
+											<string>52B9276A0BDD205200359AB8</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -403,9 +403,9 @@
 			</array>
 			<key>TableOfContents</key>
 			<array>
-				<string>525509030BB3E740005A6E7E</string>
+				<string>52B9276C0BDD205200359AB8</string>
 				<string>1CE0B1FE06471DED0097A5F4</string>
-				<string>525509040BB3E740005A6E7E</string>
+				<string>52B9276D0BDD205200359AB8</string>
 				<string>1CE0B20306471E060097A5F4</string>
 				<string>1CE0B20506471E060097A5F4</string>
 			</array>
@@ -551,7 +551,8 @@
 	<integer>5</integer>
 	<key>WindowOrderList</key>
 	<array>
-		<string>/Users/aqua/Documents/Projects/MacTrek/Client/branch-1.1.0/MacTrek.xcodeproj</string>
+		<string>52EDECE60A1DD98600FD7731</string>
+		<string>/Users/aqua/Documents/Projects/MacTrek/Client/branch-1.1.x/MacTrek.xcodeproj</string>
 	</array>
 	<key>WindowString</key>
 	<string>964 190 1333 1040 0 0 2560 1578 </string>
@@ -592,6 +593,8 @@
 							<string>376pt</string>
 						</dict>
 						<dict>
+							<key>BecomeActive</key>
+							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXBuildLogShowsTranscriptDefaultKey</key>
@@ -633,7 +636,7 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>52EDECE60A1DD98600FD7731</string>
-				<string>52BE01200BB2F979000722CB</string>
+				<string>52B9276E0BDD205200359AB8</string>
 				<string>1CD0528F0623707200166675</string>
 				<string>XCMainBuildResultsModuleGUID</string>
 			</array>
