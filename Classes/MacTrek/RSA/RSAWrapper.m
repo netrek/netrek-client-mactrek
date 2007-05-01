@@ -11,18 +11,6 @@
 
 @implementation RSAWrapper
 
-- (id) init {
-	self = [super init];
-	if (self != nil) {
-		gmpInstalled = [self gmpIsInstalled]; // cache result for speedbump
-	}
-	return self;
-}
-
-- (bool) gmpIsInstalled {
-	return YES;
-}
-
 // creates a response to the RSA data block, the comm handler needs to send it
 - (NSData *) encode:(NSMutableData *)data forHost:(ONHost*)host onPort:(int)port {
 	
