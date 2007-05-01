@@ -212,11 +212,8 @@ bool goSleeping;
 	[notificationCenter addObserver:self selector:@selector(sendReservedReply:)
                                name:@"SP_RESERVED" object:nil useLocks:multiThreaded];				// server requested reserved
 	
-	// if no gmp ignore the event and get kicked off the server anyway and comm events
-	if ([rsaCoder gmpIsInstalled]) {
-		[notificationCenter addObserver:self selector:@selector(sendRSAResponse:) 
+	[notificationCenter addObserver:self selector:@selector(sendRSAResponse:) 
 								   name:@"SP_RSA_KEY" object:nil useLocks:multiThreaded];
-	}
 
     [notificationCenter addObserver:self selector:@selector(stopCommunicationThread)
                                name:@"COMM_RESURRECT_FAILED" object:nil useLocks:multiThreaded]; 
