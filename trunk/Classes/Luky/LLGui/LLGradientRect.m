@@ -38,7 +38,7 @@
 	}
 }
 
-- (void) fillRect:(NSRect) aRect withColor:(NSString*)col {
+- (void) fillRect:(NSRect) aRect withColor:(NSString*)col alpha:(float)alpha {
 	
 	NSImage *image = [images objectForKey:col];
 	if (image == nil) {
@@ -49,7 +49,7 @@
 	sourceRect.size = [image size];
 	sourceRect.origin = NSZeroPoint;
 	
-	[image drawInRect:aRect fromRect:sourceRect operation:NSCompositeSourceOver fraction:1.0];
+	[image drawInRect:aRect fromRect:sourceRect operation:NSCompositeSourceOver fraction:alpha];
 }
 
 @end

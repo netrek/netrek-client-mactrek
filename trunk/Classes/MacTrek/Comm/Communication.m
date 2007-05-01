@@ -212,12 +212,9 @@ bool goSleeping;
 	[notificationCenter addObserver:self selector:@selector(sendReservedReply:)
                                name:@"SP_RESERVED" object:nil useLocks:multiThreaded];				// server requested reserved
 	
-	// if no gmp ignore the event and get kicked off the server anyway and comm events
-	if ([rsaCoder gmpIsInstalled]) {
-		[notificationCenter addObserver:self selector:@selector(sendRSAResponse:) 
+	[notificationCenter addObserver:self selector:@selector(sendRSAResponse:) 
 								   name:@"SP_RSA_KEY" object:nil useLocks:multiThreaded];
-	}
-
+	
     [notificationCenter addObserver:self selector:@selector(stopCommunicationThread)
                                name:@"COMM_RESURRECT_FAILED" object:nil useLocks:multiThreaded]; 
 	
@@ -840,13 +837,14 @@ bool goSleeping;
 	LLLog(@"Communication.sendRSAResponse responding with: %@:%d",
 		[server hostname], port);
 	
-    NSData *response = [rsaCoder encode:data forHost:server onPort:port];
+    NSMutableData *response = [rsaCoder encode:data forHost:server onPort:port];
 	
 	memcpy(&buffer[4], [response bytes], [response length]);
 	[self sendServerPacketWithBuffer:buffer length:(4 + [response length])];	
 
 	// and discard the data
-   [data release];
+   [data autorelease];
+   [response autorelease];
 }
 
 - (void) sendPingReq:(NSNumber *)start {

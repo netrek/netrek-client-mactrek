@@ -753,8 +753,10 @@ whichRepresentsGameBounds:gameBounds
             // lock on the closest            
             if ([universe entity:target closerToPos:targetGamePoint than:planet]) {
                 // toggle info on player
-				[universe resetShowInfoPlayers]; // close any other one
-                [target setShowInfo:![target showInfo]];
+				if (![target isMe]){ // i'm already showing
+					[universe resetShowInfoPlayers]; // close any other one
+					[target setShowInfo:![target showInfo]];		
+				}
             } else {
 				[universe resetShowInfoPlanets]; // close any other one
                 [planet setShowInfo:![planet showInfo]];

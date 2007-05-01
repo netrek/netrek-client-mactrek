@@ -40,8 +40,8 @@
     if (timeOut > 0.0) {
 		
 		if ([sock waitForReadableWithTimeout:timeOut] == NO) {
-			// trouble!
-			LLLog(@"ServerReaderTcp.doRead TIMEOUT! more than %f sec passed", timeOut);
+			// timeouts are smaller, no data does not mean there is a problem
+			//LLLog(@"ServerReaderTcp.doRead TIMEOUT! more than %f sec passed", timeOut);
 			return nil;
 		}
 	}

@@ -313,7 +313,9 @@ NSMutableData *leftOverPacket;
         }
         
         // exact fit in frame, no leftover
-        [leftOverPacket release];
+		if (leftOverPacket != nil) {
+			[leftOverPacket release];
+		}        
         leftOverPacket = nil;
     }
 	
@@ -1606,7 +1608,8 @@ int shortFromPacket(char *buffer, int offset) {
 		case SP_RSA_KEY :
 			@try {
                 LLLog(@"ServerReader.handlePacket: RSA verification requested.");
-                NSMutableData *data = [NSMutableData dataWithBytes:(buffer+4) length:RSA_KEY_SIZE];                
+                NSMutableData *data = [NSMutableData dataWithBytes:(buffer+4) length:RSA_KEY_SIZE]; 
+				[data retain]; // SERIOUS BUG !! will cause instable side effects if not retained (fixed since 1.3.0)
                 // do some stuff with RSA,
                 // looks very specific, let the RSA handler take care of it when
                 // it receives the notification

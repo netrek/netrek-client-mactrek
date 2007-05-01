@@ -21,6 +21,6 @@
 }
 
 - (void) addImage:(NSString*)name forKey:(NSString *) key;
-- (void) fillRect:(NSRect) aRect withColor:(NSString*)col;
+- (void) fillRect:(NSRect) aRect withColor:(NSString*)col alpha:(float)alpha;
 
 @end
