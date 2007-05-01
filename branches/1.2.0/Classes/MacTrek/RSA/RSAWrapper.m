@@ -11,33 +11,8 @@
 
 @implementation RSAWrapper
 
-- (id) init {
-	self = [super init];
-	if (self != nil) {
-		gmpInstalled = [self gmpIsInstalled]; // cache result for speedbump
-	}
-	return self;
-}
-
-- (bool) gmpIsInstalled {
-	/*
-	NSString *pathToResources = @"/usr/local/lib";
-    NSString *pathToServer = [NSString stringWithFormat:@"%@/libgmp.a", pathToResources];
-	
-	NSFileManager *fm = [NSFileManager defaultManager];
-    return [fm fileExistsAtPath:pathToServer];
-	 */
-	// as from version 1.1.0 gmp is compiled in the client!
-	return YES;
-}
-
 // creates a response to the RSA data block, the comm handler needs to send it
 - (NSData *) encode:(NSMutableData *)data forHost:(ONHost*)host onPort:(int)port {
-	
-	if (!gmpInstalled) {
-		LLLog(@"RSAWrapper.handleRSA: ERROR, RSA not installed, gmp not found");
-		return nil;
-	}	
 	
 	int KEY_SIZE = 32;
 
