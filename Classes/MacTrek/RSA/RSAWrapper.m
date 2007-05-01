@@ -26,11 +26,6 @@
 // creates a response to the RSA data block, the comm handler needs to send it
 - (NSData *) encode:(NSMutableData *)data forHost:(ONHost*)host onPort:(int)port {
 	
-	if (!gmpInstalled) {
-		NSLog(@"RSAWrapper.handleRSA: ERROR, RSA not installed, gmp not found");
-		return nil;
-	}	
-	
 	int KEY_SIZE = 32;
 
 	// get a pointer to the data
