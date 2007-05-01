@@ -8,36 +8,10 @@
 
 #import "RSAWrapper.h"
 
-
 @implementation RSAWrapper
 
-- (id) init {
-	self = [super init];
-	if (self != nil) {
-		gmpInstalled = [self gmpIsInstalled]; // cache result for speedbump
-	}
-	return self;
-}
-
-- (bool) gmpIsInstalled {
-	/*
-	NSString *pathToResources = @"/usr/local/lib";
-    NSString *pathToServer = [NSString stringWithFormat:@"%@/libgmp.a", pathToResources];
-	
-	NSFileManager *fm = [NSFileManager defaultManager];
-    return [fm fileExistsAtPath:pathToServer];
-	 */
-	// as from version 1.1.0 gmp is compiled in the client!
-	return YES;
-}
-
 // creates a response to the RSA data block, the comm handler needs to send it
-- (NSData *) encode:(NSMutableData *)data forHost:(LLHost*)host onPort:(int)port {
-	
-	if (!gmpInstalled) {
-		LLLog(@"RSAWrapper.encode: ERROR, RSA not installed, gmp not found");
-		return nil;
-	}	
+- (NSMutableData *) encode:(NSMutableData *)data forHost:(LLHost*)host onPort:(int)port {
 	
 	int KEY_SIZE = 32;
 
@@ -45,12 +19,10 @@
 	unsigned char *pData = (unsigned char*)[data bytes];
 	
 	// put the adress in the first 4 bytes
-	/* in LLNetwork we can optimize
-	ONHostAddress *address = [[host addresses] objectAtIndex:0];
-	unsigned char *pAddress = (unsigned char*)[[address addressData] bytes]; */
-	
 	unsigned char *pAddress = (unsigned char*)[[host firstAddressData] bytes];
-	
+	LLLog(@"RSAWrapper.encode: addr %x%x%x%x", pAddress[0], pAddress[1],  pAddress[2],  pAddress[3]); 
+		
+		
 	memcpy(pData, pAddress, 4);
 	
 	// then the port

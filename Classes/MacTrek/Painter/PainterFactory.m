@@ -35,6 +35,8 @@
         
         normalStateAttribute =[[NSMutableDictionary dictionaryWithObjectsAndKeys:
         [NSColor whiteColor],NSForegroundColorAttributeName,nil] retain];
+		
+		bar = [[LLBar alloc] init];
     }
     return self;
 }
@@ -557,13 +559,23 @@
         if ([player flags] & PLAYER_SHIELD) {
             float shieldStrenght = 100.0;
             if ([player isMe]) {
-                shieldStrenght = [player shield] * 100 / [[player ship] maxShield];
-				[self drawShieldWithStrenght: shieldStrenght inRect:playerViewBounds andAlpha:1.0]; // i always want to see my shield
+                shieldStrenght = [player shield] * 100 / [[player ship] maxShield];	
+				if (shieldStrenght > 0) {
+					[self drawShieldWithStrenght: shieldStrenght inRect:playerViewBounds andAlpha:1.0]; // i always want to see my shield		
+				}					
             } else {
 				[self drawShieldWithStrenght: shieldStrenght inRect:playerViewBounds andAlpha:[self alphaForPlayer:player]];
-			}
-                        
+			}                        
         }
+		
+		if ([player isMe]) {			
+			// and my hull always
+			float hullStrenght = [player hull] * 100 / [[player ship] maxHull];
+			[self drawHullWithStrenght: hullStrenght inRect:playerViewBounds andAlpha:0.7]; // blend a little
+			
+			// and fuel can
+			[self drawFuelGaugeOfPlayer:player rightOfRect:playerViewBounds];
+		}		
         
         // save this value, we may need it again
         NSPoint playerPositionInView = [self viewPointFromGamePoint: [player predictedPosition] 
@@ -1200,8 +1212,22 @@
 	[p release];
 }
 
-- (void)   drawShieldWithStrenght: (float)shieldPercentage inRect:(NSRect) Rect andAlpha:(float)alpha {
-    
+- (void)   drawShieldWithStrenght: (float)percentage inRect:(NSRect) Rect andAlpha:(float)alpha {
+	
+	// increase ring by 10% to make room for hull ring
+	float inset = (Rect.size.width > Rect.size.height ? Rect.size.width : Rect.size.height) / 10;
+	
+	// set shield thickness relative
+	float thickness = (Rect.size.width > Rect.size.height ? Rect.size.width : Rect.size.height) / 40;
+	thickness = (thickness > 2.0 ? thickness : 2.0); // but min 2
+	[self drawCircleWithCompletion:percentage inRect:NSInsetRect(Rect, -inset, -inset)  thickness: thickness andAlpha:alpha];
+}
+
+- (void)   drawHullWithStrenght: (float)percentage inRect:(NSRect) Rect andAlpha:(float)alpha {
+	[self drawCircleWithCompletion:percentage inRect:Rect thickness:1.0 andAlpha:alpha];
+}
+	
+- (void)   drawCircleWithCompletion: (float)shieldPercentage inRect:(NSRect) Rect thickness:(float)thick andAlpha:(float)alpha {
     // recalculate
     NSPoint centre = [self centreOfRect:Rect];
     // shield extends our ship by 1 point
@@ -1225,6 +1251,10 @@
     shieldColor = [shieldColor colorWithAlphaComponent:alpha];
 	[shieldColor set];
     
+	// set thickness
+	float currentThickness = [line lineWidth];
+	[line setLineWidth:thick];
+	
     // first the remaining strenght
     [line removeAllPoints];  
     [line appendBezierPathWithArcWithCenter:centre radius:radius startAngle:0.0 endAngle:angle];
@@ -1235,6 +1265,9 @@
         [dashedLine appendBezierPathWithArcWithCenter:centre radius:radius startAngle:angle endAngle:360.0];
         [dashedLine stroke];
     }
+	
+	// always reset
+	[line setLineWidth:currentThickness];
 
 }
 
@@ -1451,6 +1484,52 @@
 	
 }
 
+- (void) drawFuelGaugeOfPlayer:(Player*) player rightOfRect:(NSRect)aRect {
+	
+	int fuel = [player fuel];
+	int maxFuel = [[player ship] maxFuel];
+		
+	// update if needed
+	if (([bar max] != maxFuel) || ([bar value] != fuel)) {
+		[bar setWarning: (maxFuel * 0.6)];
+		[bar setCritical:(maxFuel * 0.3)];
+		[bar setMax:maxFuel];
+		[bar setValue:fuel];
+		[bar setShowBackGround:NO];
+	}
+	
+	// define rect
+	NSRect gaugeRect = aRect;
+	gaugeRect.origin.x += gaugeRect.size.width * 1.3; // 20% right of ship
+	gaugeRect.origin.y += gaugeRect.size.height * 0.1; // 10% off top and bottom
+	gaugeRect.size.height *= 0.5;  
+	gaugeRect.size.width *= 0.8;
+	
+	// draw it
+	// first save the GC
+    [[NSGraphicsContext currentContext] saveGraphicsState];
+    
+    // set up the rotate
+    NSAffineTransform *transform = [NSAffineTransform transform];
+    
+    // assume drawn at 0,0 and move to position
+    NSPoint center = [self centreOfRect:gaugeRect];
+    // transforms are read in reverse so this reads: first rotate then translate!
+    [transform translateXBy:center.x yBy:center.y];
+    [transform rotateByDegrees:-90.0];  
+    // concat the transform
+    [transform concat];
+    
+    // draw around 0,0
+    gaugeRect.origin = NSZeroPoint;
+	[bar drawRect:[shapes createRectAroundOrigin:gaugeRect]];
+    
+    // and restore the GC
+    [transform invert];
+    [transform concat];
+    [[NSGraphicsContext currentContext] restoreGraphicsState];
+}
+
 - (void) drawLabelBackgroundForRect:(NSRect)aRect {
 	return;
 }
@@ -1540,65 +1619,6 @@
 }
 
 
-/* use Same labels every where
-
-- (NSString*) labelForPlayer:(Player*)player {
-	
-	NSString *label = [NSString stringWithFormat:@"%@", [player mapCharsWithKillIndicator]];
-
-	// bug 1666845 Cloaked ships should be ?? (unless it is me)
-	if (([player flags] & PLAYER_CLOAK) && (![player isMe])) {
-		return @"??";
-	}
-	
-    // extended label?
-    if ([player showInfo] || debugLabels) {
-        label = [NSString stringWithFormat:@"%@ %d(%d) %d %d [%c%c%c%c%c%c] %d %@",
-            [player longNameWithKillIndicator],
-            [player speed],
-            [player requestedSpeed],
-            [player kills],
-            [player armies],
-            ([player flags] & PLAYER_REPAIR ? 'R' : '-'),
-            ([player flags] & PLAYER_BOMB ?   'B' : '-'),
-            ([player flags] & PLAYER_ORBIT ?  'O' : '-'),
-            ([player flags] & PLAYER_CLOAK ?  'C' : '-'),
-            ([player flags] & PLAYER_BEAMUP ?  'U' : '-'),
-            ([player flags] & PLAYER_BEAMDOWN ?  'D' : '-'),
-            [player cloakPhase],
-            (debugLabels ? [[player statusString] substringFromIndex:7] : @"") // in debug we show status
-            ];
-    }   
-	return label;
-}
-
-- (NSString*) label2ForPlayer:(Player*)player {	
-	
-	// bug 1666845 Cloaked ships should be ??
-	if (([player flags] & PLAYER_CLOAK) && (![player isMe])) {
-		return nil;
-	}
-	
-	if (debugLabels) {
-		// prepare another line
-		NSArray *torps = [player torps];
-		NSString *label = [NSString stringWithFormat:@"%@ T[%c%c%c%c%c%c%c%c]",
-			[[player ship] longName],
-			[[torps objectAtIndex:0] statusChar],  // we know that there are 8 and this is debug
-			[[torps objectAtIndex:1] statusChar],
-			[[torps objectAtIndex:2] statusChar],
-			[[torps objectAtIndex:3] statusChar],
-			[[torps objectAtIndex:4] statusChar],
-			[[torps objectAtIndex:5] statusChar],
-			[[torps objectAtIndex:6] statusChar],
-			[[torps objectAtIndex:7] statusChar]];
-		return label;
-	}
-	return nil;
-}
-
-*/
-
 - (NSString*) labelForPlayer:(Player*)player {
 	
 	// bug 1666845 Cloaked ships should be ?? (unless it is me)
@@ -1610,7 +1630,7 @@
 		[player name]];
 	
     // extended label?
-	if ([player showInfo] || debugLabels) {
+	if ([player showInfo] || debugLabels || [player isMe]) {
 		label = [NSString stringWithFormat:@"%@ (%@)", [player mapCharsWithKillIndicator],
 			[player nameWithRank]];
 	}
@@ -1627,28 +1647,21 @@
 	}
 	
 	// extended label?
-	if ([player showInfo] || debugLabels) {
+	if ([player showInfo] || debugLabels || [player isMe]) {
 		if (isMe) { // show als requested speed
-			return [NSString stringWithFormat:@"S%d(%d) K%d A%d T%d [%c%c%c%c%c%c]", 
+			Ship *ship = [player ship];
+			return [NSString stringWithFormat:@"S%d(%d) F%d D%d", 
 				[player speed],
 				[player requestedSpeed],
-				[player kills],
-				[player armies],
-				[player availableTorps],
-				([player flags] & PLAYER_REPAIR ? 'R' : '-'),
-				([player flags] & PLAYER_BOMB ?   'B' : '-'),
-				([player flags] & PLAYER_ORBIT ?  'O' : '-'),
-				([player flags] & PLAYER_CLOAK ?  'C' : '-'),
-				([player flags] & PLAYER_BEAMUP ?  'U' : '-'),
-				([player flags] & PLAYER_BEAMDOWN ?  'D' : '-') ];
+				([player fuel] * 100 / [ship maxFuel]),
+				([player hull] * 100 / [ship maxHull])
+				];
 		} else {
-			return [NSString stringWithFormat:@"S%d K%d T%d [%c%c%c]", 
+			return [NSString stringWithFormat:@"S%d K%d T%d", 
 				[player speed],
 				[player kills],
-				[player availableTorps],
-				([player flags] & PLAYER_REPAIR ? 'R' : '-'),
-				([player flags] & PLAYER_BOMB ?   'B' : '-'),
-				([player flags] & PLAYER_ORBIT ?  'O' : '-') ];	
+				[player availableTorps]
+				];	
 		}
 	} else {
 		return nil;
@@ -1662,16 +1675,18 @@
 		return nil;
 	}
 	
-	if (debugLabels) {
+	if (debugLabels || [player isMe]) {
 		// prepare another line		 			
-		Plasma *plasma = [universe plasmaWithId:[player plasmaId]];
-		Phaser *phaser = [universe phaserWithId:[player phaserId]];
-		NSString *label = [NSString stringWithFormat:@"PH[%c][%d] PL[%c][%d]",
-			[phaser statusChar],
-			[phaser fuse],
-			[plasma statusChar],
-			[plasma fuse]];
-		return label;
+		return [NSString stringWithFormat:@"K%d A%d T%d [%c%c%c%c%c]", 
+			[player kills],
+			[player armies],
+			[player availableTorps],
+			([player flags] & PLAYER_REPAIR ? 'R' : '-'),
+			([player flags] & PLAYER_BOMB ?   'B' : '-'),
+			([player flags] & PLAYER_ORBIT ?  'O' : '-'),
+			([player flags] & PLAYER_CLOAK ?  'C' : '-'),
+			([player flags] & PLAYER_BEAMUP ?  'U' : '-') 
+			];
 	}
 	return nil;
 }

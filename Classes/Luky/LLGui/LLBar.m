@@ -18,14 +18,19 @@ static NSBezierPath *line = nil; // this makes us fast, but not rentrant
     if (self != nil) {
         min = 0.0;
         max = 1.0;
+		alpha = 1.0;
         value = max;
         tempMax = max;
         discrete = NO;
         line = [[NSBezierPath alloc] init];    
         name = [[NSString stringWithString:@"not set"] retain];
-		
+		background = YES;
     }
     return self;
+}
+
+- (bool) showBackGround {
+	return background;
 }
 
 - (NSString *)name {
@@ -56,8 +61,16 @@ static NSBezierPath *line = nil; // this makes us fast, but not rentrant
 	return discrete;
 }
 
+- (float) alpha {
+	return alpha;
+}
+
 - (float) critical {
 	return critical;
+}
+
+- (void) setShowBackGround:(bool)show {
+	background = show;
 }
 
 - (void) setName:(NSString *) newValue {
@@ -104,6 +117,10 @@ static NSBezierPath *line = nil; // this makes us fast, but not rentrant
 	warning = newValue;
 }
 
+- (void) setAlpha:(float)fraction {
+	alpha = fraction;
+}
+
 - (void) setCritical:(float)newValue {
 	if (newValue > max) {
 		LLLog(@"LLBar.setCritical <= max");
@@ -127,11 +144,13 @@ static NSBezierPath *line = nil; // this makes us fast, but not rentrant
 	NSString *gradientBarColor = LL_GREEN;
     
     // draw the background
-    [[NSColor whiteColor] set];
-    NSRectFill(aRect);
+	if (background){
+	    [[NSColor whiteColor] set];
+		NSRectFill(aRect);	
+	}
     
 	// draw the border
-	[[NSColor blackColor] set];
+	[[NSColor grayColor] set];
     [line removeAllPoints];
     [line appendBezierPathWithRect:aRect];
     [line stroke];

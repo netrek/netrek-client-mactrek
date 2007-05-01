@@ -15,10 +15,9 @@ void rsa_black_box(unsigned char *out, unsigned char *in,
                    unsigned char *public, unsigned char *global);
 
 @interface RSAWrapper : BaseClass {
-	bool gmpInstalled;
+
 }
 
-- (NSData *) encode:(NSMutableData *)data forHost:(LLHost*)host onPort:(int)port;
-- (bool) gmpIsInstalled;
+- (NSMutableData *) encode:(NSMutableData *)data forHost:(LLHost*)host onPort:(int)port;
 
 @end

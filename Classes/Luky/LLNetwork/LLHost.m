@@ -63,8 +63,9 @@
 
 - (NSData *)firstAddressData {
 	// should return 4 bytes containing the network address
-	NSString *addressString = [self address];
-
+	NSString *addressString = [[self address] stringByAppendingString:@"."]; // append a final dot
+	
+	// keep looking for the bit before the dot, then cut it off
 	NSMutableData *result = [[[NSMutableData alloc] init] autorelease];
 	NSString *tuple;
 	NSRange tupleRange;
@@ -81,7 +82,7 @@
 		}
 		// cut in two pieces
 		tuple = [addressString substringWithRange:tupleRange];
-		addressString = [addressString substringFromIndex:tupleRange.length];
+		addressString = [addressString substringFromIndex:tupleRange.length + 1]; // including dot
 		// get the value
 		int intValue = [tuple intValue];
 		char value = intValue & 0xFF;

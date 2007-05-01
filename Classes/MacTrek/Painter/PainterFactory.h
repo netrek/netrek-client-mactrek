@@ -15,6 +15,7 @@
 #include <unistd.h>
 #include <stdlib.h>
 #include "SimpleTracker.h"
+#import "LLBar.h"
 
 
 #define PF_DEFAULT_BACKGROUND_IMAGE_SIZE NSMakeSize(100, 100)
@@ -35,6 +36,7 @@
     NSMutableDictionary *normalStateAttribute;
     NSRect galaxy;
 	bool accelerate;
+	LLBar *bar;
 }
 
 // internal
@@ -74,6 +76,7 @@
 // should be overwritten by subclasses
 - (void)   drawPlayer:(Player*) player inRect:(NSRect) Rect;
 - (void)   drawShieldWithStrenght: (float)shieldPercentage inRect:(NSRect) Rect andAlpha:(float)alpha;
+- (void)   drawHullWithStrenght: (float)percentage inRect:(NSRect) Rect andAlpha:(float)alpha;
 - (void)   drawLabelForPlanet:(Planet*)planets belowRect:(NSRect)planetViewBounds;
 - (void)   drawLabelForPlayer:(Player*)player belowRect:(NSRect)playerViewBounds;
 - (void)   drawPlanet:(Planet*) planet inRect:(NSRect) Rect;
@@ -107,6 +110,8 @@
 - (void) drawLabel:(NSString*)label inRect:(NSRect)aRect withColor:(NSColor*)col;
 - (void) drawLabel:(NSString*)label atPoint:(NSPoint)aPoint withColor:(NSColor*)col;
 - (void) drawShipType:(int)type forTeamId:(int) teamId withCloakPhase:(int)cloakPhase inRect:(NSRect)Rect;
+- (void)   drawCircleWithCompletion: (float)shieldPercentage inRect:(NSRect) Rect thickness:(float)thick andAlpha:(float)alpha;
+- (void) drawFuelGaugeOfPlayer:(Player*) player rightOfRect:(NSRect)aRect;
 // and the stamping algorithm (will use defaults otherwise)
 - (NSSize) backGroundImageSize;
 // could be overwritten if you want different colors

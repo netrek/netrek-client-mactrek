@@ -22,6 +22,7 @@
 	float critical;
     NSString *name;
     bool discrete;
+	bool background;
 	LLGradientRect *gradientRect;
 }
 
@@ -32,7 +33,9 @@
 - (float) tempMax;
 - (float) warning;
 - (float) critical;
+- (float) alpha;
 - (bool)  discrete;
+- (bool)  showBackGround;
 
 - (void) setName:(NSString *) newValue;
 - (void) setDiscrete:(bool)discrete;
@@ -42,5 +45,7 @@
 - (void) setTempMax:(float)newValue;
 - (void) setWarning:(float)newValue;
 - (void) setCritical:(float)newValue;
+- (void) setAlpha:(float)fraction;
+- (void) setShowBackGround:(bool)show;
 
 @end
