@@ -20,8 +20,6 @@
 
 + (NSString *)machineType;
 + (NSString *)humanMachineType;
-+ (NSString *)humanMachineTypeAlternate;
-
 + (long)processorClockSpeed;
 + (long)processorClockSpeedInMHz;
 + (unsigned int)countProcessors;
@@ -32,7 +30,6 @@
 + (NSString *)powerPCTypeString;
 
 + (NSString *)computerName;
-+ (NSString *)computerSerialNumber;
 
 + (NSString *)operatingSystemString;
 + (NSString *)systemVersionString;

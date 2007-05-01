@@ -28,7 +28,6 @@
 		[NSNumber numberWithInt:[self countProcessors]],
 		@"CountProcessors",
 		[self computerName],@"ComputerName",
-		[self computerSerialNumber],@"ComputerSerialNumber",
 		[self operatingSystemString],@"OperatingSystem",
 		[self systemVersionString],@"SystemVersion",		
 		nil];
@@ -157,22 +156,6 @@ static NSDictionary *translationDictionary=nil;
 	else
 		return machineType;
 }
-
-//for some reason, this does not work
-//probably old stuff still around
-+ (NSString *)humanMachineTypeAlternate
-{
-	OSErr err;
-	long result;
-	Str255 name;
-	err=Gestalt('mach',&result); //gestaltMachineType = 'mach'
-	if (err==nil) {
-		GetIndString(name,kMachineNameStrID,(short)result);
-		return [NSString stringWithCString:name];
-	} else
-		return @"humanMachineTypeAlternate: machine name cannot be determined";
-}
-
 
 #pragma mark *** Getting Processor info ***
 
@@ -304,82 +287,6 @@ static NSDictionary *translationDictionary=nil;
 	computerName=[NSString stringWithString:(NSString *)name];
 	CFRelease(name);
 	return computerName;
-}
-
-/* copied from http://cocoa.mamasam.com/COCOADEV/2003/07/1/68334.php */
-/* and modified by http://nilzero.com/cgi-bin/mt-comments.cgi?entry_id=1300 */
-/* and by http://cocoa.mamasam.com/COCOADEV/2003/07/1/68337.php/ */
-+ (NSString *)computerSerialNumber
-{
-	NSString         *result = @"";
-	mach_port_t       masterPort;
-	kern_return_t      kr = noErr;
-	io_registry_entry_t  entry;    
-	CFDataRef         propData;
-	CFTypeRef         prop;
-	CFTypeID         propID=NULL;
-	UInt8           *data;
-	unsigned int        i, bufSize;
-	char            *s, *t;
-	char            firstPart[64], secondPart[64];
-	
-	kr = IOMasterPort(MACH_PORT_NULL, &masterPort);        
-	if (kr == noErr) {
-		entry = IORegistryGetRootEntry(masterPort);
-		if (entry != MACH_PORT_NULL) {
-			prop = IORegistryEntrySearchCFProperty(entry,
-												   kIODeviceTreePlane,
-												   CFSTR("serial-number"),
-												   nil, kIORegistryIterateRecursively);
-			if (prop == nil) {
-				result = @"null";
-			} else {
-				propID = CFGetTypeID(prop);
-			}
-			if (propID == CFDataGetTypeID()) {
-				propData = (CFDataRef)prop;
-				bufSize = CFDataGetLength(propData);
-				if (bufSize > 0) {
-					data = CFDataGetBytePtr(propData);
-					if (data) {
-						i = 0;
-						s = data;
-						t = firstPart;
-						while (i < bufSize) {
-							i++;
-							if (*s != '\0') {
-								*t++ = *s++;
-							} else {
-								break;
-							}
-						}
-						*t = '\0';
-						
-						while ((i < bufSize) && (*s == '\0')) {
-							i++;
-							s++;
-						}
-						
-						t = secondPart;
-						while (i < bufSize) {
-							i++;
-							if (*s != '\0') {
-								*t++ = *s++;
-							} else {
-								break;
-							}
-						}
-						*t = '\0';
-						result =
-							[NSString stringWithFormat:
-								@"%s%s",secondPart,firstPart];
-					}
-				}
-			}
-		}
-		mach_port_deallocate(mach_task_self(), masterPort);
-	}
-	return(result);
 }
 
 #pragma mark *** System version ***
