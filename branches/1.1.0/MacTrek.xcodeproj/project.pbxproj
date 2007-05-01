@@ -77,12 +77,6 @@
 		5212F0AC0B08FFB80059A8B1 /* PlayerListView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5212F04A0B08FFB80059A8B1 /* PlayerListView.m */; };
 		5220A6C80A598D2900ADAD05 /* QTKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5220A6C70A598D2900ADAD05 /* QTKit.framework */; };
 		522F30AF0B0B1D6200E7DDED /* RSAWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 522F30AE0B0B1D6200E7DDED /* RSAWrapper.m */; };
-		522F30B80B0B1E2C00E7DDED /* rsa_box_0.c in Sources */ = {isa = PBXBuildFile; fileRef = 522F30B20B0B1E2C00E7DDED /* rsa_box_0.c */; };
-		522F30B90B0B1E2C00E7DDED /* rsa_box_4.c in Sources */ = {isa = PBXBuildFile; fileRef = 522F30B30B0B1E2C00E7DDED /* rsa_box_4.c */; };
-		522F30BA0B0B1E2C00E7DDED /* rsa_box_1.c in Sources */ = {isa = PBXBuildFile; fileRef = 522F30B40B0B1E2C00E7DDED /* rsa_box_1.c */; };
-		522F30BB0B0B1E2C00E7DDED /* rsa_box.c in Sources */ = {isa = PBXBuildFile; fileRef = 522F30B50B0B1E2C00E7DDED /* rsa_box.c */; };
-		522F30BC0B0B1E2C00E7DDED /* rsa_box_3.c in Sources */ = {isa = PBXBuildFile; fileRef = 522F30B60B0B1E2C00E7DDED /* rsa_box_3.c */; };
-		522F30BD0B0B1E2C00E7DDED /* rsa_box_2.c in Sources */ = {isa = PBXBuildFile; fileRef = 522F30B70B0B1E2C00E7DDED /* rsa_box_2.c */; };
 		52756F210B3554CA00631149 /* PRECOMPILED in Resources */ = {isa = PBXBuildFile; fileRef = 52756EA90B3554CA00631149 /* PRECOMPILED */; };
 		527E05030AF3666000B5D37F /* OmniNetworking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 527E05010AF3666000B5D37F /* OmniNetworking.framework */; };
 		527E05040AF3666000B5D37F /* OmniBase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 527E05020AF3666000B5D37F /* OmniBase.framework */; };
@@ -147,6 +141,12 @@
 		52DC5E4F0B3158D600C78FD1 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52DC5E3D0B3158D500C78FD1 /* SystemConfiguration.framework */; };
 		52DC5EF00B3158EA00C78FD1 /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52DC5E500B3158EA00C78FD1 /* IOKit.framework */; };
 		52DC5F0C0B3159DE00C78FD1 /* ServerControllerNew.m in Sources */ = {isa = PBXBuildFile; fileRef = 52DC5F0B0B3159DE00C78FD1 /* ServerControllerNew.m */; };
+		52EC2E220BE7B39C006EE495 /* rsa_box_0.c in Sources */ = {isa = PBXBuildFile; fileRef = 52EC2E1C0BE7B39C006EE495 /* rsa_box_0.c */; };
+		52EC2E230BE7B39C006EE495 /* rsa_box_1.c in Sources */ = {isa = PBXBuildFile; fileRef = 52EC2E1D0BE7B39C006EE495 /* rsa_box_1.c */; };
+		52EC2E240BE7B39C006EE495 /* rsa_box_3.c in Sources */ = {isa = PBXBuildFile; fileRef = 52EC2E1E0BE7B39C006EE495 /* rsa_box_3.c */; };
+		52EC2E250BE7B39C006EE495 /* rsa_box.c in Sources */ = {isa = PBXBuildFile; fileRef = 52EC2E1F0BE7B39C006EE495 /* rsa_box.c */; };
+		52EC2E260BE7B39C006EE495 /* rsa_box_2.c in Sources */ = {isa = PBXBuildFile; fileRef = 52EC2E200BE7B39C006EE495 /* rsa_box_2.c */; };
+		52EC2E270BE7B39C006EE495 /* rsa_box_4.c in Sources */ = {isa = PBXBuildFile; fileRef = 52EC2E210BE7B39C006EE495 /* rsa_box_4.c */; };
 		52F5D9C40B1A69E000B8B9C5 /* assert.c in Sources */ = {isa = PBXBuildFile; fileRef = 52F5D83C0B1A69E000B8B9C5 /* assert.c */; };
 		52F5D9C50B1A69E000B8B9C5 /* compat.c in Sources */ = {isa = PBXBuildFile; fileRef = 52F5D83D0B1A69E000B8B9C5 /* compat.c */; };
 		52F5D9C60B1A69E000B8B9C5 /* dumbmp.c in Sources */ = {isa = PBXBuildFile; fileRef = 52F5D83F0B1A69E000B8B9C5 /* dumbmp.c */; };
@@ -659,12 +659,6 @@
 		5220A6C70A598D2900ADAD05 /* QTKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QTKit.framework; path = /System/Library/Frameworks/QTKit.framework; sourceTree = "<absolute>"; };
 		522F30AD0B0B1D6200E7DDED /* RSAWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RSAWrapper.h; path = RSA/RSAWrapper.h; sourceTree = "<group>"; };
 		522F30AE0B0B1D6200E7DDED /* RSAWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RSAWrapper.m; path = RSA/RSAWrapper.m; sourceTree = "<group>"; };
-		522F30B20B0B1E2C00E7DDED /* rsa_box_0.c */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.c; name = rsa_box_0.c; path = ../../../../RSA/MacTrek/rsa_box_0.c; sourceTree = "<group>"; };
-		522F30B30B0B1E2C00E7DDED /* rsa_box_4.c */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.c; name = rsa_box_4.c; path = ../../../../RSA/MacTrek/rsa_box_4.c; sourceTree = "<group>"; };
-		522F30B40B0B1E2C00E7DDED /* rsa_box_1.c */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.c; name = rsa_box_1.c; path = ../../../../RSA/MacTrek/rsa_box_1.c; sourceTree = "<group>"; };
-		522F30B50B0B1E2C00E7DDED /* rsa_box.c */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.c; name = rsa_box.c; path = ../../../../RSA/MacTrek/rsa_box.c; sourceTree = "<group>"; };
-		522F30B60B0B1E2C00E7DDED /* rsa_box_3.c */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.c; name = rsa_box_3.c; path = ../../../../RSA/MacTrek/rsa_box_3.c; sourceTree = "<group>"; };
-		522F30B70B0B1E2C00E7DDED /* rsa_box_2.c */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.c; name = rsa_box_2.c; path = ../../../../RSA/MacTrek/rsa_box_2.c; sourceTree = "<group>"; };
 		52756EA90B3554CA00631149 /* PRECOMPILED */ = {isa = PBXFileReference; lastKnownFileType = folder; name = PRECOMPILED; path = Resources/PRECOMPILED; sourceTree = "<group>"; };
 		527E05010AF3666000B5D37F /* OmniNetworking.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OmniNetworking.framework; path = ../Release/OmniNetworking.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		527E05020AF3666000B5D37F /* OmniBase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = OmniBase.framework; path = ../Release/OmniBase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -761,6 +755,12 @@
 		52DC5E500B3158EA00C78FD1 /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = /Developer/SDKs/MacOSX10.4u.sdk/System/Library/Frameworks/IOKit.framework; sourceTree = "<absolute>"; };
 		52DC5F0A0B3159DE00C78FD1 /* ServerControllerNew.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServerControllerNew.h; sourceTree = "<group>"; };
 		52DC5F0B0B3159DE00C78FD1 /* ServerControllerNew.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServerControllerNew.m; sourceTree = "<group>"; };
+		52EC2E1C0BE7B39C006EE495 /* rsa_box_0.c */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.c; name = rsa_box_0.c; path = "RSA-SECRET/rsa_box_0.c"; sourceTree = SOURCE_ROOT; };
+		52EC2E1D0BE7B39C006EE495 /* rsa_box_1.c */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.c; name = rsa_box_1.c; path = "RSA-SECRET/rsa_box_1.c"; sourceTree = SOURCE_ROOT; };
+		52EC2E1E0BE7B39C006EE495 /* rsa_box_3.c */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.c; name = rsa_box_3.c; path = "RSA-SECRET/rsa_box_3.c"; sourceTree = SOURCE_ROOT; };
+		52EC2E1F0BE7B39C006EE495 /* rsa_box.c */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.c; name = rsa_box.c; path = "RSA-SECRET/rsa_box.c"; sourceTree = SOURCE_ROOT; };
+		52EC2E200BE7B39C006EE495 /* rsa_box_2.c */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.c; name = rsa_box_2.c; path = "RSA-SECRET/rsa_box_2.c"; sourceTree = SOURCE_ROOT; };
+		52EC2E210BE7B39C006EE495 /* rsa_box_4.c */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.c; name = rsa_box_4.c; path = "RSA-SECRET/rsa_box_4.c"; sourceTree = SOURCE_ROOT; };
 		52F5D83C0B1A69E000B8B9C5 /* assert.c */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.c; path = assert.c; sourceTree = "<group>"; };
 		52F5D83D0B1A69E000B8B9C5 /* compat.c */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.c; path = compat.c; sourceTree = "<group>"; };
 		52F5D83E0B1A69E000B8B9C5 /* config.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = config.h; sourceTree = "<group>"; };
@@ -1493,12 +1493,12 @@
 		522F30AC0B0B1D4500E7DDED /* RSA */ = {
 			isa = PBXGroup;
 			children = (
-				522F30B20B0B1E2C00E7DDED /* rsa_box_0.c */,
-				522F30B30B0B1E2C00E7DDED /* rsa_box_4.c */,
-				522F30B40B0B1E2C00E7DDED /* rsa_box_1.c */,
-				522F30B50B0B1E2C00E7DDED /* rsa_box.c */,
-				522F30B60B0B1E2C00E7DDED /* rsa_box_3.c */,
-				522F30B70B0B1E2C00E7DDED /* rsa_box_2.c */,
+				52EC2E1C0BE7B39C006EE495 /* rsa_box_0.c */,
+				52EC2E1D0BE7B39C006EE495 /* rsa_box_1.c */,
+				52EC2E1E0BE7B39C006EE495 /* rsa_box_3.c */,
+				52EC2E1F0BE7B39C006EE495 /* rsa_box.c */,
+				52EC2E200BE7B39C006EE495 /* rsa_box_2.c */,
+				52EC2E210BE7B39C006EE495 /* rsa_box_4.c */,
 				522F30AD0B0B1D6200E7DDED /* RSAWrapper.h */,
 				522F30AE0B0B1D6200E7DDED /* RSAWrapper.m */,
 			);
@@ -2155,7 +2155,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "rm -Rf $TARGET_BUILD_DIR/$TARGET_NAME.app/Contents/Frameworks\nmkdir -p $TARGET_BUILD_DIR/$TARGET_NAME.app/Contents/Frameworks\ncp -RLf $TARGET_BUILD_DIR/OmniNetworking.framework $TARGET_BUILD_DIR/$TARGET_NAME.app/Contents/Frameworks \ncp -RLf $TARGET_BUILD_DIR/OmniBase.framework $TARGET_BUILD_DIR/$TARGET_NAME.app/Contents/Frameworks";
+			shellScript = "rm -Rf $TARGET_BUILD_DIR/$TARGET_NAME.app/Contents/Frameworks\nmkdir -p $TARGET_BUILD_DIR/$TARGET_NAME.app/Contents/Frameworks\ncp -RLf $PROJECT_DIR/../../../BuildEnviroment/$BUILD_STYLE/OmniNetworking.framework $TARGET_BUILD_DIR/$TARGET_NAME.app/Contents/Frameworks \ncp -RLf $PROJECT_DIR/../../../BuildEnviroment/$BUILD_STYLE/OmniBase.framework $TARGET_BUILD_DIR/$TARGET_NAME.app/Contents/Frameworks";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -2259,12 +2259,6 @@
 				528E7E380B0A660800B22943 /* LLView.m in Sources */,
 				528E83680B0A8F5600B22943 /* SimpleBaseClass.m in Sources */,
 				522F30AF0B0B1D6200E7DDED /* RSAWrapper.m in Sources */,
-				522F30B80B0B1E2C00E7DDED /* rsa_box_0.c in Sources */,
-				522F30B90B0B1E2C00E7DDED /* rsa_box_4.c in Sources */,
-				522F30BA0B0B1E2C00E7DDED /* rsa_box_1.c in Sources */,
-				522F30BB0B0B1E2C00E7DDED /* rsa_box.c in Sources */,
-				522F30BC0B0B1E2C00E7DDED /* rsa_box_3.c in Sources */,
-				522F30BD0B0B1E2C00E7DDED /* rsa_box_2.c in Sources */,
 				52BA84C90B10DFFF00F71673 /* SimpleTracker.m in Sources */,
 				52BA84FB0B10E22500F71673 /* TrackUpdate.m in Sources */,
 				52F5D9C40B1A69E000B8B9C5 /* assert.c in Sources */,
@@ -2622,6 +2616,12 @@
 				52F5DB2D0B1A69E000B8B9C5 /* version.c in Sources */,
 				52DC5E3A0B31574200C78FD1 /* LLSystemInformation.m in Sources */,
 				52DC5F0C0B3159DE00C78FD1 /* ServerControllerNew.m in Sources */,
+				52EC2E220BE7B39C006EE495 /* rsa_box_0.c in Sources */,
+				52EC2E230BE7B39C006EE495 /* rsa_box_1.c in Sources */,
+				52EC2E240BE7B39C006EE495 /* rsa_box_3.c in Sources */,
+				52EC2E250BE7B39C006EE495 /* rsa_box.c in Sources */,
+				52EC2E260BE7B39C006EE495 /* rsa_box_2.c in Sources */,
+				52EC2E270BE7B39C006EE495 /* rsa_box_4.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
