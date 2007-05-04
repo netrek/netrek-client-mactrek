@@ -1160,6 +1160,8 @@ bool goSleeping;
     @try {
         connectionTCPSocket = [serverTCPSocket acceptConnectionAndKeepListening];
         LLLog(@"Communication.connectToServer: got connection");
+		// set to non-blocking communication
+		[serverTCPSocket setBlocking:NO];
     }
     @catch (NSException * e) {
         LLLog(@"Communication.connectToServer: error accepting connection on socket %d", port);

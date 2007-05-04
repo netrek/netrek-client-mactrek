@@ -35,7 +35,6 @@
 	unsigned char *pResponse = (unsigned char*)[response mutableBytes];
 	
 	// decode the key
-	LLLog(@"RSAWrapper.encode: decoding RSA request");
 	// void rsa_black_box(unsigned char *out, unsigned char *in, unsigned char *public, unsigned char *global) 
 	
 	/* 
@@ -47,9 +46,10 @@
 		rsa_box.c, rsa_box_0.c, rsa_box_1.c, rsa_box_2.c, rsa_box_3.c, rsa_box_4.c
 	    and get your key to the servers of course :-)
 	 */
-		
-	rsa_black_box(pResponse+2*KEY_SIZE, pData, pResponse+KEY_SIZE, pResponse);
 	
+	LLLog(@"RSAWrapper.encode: decoding RSA request");	
+	rsa_black_box(pResponse+2*KEY_SIZE, pData, pResponse+KEY_SIZE, pResponse);
+	LLLog(@"RSAWrapper.encode: complete");
 	return response;	
 }
 

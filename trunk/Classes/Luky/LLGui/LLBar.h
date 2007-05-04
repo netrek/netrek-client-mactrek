@@ -17,6 +17,7 @@
 	float max;
 	float min;
 	float value;
+	float alpha;
 	float tempMax;
 	float warning;
 	float critical;

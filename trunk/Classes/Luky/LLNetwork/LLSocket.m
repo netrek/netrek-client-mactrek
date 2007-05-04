@@ -61,6 +61,7 @@
     struct timeval timeout;
     
 	if (![mutex lockBeforeDate:[NSDate dateWithTimeIntervalSinceNow:timeOut]]) {
+		LLLog(@"LLSocket.waitForReadableWithTimeout lock timeout");
 		return NO; // no lock obtained, so no need to unlock
 	}
 	
@@ -103,7 +104,8 @@
     fd_set writefds;
     struct timeval timeout;
 	
-	if (![mutex lockBeforeDate:[NSDate dateWithTimeIntervalSinceNow:timeOut]]) {
+	if (![mutex lockBeforeDate:[NSDate dateWithTimeIntervalSinceNow:timeOut]]) {		
+		LLLog(@"LLSocket.isWritable lock timeout");
 		return NO; // no lock obtained, so no need to unlock
 	}
 	
@@ -165,7 +167,8 @@
     int flags;
     int result;
     
-	if (![mutex lockBeforeDate:[NSDate dateWithTimeIntervalSinceNow:timeOut]]) {
+	if (![mutex lockBeforeDate:[NSDate dateWithTimeIntervalSinceNow:timeOut]]) {		
+		LLLog(@"LLSocket.setBlocking lock timeout");
 		return; // no lock obtained, so no need to unlock
 	}
 	
@@ -199,6 +202,7 @@
 - (void)setReadBufferSize:(unsigned int)size {
 	
 	if (![mutex lockBeforeDate:[NSDate dateWithTimeIntervalSinceNow:timeOut]]) {
+		LLLog(@"LLSocket.setReadBufferSize lock timeout");
 		return; // no lock obtained, so no need to unlock
 	}
 	
@@ -264,6 +268,7 @@
     int on = 1;
 	
 	if (![mutex lockBeforeDate:[NSDate dateWithTimeIntervalSinceNow:timeOut]]) {
+		LLLog(@"LLSocket._bindTo lock timeout");
 		return; // no lock obtained, so no need to unlock
 	}
 	
@@ -293,6 +298,7 @@
 - (void)_close {
 	
 	if (![mutex lockBeforeDate:[NSDate dateWithTimeIntervalSinceNow:timeOut]]) {
+		LLLog(@"LLSocket._close lock timeout");
 		return; // no lock obtained, so no need to unlock
 	}
 	
