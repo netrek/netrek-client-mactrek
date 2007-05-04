@@ -8,7 +8,7 @@
 
 #import "LLFullScreenBackgroundWindow.h"
 
-//#define DEBUG 
+#define DEBUG 
 
 @implementation LLFullScreenBackgroundWindow
 
@@ -74,6 +74,8 @@
 	NSRect frame1 = [[LLScreenResolution defaultScreenResolution] frameForPrimairyDisplay];	
 	NSRect frame2 = [[NSScreen mainScreen] frame];
 	[self setFrame:frame1 display:YES];
+	LLLog(@"LLFullScreenBackgroundWindow.awakeFromNib %x %x %x %x", frame2.origin.x, 
+		  frame2.origin.y, frame2.size.width, frame2.size.height);
     //-----------------------------------------------------------
 #endif
 	

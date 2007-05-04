@@ -36,6 +36,7 @@
     struct sockaddr_in remoteAddr;
 	
 	if (![mutex lockBeforeDate:[NSDate dateWithTimeIntervalSinceNow:timeOut]]) {
+		LLLog(@"LLTCPSocket.connectToHost lock timeout");		
 		return; // no lock obtained, so no need to unlock
 	}
 	
@@ -89,6 +90,7 @@
     [self _bindTo:INADDR_ANY port:port];
 	
 	if (![mutex lockBeforeDate:[NSDate dateWithTimeIntervalSinceNow:timeOut]]) {
+		LLLog(@"LLTCPSocket.listenOnPort lock timeout");
 		return; // no lock obtained, so no need to unlock
 	}
 	
@@ -115,6 +117,7 @@
     unsigned int addrSize = sizeof(acceptAddr);
 	
 	if (![mutex lockBeforeDate:[NSDate dateWithTimeIntervalSinceNow:timeOut]]) {
+		LLLog(@"LLTCPSocket.acceptConnection lock timeout");
 		return; // no lock obtained, so no need to unlock
 	}
 	
@@ -166,6 +169,7 @@
     unsigned int addrSize = sizeof(acceptAddr);
 	
 	if (![mutex lockBeforeDate:[NSDate dateWithTimeIntervalSinceNow:timeOut]]) {
+		LLLog(@"LLTCPSocket.acceptConnectionAndKeepListening lock timeout");
 		return nil; // no lock obtained, so no need to unlock
 	}
 	
@@ -211,6 +215,7 @@
     ssize_t count;
 	
 	if (![mutex lockBeforeDate:[NSDate dateWithTimeIntervalSinceNow:timeOut]]) {
+		LLLog(@"LLTCPSocket.readData lock timeout");
 		return 0; // no lock obtained, so no need to unlock
 	}
 	
@@ -269,6 +274,7 @@
     int sent;
     
 	if (![mutex lockBeforeDate:[NSDate dateWithTimeIntervalSinceNow:timeOut]]) {
+		LLLog(@"LLTCPSocket.writeData lock timeout");
 		return; // no lock obtained, so no need to unlock
 	}
 	

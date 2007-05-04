@@ -203,7 +203,7 @@ static NSBezierPath *line = nil; // this makes us fast, but not rentrant
         // fill inside
         [barColor set];
         // NSRectFill(barRect);  use gradient bars now        
-		[gradientRect fillRect:barRect withColor:gradientBarColor];
+		[gradientRect fillRect:barRect withColor:gradientBarColor alpha:alpha];
 		
         // stroke the outline with black
         [[NSColor blackColor] set];
@@ -230,7 +230,7 @@ static NSBezierPath *line = nil; // this makes us fast, but not rentrant
             disabledBar.size.width = end.x - start.x;
             [[NSColor grayColor] set];
             //NSRectFill(disabledBar);
-            [gradientRect fillRect:barRect withColor:LL_GRAY];
+            [gradientRect fillRect:barRect withColor:LL_GRAY alpha:alpha];
 			
             // draw the line
             // $$ for some reason we are not seeing this line...
@@ -262,7 +262,7 @@ static NSBezierPath *line = nil; // this makes us fast, but not rentrant
             // fill inside
             [barColor set];
             //NSRectFill(barRect); 
-			[gradientRect fillRect:barRect withColor:gradientBarColor];
+			[gradientRect fillRect:barRect withColor:gradientBarColor alpha:alpha];
 			
             // stroke the outline with black
             [[NSColor blackColor] set];
@@ -286,7 +286,7 @@ static NSBezierPath *line = nil; // this makes us fast, but not rentrant
             // fill inside 50% black
             [barColor set];
             //NSRectFill(barRect); 
-			[gradientRect fillRect:barRect withColor:LL_GRAY];
+			[gradientRect fillRect:barRect withColor:LL_GRAY  alpha:alpha];
 			
             // stroke the outline with black
             [[NSColor blackColor] set];

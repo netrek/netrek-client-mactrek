@@ -69,6 +69,7 @@
 	unsigned int length;
 	
 	if (![mutex lockBeforeDate:[NSDate dateWithTimeIntervalSinceNow:timeOut]]) {
+		LLLog(@"LLUDPSocket.readData lock timeout");
 		return 0; // no lock obtained, so no need to unlock
 	}
 	
@@ -153,6 +154,7 @@
 	struct sockaddr_in remoteAddress;
     
 	if (![mutex lockBeforeDate:[NSDate dateWithTimeIntervalSinceNow:timeOut]]) {
+		LLLog(@"LLUDPSocket.writeData lock timeout");
 		return; // no lock obtained, so no need to unlock
 	}
 	

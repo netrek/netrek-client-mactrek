@@ -113,7 +113,7 @@ NSMutableData *leftOverPacket;
     if (self != nil) {
         // packet debugger
         pktConv = [[PacketTypesDebug alloc] init];
-        [pktConv setDebugPackets:NO]; 
+        [pktConv setDebugPackets:YES]; // set to yes to see a dump of all packets 
         leftOverPacket = nil;
         // number of bits per byte
 
@@ -167,12 +167,6 @@ NSMutableData *leftOverPacket;
         buffer = (char*)[dataReceived bytes];
     }
   
-    /*
-    LLLog(@"ServerReader.readFromServer raw block read start:");
-    [pktConv printPacketInBuffer:buffer size:count];
-    LLLog(@"ServerReader.readFromServer raw block read end");    
-    */
-	
     while(count > 0)  {
         // the first char in the buffer should tell us the type of the message
         int ptype = buffer[0] & 0xFF;
@@ -197,11 +191,14 @@ NSMutableData *leftOverPacket;
         }
         
         int size = PACKET_SIZES[ptype];
-        // debug 
-        //LLLog(@"ServerReader.readFromServer received message: %@ (%d), size %d buffer size: %d", 
-        //      [pktConv serverPacketString:buffer[0]], buffer[0], size, count);
-        [pktConv printPacketInBuffer:buffer size:size];
-        
+        // ------
+		// DEBUG
+		// ------
+        LLLog(@"ServerReader.readFromServer received message: %@ (%d), size %d buffer size: %d", 
+              [pktConv serverPacketString:buffer[0]], buffer[0], size, count);
+        //[pktConv printPacketInBuffer:buffer size:size];
+        // ------
+		
         // handle variable buffer packets first
         // determine the size of the packet before we can handle it
 		if (size == -1) {
