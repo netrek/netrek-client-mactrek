@@ -386,9 +386,13 @@
             // add a character to the line
             [line appendString: [NSString stringWithFormat: @"%2.2x ", 0xFF & buffer[i]]];
             if ((buffer[i] != 0) && (buffer[i] != '\n') && (buffer[i] != '\r')) {
-                [ascii appendString:[NSString stringWithFormat: @" %1c ", buffer[i]]];
+				if (buffer[i] != '%') {
+					[ascii appendString:[NSString stringWithFormat: @" %1c ", buffer[i]]];
+				} else {
+					 [ascii appendString:                           @" %% "];
+				}               
             } else {
-                [ascii appendString:[NSString stringWithFormat: @"   ", buffer[i]]];
+                [ascii appendString:                                @"   "];
             }            
         }
         LLLog(line);
@@ -404,11 +408,15 @@
     for (int i = 0; i < size; i++) {
         // add a character to the line
         [line appendString: [NSString stringWithFormat: @"%2.2x ", 0xFF & buffer[i]]];
-        if ((buffer[i] != 0) && (buffer[i] != '\n') && (buffer[i] != '\r')) {
-            [ascii appendString:[NSString stringWithFormat: @" %1c ", buffer[i]]];
-        } else {
-            [ascii appendString:[NSString stringWithFormat: @"   ", buffer[i]]];
-        }
+		if ((buffer[i] != 0) && (buffer[i] != '\n') && (buffer[i] != '\r')) {
+			if (buffer[i] != '%') {
+				[ascii appendString:[NSString stringWithFormat: @" %1c ", buffer[i]]];
+			} else {
+				[ascii appendString:                           @" %% "];
+			}               
+		} else {
+			[ascii appendString:                                @"   "];
+		}
     }
     LLLog(line);
     LLLog(ascii);

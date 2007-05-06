@@ -616,7 +616,7 @@ bool goSleeping;
 			entire program because this thread does a blocking read 
 			why actually? */
 		// ------ GHOSTBUST RESURECT ------ 
-		/*
+		
 		
         if([self connectToServerUsingNextPort]) {
             [notificationCenter postNotificationName:@"COMM_RESURRECTED" object:self 
@@ -630,7 +630,7 @@ bool goSleeping;
 			LLLog(@"Communication.readFromServer Sorry,  We could not be resurrected!");
 			readOk = NO;
         }
-		 */
+		
 		// ------ GHOSTBUST RESURECT ------
     }
     

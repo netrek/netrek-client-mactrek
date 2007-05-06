@@ -24,18 +24,6 @@
 
 - (void)awakeFromNib {
 	
-	// 1667734 add rendezvous servers
-	
-	/*
-	 should work, but does not
-	 
-	serviceBrowser = [[NSNetServiceBrowser alloc] init];
-	[serviceBrowser setDelegate:self];
-	//[serviceBrowser setDelegate:[[LLNetServiceDelegate alloc] init]];  // test
-	[serviceBrowser searchForServicesOfType:@"_netrek._tcp." inDomain:@""];	
-	 
-	 */
-	
 	availableServices = nil;
 	 
 	rendezvousController = [[LLRendezvousController alloc] initWithName:@"MacTrek" type:@"_netrek._tcp." port:2592];
@@ -47,10 +35,10 @@
 	[rendezvousController performSelector:@selector(refreshBrowsing) withObject:nil afterDelay:1.0];
 	
 	// initial query is in seperate thread		
-	//[NSThread detachNewThreadSelector:@selector(refreshServersInSeperateThread:) toTarget:self withObject:nil];
-	[self refreshServers:self];
+	[NSThread detachNewThreadSelector:@selector(refreshServersInSeperateThread:) toTarget:self withObject:nil];
+	//[self refreshServers:self];
 	// try again in 1 second
-	[self performSelector:@selector(refreshServers:) withObject:self afterDelay:1.0];
+	//[self performSelector:@selector(refreshServers:) withObject:self afterDelay:1.0];
 }
 
 - (void)discoveredServicesDidChange:(id)sender {
@@ -108,47 +96,9 @@
     [pool release];
 }
 
-// 1667734 add rendezvous servers
-/*
-- (void)netServiceBrowser:(NSNetServiceBrowser *)netServiceBrowser didFindService:(NSNetService *)netService moreComing:(BOOL)moreServicesComing {
-	
-	if ([[netService type] isEqualToString:@"_netrek._tcp."]){
-		
-		// create a new entry
-		MetaServerEntry *entry = [[MetaServerEntry alloc] init];
-		[entry setAddress: [netService hostName]];
-		[entry setPort:    2592];
-		[entry setStatus:  RENDEZVOUS];
-		[entry setGameType:    BRONCO];	
-		
-		[bonjourServers insertObject:entry atIndex:0];    
-		[serverTableView reloadData];
-		
-		LLLog(@"MetaServerTableDataSource.netServiceBrowser: added %@", [netService hostName]);
-	} else {
-		LLLog(@"MetaServerTableDataSource.netServiceBrowser: unknown service %@", [netService type]); 
-	}
-
-}
-
-- (void)netServiceBrowser:(NSNetServiceBrowser *)netServiceBrowser didRemoveService:(NSNetService *)netService moreComing:(BOOL)moreServicesComing {
-	if ([[netService type] isEqualToString:@"_netrek._tcp"]){
-		
-		// find and remove
-		MetaServerEntry *server = [self findServer:[netService hostName]];
-		
-		if (server != nil) {
-			[bonjourServers removeObject:server];
-		}
-		[serverTableView reloadData];
-		
-		LLLog(@"MetaServerTableDataSource.netServiceBrowser: removed %@", [netService hostName]);
-	} else {
-		LLLog(@"MetaServerTableDataSource.netServiceBrowser:(rem) unknown service %@", [netService type]); 
-	}
-}
-*/
 - (IBAction)refreshServers:(id)sender {  
+
+	LLLog(@"MetaServerTableDataSource.refreshServers");
 	
 	NSMutableArray *result;
 	@try {
@@ -156,16 +106,17 @@
 	}
 	@catch (NSException * e) {
 		LLLog(@"MetaServerTableDataSource.refreshServers: error %@", [e reason]);
-		return;
+		return; 
 	}
 
-	// small protection allows for initial emty array, so when tehre is no internet,
+	// small protection allows for initial empty array, so when tehre is no internet,
 	// you can still play on the local server.
 	if (result != nil) {
 		// check for localhost before releaseing
 		MetaServerEntry *localhost = [self findServer:@"localhost"];
 		[metaServerServers release];
 		metaServerServers = result;
+		[metaServerServers retain];
 		if (localhost != nil) {
 			LLLog(@"MetaServerTableDataSource.refreshServers: keeping localhost");
 			[self addServerPassivly:localhost];

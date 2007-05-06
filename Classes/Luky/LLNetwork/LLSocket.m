@@ -297,10 +297,7 @@
 //
 - (void)_close {
 	
-	if (![mutex lockBeforeDate:[NSDate dateWithTimeIntervalSinceNow:timeOut]]) {
-		LLLog(@"LLSocket._close lock timeout");
-		return; // no lock obtained, so no need to unlock
-	}
+	// no need for locks, we are called internally
 	
     if ( socketfd != SOCKET_INVALID_DESCRIPTOR ) {
         close(socketfd);
@@ -315,8 +312,6 @@
     connected = NO;
     listening = NO;
     remotePort = SOCKET_INVALID_PORT;
-	
-	[mutex unlock];
 }
 
 - (BOOL) isBusy {

@@ -20,17 +20,13 @@
     // connect and create a stream
     LLTCPSocket *socket = [[LLTCPSocket alloc] init];
     LLHost *hostName = [LLHost hostWithName:server];
+	//[socket setBlocking:NO];  // dont wait when connecting to server
     [socket connectToHost:hostName port:port];
     LLSocketStream *stream = [LLSocketStream streamWithSocket:socket];
-	[stream setBlocking:YES]; // we want to wait
+	[stream setBlocking:YES]; // we want to wait ???
 
 	entries = [self parseInputFromStream:stream];
     
-    // close connection 
-    // apperantly not needed, is autoreleased
-    //[stream release];
-    //[socket release];
-
     return entries;
 }
 	
@@ -49,8 +45,17 @@
     [entries addObject:entry];  */
 	LLLog(@"MetaServerParser.parseInputFromStream started");
 	
-    NSString *line = nil;		
-    while ((line = [stream readLine]) != nil) {
+    NSString *line = nil;
+	
+	@try {
+		line = [stream readLine];
+	}
+	@catch (NSException * e) {
+		LLLog(@"MetaServerParser.parseInputFromStream: error %@", [e reason]);
+		line = nil;
+	}
+	
+    while (line != nil) {
         // make sure this is a line with server info on it
 		LLLog(@"MetaServerParser.parseInputFromStream: [%@], size %d", line, [line length]);
         if ([line length] == 79 && 
@@ -96,8 +101,15 @@
 			if ([entry gameType] != PARADISE) {
                 [entries addObject:entry]; 
 
-			}
-			
+			}			
+		}
+		
+		@try {
+			line = [stream readLine];
+		}
+		@catch (NSException * e) {
+			LLLog(@"MetaServerParser.parseInputFromStream: error %@", [e reason]);
+			line = nil;
 		}
     }
 	return entries;

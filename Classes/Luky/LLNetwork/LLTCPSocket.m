@@ -220,7 +220,7 @@
 	}
 	
 	// data must not be null ptr	
-	if ( data == NULL )
+	if ( data == NULL ) 
 		[NSException raise:SOCKET_EX_INVALID_BUFFER 
 					format:SOCKET_EX_INVALID_BUFFER];
 	
@@ -243,8 +243,12 @@
     }
     else if ( count == 0 )
     {
-        // Other side has disconnected, so close down our socket		
+        // Other side has disconnected, so close down our socket
+		LLLog(@"LLTCPSocket.readData other side closed socket");
         [self _close];
+		[NSException raise:SOCKET_EX_NOT_CONNECTED 
+					format:SOCKET_EX_NOT_CONNECTED];
+		return -1;
     }
     else if ( count < 0 )
     {
@@ -252,6 +256,7 @@
         if ( errno == EAGAIN )
         {
             // No data available to read (and socket is non-blocking)
+			LLLog(@"LLTCPSocket.readData no data read, but non blocking");
             count = 0;
         }
         else
