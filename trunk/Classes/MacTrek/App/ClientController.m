@@ -51,10 +51,13 @@ bool ghostStart = NO;
 			[notificationCenter postNotificationName:@"CC_GO_OUTFIT" 
 											  object:self 
 											userInfo:nil]; 
+			exploding = NO; // be sure to reset or worf will echo
 		}
         if (([player status] == PLAYER_EXPLODE) ) {
             LLLog(@"ClientController.checkForDeath: firing delayed death warrent");
 			exploding = YES;
+			// some times we never enter the check for death routine again
+			[self performSelector: @selector(checkForDeath:) withObject:player afterDelay: 2.0]; 
         } 
     }
 }

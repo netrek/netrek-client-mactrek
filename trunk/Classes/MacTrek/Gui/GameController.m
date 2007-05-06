@@ -31,6 +31,17 @@ bool forceBarUpdate = NO;
     [armiesBar setDiscrete:YES];
     [torpsBar setDiscrete:YES];
     //[phasersBar setDiscrete:YES];
+	
+	// should be the default..
+	[shieldBar setAlpha: 1.0];  
+    [speedBar setAlpha: 1.0];
+    [hullBar setAlpha: 1.0];
+    [fuelBar setAlpha: 1.0];
+    [torpsBar setAlpha: 1.0];
+    [phasersBar setAlpha: 1.0];
+    [eTempBar setAlpha: 1.0];
+    [wTempBar setAlpha: 1.0];
+    [armiesBar setAlpha: 1.0];	
     
     // add speech
     //synth = [[NSSpeechSynthesizer alloc] initWithVoice:@"com.apple.speech.synthesis.voice.Zarvox"];
