@@ -300,6 +300,9 @@ static Player *me;
 }
 
 - (Ship *)   shipWithPhaserId:(int)phaserId {
+	if (phaserId > [players count]) {
+		return nil;
+	}
     // we store phasers with the same index as players
     // as each player has only one ship and each ship
     // has only one phaser
@@ -315,14 +318,23 @@ static Player *me;
 }
 
 - (Torp *)   torpWithId:(int)torpId {
+	if (torpId > [torps count]) {
+		return nil;
+	}
     return [torps objectAtIndex:torpId];
 }
 
 - (Phaser *) phaserWithId:(int)phaserId {
+	if (phaserId > [phasers count]) {
+		return nil;
+	}
     return [phasers objectAtIndex:phaserId];
 }
 
 - (Plasma *) plasmaWithId:(int)plasmaId {
+	if (plasmaId > [plasmas count]) {
+		return nil;
+	}
     return [plasmas objectAtIndex:plasmaId];
 }
 
