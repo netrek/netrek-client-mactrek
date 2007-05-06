@@ -1584,6 +1584,7 @@ int shortFromPacket(char *buffer, int offset) {
 			@try {
                 NSLog(@"ServerReader.handlePacket: RSA verification requested.");
                 NSMutableData *data = [NSMutableData dataWithBytes:(buffer+4) length:RSA_KEY_SIZE];                
+		[data retain];
                 // do some stuff with RSA,
                 // looks very specific, let the RSA handler take care of it when
                 // it receives the notification
