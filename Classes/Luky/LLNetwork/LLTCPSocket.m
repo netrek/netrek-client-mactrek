@@ -17,6 +17,8 @@
 - (id) init {
 	self = [super init];
 	if (self != nil) {
+		// use seperate lock for writing
+		mutexWrite = [[NSLock alloc] init];
 		
 		// Create TCP socket	
 		if ( (socketfd = socket(AF_INET, SOCK_STREAM, 0)) < 0 )
@@ -278,7 +280,7 @@
     int len = [data length];
     int sent;
     
-	if (![mutex lockBeforeDate:[NSDate dateWithTimeIntervalSinceNow:timeOut]]) {
+	if (![mutexWrite lockBeforeDate:[NSDate dateWithTimeIntervalSinceNow:timeOut]]) {
 		LLLog(@"LLTCPSocket.writeData lock timeout");
 		return; // no lock obtained, so no need to unlock
 	}
@@ -305,7 +307,7 @@
         len -= sent;
     }
 	
-	[mutex unlock];
+	[mutexWrite unlock];
 }
 
 //
