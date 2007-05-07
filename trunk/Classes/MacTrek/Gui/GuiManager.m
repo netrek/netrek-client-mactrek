@@ -41,7 +41,7 @@ int startUpEvents = 0;
 		
 		// ROOT PLACE to turn MULTITHREADING off, only tested for guest login
 		// turn only off for testing!
-		multiThreaded = NO; 
+		multiThreaded = YES; 
 		mutex = [[NSLock alloc] init];
 		
         // setup our client
@@ -57,8 +57,8 @@ int startUpEvents = 0;
         soundPlayerTheme3 = [[SoundPlayerForTac alloc] init];
         painterTheme3     = [[PainterFactoryForTac alloc] init];
         // pick a default
-        soundPlayerActiveTheme = soundPlayerTheme1;
-        painterActiveTheme = painterTheme1;
+        soundPlayerActiveTheme = soundPlayerTheme2;
+        painterActiveTheme = painterTheme2;
         activeTheme = -1;
         
         // reset gameState

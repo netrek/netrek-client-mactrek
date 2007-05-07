@@ -192,10 +192,9 @@ NSMutableData *leftOverPacket;
         
         int size = PACKET_SIZES[ptype];
         // ------
-		// DEBUG
+		// DEBUG (generates lots of data !)
 		// ------
-        LLLog(@"ServerReader.readFromServer received message: %@ (%d), size %d buffer size: %d", 
-              [pktConv serverPacketString:buffer[0]], buffer[0], size, count);
+        //LLLog(@"ServerReader.readFromServer received message: %@ (%d), size %d buffer size: %d", [pktConv serverPacketString:buffer[0]], buffer[0], size, count);
         //[pktConv printPacketInBuffer:buffer size:size];
         // ------
 		

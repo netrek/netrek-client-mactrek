@@ -10,7 +10,7 @@
 #import "LLSocket.h"
 
 @interface LLTCPSocket : LLSocket {
-	
+	NSLock			*mutexWrite;
 }
 
 // Usage:
