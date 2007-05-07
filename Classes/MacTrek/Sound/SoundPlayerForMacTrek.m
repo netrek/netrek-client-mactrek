@@ -27,26 +27,23 @@
     SoundEffect *sound;
     
     // old sounds
-    //sound = [[SoundEffect alloc] init];
-    //[sound loadSoundWithName:@"SoundEffects/engine.au"]; // do not like this sound
-    //[soundEffects setObject:sound forKey:@"ENGINE_SOUND"];
-    sound = [[SoundEffect alloc] init];
-    [sound loadSoundWithName:@"SoundEffects/explosion.au"];
-    [soundEffects setObject:sound forKey:@"EXPLOSION_SOUND"];   
-    sound = [[SoundEffect alloc] init];   
-    [sound loadSoundWithName:@"SoundEffects/intro.au"];                      
-    [soundEffects setObject:sound forKey:@"INTRO_SOUND"];
-    sound = [[SoundEffect alloc] init];
-    [sound loadSoundWithName:@"SoundEffects/plasma_hit.au" nrOfInstances:8];
-    [soundEffects setObject:sound forKey:@"PLASMA_HIT_SOUND"];
     sound = [[SoundEffect alloc] init];
     [sound loadSoundWithName:@"SoundEffects/self_destruct.au"];                  
     [soundEffects setObject:sound forKey:@"SELF_DESTRUCT_SOUND"];
-    sound = [[SoundEffect alloc] init];
-    [sound loadSoundWithName:@"SoundEffects/torp_hit.au" nrOfInstances:8];
-    [soundEffects setObject:sound forKey:@"TORP_HIT_SOUND"];    
-    
-    // new sounds    
+       
+    // new sounds 
+	sound = [[SoundEffect alloc] init];   
+    [sound loadSoundWithName:@"SoundEffects2/intro.wav"];                      
+    [soundEffects setObject:sound forKey:@"INTRO_SOUND"];
+	sound = [[SoundEffect alloc] init];
+    [sound loadSoundWithName:@"SoundEffects2/torp_hit.wav" nrOfInstances:8];
+    [soundEffects setObject:sound forKey:@"TORP_HIT_SOUND"]; 
+	sound = [[SoundEffect alloc] init];
+    [sound loadSoundWithName:@"SoundEffects2/plasma_hit.wav" nrOfInstances:8];
+    [soundEffects setObject:sound forKey:@"PLASMA_HIT_SOUND"];
+	sound = [[SoundEffect alloc] init];
+    [sound loadSoundWithName:@"SoundEffects2/explosion.wav"];
+    [soundEffects setObject:sound forKey:@"EXPLOSION_SOUND"];   
     sound = [[SoundEffect alloc] init];
     [sound loadSoundWithName:@"SoundEffects2/cloak.wav"];
     [soundEffects setObject:sound forKey:@"CLOAK_SOUND"];
