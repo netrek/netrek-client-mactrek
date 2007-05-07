@@ -1460,7 +1460,7 @@
 			
 			// and store it
 			[player setLabel:labelImage forKey:key];
-			LLLog(@"PainterFactory.drawLabelForPlayer created label: %@", label);
+			//LLLog(@"PainterFactory.drawLabelForPlayer created label: %@", label);
 		} else {
 			//LLLog(@"PainterFactory.drawLabelForPlayer using cached label: %@", label);
 		}

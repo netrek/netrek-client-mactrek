@@ -351,7 +351,7 @@
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>520433D00BEFCAE900F3C7E9</string>
+										<string>520433D70BEFCCA400F3C7E9</string>
 										<key>history</key>
 										<array>
 											<string>52D7041F0B386D1100CD124C</string>
@@ -905,7 +905,7 @@
 	<key>StatusbarIsVisible</key>
 	<true/>
 	<key>TimeStamp</key>
-	<real>200264425.89405701</real>
+	<real>200264868.67769599</real>
 	<key>ToolbarDisplayMode</key>
 	<integer>1</integer>
 	<key>ToolbarIsVisible</key>
@@ -922,10 +922,10 @@
 	<array>
 		<string>1C530D57069F1CE1000CFCEE</string>
 		<string>520433A60BEFC80100F3C7E9</string>
-		<string>1CD10A99069EF8BA00B06720</string>
 		<string>1C0AD2B3069F1EA900FABCE6</string>
-		<string>/Volumes/Banana/develop/MacTrek/Client/trunk/MacTrek.xcodeproj</string>
+		<string>1CD10A99069EF8BA00B06720</string>
 		<string>52EDECE60A1DD98600FD7731</string>
+		<string>/Volumes/Banana/develop/MacTrek/Client/trunk/MacTrek.xcodeproj</string>
 	</array>
 	<key>WindowString</key>
 	<string>627 137 1524 1431 0 0 2560 1578 </string>
@@ -1156,7 +1156,7 @@
 										<key>PBXProjectModuleGUID</key>
 										<string>1CDD528C0622207200134675</string>
 										<key>PBXProjectModuleLabel</key>
-										<string>GuiManager.m</string>
+										<string>PainterFactory.m</string>
 										<key>StatusBarVisibility</key>
 										<true/>
 									</dict>
@@ -1382,7 +1382,7 @@
 			<key>WindowToolGUID</key>
 			<string>1C0AD2B3069F1EA900FABCE6</string>
 			<key>WindowToolIsVisible</key>
-			<true/>
+			<false/>
 		</dict>
 		<dict>
 			<key>FirstTimeWindowDisplayed</key>
