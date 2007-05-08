@@ -122,6 +122,7 @@
     unsigned short 	remotePort;
     int 			socketfd;
 	BOOL 			connected;
+	BOOL			blocking;
 	BOOL			listening;
 	NSLock			*mutex;
 	int				timeOut;

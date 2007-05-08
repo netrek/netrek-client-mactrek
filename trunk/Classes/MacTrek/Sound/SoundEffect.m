@@ -104,7 +104,7 @@
 	QTMovie *sound = [self sound];
 	if (sound != nil) {
 		[sound setVolume:vol];
-		LLLog(@"SoundEffect.playWithVolume %f sound %@", vol, name);
+		//LLLog(@"SoundEffect.playWithVolume %f sound %@", vol, name);
 		[sound play];
 	}
 }
@@ -121,7 +121,7 @@
 			
 		MediaSetSoundBalance((void*)sound, balance); 
 		[sound setVolume:vol];
-		LLLog(@"SoundEffect.playWithVolume %f balance %f (%d) sound %@", vol, bal, balance, name);
+		//LLLog(@"SoundEffect.playWithVolume %f balance %f (%d) sound %@", vol, bal, balance, name);
 		[sound play];
 	}
 }

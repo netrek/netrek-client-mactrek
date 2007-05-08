@@ -42,6 +42,15 @@ bool forceBarUpdate = NO;
     [eTempBar setAlpha: 1.0];
     [wTempBar setAlpha: 1.0];
     [armiesBar setAlpha: 1.0];	
+	[shieldBar setShowBackGround: YES];  
+    [speedBar setShowBackGround: YES];
+    [hullBar setShowBackGround: YES];
+    [fuelBar setShowBackGround: YES];
+    [torpsBar setShowBackGround: YES];
+    [phasersBar setShowBackGround: YES];
+    [eTempBar setShowBackGround: YES];
+    [wTempBar setShowBackGround: YES];
+    [armiesBar setShowBackGround: YES];
     
     // add speech
     //synth = [[NSSpeechSynthesizer alloc] initWithVoice:@"com.apple.speech.synthesis.voice.Zarvox"];

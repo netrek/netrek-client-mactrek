@@ -165,7 +165,7 @@ whichRepresentsGameBounds:gameBounds
     
     switch (inputMode) {
     case GV_NORMAL_MODE:
-        LLLog(@"GameView.keyDown handle in normal mode");
+        //LLLog(@"GameView.keyDown handle in normal mode");  // happens often
         [self normalModeKeyDown:theEvent];
         break;
     case GV_MESSAGE_MODE:

@@ -274,7 +274,7 @@ int startUpEvents = 0;
 	NSMenu *source = [notification object];
 	NSMenuItem *item = [source itemAtIndex:[[[notification userInfo] valueForKey:@"NSMenuItemIndex"] intValue]];
 	
-	LLLog(@"GuiManager.killed: %@, menu [%@]", [notification name], [item title]);	
+	//LLLog(@"GuiManager.killed: %@, menu [%@]", [notification name], [item title]);	
 	if (![[item title] isEqualToString:@"Quit"]){
 		return; // wrong menu changed
 	}
