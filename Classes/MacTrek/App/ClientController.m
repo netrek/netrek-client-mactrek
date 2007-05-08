@@ -45,46 +45,23 @@ bool ghostStart = NO;
     // did i die?
     if ([player isMe]) {
         LLLog(@"ClientController.checkForDeath status = %@", [player statusString]);
-		if ( exploding ) {
-			LLLog(@"ClientController.checkForDeath: today was a good day to die (status: %@)", [player statusString]);
-			exploding = NO;
-			[notificationCenter postNotificationName:@"CC_GO_OUTFIT" 
-											  object:self 
-											userInfo:nil]; 
-			exploding = NO; // be sure to reset or worf will echo
-		}
-        if (([player status] == PLAYER_EXPLODE) ) {
+		
+		if (([player status] == PLAYER_EXPLODE) && !exploding ) {  // if we are not exploding, but our status became explosive
             LLLog(@"ClientController.checkForDeath: firing delayed death warrent");
 			exploding = YES;
 			// some times we never enter the check for death routine again
 			[self performSelector: @selector(checkForDeath:) withObject:player afterDelay: 2.0]; 
         } 
-    }
-}
-
-- (void) slowDeath:(Player *)me {
-    // needed because this is called while still drawing the gameview 
-    // changing the drawing now would invoke a different graphic context
-    LLLog(@"ClientController.slowDeath: i think i am dead");
-   [self performSelector: @selector(iDied:) withObject:me afterDelay: 0.1]; 
-}
-
-/*
-- (void) iDied:(Player *)me {
-    // go to outfitting
-   	if ([me status] != PLAYER_OUTFIT) {
 		
-		LLLog(@"ClientController.iDied: today was a good day to die (status: %@)", [me statusString]);
-
-		[me setStatus:PLAYER_OUTFIT];
-		[notificationCenter postNotificationName:@"CC_GO_OUTFIT" 
-										  object:self 
-										userInfo:nil];    
-	} else {
-		// already dead
+		if ( exploding ) {
+			LLLog(@"ClientController.checkForDeath: today was a good day to die (status: %@)", [player statusString]);
+			exploding = NO;  // die only once
+			[notificationCenter postNotificationName:@"CC_GO_OUTFIT" 
+											  object:self 
+											userInfo:nil]; 
+		}
 	}
 }
-*/
 
 - (bool) slotObtained {
     
@@ -153,19 +130,14 @@ bool ghostStart = NO;
 - (bool)sendSlotSettingsToServer {
 	
 	//try UDP
-	//[communication sendUdpReq:[NSNumber numberWithInt:COMM_UDP]];
     [notificationCenter postNotificationName:@"COMM_SEND_SHORT_REQ" object:self userInfo:[NSNumber numberWithInt:COMM_UDP]];        
 	//try short packets
-	//[communication sendShortReq:[NSNumber numberWithInt:SPK_VON]];
     [notificationCenter postNotificationName:@"COMM_SEND_SHORT_REQ" object:self userInfo:[NSNumber numberWithInt:SPK_VON]];
 	//send options we have set
-	//[communication sendOptionsPacket];
     [notificationCenter postNotificationName:@"COMM_SEND_OPTIONS_PACKET" object:self userInfo:nil];
 	// $$ don't ping yet
-    //[communication sendPingReq:[NSNumber numberWithBool:NO]];
     [notificationCenter postNotificationName:@"COMM_SEND_PING_REQ" object:self userInfo:[NSNumber numberWithBool:NO]];
 	//send desired updates per second
-	//[communication sendUpdatePacket:[NSNumber numberWithInt:COMM_UPDATES_PER_SECOND]];
     [notificationCenter postNotificationName:@"COMM_SEND_UPDATE_PACKET" object:self userInfo:[NSNumber numberWithInt:COMM_UPDATES_PER_SECOND]]; 
     return YES;
 }

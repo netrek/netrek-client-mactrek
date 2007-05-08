@@ -17,7 +17,7 @@
 #import "BaseClass.h"
 #import "RSAWrapper.h"
 
-#define COMM_UPDATES_PER_SECOND   5
+#define COMM_UPDATES_PER_SECOND   10
 #define MAX_PORT_RETRY  10
 // set to yes to diagnose the udp 
 #define COMM_UDP_DIAG        NO

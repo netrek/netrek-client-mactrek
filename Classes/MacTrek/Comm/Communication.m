@@ -1101,6 +1101,7 @@ bool goSleeping;
         // connect and create a stream
         socket = [[LLTCPSocket alloc] init];
         [socket connectToHost:hostName port:port];
+		[socket setBlocking:NO]; // or this may lock the entire thread !
         LLLog(@"Communication.callServer: got connection parameters");
         // create a sender and receiver
         [tcpSender release];
@@ -1308,6 +1309,7 @@ bool goSleeping;
 				
 			if (isSleeping) {
 				sleep(COMM_NETWORK_TIMEOUT);
+				LLLog(@"Communication.run snort snort");
 			} else {
 				if ([self readFromServer] == NO) {
 					LLLog(@"Communication.run ERROR detected going to sleep");
@@ -1387,6 +1389,7 @@ bool goSleeping;
 		count++;
 		sleep(COMM_NETWORK_TIMEOUT);
 		if (count > MAX_WAIT_BEFORE_CONTINUE){
+			LLLog(@"Communication.suspendCommunicationThread: never went to sleep enforce mode");
 			isSleeping = YES;
 		}
 	}

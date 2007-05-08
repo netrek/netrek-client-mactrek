@@ -33,6 +33,7 @@
 	
     connected = NO;
     listening = NO;
+	blocking  = YES; // default
     readBuffer = NULL;
     readBufferSize = SOCKET_DEFAULT_READ_BUFFER_SIZE;
     remoteHostName = NULL;
@@ -159,6 +160,13 @@
     return remotePort;
 }
 
+// 
+// Query function for programmers with amnesia
+//
+- (BOOL)blocking {
+	return blocking;
+}
+
 //
 // Switch the socket to blocking or non-blocking mode
 //
@@ -192,6 +200,8 @@
     if ( result < 0 )
         [NSException raise:SOCKET_EX_FCNTL_FAILED 
 					format:SOCKET_EX_FCNTL_FAILED_F, strerror(errno)];
+	
+	blocking = shouldBlock;
 	
 	[mutex unlock];
 }
