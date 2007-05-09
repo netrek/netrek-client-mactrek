@@ -146,6 +146,7 @@
 		529F08830B06934F00255735 /* SoundEffects in Resources */ = {isa = PBXBuildFile; fileRef = 529F08550B06934F00255735 /* SoundEffects */; };
 		529F08840B06934F00255735 /* SoundEffects2 in Resources */ = {isa = PBXBuildFile; fileRef = 529F086D0B06934F00255735 /* SoundEffects2 */; };
 		529F088C0B06935F00255735 /* LLResources in Resources */ = {isa = PBXBuildFile; fileRef = 529F08850B06935F00255735 /* LLResources */; };
+		52AD186A0BF25FB7007AF259 /* MTUDPWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 52AD18690BF25FB7007AF259 /* MTUDPWindowController.m */; };
 		52BA84C90B10DFFF00F71673 /* SimpleTracker.m in Sources */ = {isa = PBXBuildFile; fileRef = 52BA84C80B10DFFF00F71673 /* SimpleTracker.m */; };
 		52BA84FB0B10E22500F71673 /* TrackUpdate.m in Sources */ = {isa = PBXBuildFile; fileRef = 52BA84FA0B10E22500F71673 /* TrackUpdate.m */; };
 		52C7A7F00B17800900F2D523 /* mactrek-mosaic.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 52C7A7EF0B17800900F2D523 /* mactrek-mosaic.jpg */; };
@@ -786,6 +787,8 @@
 		529F08550B06934F00255735 /* SoundEffects */ = {isa = PBXFileReference; lastKnownFileType = folder; name = SoundEffects; path = Resources/SoundEffects; sourceTree = "<group>"; };
 		529F086D0B06934F00255735 /* SoundEffects2 */ = {isa = PBXFileReference; lastKnownFileType = folder; name = SoundEffects2; path = Resources/SoundEffects2; sourceTree = "<group>"; };
 		529F08850B06935F00255735 /* LLResources */ = {isa = PBXFileReference; lastKnownFileType = folder; name = LLResources; path = Classes/Luky/LLResources; sourceTree = "<group>"; };
+		52AD18680BF25FB7007AF259 /* MTUDPWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTUDPWindowController.h; sourceTree = "<group>"; };
+		52AD18690BF25FB7007AF259 /* MTUDPWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTUDPWindowController.m; sourceTree = "<group>"; };
 		52BA66300B10AE6100C7EB70 /* Version.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Version.h; sourceTree = "<group>"; };
 		52BA84C70B10DFFF00F71673 /* SimpleTracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SimpleTracker.h; path = Tracker/SimpleTracker.h; sourceTree = "<group>"; };
 		52BA84C80B10DFFF00F71673 /* SimpleTracker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SimpleTracker.m; path = Tracker/SimpleTracker.m; sourceTree = "<group>"; };
@@ -1482,6 +1485,8 @@
 				5212F0280B08FFB80059A8B1 /* SelectServerController.m */,
 				5212F0290B08FFB80059A8B1 /* SettingsController.h */,
 				5212F02A0B08FFB80059A8B1 /* SettingsController.m */,
+				52AD18680BF25FB7007AF259 /* MTUDPWindowController.h */,
+				52AD18690BF25FB7007AF259 /* MTUDPWindowController.m */,
 			);
 			path = Gui;
 			sourceTree = "<group>";
@@ -2728,6 +2733,7 @@
 				52E520460BE7AD3C002B45E2 /* rsa_box_3.c in Sources */,
 				52E520470BE7AD3C002B45E2 /* rsa_box_4.c in Sources */,
 				52E520480BE7AD3C002B45E2 /* rsa_box.c in Sources */,
+				52AD186A0BF25FB7007AF259 /* MTUDPWindowController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

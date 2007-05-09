@@ -1309,7 +1309,7 @@ bool goSleeping;
 				
 			if (isSleeping) {
 				sleep(COMM_NETWORK_TIMEOUT);
-				LLLog(@"Communication.run snort snort");
+				//LLLog(@"Communication.run snort snort");
 			} else {
 				if ([self readFromServer] == NO) {
 					LLLog(@"Communication.run ERROR detected going to sleep");

@@ -1503,6 +1503,9 @@
 	gaugeRect.origin.x += gaugeRect.size.width * 1.3; // 20% right of ship
 	gaugeRect.origin.y += gaugeRect.size.height * 0.1; // 10% off top and bottom
 	gaugeRect.size.height *= 0.2;  // displayed as width!!
+	if (gaugeRect.size.height < 5.0) {  // box + seperator + 1pix bar
+		gaugeRect.size.height = 5.0;
+	}
 	gaugeRect.size.width *= 0.8;   // displayed as heigth (we rotate the bar)
 	
 	// draw it
