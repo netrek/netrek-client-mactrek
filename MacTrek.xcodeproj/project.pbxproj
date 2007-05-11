@@ -2245,13 +2245,12 @@
 			files = (
 			);
 			inputPaths = (
-				/Volumes/Potatoe/Build/Debug/OmniNetworking.framework,
 			);
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "rm -Rf $TARGET_BUILD_DIR/$TARGET_NAME.app/Contents/Frameworks\nmkdir -p $TARGET_BUILD_DIR/$TARGET_NAME.app/Contents/Frameworks\n#cp -RLf $TARGET_BUILD_DIR/OmniNetworking.framework $TARGET_BUILD_DIR/$TARGET_NAME.app/Contents/Frameworks \n#cp -RLf $TARGET_BUILD_DIR/OmniBase.framework $TARGET_BUILD_DIR/$TARGET_NAME.app/Contents/Frameworks";
+			shellScript = "rm -Rf $TARGET_BUILD_DIR/$TARGET_NAME.app/Contents/Frameworks\nmkdir -p $TARGET_BUILD_DIR/$TARGET_NAME.app/Contents/Frameworks\n#cp -RLf $TARGET_BUILD_DIR/OmniNetworking.framework $TARGET_BUILD_DIR/$TARGET_NAME.app/Contents/Frameworks \n#cp -RLf $TARGET_BUILD_DIR/OmniBase.framework $TARGET_BUILD_DIR/$TARGET_NAME.app/Contents/Frameworks\necho $VERSION_INFO_STRING > $TARGET_BUILD_DIR/$TARGET_NAME.app/Contents/Resources/version.txt";
 		};
 /* End PBXShellScriptBuildPhase section */
 

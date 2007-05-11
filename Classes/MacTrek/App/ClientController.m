@@ -24,7 +24,7 @@ bool ghostStart = NO;
     }
 	return self;
 }
-
+/*
 - (id) initWithUniverse:(Universe*)newUniverse {
 	self = [self init];
 	if (self != nil) {
@@ -33,7 +33,7 @@ bool ghostStart = NO;
     }
 	return self;
 }
-
+*/
 - (Communication *) communication {
 	return communication;
 }

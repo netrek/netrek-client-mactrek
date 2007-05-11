@@ -15,11 +15,11 @@
 
 @interface ClientController : BaseClass {
 	Communication *communication;
+	IBOutlet
 }
 
 - (Communication *) communication;
-//- (void)iDied:(Player *)me;
-- (id)  initWithUniverse:(Universe*)newUniverse;
+//- (id)  initWithUniverse:(Universe*)newUniverse;
 - (void)singleReadFromServer;
 - (bool)startClientAt:(NSString *)server port:(int)port seperate:(bool)multiThread;
 - (bool)sendSlotSettingsToServer;

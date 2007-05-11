@@ -165,7 +165,6 @@
 #define MODE_SIMPLE			  1 
 #define MODE_FAT				  2 
 #define MODE_DOUBLE			  3 
-
 #define UDP_RECENT_INTR		  300 
 #define UDP_UPDATE_WAIT		  5     
 

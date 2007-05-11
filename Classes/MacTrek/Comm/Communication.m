@@ -65,7 +65,6 @@ bool goSleeping;
         ghostSlot = -1;  
         commMode = COMM_TCP;         // COMM_TCP or COMM_UDP
         commStatus = 0;
-        commModeRequest;
         shortVersion = COMM_SHORTVERSION;
         receiveShort = NO;
         fList = [[FeatureList alloc] init]; 
@@ -193,6 +192,8 @@ bool goSleeping;
                                name:@"COMM_SEND_SHORT_REQ" object:nil useLocks:multiThreaded];             // NSNumber char
     [notificationCenter addObserver:self selector:@selector(sendUdpVerify:)
                                name:@"COMM_SEND_VERIFY" object:nil useLocks:multiThreaded];                // --
+	[notificationCenter addObserver:self selector:@selector(forceResetToTCP:)
+                               name:@"COMM_FORCE_RESET_TO_TCP" object:nil useLocks:multiThreaded];                // --
      
     // implementation of serverReader events
     [notificationCenter addObserver:self selector:@selector(closeUdpConn:)
@@ -1253,7 +1254,7 @@ bool goSleeping;
     [udpSender release];
 }
 
-- (void) forceResetToTCP {
+- (void) forceResetToTCP:(id)sender {
     LLLog(@"Communication.forceResetToTCP: UDP: FORCE RESET REQUESTED"); 
     [self sendUdpReq:[NSNumber numberWithChar:COMM_TCP]];
 
