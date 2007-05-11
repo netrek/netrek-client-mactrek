@@ -1,2 +1,2 @@
-svn checkout https://mactrek.svn.sourceforge.net/svnroot/mactrek/trunk/English.lproj/MainMenu.nib tmp
+svn checkout https://lukassen@mactrek.svn.sourceforge.net/svnroot/mactrek/trunk/English.lproj/MainMenu.nib tmp
 cp -R tmp/.svn English.lproj/MainMenu.nib
