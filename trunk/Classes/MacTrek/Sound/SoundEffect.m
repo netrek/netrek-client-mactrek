@@ -4,7 +4,7 @@
 //
 //  Created by Aqua on 03/07/2006.
 //  Copyright 2006 Luky Soft. See Licence.txt for licence details.
-//
+//  
 
 #import "SoundEffect.h"
 
@@ -44,7 +44,9 @@
 	QTMovie *sound;
 	for (int i = 0; i < nrOfInstances; i++) {
 		sound = [QTMovie movieWithFile:pathToSound error:nil];
-		[soundInstances addObject:sound];
+		if (sound != nil) {  // check, if there are too many open files, it will return nil and crash
+			[soundInstances addObject:sound];
+		}
 	}
     
     return YES;

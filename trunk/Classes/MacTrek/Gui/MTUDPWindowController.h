@@ -1,9 +1,11 @@
 /* MTUDPWindowController */
 
 #import <Cocoa/Cocoa.h>
+#import "BaseClass.h"
+#import "PacketTypes.h"
 
-@interface MTUDPWindowController : NSObject
-{
+@interface MTUDPWindowController : BaseClass {
+	
     IBOutlet NSSegmentedControl *channelState;
     IBOutlet NSComboBox *receiveModeBox;
     IBOutlet NSButton *resetButton;
@@ -21,5 +23,6 @@
 - (void)sequenceChecking:(NSSegmentedControl*)sender;
 - (void)sendModeChanged:(NSComboBox*)sender;
 - (void)receiveModeChanged:(NSComboBox*)sender;
+- (void)refresh;
 
 @end
