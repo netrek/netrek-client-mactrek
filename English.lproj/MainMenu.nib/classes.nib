@@ -103,6 +103,23 @@
             }; 
             SUPERCLASS = BaseClass; 
         }, 
+        {
+            ACTIONS = {resetToTcp = id; updateAll = id; }; 
+            CLASS = MTUDPWindowController; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {
+                channelState = NSSegmentedControl; 
+                receiveModeBox = NSComboBox; 
+                resetButton = NSButton; 
+                sendModeBox = NSComboBox; 
+                sequenceChecking = NSSegmentedControl; 
+                statisticsField = NSTextField; 
+                statusField = NSTextField; 
+                udpPanel = NSPanel; 
+                updateAllButton = NSButton; 
+            }; 
+            SUPERCLASS = NSObject; 
+        }, 
         {CLASS = MapView; LANGUAGE = ObjC; SUPERCLASS = RoundedView; }, 
         {
             ACTIONS = {
