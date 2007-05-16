@@ -21,19 +21,12 @@ bool ghostStart = NO;
         [notificationCenter addObserver:self selector:@selector(checkForDeath:) name:@"SP_PSTATUS" 
                                  object:nil useLocks:NO useMainRunLoop:YES];
 		communication = [[Communication alloc] init];
+		
+		[communication awakeFromNib]; // must call since it's not in a nib
     }
 	return self;
 }
-/*
-- (id) initWithUniverse:(Universe*)newUniverse {
-	self = [self init];
-	if (self != nil) {
-		universe = newUniverse;
-        communication = [[Communication alloc] initWithUniverse:universe baseUdpPort:0];
-    }
-	return self;
-}
-*/
+
 - (Communication *) communication {
 	return communication;
 }

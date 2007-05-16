@@ -7,50 +7,50 @@
 //-------------------------------------------
  
 #import "MetaServerEntry.h"
-  
+
 @implementation MetaServerEntry
-        
-    - (id) init {
-        self = [super init];
-        if (self != nil) {
-            statusStrings = [[NSArray alloc] initWithObjects:    
-                @"OPEN:", 
-                @"Wait queue:", 
-                @"Nobody", 
-                @"Timed out", 
-                @"No connection",
-                @"Active", 
-                @"CANNOT CONNECT", 
-                @"DEFAULT SERVER",
-                nil];
-            
-        }
-        return self;
-    }
- 
-    // setters
-    - (void) setAddress:(NSString*) newAddress {
-        [address release];
-        address = newAddress;
-        [address retain];
-    }
-    
-    - (void) setPort:(int)newPort {
-        port = newPort;
-    }    
-    
-    - (void) setTime:(int)newTime {
-        time = newTime;
-    }
-    
-    - (void) setPlayers:(int)newPlayers {
-        players = newPlayers;
-    }
-    
-    - (void) setStatus:(enum ServerStatusType)newStatus {
-        status = newStatus;
-    }
-    
+
+- (id) init {
+	self = [super init];
+	if (self != nil) {
+		statusStrings = [[NSArray alloc] initWithObjects:    
+												  @"OPEN:", 
+											@"Wait queue:", 
+			@"Nobody", 
+			@"* Timed out", 
+			@"No connection",
+			@"Active", 
+			@"CANNOT CONNECT", 
+			@"DEFAULT SERVER",
+			nil];
+		
+	}
+	return self;
+}
+
+// setters
+- (void) setAddress:(NSString*) newAddress {
+	[address release];
+	address = newAddress;
+	[address retain];
+}
+
+- (void) setPort:(int)newPort {
+	port = newPort;
+}    
+
+- (void) setTime:(int)newTime {
+	time = newTime;
+}
+
+- (void) setPlayers:(int)newPlayers {
+	players = newPlayers;
+}
+
+- (void) setStatus:(enum ServerStatusType)newStatus {
+	status = newStatus;
+}
+
 - (enum ServerGameType) setGameTypeWithString:(NSString *) line {
     
     if ([line isEqualToString:@"P"]) {
@@ -66,47 +66,49 @@
     return [self gameType];
 }
 
-    - (enum ServerStatusType) setStatusWithString:(NSString *) line {
-        for (int i = 0; i < [statusStrings count]; ++i) {
-            if ([line  compare:[statusStrings objectAtIndex:i]] != -1) {
-                [self setStatus: i];
-                return [self status];
-            }
-        }
-        return ERROR;
-    }
+- (enum ServerStatusType) setStatusWithString:(NSString *) line {
+	
+	for (int i = 0; i < [statusStrings count]; ++i) {
+		if ([line  compare:[statusStrings objectAtIndex:i]] != -1) {
+			[self setStatus: i];
+			return [self status];
+		}
+	}
+	LLLog(@"MetaServerEntry.setStatusWithString extracting status from [%@] failed", line);
+	return ERROR;
+}
 
-    - (void) setGameType:(enum ServerGameType)newType {
-        type = newType;
-    }
-    
-    - (void) setHasRSA:(bool)newRsa {
-        rsa = newRsa;
-    }
-    
-    // getters
-    - (NSString*) address {
-        return address;
-    }
-    
-    - (int) port {
-        return port;
-    }
-    
-    - (int) time {
-        return time;
-    }
-    
-    - (int) players {
-        return players;
-    }
-    
-    - (enum ServerStatusType) status {
-        return status;
-    }
-    
+- (void) setGameType:(enum ServerGameType)newType {
+	type = newType;
+}
+
+- (void) setHasRSA:(bool)newRsa {
+	rsa = newRsa;
+}
+
+// getters
+- (NSString*) address {
+	return address;
+}
+
+- (int) port {
+	return port;
+}
+
+- (int) time {
+	return time;
+}
+
+- (int) players {
+	return players;
+}
+
+- (enum ServerStatusType) status {
+	return status;
+}
+
 - (NSString*) statusString {
- 
+	
     switch (status) {
         case OPEN:
             return @"Open";
@@ -142,29 +144,29 @@
 }
 
 - (NSString*) gameTypeString {
-
+	
     switch (type) {
-    case BRONCO:
-        return @"Bronco";
-        break;
-    case PARADISE:
-        return @"Paradise";
-        break;
-    case HOCKEY:
-        return @"Hockey";
-        break;        
-    default:
-        return @"Unknown";
-        break;
+		case BRONCO:
+			return @"Bronco";
+			break;
+		case PARADISE:
+			return @"Paradise";
+			break;
+		case HOCKEY:
+			return @"Hockey";
+			break;        
+		default:
+			return @"Unknown";
+			break;
     }
 }
 
-    - (enum ServerGameType) gameType {
-        return type;
-    }
-    
-    - (bool) hasRSA {
-        return rsa;
-    }
- 
+- (enum ServerGameType) gameType {
+	return type;
+}
+
+- (bool) hasRSA {
+	return rsa;
+}
+
 @end

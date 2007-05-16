@@ -43,10 +43,12 @@
     UdpStats *udpStats;
 	bool multiThreaded;
 	RSAWrapper *rsaCoder;
+	int udpReceiveMode;
+	int udpSendMode;
+	bool udpSequenceChecking;
 }
 
 // init
-- (id)initWithUniverse:(Universe*)newUniverse baseUdpPort:(int)basePort;
 // privates
 - (void)subscribeToNotifications;
 - (void) run;

@@ -20,9 +20,11 @@
 @interface ServerReaderUdp : ServerReader {
     UdpStats *udpStats;
 	LLUDPSocket *udpSocket;
+	bool sequenceCheck;
 }
 
 - (id)initWithUniverse:(Universe*)newUniverse communication:(Communication*)comm socket:(LLUDPSocket *)socket udpStats:(UdpStats*)stats;
 - (UdpStats*)udpStats;
+- (void) setSequenceCheck:(bool)newValue;
 
 @end
