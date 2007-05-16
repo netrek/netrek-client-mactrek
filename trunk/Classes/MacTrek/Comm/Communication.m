@@ -77,22 +77,41 @@ bool goSleeping;
 		isSleeping = NO;
         keepRunning = YES;
 		goSleeping = NO;
+		//  $$$ Communication does not do anything with them yet!
+		udpReceiveMode = MODE_TCP;
+		udpSendMode = MODE_TCP;
+		udpSequenceChecking = YES;
 		
 		// multithreaded?
 		multiThreaded = NO;
-   }
+	}
     return self;
 }
 
-- (id)initWithUniverse:(Universe*)newUniverse baseUdpPort:(int)basePort {
-    self = [self init];
-    if (self != nil) {
-        [universe release];
-        universe = newUniverse;
-        [universe retain];
-        baseLocalUdpPort = basePort;
-    }
-    return self;
+- (void)awakeFromNib {
+	// post initial state
+	[notificationCenter postNotificationName:@"COMM_MODE_CHANGED" userInfo:[NSNumber numberWithInt:commMode]];
+	[notificationCenter postNotificationName:@"COMM_STATE_CHANGED" userInfo:[NSNumber numberWithInt:commStatus]];
+	
+	// listen to changes in settings
+	[notificationCenter addObserver:self selector:@selector(setUdpSequenceCheck:) name:@"UC_UDP_SEQUENCE_CHECK"];
+	[notificationCenter addObserver:self selector:@selector(setUdpSendMode:) name:@"UC_UDP_SEND_MODE"];
+	[notificationCenter addObserver:self selector:@selector(setUdpReceiveMode:) name:@"UC_UDP_RECEIVE_MODE"];
+}
+
+- (void) setUdpSequenceCheck:(NSNumber*) newValue {
+	udpSequenceChecking = [newValue boolValue];
+	if (udpReader) {
+		[udpReader setSequenceCheck:udpSequenceChecking];
+	}
+}
+
+- (void) setUdpSendMode:(NSNumber*) newValue {
+	udpSendMode = [newValue intValue];
+}
+
+- (void) setUdpReceiveMode:(NSNumber*) newValue {
+	udpReceiveMode = [newValue intValue];
 }
 
 - (void) setMultiThreaded:(bool) multi {
@@ -103,9 +122,9 @@ bool goSleeping;
     
     // tie [self selector] to a common event so it can be remotely invoked
     // this is thread safe because of the locks
-    // i will respond to anyone (nil)                                                           // expect parameter
+    // i will respond to anyone (nil)																	   // expected parameter
     [notificationCenter addObserver:self selector:@selector(readFromServer:) 
-                               name:@"COMM_READ_FROM_SERVER" object:nil useLocks:multiThreaded];                   // --
+                               name:@"COMM_READ_FROM_SERVER" object:nil useLocks:multiThreaded];           // --
     [notificationCenter addObserver:self selector:@selector(cleanUp:) 
                                name:@"COMM_CLEAN_UP" object:nil useLocks:multiThreaded];                   // --
     [notificationCenter addObserver:self selector:@selector(readFromServer:) 
@@ -193,11 +212,11 @@ bool goSleeping;
     [notificationCenter addObserver:self selector:@selector(sendUdpVerify:)
                                name:@"COMM_SEND_VERIFY" object:nil useLocks:multiThreaded];                // --
 	[notificationCenter addObserver:self selector:@selector(forceResetToTCP:)
-                               name:@"COMM_FORCE_RESET_TO_TCP" object:nil useLocks:multiThreaded];                // --
+                               name:@"COMM_FORCE_RESET_TO_TCP" object:nil useLocks:multiThreaded];         // --
      
     // implementation of serverReader events
     [notificationCenter addObserver:self selector:@selector(closeUdpConn:)
-                               name:@"SP_SWITCHED_DENIED" object:nil useLocks:multiThreaded];     // close connection if switch denied
+                               name:@"SP_SWITCHED_DENIED" object:nil useLocks:multiThreaded];			   // close connection if switch denied
 	[notificationCenter addObserver:self selector:@selector(closeUdpConn:)
                                name:@"SP_UDP_SWITCHED_TO_TCP" object:nil useLocks:multiThreaded];          // close the connection 
 	[notificationCenter addObserver:self selector:@selector(sendUdpVerify:)
@@ -211,7 +230,7 @@ bool goSleeping;
 	[notificationCenter addObserver:self selector:@selector(sendShortReq:)
                                name:@"SP_S_REPLY_SPK_VON" object:nil useLocks:multiThreaded];              // switch ot short pkt  
 	[notificationCenter addObserver:self selector:@selector(sendReservedReply:)
-                               name:@"SP_RESERVED" object:nil useLocks:multiThreaded];				// server requested reserved
+                               name:@"SP_RESERVED" object:nil useLocks:multiThreaded];					   // server requested reserved
 	
 	[notificationCenter addObserver:self selector:@selector(sendRSAResponse:) 
 								   name:@"SP_RSA_KEY" object:nil useLocks:multiThreaded];
@@ -258,7 +277,9 @@ bool goSleeping;
 
 -(void)setCommMode:(int)mode {
     commMode = mode;
+	[notificationCenter postNotificationName:@"COMM_MODE_CHANGED" userInfo:[NSNumber numberWithInt:commMode]];
 }
+
 -(int)commModeRequest {
     return commModeRequest;
 }
@@ -277,6 +298,8 @@ bool goSleeping;
 
 -(void)setCommStatus:(int)status {
     commStatus = status;
+	[notificationCenter postNotificationName:@"COMM_STATE_CHANGED" userInfo:[NSNumber numberWithInt:commStatus]];
+
 }
 
 -(int)shortVersion {
@@ -344,7 +367,7 @@ bool goSleeping;
 	[self sendShortPacketNoForceWithId:type state:state];
     
 	// if we're sending in UDP mode, be prepared to forceStat it
-	if (commMode == COMM_UDP && forceState) {
+	if (commMode == COMM_UDP && (forceState || udpSendMode == MODE_FAT || udpSendMode == MODE_DOUBLE)) {
 		switch (type) {
             case CP_SPEED:
                 fSpeed = state | 0x100;
@@ -379,18 +402,24 @@ bool goSleeping;
                 else
                     fBeamdown = 2 | 0x500;
                 break;
-            case CP_PHASER:
-                fPhaser = state | 0x100;
-                break;
-            case CP_PLASMA:
-                fPlasma = state | 0x100;
-                break;
+		}
+		
+		if (udpSendMode == MODE_DOUBLE) {			
+		    switch (type) {
+				case CP_PHASER:
+					fPhaser = state | 0x100;
+					break;
+				case CP_PLASMA:
+					fPlasma = state | 0x100;
+					break;
+			}
 		}
 	}
 }
 
 - (void) sendServerPacketWithBuffer:(char*)buffer length:(int) size {
-	if(commMode == COMM_UDP) {
+	
+	if(commMode == COMM_UDP  && udpSendMode != MODE_TCP) {
 		// UDP stuff
 		switch (buffer[0]) {
 			case CP_SPEED:
@@ -419,10 +448,9 @@ bool goSleeping;
 				// non-critical stuff, use UDP
 				[udpStats increasePacketsSendBy:1];
 				if ((udpSender == nil) || (![udpSender sendBuffer:buffer length:size])) {
-				    [notificationCenter postNotificationName:@"COMM_UDP_LINK_SEVERED" object:self 
-                                                    userInfo:@"UDP link severed"];
 				    commModeRequest = commMode;
 				    commStatus = STAT_CONNECTED;
+					[notificationCenter postNotificationName:@"COMM_STATE_CHANGED" userInfo:[NSNumber numberWithInt:commStatus]];
 				    [self sendUdpReq:COMM_TCP]; // should switch to TCP? $$$ not in orig code
 				    [self closeUdpConn];
 				}
@@ -562,6 +590,12 @@ bool goSleeping;
     //[notificationCenter removeObserver:self name:nil];
 }
 
+// convieniance function
+-(void)readFromServer:(id)sender {
+    [self readFromServer];
+}
+
+
 -(bool)readFromServer {
 	
 	bool readOk = YES;
@@ -572,26 +606,31 @@ bool goSleeping;
     //LLLog(@"Communication.readFromServer entered");
     
     // read from UDP connection
-    if(udpReader != nil && commStatus != STAT_SWITCH_TCP) {
+    if(udpReader != nil && commStatus != STAT_SWITCH_TCP && (udpReceiveMode != MODE_TCP)) {
         @try {
             [udpReader readFromServer];
         }
         @catch(NSException *e) {
-            [notificationCenter postNotificationName:@"COMM_UDP_LINK_SEVERED" object:self 
-                                            userInfo:@"UDP link severed"];
             [self sendUdpReq:COMM_TCP];
             [self closeUdpConn];
 		    readOk = NO;
+			commMode = COMM_TCP;
+			[notificationCenter postNotificationName:@"COMM_MODE_CHANGED" userInfo:[NSNumber numberWithInt:commMode]];
         }
         
         if (commStatus == STAT_VERIFY_UDP) {
-            [notificationCenter postNotificationName:@"COMM_UDP_LINK_ESTABLISHED" object:self 
-                                            userInfo:@"UDP link established"];
             [udpStats setSequence:0];// reset sequence #s
-                [self resetForce];
-                
-                commMode = COMM_UDP;
-                commStatus = STAT_CONNECTED;
+			[self resetForce];
+			
+			commMode = COMM_UDP;
+			commStatus = STAT_CONNECTED;
+			[notificationCenter postNotificationName:@"COMM_MODE_CHANGED" userInfo:[NSNumber numberWithInt:commMode]];	
+			[notificationCenter postNotificationName:@"COMM_STATE_CHANGED" userInfo:[NSNumber numberWithInt:commStatus]];
+			
+			if (udpReceiveMode != MODE_SIMPLE) {
+				[self sendUdpReq:[NSNumber numberWithChar:(COMM_MODE + (udpReceiveMode & 0xFF))]];
+			}
+
         }
         
         [self checkForce];
@@ -612,6 +651,7 @@ bool goSleeping;
             [self closeUdpConn];
         }
         commMode = commModeRequest = COMM_TCP;
+		[notificationCenter postNotificationName:@"COMM_MODE_CHANGED" userInfo:[NSNumber numberWithInt:commMode]];
         
 		/* MacTrek 1.1.0 resurection rarely works and usually locks down the 
 			entire program because this thread does a blocking read 
@@ -638,11 +678,6 @@ bool goSleeping;
     //stop = [NSDate timeIntervalSinceReferenceDate];  
     //LLLog(@"Communication.readFromServer(spent): %f sec", (stop-start));
 	return readOk;
-}
-
-// convieniance function
--(void)readFromServer:(id)sender {
-    [self readFromServer];
 }
 
 - (void) sendSpeedReq:(NSNumber*) speed {
@@ -861,7 +896,7 @@ bool goSleeping;
 	buffer[0] = CP_PING_RESPONSE;
 	buffer[1] = [number charValue];
 	buffer[2] = (char)(ping ? 1 : 0);
-	[self bigEndianInteger:[udpStats packetsSent] + (commMode == COMM_UDP ? 1 : 0) inBuffer:buffer withOffset:4];
+	[self bigEndianInteger:[udpStats packetsSent] + ((commMode == COMM_UDP && udpSendMode) ? 1 : 0) inBuffer:buffer withOffset:4];
     [self bigEndianInteger:[udpStats packetsReceived] inBuffer:buffer withOffset:8];
     [self sendServerPacketWithBuffer:buffer length:12];
 }
@@ -1024,15 +1059,14 @@ bool goSleeping;
         // open UDP port
         if([self openUdpConn]) {
             LLLog([NSString stringWithFormat:@"Communication.sendUdpReq: bind to local port %d success", localUdpPort]);
-            [notificationCenter postNotificationName:@"COMM_UDP_REQ_SUCCESS" object:self 
-                                            userInfo:@"UDP connection established"];
+			[notificationCenter postNotificationName:@"COMM_STATE_CHANGED" userInfo:[NSNumber numberWithInt:commStatus]];
         }
         else {
             LLLog([NSString stringWithFormat:@"Communication.sendUdpReq: bind to local port %d failed", localUdpPort]);
             commModeRequest = COMM_TCP;
             commStatus = STAT_CONNECTED;
-            [notificationCenter postNotificationName:@"COMM_UDP_REQ_FAILED" object:self 
-                                            userInfo:@"Unable to establish UDP connection"];
+			[notificationCenter postNotificationName:@"COMM_STATE_CHANGED" userInfo:[NSNumber numberWithInt:commStatus]];
+
             return;
         }
     }
@@ -1052,12 +1086,10 @@ bool goSleeping;
     else {
         commStatus = STAT_SWITCH_UDP;
     }
-    
+    [notificationCenter postNotificationName:@"COMM_STATE_CHANGED" userInfo:[NSNumber numberWithInt:commStatus]];
+
     NSString *message = [NSString stringWithFormat:@"UDP: Sent request for %@ mode", (req == COMM_TCP ? @"TCP" : @"UDP")];
     LLLog([NSString stringWithFormat:@"Communication.sendUdpReq: %@", message]);
-    
-    [notificationCenter postNotificationName:@"COMM_UDP_REQ_FOR_MODE" object:self 
-                                    userInfo:message];
 }
 
 - (void) sendUdpVerify:(id)sender {
@@ -1073,7 +1105,8 @@ bool goSleeping;
         // update vars
         commModeRequest = commMode;
         commStatus = STAT_CONNECTED;
-        
+        [notificationCenter postNotificationName:@"COMM_STATE_CHANGED" userInfo:[NSNumber numberWithInt:commStatus]];
+
         // loop back 
         [self sendUdpReq:COMM_TCP];
         [self closeUdpConn];
@@ -1225,6 +1258,8 @@ bool goSleeping;
             [udpReader release];
             udpReader = [[ServerReaderUdp alloc] initWithUniverse:universe communication:self socket:udpSocket udpStats:udpStats];
 			[udpReader setTimeOut:COMM_NETWORK_TIMEOUT]; 
+			[udpReader setSequenceCheck:udpSequenceChecking];
+			
             [udpSender release];
             udpSender = [[ServerSenderTcp alloc] initWithSocket:udpSocket];
             
@@ -1259,7 +1294,13 @@ bool goSleeping;
     [self sendUdpReq:[NSNumber numberWithChar:COMM_TCP]];
 
     commMode = commModeRequest = COMM_TCP;
+	[notificationCenter postNotificationName:@"COMM_MODE_CHANGED" userInfo:[NSNumber numberWithInt:commMode]];
     commStatus = STAT_CONNECTED;
+	[notificationCenter postNotificationName:@"COMM_STATE_CHANGED" userInfo:[NSNumber numberWithInt:commStatus]];
+	udpReceiveMode = MODE_TCP;
+	udpSendMode = MODE_TCP;
+	[self setUdpSequenceCheck:[NSNumber numberWithBool:YES]];
+
     [self closeUdpConn];
 }
 
@@ -1316,7 +1357,17 @@ bool goSleeping;
 					LLLog(@"Communication.run ERROR detected going to sleep");
 					// error occured, better stop
 					 goSleeping = YES;
-				}  
+				} else {
+					// read ok, if not TCP then UDP stats have changed
+					if (commMode != COMM_TCP) {
+						static int i = 0;
+						if (i < 10) { // reduce load, do not report all changes
+							i++;
+						} else {
+							[notificationCenter postNotificationName:@"COMM_UDP_STATS_CHANGED" userInfo:udpStats];
+						}
+					}
+				}
 			}
             //stop = [NSDate timeIntervalSinceReferenceDate];  
             //LLLog(@"Communication.run(blocking): %f sec", (stop-start));            

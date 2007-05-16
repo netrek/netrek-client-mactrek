@@ -16,6 +16,7 @@
     if (self != nil) {
         udpSocket = nil; // very bad if it stays that way
         udpStats = nil;
+		sequenceCheck = YES;
     }
     return self;
 }
@@ -26,8 +27,13 @@
         udpStats = stats;
         udpSocket = socket;
 		[udpSocket setReadBufferSize:SRV_UDP_MAX_DATA_LENGTH];
+		sequenceCheck = YES; // twice since i am not sure init is called
     }
     return self;
+}
+
+- (void) setSequenceCheck:(bool)newValue {
+	sequenceCheck = newValue;
 }
 
 - (void) close {
@@ -111,6 +117,13 @@
         // adjust new_sequence and do compare
         new_sequence |= ([udpStats sequence] & 0xFFFF0000);
         
+		if (sequenceCheck == NO) {
+			// put this here so that turning seq check on and off doesn't
+			// make us think we lost a whole bunch of packets.
+			[udpStats setSequence:new_sequence];
+			return;			
+		}
+		
         if (new_sequence > [udpStats sequence]) {
             // accept
             if (new_sequence != [udpStats sequence] + 1) {

@@ -62,7 +62,7 @@
             [[line substringWithRange:NSMakeRange(0,3)] isEqualToString:@"-h "] && 
             [[line substringWithRange:NSMakeRange(40, 3)] isEqualToString:@"-p "]) {
             
-			entry = [[MetaServerEntry alloc] init];
+			entry = [[[MetaServerEntry alloc] init] autorelease];
 			[entry setAddress: [line substringWithRange:NSMakeRange(3, 36)]];
             
             // !! strip off trailing spaces
@@ -79,6 +79,7 @@
 
             if ([entry status] == CANNOT_CONNECT) {
                 // break the while loop
+				line = nil;
                 continue;
             }
 
@@ -87,8 +88,7 @@
 			if ([entry status] == OPEN || [entry status] == WAIT) {
 				// TODO: Handle FormatErrors here too
                 [entry setPlayers:[[line substringWithRange:NSMakeRange(59, 3)] intValue]];
-			}
-        
+			}        
 
 			// read the flags
             [entry setHasRSA: NO];
