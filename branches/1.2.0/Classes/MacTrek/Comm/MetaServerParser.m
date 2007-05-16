@@ -69,6 +69,7 @@
 
             if ([entry status] == CANNOT_CONNECT) {
                 // break the while loop
+		line = nil;
                 continue;
             }
 
