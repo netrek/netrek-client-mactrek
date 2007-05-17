@@ -404,7 +404,7 @@ int shortFromPacket(char *buffer, int offset) {
 // too big to be in switch
 -(void) handleUdpReply:(char*) buffer {
     
-    LLLog([NSString stringWithFormat:@"ServerReader.handleUdpReply: UDP: Received UDP reply %c", (buffer[1])]);
+    LLLog([NSString stringWithFormat:@"ServerReader.handleUdpReply: UDP: Received UDP reply %d", (buffer[1])]);
     
     switch (buffer[1] & 0xFF) {
         case SWITCH_TCP_OK:
@@ -429,15 +429,16 @@ int shortFromPacket(char *buffer, int offset) {
                     LLLog(@"ServerReader.handleUdpReply: Got unsolicited SWITCH_UDP_OK; ignoring");
                 }
                 else {
-                    LLLog(@"ServerReader.handleUdpReply: Connected to server's UDP port");
+                    
                     [communication setCommMode: COMM_UDP];
                     [communication setCommStatus: STAT_VERIFY_UDP];    
                     int port = intFromPacket(buffer, 4);
-                    /* the following should be done by the comm class upon receiving the event 
-                        comm.connUdpConn(); comm.sendUdpVerify(); */
-					[communication connectToServerUsingPort:port]; // should be event trigger but this is soo much
-																   // easier
-                    [notificationCenter postNotificationName:@"SP_TCP_SWITCHED_TO_UDP" 
+					[communication connectToServerUdpAtPort:port];
+					LLLog(@"ServerReader.handleUdpReply: Connected to server's UDP port %d", port);
+
+					//[communication sendUdpVerify:self];  use a notification for taht
+                    
+					[notificationCenter postNotificationName:@"SP_TCP_SWITCHED_TO_UDP" 
                                                       object:self 
                                                     userInfo:[NSNumber numberWithInt:port]];
                 }

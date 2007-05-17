@@ -78,12 +78,17 @@ bool goSleeping;
         keepRunning = YES;
 		goSleeping = NO;
 		//  $$$ Communication does not do anything with them yet!
-		udpReceiveMode = MODE_TCP;
-		udpSendMode = MODE_TCP;
+		udpReceiveMode = MODE_SIMPLE;
+		udpSendMode = MODE_SIMPLE;
 		udpSequenceChecking = YES;
 		
 		// multithreaded?
 		multiThreaded = NO;
+				
+		// listen to changes in settings
+		[notificationCenter addObserver:self selector:@selector(setUdpSequenceCheck:) name:@"UC_UDP_SEQUENCE_CHECK"];
+		[notificationCenter addObserver:self selector:@selector(setUdpSendMode:) name:@"UC_UDP_SEND_MODE"];
+		[notificationCenter addObserver:self selector:@selector(setUdpReceiveMode:) name:@"UC_UDP_RECEIVE_MODE"];
 	}
     return self;
 }
@@ -92,11 +97,6 @@ bool goSleeping;
 	// post initial state
 	[notificationCenter postNotificationName:@"COMM_MODE_CHANGED" userInfo:[NSNumber numberWithInt:commMode]];
 	[notificationCenter postNotificationName:@"COMM_STATE_CHANGED" userInfo:[NSNumber numberWithInt:commStatus]];
-	
-	// listen to changes in settings
-	[notificationCenter addObserver:self selector:@selector(setUdpSequenceCheck:) name:@"UC_UDP_SEQUENCE_CHECK"];
-	[notificationCenter addObserver:self selector:@selector(setUdpSendMode:) name:@"UC_UDP_SEND_MODE"];
-	[notificationCenter addObserver:self selector:@selector(setUdpReceiveMode:) name:@"UC_UDP_RECEIVE_MODE"];
 }
 
 - (void) setUdpSequenceCheck:(NSNumber*) newValue {
@@ -608,9 +608,11 @@ bool goSleeping;
     // read from UDP connection
     if(udpReader != nil && commStatus != STAT_SWITCH_TCP && (udpReceiveMode != MODE_TCP)) {
         @try {
+			//LLLog(@"Communication.readFromServer reading UDP");
             [udpReader readFromServer];
         }
         @catch(NSException *e) {
+			LLLog(@"Communication.readFromServer ERROR reading UDP: %@", [e reason]);
             [self sendUdpReq:COMM_TCP];
             [self closeUdpConn];
 		    readOk = NO;
@@ -624,6 +626,7 @@ bool goSleeping;
 			
 			commMode = COMM_UDP;
 			commStatus = STAT_CONNECTED;
+			LLLog(@"Communication.readFromServer connected to server on UDP and verified both ways");
 			[notificationCenter postNotificationName:@"COMM_MODE_CHANGED" userInfo:[NSNumber numberWithInt:commMode]];	
 			[notificationCenter postNotificationName:@"COMM_STATE_CHANGED" userInfo:[NSNumber numberWithInt:commStatus]];
 			
@@ -658,8 +661,16 @@ bool goSleeping;
 			why actually? */
 		// ------ GHOSTBUST RESURECT ------ 
 		
+		LLLog(@"Communication.readFromServer attemting resurrection");
 		
-        if([self connectToServerUsingNextPort]) {
+		int port = [tcpSender serverPort]; // get the port from the socket
+		LLHost *server = [tcpSender serverHost];
+		
+		// this next port stuff does not seem to work $$$
+        //if([self connectToServerUsingNextPort]) {
+		// try something new
+		if ([self callServer:[server address] port:port]) {
+			
             [notificationCenter postNotificationName:@"COMM_RESURRECTED" object:self 
                                             userInfo:@"Yea!  We've been resurrected!"];
 			LLLog(@"Communication.readFromServer Yea!  We've been resurrected!");
@@ -1238,7 +1249,7 @@ bool goSleeping;
         LLLog([NSString stringWithFormat:@"Communication.openUdp: UDP: using base port %d", baseLocalUdpPort]);
     }
     else {
-        localUdpPort = (int)(random() * 32767);
+        localUdpPort = (int)(random() & 32767);
     }
     
     for(int attempts = 0; attempts < MAX_PORT_RETRY; ++attempts) {
@@ -1254,14 +1265,12 @@ bool goSleeping;
             
 			LLLog([NSString stringWithFormat:@"Communication.openUdp: UDP: port is %d", localUdpPort]);
             
-            // setup the reader and writer
+            // setup the reader 
             [udpReader release];
             udpReader = [[ServerReaderUdp alloc] initWithUniverse:universe communication:self socket:udpSocket udpStats:udpStats];
 			[udpReader setTimeOut:COMM_NETWORK_TIMEOUT]; 
 			[udpReader setSequenceCheck:udpSequenceChecking];
-			
-            [udpSender release];
-            udpSender = [[ServerSenderTcp alloc] initWithSocket:udpSocket];
+
             
             return true;
         }
@@ -1281,12 +1290,32 @@ bool goSleeping;
     return false;
 }
 
+- (void) connectToServerUdpAtPort:(int) port {
+	// setup the udp writer
+	 LLUDPSocket *udpSocket = [[LLUDPSocket alloc] init];
+	
+	// try to connect to the servers udp port
+	LLHost *server = [tcpSender serverHost]; // first get the server name
+	[udpSocket connectToHost:server port:port]; // set it up in the socket
+	
+	LLLog(@"Communication.connectToServerUdpAtPort: %@:%d", [server hostname], port);
+	
+	[udpSender release];
+	udpSender = [[ServerSenderUdp alloc] initWithSocket:udpSocket];
+}
+
 - (void) closeUdpConn {
     LLLog(@"Communication.closeUdpConn: UDP: Closing UDP socket");
-    [udpReader close];
-    [udpReader release];
-    [udpSender close];
-    [udpSender release];
+	if (udpReader) {
+		[udpReader close];
+		[udpReader release];
+		udpReader = nil;
+	}
+	if (udpSender) {
+		[udpSender close];
+		[udpSender release];
+		udpSender = nil;
+	}
 }
 
 - (void) forceResetToTCP:(id)sender {

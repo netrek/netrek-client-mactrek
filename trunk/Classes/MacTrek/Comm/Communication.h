@@ -144,6 +144,7 @@
 - (bool) connectToServerUsingPort:(int) port;
 - (bool) connectToServerUsingPort:(int) port expectedHost:(NSString *) host; 
 - (bool) connectToServerUsingNextPort;
+- (void) connectToServerUdpAtPort:(int) port;
 - (int)  sendSocketVersionAndNumberReq:(int)port;
  // private routine, use sendUdpReq instead
 - (bool) openUdpConn;
