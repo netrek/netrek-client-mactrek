@@ -34,6 +34,10 @@
 	[sendModeBox setAction:@selector(sendModeChanged:)];
 	[receiveModeBox setTarget:self];
 	[receiveModeBox setAction:@selector(receiveModeChanged:)];
+	
+	// set defaults
+	[sendModeBox selectItemAtIndex:MODE_SIMPLE];
+	[receiveModeBox selectItemAtIndex:MODE_SIMPLE];
 }
 
 - (void)refreshUdpStats:(UdpStats*)newStats {
@@ -54,20 +58,24 @@
 
 - (void)commModeChanged:(NSNumber*)newMode {
 	
-		switch([newMode intValue]) {
-			case COMM_TCP:
-				[statusField setStringValue:@"UDP Channel is CLOSED"];
-				break;
-			case COMM_UDP:
-				[statusField setStringValue:@"UDP Channel is OPEN"];
-				break;
-			default:
-				LLLog(@"MTUDPWindowController.commModeChanged illigal mode %d", [newMode intValue]);
-				break;
-		}
+	LLLog(@"MTUDPWindowController.commModeChanged %d", [newMode intValue]);
+	
+	switch([newMode intValue]) {
+		case COMM_TCP:
+			[statusField setStringValue:@"UDP Channel is CLOSED"];
+			break;
+		case COMM_UDP:
+			[statusField setStringValue:@"UDP Channel is OPEN"];
+			break;
+		default:
+			LLLog(@"MTUDPWindowController.commModeChanged illigal mode %d", [newMode intValue]);
+			break;
+	}
 }
 
 - (void)commStateChanged:(NSNumber*)newState {
+	
+	LLLog(@"MTUDPWindowController.commStateChanged %d", [newState intValue]);
 	
 	switch([newState intValue]) {
 		case STAT_CONNECTED:

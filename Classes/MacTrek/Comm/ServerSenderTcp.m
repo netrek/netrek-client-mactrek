@@ -33,8 +33,7 @@
             [socket writeData:packet];
         } else {
             LLLog(@"ServerSenderTcp.sendBuffer cannot send message, socket was closed");
-        }
-        
+        }        
     }
     @catch (NSException * e) {
         LLLog(@"ServerSenderTcp.sendBuffer cannot send message, should close!");

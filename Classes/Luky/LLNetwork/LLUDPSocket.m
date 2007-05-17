@@ -43,6 +43,8 @@
 	
 	// for UDP we do not actually listen, just bind to the port	
     listening = YES;
+	// must set connected too otherwise some otherwise waitForReadableWithTimeout won't work
+	connected = YES; 
 	[remoteHostName release];
 	remoteHostName = nil; // reset remote host
 }
@@ -54,7 +56,7 @@
 	
 	// we do not actually connect in UDP but setup the remote address
 	[remoteHostName release];
-	remoteHostName = [host hostname];
+	remoteHostName = [host address]; // need dotted notation
 	remotePort = port;	
 }
 
@@ -162,6 +164,11 @@
     if ( socketfd == SOCKET_INVALID_DESCRIPTOR )
         [NSException raise:SOCKET_EX_BAD_SOCKET_DESCRIPTOR 
 					format:SOCKET_EX_BAD_SOCKET_DESCRIPTOR];
+	
+	if (remoteHostName == nil) {
+		LLLog(@"LLUDPSocket.writeData ERROR no remote host set");
+		return; 
+	}
 	
 	// translate the remote hostname to byte order
 	struct in_addr address;

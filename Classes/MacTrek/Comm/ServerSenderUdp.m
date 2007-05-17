@@ -26,8 +26,21 @@
           [pktConv clientPacketString:buffer[0]], buffer[0], size);
     
     NSData *packet = [[NSData alloc] initWithBytes:buffer length:size];
+	
     // $$ should test for some error in the writing?
-    [socket writeData:packet];
+	@try {
+        if (socket != nil) {
+            [socket writeData:packet];
+        } else {
+            LLLog(@"ServerSenderUdp.sendBuffer cannot send message, socket was closed");
+        } 
+	}
+	@catch (NSException * e) {
+		LLLog(@"ServerSenderUdp.sendBuffer ERROR %@", [e reason]);
+		[packet release];
+		return NO;
+	}
+    
     [packet release];
     return YES;
 }

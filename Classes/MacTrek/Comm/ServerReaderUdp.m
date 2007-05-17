@@ -60,15 +60,16 @@
 	// wait with timeout if needed
     if (timeOut > 0.0) {
 		if ([udpSocket waitForReadableWithTimeout:timeOut] == NO) {
-			// trouble!
-			LLLog(@"ServerReaderUdp.doRead TIMEOUT! more than %f sec passed", timeOut);
+			// there might simply be no data
+			//LLLog(@"ServerReaderUdp.doRead TIMEOUT! more than %f sec passed", timeOut);
 			return nil;
 		}
 	}	
+		
 	// actual read
     @try {        
         int length = [udpSocket readData:data];
-        [data setLength: length];    
+        [data setLength: length]; 
     }
     @catch (NSException * e) {
         LLLog(@"ServerReaderUdp.doRead: Timed out waiting for UDP response from server");
