@@ -22,8 +22,8 @@
 
 - (bool) sendBuffer:(char*) buffer length:(int)size {
     
-    LLLog(@"ServerSenderTcp.sendBuffer message: %@ (%d) size: %d", 
-          [pktConv clientPacketString:buffer[0]], buffer[0], size);
+	// clutters too much
+    //LLLog(@"ServerSenderTcp.sendBuffer message: %@ (%d) size: %d", [pktConv clientPacketString:buffer[0]], buffer[0], size);
     [pktConv printPacketInBuffer:buffer size:size];
 	
     NSData *packet = [[NSData alloc] initWithBytes:buffer length:size];

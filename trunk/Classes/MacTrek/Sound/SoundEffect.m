@@ -98,8 +98,19 @@
 	QTMovie *sound = [self sound];	
 	if (sound != nil) {
 		[sound play];
+	}    
+}
+
+-(void) stop { // stops all instances
+	QTMovie *sound;
+	for (int i = 0; i < [soundInstances count]; i++) {
+		
+		sound = [soundInstances objectAtIndex:i];
+		if (sound != nil) {
+			[sound stop];
+			[sound gotoBeginning];
+		}
 	}
-    
 }
 
 -(void) playWithVolume:(float)vol {

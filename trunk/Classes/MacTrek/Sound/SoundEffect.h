@@ -33,6 +33,7 @@
 -(void) playWithVolume:(float)vol;
 -(void) playWithVolume:(float)vol balance:(float)bal;
 -(void) play;
+-(void) stop;
 
 
 @end

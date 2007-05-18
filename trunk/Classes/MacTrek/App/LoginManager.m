@@ -26,7 +26,11 @@ bool serverReplyReceived = NO;
         [notificationCenter addObserver:self selector:@selector(serverReportsLoginAccepted:) 
                                    name:@"SP_LOGIN_ACCEPTED" object:nil];
         [notificationCenter addObserver:self selector:@selector(serverReportsLoginDenied:) 
-                                   name:@"SP_LOGIN_NOT_ACCEPTED" object:nil];             
+                                   name:@"SP_LOGIN_NOT_ACCEPTED" object:nil];      
+		
+		// auto login
+		[notificationCenter addObserver:self selector:@selector(autoLogin:) 
+                                   name:@"GM_SEND_LOGIN_REQ" object:nil]; 
     }
     return self;
 }
@@ -123,6 +127,15 @@ bool serverReplyReceived = NO;
                                         NSUserName(), @"login", 
                                         [NSNumber numberWithInt:(checkName ? 1 : 0)], @"query",
                                         nil]];
+}
+
+- (void) autoLogin:(NSDictionary *)data {
+	[self setName:[data objectForKey:@"name"]];
+	if ([name isEqualToString:@"Guest"] || [name isEqualToString:@"guest"]) {
+        // do nothing
+    } else {
+		[self setPassword:[data objectForKey:@"pass"]];	
+	}	
 }
 
 - (void) setPassword:(NSString *)loginPassword {

@@ -23,6 +23,7 @@ char myship = SHIP_CA;
     if (self != nil) {
         // the server will send SP_MASK to tell us in which team we are welcome
         [notificationCenter addObserver:self selector:@selector(handleTeamMask:) name:@"SP_MASK" object:nil];
+	
 		painter = nil;
     }
     return self;
@@ -60,6 +61,56 @@ char myship = SHIP_CA;
 	[self redrawButton:sbButton withShip:SHIP_SB];
 }
 
+-(NSButton *) buttonForTeam:(int) teamId {
+	
+	switch (teamId) {
+		case TEAM_FED:
+			return fedButton;
+			break;
+		case TEAM_KLI:
+			return kliButton;
+			break;
+		case TEAM_ORI:
+			return oriButton;
+			break;
+		case TEAM_ROM:
+			return romButton;
+			break;
+		default:
+			return nil;
+			break;
+	}
+}
+
+- (bool) freeSeatOnTeam:(int)teamId {
+	return [[self buttonForTeam:teamId] isEnabled];	
+}
+
+- (void) findTeam {
+	if ([self freeSeatOnTeam:myTeam]) {
+		return; // no need
+	}
+	
+	int newTeam = myTeam;
+	// check if myTeam is enabled, if not find next team that is
+	for (int i=TEAM_FIRST; i < TEAM_MAX; i++) {
+		if (![self freeSeatOnTeam:newTeam]) {
+			newTeam++; // increase
+			newTeam %= TEAM_MAX; // rollover
+		}
+	}
+	
+	if ([self freeSeatOnTeam:newTeam]) {  // found one
+		LLLog(@"OutfitMenuController.findTeam moved from team %d to %d", myTeam, newTeam);
+		[[self buttonForTeam:myTeam] setState: NSOffState];
+		myTeam = newTeam;
+		[[self buttonForTeam:myTeam] setState: NSOnState];
+	} else {
+		LLLog(@"OutfitMenuController.findTeam NO free team, might as well go home");
+		[self setInstructionField:@"NO free team, better try different server"];
+	}
+}
+
 - (void) handleTeamMask:(NSNumber *) mask{
     
     char newTeamMask = [mask charValue];
@@ -84,7 +135,7 @@ char myship = SHIP_CA;
         open = (([team bitMask] & teamMask) != 0);
         [fedButton setEnabled:open];        
         [fedButton setTitle:[NSString stringWithFormat:@"%d\nFederation", [team count]]];
-        
+		
         team = [universe teamWithId:TEAM_KLI];
         open = (([team bitMask] & teamMask) != 0);
         [kliButton setEnabled:open];
@@ -99,6 +150,8 @@ char myship = SHIP_CA;
         open = (([team bitMask] & teamMask) != 0);
         [romButton setEnabled:open];       
         [romButton setTitle:[NSString stringWithFormat:@"%d\nRomulan", [team count]]];
+		
+		[self findTeam];
     }    
 }
 

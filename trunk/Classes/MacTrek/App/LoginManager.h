@@ -31,5 +31,6 @@
 - (void) setPassword:(NSString *)loginPassword;
 - (void) reset;
 - (int) state;
+- (void) autoLogin:(NSDictionary *)data;
 
 @end

@@ -21,17 +21,48 @@ bool validServer;
     return self;
 }
 
-
 - (void) awakeFromNib {
 
 	// do super too 
 	[super awakeFromNib];
 	
-    // verify did end typinh
+    // verify did end typing with apples  notificationcentre
     [[NSNotificationCenter defaultCenter] addObserver:self
 											 selector:@selector(manualEntryDidEndEditing:)
 												 name:@"NSControlTextDidEndEditingNotification"
-											   object:serverNameTextField];    
+											   object:serverNameTextField];   
+	
+	// and at our own
+	[[LLNotificationCenter defaultCenter] addObserver:self selector:@selector(quickConnect) name:@"MC_QUICK_CONNECT_STAGE_1"];
+}
+
+- (void) quickConnect {
+	LLLog(@"SelectServerController.quickConnect called");
+	
+	// create temp array with both
+	NSMutableArray *entries = [NSMutableArray arrayWithArray:bonjourServers];
+	[entries addObjectsFromArray:metaServerServers];
+	
+	MetaServerEntry *bestEntry = nil;
+	MetaServerEntry *entry = nil;
+	for (int i=0; i < [entries count]; i++) {
+		entry = (MetaServerEntry *) [entries objectAtIndex:i];
+		if (entry != nil) {
+			if (bestEntry == nil) {
+				bestEntry = entry; // anything beats nil
+			} else {
+				if ([bestEntry players] < [entry players]) {
+					bestEntry = entry; // the more the merrier
+				}
+			}
+		}
+	}
+	
+	if (entry != nil) {
+		// do something with it
+		[entry retain];
+		[[LLNotificationCenter defaultCenter] postNotificationName:@"SC_QUICK_CONNECT_STAGE_2" userInfo:entry];
+	}
 }
 
 - (void) invalidServer {
@@ -56,7 +87,6 @@ bool validServer;
 
 - (void) setServerSelected:(MetaServerEntry *) server {
     
-
     LLLog(@"SelectServerController.setServerSelected called");
 	// start spinning
 	[spinner startAnimation:self];

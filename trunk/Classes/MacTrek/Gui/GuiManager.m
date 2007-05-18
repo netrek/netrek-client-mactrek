@@ -34,10 +34,16 @@
 
 bool clientRuns = NO;
 int startUpEvents = 0;
+bool quickConnect = NO;
+NSString *defaultName;
+NSString *defaultPassword;
 
 - (id) init {
     self = [super init];
     if (self != nil) {
+		
+		defaultName = @"guest";
+		defaultPassword = @"";
 		
 		// ROOT PLACE to turn MULTITHREADING off, only tested for guest login
 		// turn only off for testing!
@@ -105,12 +111,46 @@ int startUpEvents = 0;
 		// message sent, move focus to gameview
 		[notificationCenter addObserver:self selector:@selector(focusToGameView) 
                                    name:@"COMM_SEND_MESSAGE" object:nil];
+		
+		// quick connect
+		[notificationCenter addObserver:self selector:@selector(quickConnect:) 
+                                   name:@"SC_QUICK_CONNECT_STAGE_2" object:nil];
+
 				
 		// shutdown
 		[notificationCenter addObserver:self selector:@selector(shutdown) name:@"MC_MACTREK_SHUTDOWN"];
 
     }
     return self;
+}
+
+- (void) quickConnect:(MetaServerEntry*) entry {
+	LLLog(@"GuiManager.quickConnect: setting server %@", [entry address]);
+	[self serverSelected:entry]; // select the server
+	quickConnect = YES;
+}
+
+- (void) quickConnectAutoLogin {
+	LLLog(@"GuiManager.quickConnectAutoLogin: logging in with %@", defaultName);
+	[notificationCenter postNotificationName:@"GM_SEND_LOGIN_REQ" 
+                                      object:nil 
+                                    userInfo:[NSDictionary dictionaryWithObjectsAndKeys: 
+                                        defaultName, @"name",
+                                        defaultPassword, @"pass", 
+                                        NSUserName(), @"login", 
+                                        [NSNumber numberWithInt:0], @"query",
+                                        nil]];
+}
+
+- (void) quickConnectPickTeamShip {
+	LLLog(@"GuiManager.quickConnectPickTeamShip: picking ship and team");
+
+	// blow through outfit menu
+	[outfitCntrl play:self];
+	
+	// reset it some damage
+	[loginCntrl reset];
+	quickConnect = NO;
 }
 
 - (void) focusToGameView {
@@ -392,6 +432,9 @@ int startUpEvents = 0;
 
 - (void)serverSelected:(MetaServerEntry *) selectedServer {
     
+	// deactivate old quick connects
+	quickConnect = NO;
+	
     switch (gameState) {
         case GS_NO_SERVER_SELECTED:
         case GS_SERVER_SELECTED:
@@ -547,6 +590,12 @@ int startUpEvents = 0;
     }
     
     LLLog(@"GuiManager.serverSlotFound GAMESTATE = %@", [self gameStateAsString]);
+	
+	if (quickConnect) {
+		LLLog(@"GuiManager.serverSlotFound calling autologin");
+		[self quickConnectAutoLogin];
+	}
+	
 }
 
 - (void) iDied {
@@ -591,7 +640,14 @@ int startUpEvents = 0;
             // only as long as we are in outfit!!!
             [notificationCenter addObserver:outfitCntrl selector:@selector(setInstructionField:) name:@"SP_WARNING"
                                      object:nil useLocks:NO useMainRunLoop:YES]; 
-            // a successfull outfit moves us to the next state
+			if (quickConnect) {
+				// wait 100ms to allow SP_MASK to arrive
+				LLLog(@"GuiManager.loginComplete delaying request for ship and team by 100ms");
+				//[self performSelector:@selector(quickConnectPickTeamShip) withObject:self afterDelay:0.1];
+				// does not work after delay
+				[self quickConnectPickTeamShip];
+			}
+            // else a successfull outfit moves us to the next state
             break;
         case GS_GAME_ACTIVE:    // if we are killed we get back here
             // start with a empty login

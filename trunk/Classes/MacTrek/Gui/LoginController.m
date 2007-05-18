@@ -164,7 +164,7 @@ bool clockRunning = NO;
     if (!multiThreaded) {
         // read until a SP_LOGIN_OK or NOK comes
         while ([loginManager state] == LOGIN_GETNAME) {
-            [notificationCenter postNotificationName:@"COMM_READ_FROM_SERVER"]; // $$ pray this does not block
+            [notificationCenter postNotificationName:@"COMM_READ_FROM_SERVER"]; 
         }
         // done, we moved to the next stage (new name, or known name)
         if ([[[playerName stringValue] uppercaseString] isEqualToString:@"GUEST"]) {
@@ -175,9 +175,6 @@ bool clockRunning = NO;
             }            
         }
     }
-    
-
-    
 }
 
 - (void)passwordVerifyDidEndEditing:(NSNotification *)aNotification {
