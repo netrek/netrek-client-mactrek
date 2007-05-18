@@ -138,6 +138,10 @@
 	// Concurrency Functions
 - (BOOL)isBusy;
 
+    // connection management
+- (void)connectToHost:(LLHost*)host port:(unsigned short)port;
+- (void)connectToHost:(LLHost*)host port:(unsigned short)port force:(BOOL)force;
+
 	// Reading and writing data
 - (BOOL)isReadable;
 - (BOOL)isWritable;

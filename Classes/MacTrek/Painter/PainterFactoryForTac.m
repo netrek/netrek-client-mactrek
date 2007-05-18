@@ -20,7 +20,7 @@
     NSImage *rawImage = [[NSImage alloc] initWithContentsOfFile:pathToImage];
     
     if (rawImage == nil) {
-        LLLog(@"PainterFactoryForTac.loadImage %@ failed, reverting to super", pathToImage);
+        //LLLog(@"PainterFactoryForTac.loadImage %@ failed, reverting to super", pathToImage);
         // something went wrong try super image
         return [super loadImage:imageName];
     }
@@ -88,49 +88,6 @@
 
 	
 }
-/* new graphics for TAC use same format as other graphics,
-   thus no longer need to go through the gifs
-
-- (void) drawShipType:(int)type forTeamId:(int) teamId withCloakPhase:(int)cloakPhase inRect:(NSRect)Rect {
-    
-    // first get the ship image
-    NSImage *imgShip = nil;	
-	
-	NSMutableString *key = [[[NSMutableString alloc] init] autorelease];
-	
-	// start with the team
-	[key appendString:[[universe teamWithId:teamId] abbreviation]];
-	//-
-	[key appendString:@"-"];
-	// then teh ship
-	[key appendString:[[universe shipOfType:type] abbreviation]];
-	// get
-	imgShip = [extraImages objectForKey:key];
-	 	
-	if (imgShip == nil) {
-		// let's not log every redraw
-		//LLLog(@"PainterFactoryForTac.drawShipType unknown ship %@", key);
-		[super drawShipType:type forTeamId:teamId withCloakPhase:cloakPhase inRect:Rect];
-		return;
-	}
-    
-    // get the rigth image 
-    // assume the ships are in squares and heigth = width top-down
-	// but we need the top most (and cocoa is flipped!)
-	float side = [imgShip size].width;
-    NSRect shipRect = NSMakeRect( 0, [imgShip size].height - side, side , side); 
-    
-    // calculate the alpha for cloak
-    float alpha = 1.0;
-    if (cloakPhase > 0) {
-        // find out aplha value PF_MIN_ALPHA_VALUE (0.1) means fully cloaked
-        // 1.0 means fully uncloaked
-        alpha -= (((1.0 - PF_MIN_ALPHA_VALUE) * cloakPhase) / PLAYER_CLOAK_PHASES);
-    }
-   [imgShip drawInRect:Rect fromRect:shipRect operation: NSCompositeSourceOver fraction:alpha];      
-}
-
-*/
 
 - (void)   drawPlanet:(Planet*) planet inRect:(NSRect) Rect { 
 	

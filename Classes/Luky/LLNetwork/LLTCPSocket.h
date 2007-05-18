@@ -28,7 +28,7 @@
 - (BOOL)isConnected;
 
 	// Making connections
-- (void)connectToHost:(LLHost*)host port:(unsigned short)port;
+//- (void)connectToHost:(LLHost*)host port:(unsigned short)port; moved to superclass
 
 	// Receiving connections
 - (void)listenOnPort:(unsigned short)port;

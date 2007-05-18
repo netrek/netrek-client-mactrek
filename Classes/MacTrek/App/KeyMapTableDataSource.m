@@ -49,7 +49,7 @@
 - (int)numberOfRowsInTableView:(NSTableView *)aTableView {
 
     if (keyMapTableView == aTableView) {
-		 LLLog(@"KeyMapTableDataSource.numberOfRowsInTableView %d", [myMap count]);
+		//LLLog(@"KeyMapTableDataSource.numberOfRowsInTableView %d", [myMap count]);
         return [myMap count];
     }
     return 0;

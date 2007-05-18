@@ -215,9 +215,9 @@ bool goSleeping;
                                name:@"COMM_FORCE_RESET_TO_TCP" object:nil useLocks:multiThreaded];         // --
      
     // implementation of serverReader events
-    [notificationCenter addObserver:self selector:@selector(closeUdpConn:)
+    [notificationCenter addObserver:self selector:@selector(closeUdpConn)
                                name:@"SP_SWITCHED_DENIED" object:nil useLocks:multiThreaded];			   // close connection if switch denied
-	[notificationCenter addObserver:self selector:@selector(closeUdpConn:)
+	[notificationCenter addObserver:self selector:@selector(closeUdpConn)
                                name:@"SP_UDP_SWITCHED_TO_TCP" object:nil useLocks:multiThreaded];          // close the connection 
 	[notificationCenter addObserver:self selector:@selector(sendUdpVerify:)
                                name:@"SP_TCP_SWITCHED_TO_UDP" object:nil useLocks:multiThreaded];          // when switched to UDP verify
@@ -608,7 +608,6 @@ bool goSleeping;
     // read from UDP connection
     if(udpReader != nil && commStatus != STAT_SWITCH_TCP && (udpReceiveMode != MODE_TCP)) {
         @try {
-			//LLLog(@"Communication.readFromServer reading UDP");
             [udpReader readFromServer];
         }
         @catch(NSException *e) {
@@ -663,13 +662,12 @@ bool goSleeping;
 		
 		LLLog(@"Communication.readFromServer attemting resurrection");
 		
-		int port = [tcpSender serverPort]; // get the port from the socket
-		LLHost *server = [tcpSender serverHost];
-		
 		// this next port stuff does not seem to work $$$
-        //if([self connectToServerUsingNextPort]) {
-		// try something new
-		if ([self callServer:[server address] port:port]) {
+        if([self connectToServerUsingNextPort]) {
+		// try something new			
+		// int port = [tcpSender serverPort]; // get the port from the socket
+		// LLHost *server = [tcpSender serverHost];
+		//if ([self callServer:[server address] port:port]) {
 			
             [notificationCenter postNotificationName:@"COMM_RESURRECTED" object:self 
                                             userInfo:@"Yea!  We've been resurrected!"];
@@ -1015,7 +1013,7 @@ bool goSleeping;
 - (int) sendPickSocketReq:(NSNumber*) startAtPort {
     int old_port = [startAtPort intValue];
     
-    nextPort = (int)(random() * 32767);
+    nextPort = (int)(random() & 32767);
     while (nextPort < 2048 || nextPort == old_port) {
         nextPort = ((nextPort + 10687) & 32767);
     }
@@ -1176,8 +1174,8 @@ bool goSleeping;
 // the connectToServer routines are only used when starting up with a socket on the prompt and autologin
 // otherwise use callServer
 - (bool) connectToServerUsingNextPort {
-    // tell the server to pick a port and use it ourself
-    return [self connectToServerUsingPort:[self sendPickSocketReq]];
+    // tell the server to pick a port and use it ourself	
+    return [self connectToServerUsingPort:nextPort];
 }
 
 - (bool) connectToServerUsingPort:(int) port {
@@ -1292,7 +1290,8 @@ bool goSleeping;
 
 - (void) connectToServerUdpAtPort:(int) port {
 	// setup the udp writer
-	 LLUDPSocket *udpSocket = [[LLUDPSocket alloc] init];
+	//LLUDPSocket *udpSocket = [[LLUDPSocket alloc] init];
+	LLUDPSocket *udpSocket = [udpReader udpSocket]; // use the same socket as the reader	
 	
 	// try to connect to the servers udp port
 	LLHost *server = [tcpSender serverHost]; // first get the server name
