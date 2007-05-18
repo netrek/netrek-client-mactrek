@@ -18,6 +18,8 @@
     IBOutlet NSButton    *playButton;
     IBOutlet NSButton    *quitButton;
 	IBOutlet NSButton    *creditsButton;
+	IBOutlet NSButton    *helpButton;
+    IBOutlet NSButton    *quickConnectButton;
     IBOutlet NSTabView   *tabFrameView;  
 }
 // menu actions
@@ -29,6 +31,9 @@
 - (IBAction)raiseGame:(id)sender;
 - (IBAction)raiseCredits:(id)sender;
 - (IBAction)quit:(id)sender;
+
+- (IBAction)helpButtonPressed:(id)sender;
+- (IBAction)quickButtonPressed:(id)sender;
 
 // return to the menu
 - (IBAction)raiseMenu:(id)sender; 

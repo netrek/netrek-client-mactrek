@@ -22,11 +22,40 @@
        //[self subscribeToNotifications]; // the gui manager will sub/unsub us
         
         // start caching in the background
+		//[NSThread detachNewThreadSelector:@selector(loadSoundsInSeperateThread:) toTarget:self withObject:nil];
         [self performSelector:@selector(loadSounds) withObject:nil afterDelay:0.01];
-        //[self loadSounds]; // $$seperate thread works not ok?
-
+        //[self loadSounds]; // $$seperate thread works not ok? QTMovie class must be initialized on the main thread.
+		
+		[notificationCenter addObserver:self selector:@selector(stopIntroSound) name:@"GM_GAME_ENTERED"];
     }
     return self;
+}
+
+- (void) stopSound:(NSString*) snd {
+	SoundEffect *sound = [soundEffects objectForKey:snd];
+    if (sound != nil) {
+		LLLog(@"Soundplayer.stopSound %@", snd);
+        [sound stop];  
+    } else {
+        LLLog(@"Soundplayer.stopSound no sound for %@", snd);
+    }
+}
+
+- (void) stopIntroSound {
+	[self stopSound:@"INTRO_SOUND"];
+}
+
+- (void) loadSoundsInSeperateThread:(id)sender {
+    
+    // create a private pool for this thread
+    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+    
+    LLLog(@"SoundPlayer.loadSoundsInSeperateThread: start running");
+    [self loadSounds];
+    LLLog(@"SoundPlayer.loadSoundsInSeperateThread: complete");
+      
+    // release the pool
+    [pool release];
 }
 
 - (void) awakeFromNib {
@@ -179,7 +208,6 @@
     } else {
         LLLog(@"Soundplayer.playSoundEffect no sound for %@", snd);
     }
-
 }
 
 - (void) handleMessageSent {

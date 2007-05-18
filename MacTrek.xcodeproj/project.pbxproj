@@ -91,6 +91,7 @@
 		52604A9B0B97016B0097D103 /* LLNetServiceDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 52604A9A0B97016B0097D103 /* LLNetServiceDelegate.m */; };
 		5270A4A60BAB0F9600635F95 /* SpockTorpedo.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 5270A4A50BAB0F9600635F95 /* SpockTorpedo.jpg */; };
 		52756F210B3554CA00631149 /* PRECOMPILED in Resources */ = {isa = PBXBuildFile; fileRef = 52756EA90B3554CA00631149 /* PRECOMPILED */; };
+		527B94E10BFE0C3600B4D740 /* MacTrekUserManual.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 527B94E00BFE0C3600B4D740 /* MacTrekUserManual.pdf */; };
 		527E08930AF3766A00B5D37F /* QuickTime.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 527E08920AF3766A00B5D37F /* QuickTime.framework */; };
 		528CF1A90BA07FF30001B4D0 /* MTDistressKeyMap.m in Sources */ = {isa = PBXBuildFile; fileRef = 528CF1A80BA07FF30001B4D0 /* MTDistressKeyMap.m */; };
 		528E7E0C0B0A649E00B22943 /* LLDOReceiver.m in Sources */ = {isa = PBXBuildFile; fileRef = 528E7DD50B0A649E00B22943 /* LLDOReceiver.m */; };
@@ -702,6 +703,7 @@
 		52604A9A0B97016B0097D103 /* LLNetServiceDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLNetServiceDelegate.m; sourceTree = "<group>"; };
 		5270A4A50BAB0F9600635F95 /* SpockTorpedo.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = SpockTorpedo.jpg; path = Resources/Backgrounds/SpockTorpedo.jpg; sourceTree = "<group>"; };
 		52756EA90B3554CA00631149 /* PRECOMPILED */ = {isa = PBXFileReference; lastKnownFileType = folder; name = PRECOMPILED; path = Resources/PRECOMPILED; sourceTree = "<group>"; };
+		527B94E00BFE0C3600B4D740 /* MacTrekUserManual.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; name = MacTrekUserManual.pdf; path = Resources/MacTrekUserManual.pdf; sourceTree = "<group>"; };
 		527E08920AF3766A00B5D37F /* QuickTime.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuickTime.framework; path = /System/Library/Frameworks/QuickTime.framework; sourceTree = "<absolute>"; };
 		528CF1A70BA07FF30001B4D0 /* MTDistressKeyMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTDistressKeyMap.h; sourceTree = "<group>"; };
 		528CF1A80BA07FF30001B4D0 /* MTDistressKeyMap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTDistressKeyMap.m; sourceTree = "<group>"; };
@@ -1265,6 +1267,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				527B94E00BFE0C3600B4D740 /* MacTrekUserManual.pdf */,
 				5253D56E0BCF790E0075E0D5 /* licence.rtf */,
 				52756EA90B3554CA00631149 /* PRECOMPILED */,
 				529F08850B06935F00255735 /* LLResources */,
@@ -2233,6 +2236,7 @@
 				52F819910B8F1280003ED1BE /* mouse.png in Resources */,
 				5270A4A60BAB0F9600635F95 /* SpockTorpedo.jpg in Resources */,
 				5253D56F0BCF790E0075E0D5 /* licence.rtf in Resources */,
+				527B94E10BFE0C3600B4D740 /* MacTrekUserManual.pdf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

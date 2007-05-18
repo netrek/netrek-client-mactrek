@@ -123,6 +123,8 @@
         {CLASS = MapView; LANGUAGE = ObjC; SUPERCLASS = RoundedView; }, 
         {
             ACTIONS = {
+                helpButtonPressed = id; 
+                quickButtonPressed = id; 
                 quit = id; 
                 raiseCredits = id; 
                 raiseGame = id; 
@@ -137,8 +139,10 @@
             LANGUAGE = ObjC; 
             OUTLETS = {
                 creditsButton = NSButton; 
+                helpButton = NSButton; 
                 loginButton = NSButton; 
                 playButton = NSButton; 
+                quickConnectButton = NSButton; 
                 quitButton = NSButton; 
                 selectServerButton = NSButton; 
                 settingsButton = NSButton; 

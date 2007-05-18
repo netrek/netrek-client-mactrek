@@ -135,5 +135,18 @@
     [playButton setEnabled:enable];
 }
 
+- (IBAction)helpButtonPressed:(id)sender {
+	
+	NSString *pathToResources = [[NSBundle mainBundle] resourcePath];
+	NSString *pathToPdf = [NSString stringWithFormat:@"%@/MacTrekUserManual.pdf", pathToResources];
+	
+	[[NSWorkspace sharedWorkspace] openFile:pathToPdf
+							withApplication:@"Preview"];
+}
+
+- (IBAction)quickButtonPressed:(id)sender {
+	[notificationCenter postNotificationName:@"MC_QUICK_CONNECT_STAGE_1"];
+}
+
 
 @end

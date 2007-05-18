@@ -91,7 +91,7 @@
     [self cacheImages];
     LLLog(@"PainterFactory.cacheImagesInSeperateThread: complete");
     
-    [notificationCenter postNotificationName:@"PF_IMAGES_CACHED"];
+    //[notificationCenter postNotificationName:@"PF_IMAGES_CACHED"]; // done in cacheImages
     
     // release the pool
     [pool release];

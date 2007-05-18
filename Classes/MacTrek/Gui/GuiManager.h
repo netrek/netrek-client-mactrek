@@ -94,4 +94,7 @@ enum GAME_STATE {
 - (void) fillKeyMapPanel;
 - (void)setSyncScreenUpdateWithRead:(bool)enable;
 
+- (void)serverSelected:(MetaServerEntry *) selectedServer;
+
+
 @end
