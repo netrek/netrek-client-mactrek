@@ -42,7 +42,7 @@ NSRect gameBounds;
 
 
 - (NSPoint) gamePointRepresentingCentreOfView {
-	LLLog(@"MapView.gamePointRepresentingCentreOfView entered");
+	//LLLog(@"MapView.gamePointRepresentingCentreOfView entered");
     return centerPoint;
 }
 

@@ -48,7 +48,7 @@
 	// nasty startup threading bug, remove as many threads as possible..
 	[self cacheImages]; 
 	[notificationCenter postNotificationName:@"PF_IMAGES_CACHED"];
-	LLLog(@"PainterFactory.awakeFromNib: images cached");
+	//LLLog(@"PainterFactory.awakeFromNib: images cached");
 }
 
 - (void) setSimplifyDrawing:(bool)simpleDraw {
@@ -1599,7 +1599,7 @@
         
         // and store it
         [planet setLabel:labelImage forKey:key];
-        LLLog(@"PainterFactory.drawLabelForPlanet created label: %@", key);
+        //LLLog(@"PainterFactory.drawLabelForPlanet created label: %@", key);
     } else {
         //LLLog(@"PainterFactory.drawLabelForPlanet using cached label: %@", key);
     }
@@ -1649,6 +1649,11 @@
 		return nil;
 	}
 	
+	// don't show on galactic
+	if (simple) {
+		return nil; 
+	}
+	
 	// extended label?
 	if ([player showInfo] || debugLabels || [player isMe]) {
 		if (isMe) { // show als requested speed
@@ -1676,6 +1681,11 @@
 	// bug 1666845 Cloaked ships should be ?? (unless it is me)
 	if (([player flags] & PLAYER_CLOAK) && (![player isMe])) {
 		return nil;
+	}
+	
+	// don't show on galactic
+	if (simple) {
+		return nil; 
 	}
 	
 	if (debugLabels || [player isMe]) {

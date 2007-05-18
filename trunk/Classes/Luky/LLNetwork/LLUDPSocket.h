@@ -26,7 +26,7 @@
 //			- read data 
 
 	// Making connections
-- (void)connectToHost:(LLHost*)host port:(unsigned short)port;
+//- (void)connectToHost:(LLHost*)host port:(unsigned short)port;  moved to super class
 
 	// Receiving connections
 - (void)listenOnPort:(unsigned short)port;

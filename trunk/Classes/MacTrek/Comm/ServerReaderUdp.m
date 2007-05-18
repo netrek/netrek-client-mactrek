@@ -45,6 +45,10 @@
     return udpStats;
 }
 
+- (LLUDPSocket *)udpSocket {
+	return udpSocket;
+}
+
 - (NSData *) doRead {
     // read what ever is there max 1300 bytes
     // needs to be retained/released after processing !
@@ -91,6 +95,7 @@
 
 - (bool) handlePacket:(int)ptype withSize:(int)size inBuffer:(char *)buffer {
 
+	LLLog(@"ServerReaderUDP.handlePacket: %d", ptype);
     [communication increasePacketsReceived];
     return [super handlePacket:ptype withSize:size inBuffer:buffer];
 }

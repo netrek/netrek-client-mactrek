@@ -29,54 +29,6 @@
 }
 
 //
-// Connect the socket to the host specified by hostName, on the requested port.
-//
-- (void)connectToHost:(LLHost*)host port:(unsigned short)port {
-	
-	NSString *hostName = [host hostname];
-    struct hostent* remoteHost;
-    struct sockaddr_in remoteAddr;
-	
-	if (![mutex lockBeforeDate:[NSDate dateWithTimeIntervalSinceNow:timeOut]]) {
-		LLLog(@"LLTCPSocket.connectToHost lock timeout");		
-		return; // no lock obtained, so no need to unlock
-	}
-	
-    // Socket must be created, and not already connected	
-    if ( socketfd == SOCKET_INVALID_DESCRIPTOR )
-        [NSException raise:SOCKET_EX_BAD_SOCKET_DESCRIPTOR 
-					format:SOCKET_EX_BAD_SOCKET_DESCRIPTOR];
-    
-    if ( connected )
-        [NSException raise:SOCKET_EX_ALREADY_CONNECTED 
-					format:SOCKET_EX_ALREADY_CONNECTED];
-    
-    // Look up host     
-    if ( (remoteHost = gethostbyname([hostName cString])) == NULL )
-        [NSException raise:SOCKET_EX_HOST_NOT_FOUND 
-					format:SOCKET_EX_HOST_NOT_FOUND_F, strerror(errno)];
-    
-    // Copy host address and port into socket address structure    
-    bzero((char*)&remoteAddr, sizeof(remoteAddr));
-    remoteAddr.sin_family = AF_INET;
-    bcopy((char*)remoteHost->h_addr, (char*)&remoteAddr.sin_addr.s_addr, remoteHost->h_length);
-    remoteAddr.sin_port = htons(port);
-	
-    // Request connection, raise on failure    
-    if ( (connect(socketfd, (struct sockaddr*)&remoteAddr, sizeof(remoteAddr)) < 0) )
-        [NSException raise:SOCKET_EX_CONNECT_FAILED 
-					format:SOCKET_EX_CONNECT_FAILED_F, strerror(errno)];
-	
-    // Note successful connection    
-    remoteHostName = [[NSString alloc] initWithString:hostName];
-    remotePort = port;
-	
-    connected = YES;
-	
-	[mutex unlock];
-}
-
-//
 // Start the socket listening on the given local port number
 //
 - (void)listenOnPort:(unsigned short)port {

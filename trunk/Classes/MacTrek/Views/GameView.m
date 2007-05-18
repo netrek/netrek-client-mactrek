@@ -457,7 +457,7 @@ whichRepresentsGameBounds:gameBounds
             scale = newScale;
         }
     }
-    LLLog(@"GameView.scrollWheel setting scale to %d", scale);
+    //LLLog(@"GameView.scrollWheel setting scale to %d", scale);
 }
 
 

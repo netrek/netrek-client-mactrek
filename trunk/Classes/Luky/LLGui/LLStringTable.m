@@ -135,7 +135,7 @@
     // set bounds of ALL
     for (int k = 0; k < [columns count]; k++) {
         LLStringList *list = [columns objectAtIndex:k];
-        LLLog(@"LLStringTable.setNrOfColumns (%d) x=%f, y=%f, w=%f, h=%f", k, listBounds.origin.x, listBounds.origin.y, listBounds.size.width, listBounds.size.height);
+        //LLLog(@"LLStringTable.setNrOfColumns (%d) x=%f, y=%f, w=%f, h=%f", k, listBounds.origin.x, listBounds.origin.y, listBounds.size.width, listBounds.size.height);
         [list setFrame:listBounds];
         [list setBounds:listBounds];
         [list awakeFromNib];

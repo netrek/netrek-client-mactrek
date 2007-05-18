@@ -34,6 +34,11 @@
     return self;
 }
 
+- (bool) handlePacket:(int)ptype withSize:(int)size inBuffer:(char *)buffer {
+	//LLLog(@"ServerReaderTCP.handlePacket: %d", ptype);
+	return [super handlePacket:ptype withSize:size inBuffer:buffer];
+} 
+
 - (NSData *) doRead {
 	
 	// wait with timeout if needed

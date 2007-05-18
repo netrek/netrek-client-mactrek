@@ -40,6 +40,40 @@
 	[receiveModeBox selectItemAtIndex:MODE_SIMPLE];
 }
 
+- (NSString*) modeString:(NSNumber*)newValue {
+	switch([newValue intValue]) {
+		case COMM_TCP:
+			return @"COMM_TCP";
+			break;
+		case COMM_UDP:
+			return @"COMM_UDP";
+			break;
+		default:
+			return @"ILLIGAL";
+			break;
+	}
+}
+
+- (NSString*) stateString:(NSNumber*)newValue {
+	switch([newValue intValue]) {
+		case STAT_CONNECTED:
+			return @"STAT_CONNECTED";
+			break;
+		case STAT_SWITCH_UDP:
+			return @"STAT_SWITCH_UDP";
+			break;
+		case STAT_SWITCH_TCP:
+			return @"STAT_SWITCH_TCP";
+			break;
+		case STAT_VERIFY_UDP:
+			return @"STAT_VERIFY_UDP";
+			break;
+		default:
+			return @"ILLIGAL";
+			break;
+	}
+}
+
 - (void)refreshUdpStats:(UdpStats*)newStats {
 	
 	if (stats != newStats) {
@@ -58,7 +92,7 @@
 
 - (void)commModeChanged:(NSNumber*)newMode {
 	
-	LLLog(@"MTUDPWindowController.commModeChanged %d", [newMode intValue]);
+	LLLog(@"MTUDPWindowController.commModeChanged %@", [self modeString:newMode]);
 	
 	switch([newMode intValue]) {
 		case COMM_TCP:
@@ -75,7 +109,7 @@
 
 - (void)commStateChanged:(NSNumber*)newState {
 	
-	LLLog(@"MTUDPWindowController.commStateChanged %d", [newState intValue]);
+	LLLog(@"MTUDPWindowController.commStateChanged %@", [self stateString:newState]);
 	
 	switch([newState intValue]) {
 		case STAT_CONNECTED:

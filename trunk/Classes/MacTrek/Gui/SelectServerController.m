@@ -77,7 +77,7 @@ bool validServer;
 }
 
 - (void)manualEntryDidEndEditing:(NSNotification *)aNotification {
-	LLLog(@"SelectServerController.manualEntryDidEndEditing %@", [aNotification name]);
+	//LLLog(@"SelectServerController.manualEntryDidEndEditing %@", [aNotification name]);
 	
 	// is called upon a manual enter in the textfield
 	// okay is leak, but how often do you enter a server
@@ -90,7 +90,7 @@ bool validServer;
     [entry setGameType:    BRONCO];	
 
 	// to allow for manual selection of server
-    LLLog(@"SelectServerController.manualEntryDidEndEditing should connect to %@", [serverNameTextField stringValue]);  
+    //LLLog(@"SelectServerController.manualEntryDidEndEditing should connect to %@", [serverNameTextField stringValue]);  
 	
 	// try and find the port number
 	NSString *name = [serverNameTextField stringValue];

@@ -54,10 +54,13 @@
 //
 - (void)connectToHost:(LLHost*)host port:(unsigned short)port {
 	
+	LLLog(@"LLUDPSocket.connectToHost setup connection but ignoring connect");
+	LLLog(@"LLUDPSocket.connectToHost old value %@:%d", remoteHostName, remotePort);
 	// we do not actually connect in UDP but setup the remote address
 	[remoteHostName release];
 	remoteHostName = [host address]; // need dotted notation
 	remotePort = port;	
+	LLLog(@"LLUDPSocket.connectToHost new value %@:%d", remoteHostName, port);
 }
 
 //
@@ -182,15 +185,18 @@
     remoteAddress.sin_addr.s_addr = htonl(address.s_addr);
     remoteAddress.sin_port        = htons(remotePort);	
 	
+	LLLog(@"LLUDPSocket.writeData with len %d to %@:%d", len, remoteHostName, remotePort);
+	
     // Send the data    
     while ( len > 0 )
     {
         sent = sendto(socketfd, bytes, len, 0, (struct sockaddr *)&remoteAddress, sizeof(remoteAddress));
         
-        if ( sent < 0 )
+        if ( sent < 0 ) {
+			LLLog(@"LLUDPSocket.writeData ERROR %d %s", errno, strerror(errno));
             [NSException raise:SOCKET_EX_SEND_FAILED 
 						format:SOCKET_EX_SEND_FAILED_F, strerror(errno)];    
-        
+        }
         bytes += sent;
         len -= sent;
     }

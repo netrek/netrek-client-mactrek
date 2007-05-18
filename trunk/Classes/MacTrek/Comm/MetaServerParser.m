@@ -57,7 +57,7 @@
 	
     while (line != nil) {
         // make sure this is a line with server info on it
-		LLLog(@"MetaServerParser.parseInputFromStream: [%@], size %d", line, [line length]);
+		//LLLog(@"MetaServerParser.parseInputFromStream: [%@], size %d", line, [line length]);
         if ([line length] == 79 && 
             [[line substringWithRange:NSMakeRange(0,3)] isEqualToString:@"-h "] && 
             [[line substringWithRange:NSMakeRange(40, 3)] isEqualToString:@"-p "]) {

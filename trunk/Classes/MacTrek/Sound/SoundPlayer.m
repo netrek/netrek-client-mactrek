@@ -269,7 +269,7 @@
     }
     
     if (distance > SP_MAX_RANGE) { // prevent negative volume
-        LLLog(@"Sounplayer.playSoundEffect refuse to play, too far away");
+        //LLLog(@"Sounplayer.playSoundEffect refuse to play, too far away");
         return;
     }
  
