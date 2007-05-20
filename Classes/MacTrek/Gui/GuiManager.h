@@ -54,6 +54,7 @@ enum GAME_STATE {
     //IBOutlet QCView                 *splashView;
     IBOutlet NSButton               *menuButton;
 	IBOutlet NSPanel			    *keyMapPanel;
+	LLHUDWindowController *helpWindowCntrl; // new keyMapPanel implementation
 	IBOutlet NSTextView             *keyMapList;
     //IBOutlet DemoClientController   *jtrekCntrl;
 	IBOutlet NSTextField            *versionString;
@@ -95,6 +96,6 @@ enum GAME_STATE {
 - (void)setSyncScreenUpdateWithRead:(bool)enable;
 
 - (void)serverSelected:(MetaServerEntry *) selectedServer;
-
+- (void) setUpKeyMapPanel;
 
 @end

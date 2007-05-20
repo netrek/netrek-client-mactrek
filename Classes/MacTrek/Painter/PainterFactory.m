@@ -233,6 +233,12 @@
 
 - (void) drawBackgroundInRect:(NSRect) drawingBounds ofViewBounds:(NSRect)viewBounds forMe:(Player*) me {
     
+	// as of 1.3 MacTrek theme no longer shows background
+	[[NSColor blackColor] set];
+    NSRectFill(drawingBounds);
+	return;
+	
+	/*
     // get the size of the stamp
     NSSize backGroundImageSize = [self backGroundImageSize];
     // use a local var so we can debug...
@@ -282,6 +288,8 @@
     } 
     
     backGroundStartPoint = startPoint;
+
+	 */
 }
 
 - (void) drawGalaxyEdgesInRect:(NSRect) drawingBounds forGameRect:(NSRect)gameBounds ofViewBounds:(NSRect)viewBounds withScale:(int)scale {

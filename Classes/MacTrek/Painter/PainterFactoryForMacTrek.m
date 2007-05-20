@@ -54,10 +54,12 @@
 }
 
 - (void)   drawBackgroundImageInRect:(NSRect) Rect {
+	
     NSRect sourceRect = NSMakeRect(0, 0, 0, 0);
     sourceRect.size = [imgBackground size];
     
     [imgBackground drawInRect:Rect fromRect:sourceRect  operation:NSCompositeSourceOver fraction:1.0];
+	 
 }
 
 - (NSSize) backGroundImageSize {

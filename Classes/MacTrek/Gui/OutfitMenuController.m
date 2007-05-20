@@ -23,7 +23,7 @@ char myship = SHIP_CA;
     if (self != nil) {
         // the server will send SP_MASK to tell us in which team we are welcome
         [notificationCenter addObserver:self selector:@selector(handleTeamMask:) name:@"SP_MASK" object:nil];
-	
+		quickConnect = NO;
 		painter = nil;
     }
     return self;
@@ -31,6 +31,10 @@ char myship = SHIP_CA;
 
 - (void) awakeFromNib { 
     LLLog(@"OutfitMenuController.awakeFromNib reached");
+}
+
+- (void) setQuickConnect:(bool)yesno {
+	quickConnect = yesno;
 }
 
 - (void) redrawButton:(NSButton*)but withShip:(int)shiptType{
@@ -88,6 +92,11 @@ char myship = SHIP_CA;
 
 - (void) findTeam {
 	if ([self freeSeatOnTeam:myTeam]) {
+		if (quickConnect) {
+			// continue
+			quickConnect = NO;
+			[self play:self];
+		}
 		return; // no need
 	}
 	
@@ -102,9 +111,16 @@ char myship = SHIP_CA;
 	
 	if ([self freeSeatOnTeam:newTeam]) {  // found one
 		LLLog(@"OutfitMenuController.findTeam moved from team %d to %d", myTeam, newTeam);
-		[[self buttonForTeam:myTeam] setState: NSOffState];
+		[self selectTeam:[self buttonForTeam:newTeam]];
+		/*[[self buttonForTeam:myTeam] setState: NSOffState];
 		myTeam = newTeam;
 		[[self buttonForTeam:myTeam] setState: NSOnState];
+		*/
+		if (quickConnect) {
+			// continue
+			quickConnect = NO;
+			[self play:self];
+		}
 	} else {
 		LLLog(@"OutfitMenuController.findTeam NO free team, might as well go home");
 		[self setInstructionField:@"NO free team, better try different server"];

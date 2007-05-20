@@ -93,8 +93,8 @@ NSString *defaultPassword;
         [notificationCenter addObserver:self selector:@selector(commError) 
                                    name:@"COMM_TCP_WRITE_ERROR" object:nil];
         // needed to keep polling for changed masks.. (at a very low rate)
-        [notificationCenter addObserver:self selector:@selector(handleTeamMask:) 
-                                   name:@"SP_MASK" object:nil];
+        //[notificationCenter addObserver:self selector:@selector(handleTeamMask:) 
+         //                          name:@"SP_MASK" object:nil];
         
         // startup events
         //[notificationCenter addObserver:self selector:@selector(increaseStartUpCounter) 
@@ -119,13 +119,13 @@ NSString *defaultPassword;
 				
 		// shutdown
 		[notificationCenter addObserver:self selector:@selector(shutdown) name:@"MC_MACTREK_SHUTDOWN"];
-
     }
     return self;
 }
 
 - (void) quickConnect:(MetaServerEntry*) entry {
-	LLLog(@"GuiManager.quickConnect: setting server %@", [entry address]);
+	
+	LLLog(@"GuiManager.quickConnect: setting server %@, user %@", [entry address], [properties objectForKey:@"USERNAME"]);
 	[self serverSelected:entry]; // select the server
 	quickConnect = YES;
 }
@@ -146,11 +146,16 @@ NSString *defaultPassword;
 	LLLog(@"GuiManager.quickConnectPickTeamShip: picking ship and team");
 
 	// blow through outfit menu
-	[outfitCntrl play:self];
+	[outfitCntrl setQuickConnect:YES];
+	[outfitCntrl findTeam];
 	
 	// reset it some damage
 	[loginCntrl reset];
+}
+
+- (void) quickConnectComplete {
 	quickConnect = NO;
+	[outfitCntrl setQuickConnect:NO];
 }
 
 - (void) focusToGameView {
@@ -276,22 +281,6 @@ NSString *defaultPassword;
 		[entry setStatus:  DEFAULT];
 		[entry setGameType:    BRONCO];	
 		[selectServerCntrl addServerPassivly:entry];  // gets selected automatically  
-		
-		/*
-		// 1667734 add RendezVous
-		service = [[NSNetService alloc] initWithDomain:@""
-												  type:@"_netrek._tcp"
-												  name:@"" 
-												  port:2592];
-		if(service) {
-			[service setDelegate:[[LLNetServiceDelegate alloc] init]];
-			[service publish];
-			LLLog(@"GuiManager.awakeFromNib published NSNetService for netrek.");
-		}
-		else {
-			LLLog(@"GuiManager.awakeFromNib An error occurred initializing the NSNetService object.");
-		}
-		 */
 	}
 		
 	// register for quit
@@ -299,14 +288,9 @@ NSString *defaultPassword;
 											 selector:@selector(killed:) 
 												 name:NSMenuDidChangeItemNotification //NSWindowWillCloseNotification
 											   object:nil]; 
-	
-/* logs all notification of the system, use with care
-		
-	[[NSNotificationCenter defaultCenter] addObserver:self
-											 selector:@selector(testLog:) 
-												 name:nil
-											   object:nil];
-	//*/
+
+	// setup the online help panel
+	[self setUpKeyMapPanel];
 }
 
 - (void) killed:(NSNotification *)notification {
@@ -333,22 +317,6 @@ NSString *defaultPassword;
 
 - (void) testLog:(NSNotification *)notification {
 	LLLog(@"GuiManager.testLog: %@", [notification name]);	
-}
-
-- (void)handleTeamMask:(NSNumber *) mask {
-    // we have received a new mask, as long as we are not in the game
-    // the mask may change. So we keep an eye out for a change.
-    if ((gameState == GS_LOGIN_ACCEPTED) && (!multiThreaded)) {
-        // no outit done yet try 10ms delay
-		/*
-		 better implementation of singletrhread will query anyway
-		 
-        LLLog(@"GuiManager.handleTeamMask firing up a read");
-        [client performSelector: @selector(singleReadFromServer) 
-                     withObject: self 
-                     afterDelay: 1];
-		 */
-    }
 }
 
 // added synchronized access with the reader, disables the timer
@@ -740,6 +708,7 @@ NSString *defaultPassword;
             // a kill or error will get us out of the game  
             [soundPlayerActiveTheme playSoundEffect:@"ENTER_SHIP_SOUND"];
 			[notificationCenter postNotificationName:@"GM_GAME_ENTERED"];
+			[self quickConnectComplete];
             break;
         default:
             LLLog(@"GuiManager.gameEntered unknown gameState %@", [self gameStateAsString]);
@@ -825,50 +794,89 @@ NSString *defaultPassword;
     }
 }
 
+- (void) setUpKeyMapPanel {
+	//static LLHUDWindowController *helpWindowCntrl = nil;
+	
+	if (!helpWindowCntrl) {
+		helpWindowCntrl = [[LLHUDWindowController alloc] init];
+		[helpWindowCntrl awakeFromNib];
+	}
+	
+	[[helpWindowCntrl window] setTitle:@"Keyboard Mapping"];
+	//[[helpWindowCntrl window] orderFront:self];
+	
+	LLLog(@"GuiManager.setUpKeyMapPanel: DONE");
+}
+
 - (void) showKeyMapPanel {
+	
 	// toggle position
+	/*
 	if ([keyMapPanel isVisible]) {
 		[keyMapPanel close];
 	} else {
 		[keyMapPanel orderFront:self];
-	}		
+	}
+	 */
+	
+	static int mode = 0; // 0 = invisible, 1 = action keys, 2 is macro keys
+	
+	if ([[helpWindowCntrl window] isVisible]) {
+		if (mode == 1) {
+			// refill panel
+			[self fillKeyMapPanel];
+			// and show
+			[[helpWindowCntrl window] orderFront:self];
+			mode = 2;
+		} else {
+			[[helpWindowCntrl window] close];
+			mode = 0;
+		}
+	} else {
+		// refill panel
+		[self fillKeyMapPanel];
+		[[helpWindowCntrl window] orderFront:self];
+		mode = 1;
+	}
 }
 
 - (void) fillKeyMapPanel {
+
 	LLLog(@"GuiManager.fillKeyMapPanel setting keymap in help panel");
 
+	static bool showActionKeys = YES;
+	
 	NSMutableString *result = [[[NSMutableString alloc] init] autorelease];
 	
-	// add the actions
-	[result appendString:@"-----------Controls-----------\n"];
-	MTKeyMap *keyMap = [settingsCntrl actionKeyMap];
-	NSArray *actionKeys = [keyMap allKeys];
-	for (int i = 0; i < [actionKeys count]; i++) {
-		int action = [[actionKeys objectAtIndex:i] intValue];
-		[result appendString:[NSString stringWithFormat:@"%c - %@\n", 
-			[keyMap keyForAction:action], [keyMap descriptionForAction:action]]];
-    }
-	// add the distress macros too
-	[result appendString:@"---------Communication--------\n"];
-	keyMap = [settingsCntrl distressKeyMap];
-	actionKeys = [keyMap allKeys];
+	// toggle contents
+	if (showActionKeys) {
+		// add the distress macros too
+		//[result appendString:@"---------Communication--------\n"];
+		MTKeyMap *keyMap = [settingsCntrl distressKeyMap];
+		NSArray *actionKeys = [keyMap allKeys];
+		
+		for (int i = 0; i < [actionKeys count]; i++) {
+			int action = [[actionKeys objectAtIndex:i] intValue];
+			[result appendString:[NSString stringWithFormat:@"%c - %@\n", 
+				[keyMap keyForAction:action], [keyMap descriptionForAction:action]]];
+		}
+		showActionKeys = NO;
+	} else {
+		// add the actions	
+		//[result appendString:@"-----------Controls-----------\n"];
+		MTKeyMap *keyMap = [settingsCntrl actionKeyMap];
+		NSArray *actionKeys = [keyMap allKeys];
+		for (int i = 0; i < [actionKeys count]; i++) {
+			int action = [[actionKeys objectAtIndex:i] intValue];
+			[result appendString:[NSString stringWithFormat:@"%c - %@\n", 
+				[keyMap keyForAction:action], [keyMap descriptionForAction:action]]];
+		}
+		showActionKeys = YES;
+	}
 	
-	for (int i = 0; i < [actionKeys count]; i++) {
-		int action = [[actionKeys objectAtIndex:i] intValue];
-		[result appendString:[NSString stringWithFormat:@"%c - %@\n", 
-			[keyMap keyForAction:action], [keyMap descriptionForAction:action]]];
-    }
-	
-	
-	[keyMapList setString:result];
+	//[keyMapList setString:result];
+	[[helpWindowCntrl textField] setStringValue:result];
+	//LLLog(@"GuiManager.fillKeyMapPanel setting %@", [[helpWindowCntrl textField] stringValue]);
 }
 
-
-// demo 
-/*
-- (void) play {
-    [jtrekCntrl setServer:[selectServerCntrl selectedServer]];
-    [jtrekCntrl play:self];
-}
-*/
 @end

@@ -35,6 +35,9 @@
 	IBOutlet NSPopUpButton		   *wheelMouse;
 	IBOutlet NSPopUpButton		   *resolution;
 	
+	IBOutlet NSTextField		   *playerName;    
+	IBOutlet NSTextField		   *playerPassword; 
+	
 	IBOutlet KeyMapTableDataSource *actionKeyMapDataSource;
 	IBOutlet KeyMapTableDataSource *distressKeyMapDataSource;
 	

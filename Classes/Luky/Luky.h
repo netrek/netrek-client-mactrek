@@ -32,6 +32,8 @@
 #import "LLScreenResolution.h"
 #import "LLPersistantSettings.h"
 #import "LLRendezvousController.h"
+#import "LLHUDWindowController.h"
+#import "LLHUDWindow.h"
 
 
 

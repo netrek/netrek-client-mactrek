@@ -234,6 +234,8 @@
                 mainWindow = NSWindow; 
                 middleMouse = NSPopUpButton; 
                 musicLevel = NSSlider; 
+                playerName = NSTextField; 
+                playerPassword = NSTextField; 
                 resolution = NSPopUpButton; 
                 rightMouse = NSPopUpButton; 
                 trackingEnabledButton = NSButton; 

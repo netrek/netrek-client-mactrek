@@ -169,7 +169,7 @@ bool sendEvents = YES;
     }
     
     // debug print, very helpfull, but takes load
-    LLLog(@"LLNotificationCenter.postNotificationName %@", name);
+    //LLLog(@"LLNotificationCenter.postNotificationName %@", name);
     
     bool hasObserver = NO;
     

@@ -79,9 +79,19 @@
 			<string>1313</string>
 			<string>1312</string>
 		</array>
+		<key>80</key>
+		<array>
+			<string>1366</string>
+			<string>1365</string>
+		</array>
+		<key>81</key>
+		<array>
+			<string>1364</string>
+			<string>1362</string>
+		</array>
 	</dict>
 	<key>IBLastGroupID</key>
-	<string>75</string>
+	<string>82</string>
 	<key>IBLockedTabItems</key>
 	<array>
 		<integer>731</integer>
@@ -90,10 +100,10 @@
 	<integer>4</integer>
 	<key>IBOpenObjects</key>
 	<array>
-		<integer>242</integer>
-		<integer>1077</integer>
 		<integer>1321</integer>
 		<integer>238</integer>
+		<integer>242</integer>
+		<integer>1077</integer>
 	</array>
 	<key>IBSystem Version</key>
 	<string>8P2137</string>

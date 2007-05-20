@@ -58,10 +58,11 @@ bool validServer;
 		}
 	}
 	
-	if (entry != nil) {
+	if (bestEntry != nil) {
 		// do something with it
-		[entry retain];
-		[[LLNotificationCenter defaultCenter] postNotificationName:@"SC_QUICK_CONNECT_STAGE_2" userInfo:entry];
+		[bestEntry retain];
+		LLLog(@"SelectServerController.quickConnect selected %@ with %d players", [bestEntry address], [bestEntry players]);
+		[[LLNotificationCenter defaultCenter] postNotificationName:@"SC_QUICK_CONNECT_STAGE_2" userInfo:bestEntry];
 	}
 }
 
