@@ -100,9 +100,10 @@
 
 	LLLog(@"MetaServerTableDataSource.refreshServers");
 	
-	NSMutableArray *result;
+	NSMutableArray *result, *result2;
 	@try {
-		result = [meta readFromMetaServer:@"metaserver.netrek.org" atPort:3521];
+		result  = [meta readFromMetaServer:@"sage.real-time.com" atPort:3521];
+		result2 = [meta readFromMetaServer:@"orion.netrek.org" atPort:3521];
 	}
 	@catch (NSException * e) {
 		LLLog(@"MetaServerTableDataSource.refreshServers: error %@", [e reason]);
@@ -122,6 +123,20 @@
 			[self addServerPassivly:localhost];
 		}
 	}
+	
+	// add the new server in result2 to metaServerServers
+	for (int i=0; i < [result2 count]; i++) {
+		MetaServerEntry *entry = [result2 objectAtIndex:i];
+		if ([self findServer:[entry address]]) {
+			// server already there
+			//LLLog(@"MetaServerTableDataSource.refreshServers: duplicate entry for %@", [entry address]);
+		} else {
+			// new, must add
+			LLLog(@"MetaServerTableDataSource.refreshServers: new entry for %@", [entry address]);
+			[metaServerServers addObject:entry];
+		}			
+	}
+	
 	// rendezvous too
 	[rendezvousController activateBrowsing:YES];
 	[rendezvousController activatePublishing:YES];

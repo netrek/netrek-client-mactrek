@@ -33,6 +33,7 @@
     IBOutlet NSTextField *messageTextField; // bug in IB
 	
 	PainterFactory* painter;
+	bool quickConnect;
 }
 
 // IB
@@ -44,5 +45,7 @@
 - (void) setInstructionField:(NSString *)message;
 - (void) setInstructionFieldToDefault;
 - (void) setActivePainter:(PainterFactory*)painter;
+- (void) setQuickConnect:(bool)yesno;
+- (void) findTeam;
 
 @end

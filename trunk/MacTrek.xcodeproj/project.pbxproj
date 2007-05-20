@@ -129,15 +129,16 @@
 		528E7EB70B0A67DB00B22943 /* Startrek Deep Space Nine- Enterprise D Destroyed.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 528E7EB60B0A67DB00B22943 /* Startrek Deep Space Nine- Enterprise D Destroyed.jpg */; };
 		528E7EB90B0A67E100B22943 /* carina-earth.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 528E7EB80B0A67E100B22943 /* carina-earth.jpg */; };
 		528E7EBB0B0A67E800B22943 /* horsehead_region-1k.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 528E7EBA0B0A67E800B22943 /* horsehead_region-1k.jpg */; };
-		528E7EBD0B0A67ED00B22943 /* star_wreck_laivasto_kaartaa_ulos.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 528E7EBC0B0A67ED00B22943 /* star_wreck_laivasto_kaartaa_ulos.jpg */; };
 		528E7EBF0B0A67F200B22943 /* stklingon_attack02.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 528E7EBE0B0A67F200B22943 /* stklingon_attack02.jpg */; };
 		528E7EC10B0A67FB00B22943 /* federation.png in Resources */ = {isa = PBXBuildFile; fileRef = 528E7EC00B0A67FB00B22943 /* federation.png */; };
 		528E7EC30B0A680000B22943 /* klingon.png in Resources */ = {isa = PBXBuildFile; fileRef = 528E7EC20B0A680000B22943 /* klingon.png */; };
 		528E7EC70B0A680700B22943 /* orion.png in Resources */ = {isa = PBXBuildFile; fileRef = 528E7EC60B0A680700B22943 /* orion.png */; };
 		528E7EC90B0A680A00B22943 /* romulan.png in Resources */ = {isa = PBXBuildFile; fileRef = 528E7EC80B0A680A00B22943 /* romulan.png */; };
-		528E7EF50B0A6CAC00B22943 /* Screenshot_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 528E7EF40B0A6CAC00B22943 /* Screenshot_1.png */; };
 		528E83680B0A8F5600B22943 /* SimpleBaseClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 528E83670B0A8F5600B22943 /* SimpleBaseClass.m */; };
 		528FEEC00BD6D0C40092C121 /* LLMutableDataExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 528FEEBF0BD6D0C40092C121 /* LLMutableDataExtension.m */; };
+		5293B13E0C00791900794379 /* LLHUDWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 5293B13B0C00791900794379 /* LLHUDWindow.m */; };
+		5293B13F0C00791900794379 /* LLHUDWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5293B13D0C00791900794379 /* LLHUDWindowController.m */; };
+		5293B1410C00792B00794379 /* hud_titlebar-close.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 5293B1400C00792B00794379 /* hud_titlebar-close.tiff */; };
 		529847F20A7E909C00918799 /* Quartz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 529847F10A7E909C00918799 /* Quartz.framework */; };
 		529F087E0B06934F00255735 /* Backgrounds in Resources */ = {isa = PBXBuildFile; fileRef = 529F078D0B06934F00255735 /* Backgrounds */; };
 		529F087F0B06934F00255735 /* Buttons in Resources */ = {isa = PBXBuildFile; fileRef = 529F07970B06934F00255735 /* Buttons */; };
@@ -517,7 +518,6 @@
 		52F5DB2C0B1A69E000B8B9C5 /* tal-reent.c in Sources */ = {isa = PBXBuildFile; fileRef = 52F5D9C10B1A69E000B8B9C5 /* tal-reent.c */; };
 		52F5DB2D0B1A69E000B8B9C5 /* version.c in Sources */ = {isa = PBXBuildFile; fileRef = 52F5D9C20B1A69E000B8B9C5 /* version.c */; };
 		52F819800B8EDB73003ED1BE /* MTMouseMap.m in Sources */ = {isa = PBXBuildFile; fileRef = 52F8197F0B8EDB73003ED1BE /* MTMouseMap.m */; };
-		52F819910B8F1280003ED1BE /* mouse.png in Resources */ = {isa = PBXBuildFile; fileRef = 52F819900B8F1280003ED1BE /* mouse.png */; };
 		8D11072A0486CEB800E47090 /* MainMenu.nib in Resources */ = {isa = PBXBuildFile; fileRef = 29B97318FDCFA39411CA2CEA /* MainMenu.nib */; };
 		8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
 		8D11072D0486CEB800E47090 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
@@ -768,17 +768,20 @@
 		528E7EB60B0A67DB00B22943 /* Startrek Deep Space Nine- Enterprise D Destroyed.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "Startrek Deep Space Nine- Enterprise D Destroyed.jpg"; path = "Resources/Backgrounds/Startrek Deep Space Nine- Enterprise D Destroyed.jpg"; sourceTree = "<group>"; };
 		528E7EB80B0A67E100B22943 /* carina-earth.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "carina-earth.jpg"; path = "Resources/Backgrounds/carina-earth.jpg"; sourceTree = "<group>"; };
 		528E7EBA0B0A67E800B22943 /* horsehead_region-1k.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "horsehead_region-1k.jpg"; path = "Resources/Backgrounds/horsehead_region-1k.jpg"; sourceTree = "<group>"; };
-		528E7EBC0B0A67ED00B22943 /* star_wreck_laivasto_kaartaa_ulos.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = star_wreck_laivasto_kaartaa_ulos.jpg; path = Resources/Backgrounds/star_wreck_laivasto_kaartaa_ulos.jpg; sourceTree = "<group>"; };
 		528E7EBE0B0A67F200B22943 /* stklingon_attack02.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = stklingon_attack02.jpg; path = Resources/Backgrounds/stklingon_attack02.jpg; sourceTree = "<group>"; };
 		528E7EC00B0A67FB00B22943 /* federation.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = federation.png; path = Resources/Buttons/Logos/federation.png; sourceTree = "<group>"; };
 		528E7EC20B0A680000B22943 /* klingon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = klingon.png; path = Resources/Buttons/Logos/klingon.png; sourceTree = "<group>"; };
 		528E7EC60B0A680700B22943 /* orion.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = orion.png; path = Resources/Buttons/Logos/orion.png; sourceTree = "<group>"; };
 		528E7EC80B0A680A00B22943 /* romulan.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = romulan.png; path = Resources/Buttons/Logos/romulan.png; sourceTree = "<group>"; };
-		528E7EF40B0A6CAC00B22943 /* Screenshot_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Screenshot_1.png; path = Resources/Backgrounds/Screenshot_1.png; sourceTree = "<group>"; };
 		528E83660B0A8F5600B22943 /* SimpleBaseClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimpleBaseClass.h; sourceTree = "<group>"; };
 		528E83670B0A8F5600B22943 /* SimpleBaseClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SimpleBaseClass.m; sourceTree = "<group>"; };
 		528FEEBE0BD6D0C40092C121 /* LLMutableDataExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLMutableDataExtension.h; sourceTree = "<group>"; };
 		528FEEBF0BD6D0C40092C121 /* LLMutableDataExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLMutableDataExtension.m; sourceTree = "<group>"; };
+		5293B13A0C00791900794379 /* LLHUDWindow.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = LLHUDWindow.h; sourceTree = "<group>"; };
+		5293B13B0C00791900794379 /* LLHUDWindow.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = LLHUDWindow.m; sourceTree = "<group>"; };
+		5293B13C0C00791900794379 /* LLHUDWindowController.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = LLHUDWindowController.h; sourceTree = "<group>"; };
+		5293B13D0C00791900794379 /* LLHUDWindowController.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = LLHUDWindowController.m; sourceTree = "<group>"; };
+		5293B1400C00792B00794379 /* hud_titlebar-close.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = "hud_titlebar-close.tiff"; sourceTree = "<group>"; };
 		5294F6EE0B679A1400DE60C6 /* LLLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLLog.h; sourceTree = "<group>"; };
 		529847F10A7E909C00918799 /* Quartz.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quartz.framework; path = /System/Library/Frameworks/Quartz.framework; sourceTree = "<absolute>"; };
 		529F078D0B06934F00255735 /* Backgrounds */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Backgrounds; path = Resources/Backgrounds; sourceTree = "<group>"; };
@@ -1185,7 +1188,6 @@
 		52F5D9C20B1A69E000B8B9C5 /* version.c */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.c; path = version.c; sourceTree = "<group>"; };
 		52F8197E0B8EDB73003ED1BE /* MTMouseMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTMouseMap.h; sourceTree = "<group>"; };
 		52F8197F0B8EDB73003ED1BE /* MTMouseMap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTMouseMap.m; sourceTree = "<group>"; };
-		52F819900B8F1280003ED1BE /* mouse.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = mouse.png; path = "../../Design Stuff/Images MacTrek/mouse.png"; sourceTree = SOURCE_ROOT; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Info.plist; sourceTree = "<group>"; };
 		8D1107320486CEB800E47090 /* MacTrek.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MacTrek.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -1292,11 +1294,8 @@
 				528E7EB60B0A67DB00B22943 /* Startrek Deep Space Nine- Enterprise D Destroyed.jpg */,
 				528E7EB80B0A67E100B22943 /* carina-earth.jpg */,
 				528E7EBA0B0A67E800B22943 /* horsehead_region-1k.jpg */,
-				528E7EBC0B0A67ED00B22943 /* star_wreck_laivasto_kaartaa_ulos.jpg */,
 				528E7EBE0B0A67F200B22943 /* stklingon_attack02.jpg */,
-				528E7EF40B0A6CAC00B22943 /* Screenshot_1.png */,
 				52C7A7EF0B17800900F2D523 /* mactrek-mosaic.jpg */,
-				52F819900B8F1280003ED1BE /* mouse.png */,
 				5270A4A50BAB0F9600635F95 /* SpockTorpedo.jpg */,
 			);
 			name = Resources;
@@ -1467,13 +1466,10 @@
 		5212F0150B08FFB80059A8B1 /* Gui */ = {
 			isa = PBXGroup;
 			children = (
-				5212F0160B08FFB80059A8B1 /* DemoClientController.h */,
-				5212F0170B08FFB80059A8B1 /* DemoClientController.m */,
-				5212F0180B08FFB80059A8B1 /* GameController.h */,
-				5212F0190B08FFB80059A8B1 /* GameController.m */,
-				5212F01A0B08FFB80059A8B1 /* Gui.h */,
 				5212F01B0B08FFB80059A8B1 /* GuiManager.h */,
 				5212F01C0B08FFB80059A8B1 /* GuiManager.m */,
+				5212F0180B08FFB80059A8B1 /* GameController.h */,
+				5212F0190B08FFB80059A8B1 /* GameController.m */,
 				5212F01D0B08FFB80059A8B1 /* LocalServerController.h */,
 				5212F01E0B08FFB80059A8B1 /* LocalServerController.m */,
 				5212F01F0B08FFB80059A8B1 /* LoginController.h */,
@@ -1490,6 +1486,9 @@
 				5212F02A0B08FFB80059A8B1 /* SettingsController.m */,
 				52AD18680BF25FB7007AF259 /* MTUDPWindowController.h */,
 				52AD18690BF25FB7007AF259 /* MTUDPWindowController.m */,
+				5212F0160B08FFB80059A8B1 /* DemoClientController.h */,
+				5212F0170B08FFB80059A8B1 /* DemoClientController.m */,
+				5212F01A0B08FFB80059A8B1 /* Gui.h */,
 			);
 			path = Gui;
 			sourceTree = "<group>";
@@ -1668,6 +1667,10 @@
 		528E7DE90B0A649E00B22943 /* LLGui */ = {
 			isa = PBXGroup;
 			children = (
+				5293B13A0C00791900794379 /* LLHUDWindow.h */,
+				5293B13B0C00791900794379 /* LLHUDWindow.m */,
+				5293B13C0C00791900794379 /* LLHUDWindowController.h */,
+				5293B13D0C00791900794379 /* LLHUDWindowController.m */,
 				528E7DEA0B0A649E00B22943 /* LLBar.h */,
 				528E7DEB0B0A649E00B22943 /* LLBar.m */,
 				528E7DEC0B0A649E00B22943 /* LLCharFormatter.h */,
@@ -1697,6 +1700,7 @@
 		528E7DFE0B0A649E00B22943 /* LLResources */ = {
 			isa = PBXGroup;
 			children = (
+				5293B1400C00792B00794379 /* hud_titlebar-close.tiff */,
 				528E7DFF0B0A649E00B22943 /* highlight_blue.tiff */,
 				528E7E000B0A649E00B22943 /* highlight_green.tiff */,
 				528E7E010B0A649E00B22943 /* highlight_grey.tiff */,
@@ -2224,19 +2228,17 @@
 				528E7EB70B0A67DB00B22943 /* Startrek Deep Space Nine- Enterprise D Destroyed.jpg in Resources */,
 				528E7EB90B0A67E100B22943 /* carina-earth.jpg in Resources */,
 				528E7EBB0B0A67E800B22943 /* horsehead_region-1k.jpg in Resources */,
-				528E7EBD0B0A67ED00B22943 /* star_wreck_laivasto_kaartaa_ulos.jpg in Resources */,
 				528E7EBF0B0A67F200B22943 /* stklingon_attack02.jpg in Resources */,
 				528E7EC10B0A67FB00B22943 /* federation.png in Resources */,
 				528E7EC30B0A680000B22943 /* klingon.png in Resources */,
 				528E7EC70B0A680700B22943 /* orion.png in Resources */,
 				528E7EC90B0A680A00B22943 /* romulan.png in Resources */,
-				528E7EF50B0A6CAC00B22943 /* Screenshot_1.png in Resources */,
 				52C7A7F00B17800900F2D523 /* mactrek-mosaic.jpg in Resources */,
 				52756F210B3554CA00631149 /* PRECOMPILED in Resources */,
-				52F819910B8F1280003ED1BE /* mouse.png in Resources */,
 				5270A4A60BAB0F9600635F95 /* SpockTorpedo.jpg in Resources */,
 				5253D56F0BCF790E0075E0D5 /* licence.rtf in Resources */,
 				527B94E10BFE0C3600B4D740 /* MacTrekUserManual.pdf in Resources */,
+				5293B1410C00792B00794379 /* hud_titlebar-close.tiff in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2737,6 +2739,8 @@
 				52E520470BE7AD3C002B45E2 /* rsa_box_4.c in Sources */,
 				52E520480BE7AD3C002B45E2 /* rsa_box.c in Sources */,
 				52AD186A0BF25FB7007AF259 /* MTUDPWindowController.m in Sources */,
+				5293B13E0C00791900794379 /* LLHUDWindow.m in Sources */,
+				5293B13F0C00791900794379 /* LLHUDWindowController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

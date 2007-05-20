@@ -17,11 +17,12 @@
 												  @"OPEN:", 
 											@"Wait queue:", 
 			@"Nobody", 
-			@"* Timed out", 
+			@"Timed out", 
 			@"No connection",
 			@"Active", 
 			@"CANNOT CONNECT", 
 			@"DEFAULT SERVER",
+			@"Flooding",
 			nil];
 		
 	}
@@ -69,7 +70,10 @@
 - (enum ServerStatusType) setStatusWithString:(NSString *) line {
 	
 	for (int i = 0; i < [statusStrings count]; ++i) {
-		if ([line  compare:[statusStrings objectAtIndex:i]] != -1) {
+		NSRange range = [line rangeOfString:[statusStrings objectAtIndex:i]];
+		
+		// look for substring which will catch leading * thingies
+		if (range.location != NSNotFound) {
 			[self setStatus: i];
 			return [self status];
 		}

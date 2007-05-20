@@ -240,6 +240,17 @@ struct screenMode originalMode;
             [useRCD setState:NSOffState];
         }        
     }
+	
+	val = [settings valueForKey:@"USERNAME"];	
+    if (val != nil) {
+		[playerName setStringValue:(NSString *)val];
+    }
+	
+	val = [settings valueForKey:@"PASSWORD"];
+    if (val != nil) {
+		[playerPassword setStringValue:(NSString *)val];
+    }
+	
 }
 
 - (void) saveSettings {
@@ -269,6 +280,8 @@ struct screenMode originalMode;
 	// add the resolution
 	[settings setLazyValue:[[resolution selectedItem] title]  forKey:@"RESOLUTION"];	
 	[settings setLazyValue:[NSNumber numberWithBool:[self useRCD]] forKey:@"USE_RCD"];
+	[settings setLazyValue:[playerName stringValue] forKey:@"USERNAME"];
+	[settings setLazyValue:[playerName stringValue] forKey:@"PASSWORD"];	
 	
 	if (toFile) {
 		[settings update];

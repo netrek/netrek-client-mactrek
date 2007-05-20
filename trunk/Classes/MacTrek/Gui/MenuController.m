@@ -45,7 +45,7 @@
 		[startServerButton setEnabled:YES];
 	} else {
 		[startServerButton setEnabled:NO];
-	}
+	}	
 }
 
 // internal routines
