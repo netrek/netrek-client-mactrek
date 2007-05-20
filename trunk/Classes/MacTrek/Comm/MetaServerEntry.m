@@ -14,8 +14,8 @@
 	self = [super init];
 	if (self != nil) {
 		statusStrings = [[NSArray alloc] initWithObjects:    
-												  @"OPEN:", 
-											@"Wait queue:", 
+			@"OPEN:", 
+			@"Wait queue:", 
 			@"Nobody", 
 			@"Timed out", 
 			@"No connection",
