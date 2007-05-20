@@ -100,10 +100,10 @@
 	<integer>4</integer>
 	<key>IBOpenObjects</key>
 	<array>
-		<integer>1321</integer>
-		<integer>238</integer>
-		<integer>242</integer>
 		<integer>1077</integer>
+		<integer>1321</integer>
+		<integer>242</integer>
+		<integer>238</integer>
 	</array>
 	<key>IBSystem Version</key>
 	<string>8P2137</string>

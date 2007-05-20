@@ -173,7 +173,11 @@
         } else if ([[aTableColumn identifier] isEqualTo: @"status"]) {
             return [entry statusString];
         } else if ([[aTableColumn identifier] isEqualTo: @"players"]) {
-            return [NSString stringWithFormat:@"%d", [entry players]];
+			if ([entry status] == WAIT) { // 1718734	 support for wait queus
+				return @"FULL";
+			} else {
+				return [NSString stringWithFormat:@"%d", [entry players]];
+			}
         } else if ([[aTableColumn identifier] isEqualTo: @"game"]) {
             return [entry gameTypeString];
         } else {

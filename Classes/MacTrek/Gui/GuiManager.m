@@ -131,6 +131,20 @@ NSString *defaultPassword;
 }
 
 - (void) quickConnectAutoLogin {
+	
+	/*
+	if ([properties objectForKey:@"USERNAME"] != nil) {
+		[defaultName release];
+		defaultName = [properties objectForKey:@"USERNAME"];
+		[defaultName retain];
+	} 
+	
+	if ([properties objectForKey:@"PASSWORD"] != nil) {
+		[defaultPassword release];
+		defaultPassword = [properties objectForKey:@"PASSWORD"];
+		[defaultPassword retain];
+	}
+	*/
 	LLLog(@"GuiManager.quickConnectAutoLogin: logging in with %@", defaultName);
 	[notificationCenter postNotificationName:@"GM_SEND_LOGIN_REQ" 
                                       object:nil 
