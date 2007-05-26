@@ -1550,9 +1550,14 @@
     // get the name
     NSString *label = [self labelForPlanet:planet];
 	
-	// get color
-	NSColor *col = [[planet owner] colorForTeam];
-	// NSColor *col = [NSColor whiteColor];
+	// get color unless we cannot know the color
+	NSColor *col;
+	int mask = [[[universe playerThatIsMe] team] bitMask];
+	if (([planet info] & mask) != 0) {
+		col = [[planet owner] colorForTeam];
+	} else {
+		col = [NSColor whiteColor];		
+	}
     
 	// check accelleration
 	// this is short code, but heavy on processor

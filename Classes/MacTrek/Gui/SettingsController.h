@@ -28,6 +28,7 @@
 	IBOutlet NSButton              *trackingEnabledButton;
 	IBOutlet NSButton              *logToConsole;
 	IBOutlet NSButton              *useRCD;
+	IBOutlet NSButton              *tipsButton;
 	
 	IBOutlet NSPopUpButton		   *leftMouse;
 	IBOutlet NSPopUpButton		   *rightMouse;
@@ -46,13 +47,13 @@
 }
 
 - (MTKeyMap*) distressKeyMap;
-- (MTKeyMap*) actionKeyMap;
-
+- (MTKeyMap*) actionKeyMap; 
 - (void) setResolutionByString:(NSString*) resolutionString;
 - (void) resolutionChanged:(NSNotification *)notification;
 - (bool)  trackingEnabled;
 - (bool)  soundEnabled;
 - (bool)  voiceEnabled;
+- (bool)  tipsEnabled;
 - (bool)  voiceCommands;
 - (bool)  accelerate;
 - (bool)  useRCD;

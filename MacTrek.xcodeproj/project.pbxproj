@@ -85,6 +85,7 @@
 		52248D260BD568E000B80C6B /* LLSocketStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 52248D250BD568E000B80C6B /* LLSocketStream.m */; };
 		522F30AF0B0B1D6200E7DDED /* RSAWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 522F30AE0B0B1D6200E7DDED /* RSAWrapper.m */; };
 		522F9F4C0B96C842001C4896 /* MTDistress.m in Sources */ = {isa = PBXBuildFile; fileRef = 522F9F4B0B96C842001C4896 /* MTDistress.m */; };
+		524112EF0C08778500342E93 /* MTTipOfTheDayController.m in Sources */ = {isa = PBXBuildFile; fileRef = 524112EE0C08778500342E93 /* MTTipOfTheDayController.m */; };
 		5253D56F0BCF790E0075E0D5 /* licence.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 5253D56E0BCF790E0075E0D5 /* licence.rtf */; };
 		5256E09F0B931D560078C491 /* MTMacroHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 5256E09E0B931D560078C491 /* MTMacroHandler.m */; };
 		5256E0B20B9320D80078C491 /* MTMacro.m in Sources */ = {isa = PBXBuildFile; fileRef = 5256E0B10B9320D80078C491 /* MTMacro.m */; };
@@ -148,6 +149,7 @@
 		529F08830B06934F00255735 /* SoundEffects in Resources */ = {isa = PBXBuildFile; fileRef = 529F08550B06934F00255735 /* SoundEffects */; };
 		529F08840B06934F00255735 /* SoundEffects2 in Resources */ = {isa = PBXBuildFile; fileRef = 529F086D0B06934F00255735 /* SoundEffects2 */; };
 		529F088C0B06935F00255735 /* LLResources in Resources */ = {isa = PBXBuildFile; fileRef = 529F08850B06935F00255735 /* LLResources */; };
+		52AA52290C08834200C68D78 /* tips.plist in Resources */ = {isa = PBXBuildFile; fileRef = 52AA52280C08834200C68D78 /* tips.plist */; };
 		52AD186A0BF25FB7007AF259 /* MTUDPWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 52AD18690BF25FB7007AF259 /* MTUDPWindowController.m */; };
 		52BA84C90B10DFFF00F71673 /* SimpleTracker.m in Sources */ = {isa = PBXBuildFile; fileRef = 52BA84C80B10DFFF00F71673 /* SimpleTracker.m */; };
 		52BA84FB0B10E22500F71673 /* TrackUpdate.m in Sources */ = {isa = PBXBuildFile; fileRef = 52BA84FA0B10E22500F71673 /* TrackUpdate.m */; };
@@ -695,6 +697,8 @@
 		522F30AE0B0B1D6200E7DDED /* RSAWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RSAWrapper.m; path = RSA/RSAWrapper.m; sourceTree = "<group>"; };
 		522F9F4A0B96C842001C4896 /* MTDistress.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTDistress.h; sourceTree = "<group>"; };
 		522F9F4B0B96C842001C4896 /* MTDistress.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTDistress.m; sourceTree = "<group>"; };
+		524112ED0C08778500342E93 /* MTTipOfTheDayController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTTipOfTheDayController.h; sourceTree = "<group>"; };
+		524112EE0C08778500342E93 /* MTTipOfTheDayController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTTipOfTheDayController.m; sourceTree = "<group>"; };
 		5253D56E0BCF790E0075E0D5 /* licence.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = licence.rtf; sourceTree = "<group>"; };
 		5256E09D0B931D560078C491 /* MTMacroHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTMacroHandler.h; sourceTree = "<group>"; };
 		5256E09E0B931D560078C491 /* MTMacroHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTMacroHandler.m; sourceTree = "<group>"; };
@@ -793,6 +797,7 @@
 		529F08550B06934F00255735 /* SoundEffects */ = {isa = PBXFileReference; lastKnownFileType = folder; name = SoundEffects; path = Resources/SoundEffects; sourceTree = "<group>"; };
 		529F086D0B06934F00255735 /* SoundEffects2 */ = {isa = PBXFileReference; lastKnownFileType = folder; name = SoundEffects2; path = Resources/SoundEffects2; sourceTree = "<group>"; };
 		529F08850B06935F00255735 /* LLResources */ = {isa = PBXFileReference; lastKnownFileType = folder; name = LLResources; path = Classes/Luky/LLResources; sourceTree = "<group>"; };
+		52AA52280C08834200C68D78 /* tips.plist */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text.plist; name = tips.plist; path = Resources/tips.plist; sourceTree = "<group>"; };
 		52AD18680BF25FB7007AF259 /* MTUDPWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTUDPWindowController.h; sourceTree = "<group>"; };
 		52AD18690BF25FB7007AF259 /* MTUDPWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTUDPWindowController.m; sourceTree = "<group>"; };
 		52BA66300B10AE6100C7EB70 /* Version.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Version.h; sourceTree = "<group>"; };
@@ -1272,6 +1277,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				52AA52280C08834200C68D78 /* tips.plist */,
 				527B94E00BFE0C3600B4D740 /* MacTrekUserManual.pdf */,
 				5253D56E0BCF790E0075E0D5 /* licence.rtf */,
 				52756EA90B3554CA00631149 /* PRECOMPILED */,
@@ -1475,6 +1481,8 @@
 				5212F01C0B08FFB80059A8B1 /* GuiManager.m */,
 				5212F0180B08FFB80059A8B1 /* GameController.h */,
 				5212F0190B08FFB80059A8B1 /* GameController.m */,
+				5212F0290B08FFB80059A8B1 /* SettingsController.h */,
+				5212F02A0B08FFB80059A8B1 /* SettingsController.m */,
 				5212F01D0B08FFB80059A8B1 /* LocalServerController.h */,
 				5212F01E0B08FFB80059A8B1 /* LocalServerController.m */,
 				5212F01F0B08FFB80059A8B1 /* LoginController.h */,
@@ -1487,13 +1495,13 @@
 				5212F0260B08FFB80059A8B1 /* Postman.m */,
 				5212F0270B08FFB80059A8B1 /* SelectServerController.h */,
 				5212F0280B08FFB80059A8B1 /* SelectServerController.m */,
-				5212F0290B08FFB80059A8B1 /* SettingsController.h */,
-				5212F02A0B08FFB80059A8B1 /* SettingsController.m */,
 				52AD18680BF25FB7007AF259 /* MTUDPWindowController.h */,
 				52AD18690BF25FB7007AF259 /* MTUDPWindowController.m */,
 				5212F0160B08FFB80059A8B1 /* DemoClientController.h */,
 				5212F0170B08FFB80059A8B1 /* DemoClientController.m */,
 				5212F01A0B08FFB80059A8B1 /* Gui.h */,
+				524112ED0C08778500342E93 /* MTTipOfTheDayController.h */,
+				524112EE0C08778500342E93 /* MTTipOfTheDayController.m */,
 			);
 			path = Gui;
 			sourceTree = "<group>";
@@ -2244,6 +2252,7 @@
 				5253D56F0BCF790E0075E0D5 /* licence.rtf in Resources */,
 				527B94E10BFE0C3600B4D740 /* MacTrekUserManual.pdf in Resources */,
 				5293B1410C00792B00794379 /* hud_titlebar-close.tiff in Resources */,
+				52AA52290C08834200C68D78 /* tips.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2747,6 +2756,7 @@
 				5293B13E0C00791900794379 /* LLHUDWindow.m in Sources */,
 				5293B13F0C00791900794379 /* LLHUDWindowController.m in Sources */,
 				52C6548E0C04CECF004330BE /* MTFontInstaller.m in Sources */,
+				524112EF0C08778500342E93 /* MTTipOfTheDayController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

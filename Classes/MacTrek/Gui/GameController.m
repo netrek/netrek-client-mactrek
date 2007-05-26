@@ -25,7 +25,7 @@ bool forceBarUpdate = NO;
                              object:nil useLocks:NO useMainRunLoop:NO]; // is fired in main loop
     [notificationCenter addObserver:self selector:@selector(newInfoMessage:) name:@"GV_MODE_INFO"
                              object:nil useLocks:NO useMainRunLoop:NO]; // is fired in main loop
-    universe = [Universe defaultInstance];
+	universe = [Universe defaultInstance];
     
     // set up discrete bars
     [armiesBar setDiscrete:YES];
@@ -80,7 +80,6 @@ bool forceBarUpdate = NO;
 - (void) setListenToVoiceCommands:(bool)listen {
 	[voiceCntrl setEnableListening:listen];
 }
-
 
 - (void) repaint:(float)timeSinceLastPaint {
     // invoked by timer in gui manager

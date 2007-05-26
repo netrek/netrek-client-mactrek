@@ -14,6 +14,9 @@
 	NSTextField *textField;
 }
 
+-(LLHUDWindow*) createWindowWithTextFieldWithSize:(NSSize) windowSize;
+-(LLHUDWindow*) createWindowWithTextFieldInFrame:(NSRect) windowFrame;
+
 -(NSTextField*) textField;
 -(LLHUDWindow*) window;
 
