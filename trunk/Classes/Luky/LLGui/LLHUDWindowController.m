@@ -10,42 +10,42 @@
 
 @implementation LLHUDWindowController
 
-- (void)awakeFromNib
-{
-    // Make a rect to position the window at the top-right of the screen.
-    NSSize windowSize = NSMakeSize(325.0, 765.0);
-    NSSize screenSize = [[NSScreen mainScreen] frame].size;
-    //NSRect windowFrame = NSMakeRect(screenSize.width - windowSize.width - 10.0, 
-	//screenSize.height - windowSize.height, // - [NSMenuView menuBarHeight] - 10.0 
-	//	windowSize.width, windowSize.height);
+-(LLHUDWindow*) createWindowWithTextFieldWithSize:(NSSize) windowSize {
+	
+	NSSize screenSize = [[NSScreen mainScreen] frame].size;
 	
 	// left side full screen
 	NSRect windowFrame = NSMakeRect(0, screenSize.height - windowSize.height, windowSize.width, windowSize.height);
-    
+	
+	return [self createWindowWithTextFieldInFrame:windowFrame];
+}
+
+-(LLHUDWindow*) createWindowWithTextFieldInFrame:(NSRect) windowFrame {
+		    
     // Create a HUDWindow.
-    // Note: the styleMask is ignored; NSBorderlessWindowMask is always used.
+	[window release];
+	// Note: the styleMask is ignored; NSBorderlessWindowMask is always used.
     window = [[LLHUDWindow alloc] initWithContentRect:windowFrame 
-                                          styleMask:NSBorderlessWindowMask 
-                                            backing:NSBackingStoreBuffered 
-                                              defer:NO];
+											styleMask:NSBorderlessWindowMask 
+											  backing:NSBackingStoreBuffered 
+												defer:NO];
     
     // Add some text to the window.
-    //float textHeight = 20.0;
-    //textField = [[NStextField alloc] initWithFrame:NSMakeRect(0.0, (windowSize.height / 2.0) - (textHeight / 2.0), windowSize.width, textHeight)];	
-	textField = [[NSTextField alloc] initWithFrame:NSMakeRect(10.0, 0.0, windowSize.width, windowSize.height - 20.0)];
-
+    float textHeight = 20.0;
+    [textField release];  // its retained, by the window
+	textField = [[NSTextField alloc] initWithFrame:NSMakeRect(textHeight / 2.0, 0.0, windowFrame.size.width, windowFrame.size.height - textHeight)];
+	
     [[window contentView] addSubview:textField];
     [textField setEditable:NO];
     [textField setTextColor:[NSColor whiteColor]];
     [textField setDrawsBackground:NO];
     [textField setBordered:NO];
-    //[textField setAlignment:NSCenterTextAlignment];
-    //[textField setString:@"Some sample text"];
-    //[textField release];  // keep it around so we can change the contents
     
     // Set the window's title and display it.
     [window setTitle:@"Default title"];
     //[window orderFront:self]; // initially hide ourselfs
+	
+	return window;	
 }
 
 -(NSTextField*) textField {

@@ -251,6 +251,15 @@ struct screenMode originalMode;
 		[playerPassword setStringValue:(NSString *)val];
     }
 	
+	val = [settings valueForKey:@"TIP_OF_THE_DAY"];
+    if (val != nil) {
+        if ([val boolValue]) {
+			[tipsButton setState:NSOnState];   
+        } else {
+            [tipsButton setState:NSOffState];
+        }     
+	}
+	
 }
 
 - (void) saveSettings {
@@ -282,6 +291,7 @@ struct screenMode originalMode;
 	[settings setLazyValue:[NSNumber numberWithBool:[self useRCD]] forKey:@"USE_RCD"];
 	[settings setLazyValue:[playerName stringValue] forKey:@"USERNAME"];
 	[settings setLazyValue:[playerName stringValue] forKey:@"PASSWORD"];	
+	[settings setLazyValue:[NSNumber numberWithBool:[self tipsEnabled]] forKey:@"TIP_OF_THE_DAY"];
 	
 	if (toFile) {
 		[settings update];
@@ -331,6 +341,10 @@ struct screenMode originalMode;
 
 - (bool) accelerate {
     return ([accelerateButton state] == NSOnState);
+}
+
+- (bool)  tipsEnabled {
+	return ([tipsButton state] == NSOnState);
 }
 
 - (bool) voiceCommands {

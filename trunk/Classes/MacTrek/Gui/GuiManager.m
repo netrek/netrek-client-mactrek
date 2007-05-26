@@ -66,6 +66,7 @@ NSString *defaultPassword;
         soundPlayerActiveTheme = soundPlayerTheme2;
         painterActiveTheme = painterTheme2;
         activeTheme = -1;
+		tipCntrl = [[MTTipOfTheDayController alloc] init];
         
         // reset gameState
         gameState = GS_NO_SERVER_SELECTED;
@@ -104,6 +105,9 @@ NSString *defaultPassword;
         [notificationCenter addObserver:self selector:@selector(increaseStartUpCounter) 
                                    name:@"SP_SOUNDS_CACHED"]; 
 		
+		// new painter selected?
+		[notificationCenter addObserver:self selector:@selector(settingsChanged:) name:@"SC_NEW_SETTINGS"];
+		
 		// help pressed
 		[notificationCenter addObserver:self selector:@selector(showKeyMapPanel) 
                                    name:@"GV_SHOW_HELP" object:nil];
@@ -121,6 +125,10 @@ NSString *defaultPassword;
 		[notificationCenter addObserver:self selector:@selector(shutdown) name:@"MC_MACTREK_SHUTDOWN"];
     }
     return self;
+}
+
+- (void) settingsChanged:(SettingsController*) settingsController  {
+	[self setTheme];
 }
 
 - (void) quickConnect:(MetaServerEntry*) entry {
@@ -249,16 +257,22 @@ NSString *defaultPassword;
         [menuButton setNeedsDisplay:YES];
         // or go automaticaly after 1 seconds (use obj nil since menu does not know us
         [menuCntrl  performSelector:@selector(leaveSplashScreen) withObject:nil afterDelay: 1];
-		/*
-		if (splashView != nil) {
-			[splashView performSelector:@selector(stop:) withObject:self afterDelay: 10];
-		}*/
+		
+		// if we need to, show a tip
+		if ([settingsCntrl tipsEnabled]) {
+			// show a tip
+			[tipCntrl performSelector:@selector(showTip) withObject:nil afterDelay: 1];			
+		}
         
     } else if (startUpEvents > NR_OF_EVENTS_BEFORE_SHOWING_MENU) {
         
         LLLog(@"GuiManager.increaseStartUpCounter did not expect this event... %d", startUpEvents);
         [menuCntrl raiseMenu:self]; // $$ try..
     }    
+}
+
+- (IBAction)showNextTip:(id)sender {
+	[tipCntrl showTip];
 }
 
 - (void) awakeFromNib { 
@@ -812,8 +826,10 @@ NSString *defaultPassword;
 	//static LLHUDWindowController *helpWindowCntrl = nil;
 	
 	if (!helpWindowCntrl) {
-		helpWindowCntrl = [[LLHUDWindowController alloc] init];
-		[helpWindowCntrl awakeFromNib];
+		helpWindowCntrl = [[LLHUDWindowController alloc] init];		
+		// Make a rect to position the window at the top-right of the screen.
+		NSSize windowSize = NSMakeSize(325.0, 765.0);
+		[helpWindowCntrl createWindowWithTextFieldWithSize:windowSize];
 	}
 	
 	[[helpWindowCntrl window] setTitle:@"Keyboard Mapping"];

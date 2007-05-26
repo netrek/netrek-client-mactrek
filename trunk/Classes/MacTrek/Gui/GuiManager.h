@@ -23,6 +23,7 @@
 #import "ServerControllerNew.h"
 #import "GameView.h"
 #import "LLNetServiceDelegate.h"
+#import "MTTipOfTheDayController.h"
 
 // wait for:
 //  PF_IMAGES_CACHED (3xgal + 1xmap) 
@@ -75,6 +76,7 @@ enum GAME_STATE {
     int                             activeTheme;
 	
 	ServerControllerNew				*server;
+	MTTipOfTheDayController		    *tipCntrl;
 
 	bool multiThreaded; 
 	MetaServerEntry *currentServer;
@@ -83,6 +85,7 @@ enum GAME_STATE {
 	NSLock *mutex;
 }
 
+- (IBAction)showNextTip:(id)sender;
 - (NSString*)gameStateAsString;
 - (NSApplicationTerminateReply)applicationShouldTerminate:(NSApplication *)sender;
 - (void) testLog:(NSNotification *)notification;

@@ -40,6 +40,7 @@
         }, 
         {CLASS = GameView; LANGUAGE = ObjC; SUPERCLASS = NSView; }, 
         {
+            ACTIONS = {showNextTip = id; }; 
             CLASS = GuiManager; 
             LANGUAGE = ObjC; 
             OUTLETS = {
@@ -238,6 +239,7 @@
                 playerPassword = NSTextField; 
                 resolution = NSPopUpButton; 
                 rightMouse = NSPopUpButton; 
+                tipsButton = NSButton; 
                 trackingEnabledButton = NSButton; 
                 useRCD = NSButton; 
                 voiceCmds = NSButton; 
