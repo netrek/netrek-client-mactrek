@@ -151,6 +151,7 @@
 		52AD186A0BF25FB7007AF259 /* MTUDPWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 52AD18690BF25FB7007AF259 /* MTUDPWindowController.m */; };
 		52BA84C90B10DFFF00F71673 /* SimpleTracker.m in Sources */ = {isa = PBXBuildFile; fileRef = 52BA84C80B10DFFF00F71673 /* SimpleTracker.m */; };
 		52BA84FB0B10E22500F71673 /* TrackUpdate.m in Sources */ = {isa = PBXBuildFile; fileRef = 52BA84FA0B10E22500F71673 /* TrackUpdate.m */; };
+		52C6548E0C04CECF004330BE /* MTFontInstaller.m in Sources */ = {isa = PBXBuildFile; fileRef = 52C6548D0C04CECF004330BE /* MTFontInstaller.m */; };
 		52C7A7F00B17800900F2D523 /* mactrek-mosaic.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 52C7A7EF0B17800900F2D523 /* mactrek-mosaic.jpg */; };
 		52D16B650A06C64900995816 /* logo.icns in Resources */ = {isa = PBXBuildFile; fileRef = 52D16B640A06C64900995816 /* logo.icns */; };
 		52D37C9E0B8A5C1800265266 /* MTVoiceController.m in Sources */ = {isa = PBXBuildFile; fileRef = 52D37C9D0B8A5C1800265266 /* MTVoiceController.m */; };
@@ -799,6 +800,8 @@
 		52BA84C80B10DFFF00F71673 /* SimpleTracker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SimpleTracker.m; path = Tracker/SimpleTracker.m; sourceTree = "<group>"; };
 		52BA84F90B10E22500F71673 /* TrackUpdate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TrackUpdate.h; path = Tracker/TrackUpdate.h; sourceTree = "<group>"; };
 		52BA84FA0B10E22500F71673 /* TrackUpdate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TrackUpdate.m; path = Tracker/TrackUpdate.m; sourceTree = "<group>"; };
+		52C6548C0C04CECF004330BE /* MTFontInstaller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTFontInstaller.h; sourceTree = "<group>"; };
+		52C6548D0C04CECF004330BE /* MTFontInstaller.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTFontInstaller.m; sourceTree = "<group>"; };
 		52C7A7EF0B17800900F2D523 /* mactrek-mosaic.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "mactrek-mosaic.jpg"; path = "Resources/Backgrounds/mactrek-mosaic.jpg"; sourceTree = "<group>"; };
 		52D16B640A06C64900995816 /* logo.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = logo.icns; path = Resources/logo.icns; sourceTree = "<group>"; };
 		52D37C9C0B8A5C1800265266 /* MTVoiceController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTVoiceController.h; sourceTree = "<group>"; };
@@ -1367,6 +1370,8 @@
 				5212EFCD0B08FFB80059A8B1 /* ServerController.m */,
 				52DC5F0A0B3159DE00C78FD1 /* ServerControllerNew.h */,
 				52DC5F0B0B3159DE00C78FD1 /* ServerControllerNew.m */,
+				52C6548C0C04CECF004330BE /* MTFontInstaller.h */,
+				52C6548D0C04CECF004330BE /* MTFontInstaller.m */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -2741,6 +2746,7 @@
 				52AD186A0BF25FB7007AF259 /* MTUDPWindowController.m in Sources */,
 				5293B13E0C00791900794379 /* LLHUDWindow.m in Sources */,
 				5293B13F0C00791900794379 /* LLHUDWindowController.m in Sources */,
+				52C6548E0C04CECF004330BE /* MTFontInstaller.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

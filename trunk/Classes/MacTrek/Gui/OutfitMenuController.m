@@ -24,6 +24,7 @@ char myship = SHIP_CA;
         // the server will send SP_MASK to tell us in which team we are welcome
         [notificationCenter addObserver:self selector:@selector(handleTeamMask:) name:@"SP_MASK" object:nil];
 		quickConnect = NO;
+		quickConnecting = NO;
 		painter = nil;
     }
     return self;
@@ -95,6 +96,11 @@ char myship = SHIP_CA;
 		if (quickConnect) {
 			// continue
 			quickConnect = NO;
+			quickConnecting = YES; // keep state since it may go wrong
+			[self play:self];
+		}
+		if (quickConnecting) {  // initial quick connect must have failed, but a handleTeamMask brought us here
+			quickConnecting = NO;  // can't go wrong now
 			[self play:self];
 		}
 		return; // no need
@@ -112,13 +118,14 @@ char myship = SHIP_CA;
 	if ([self freeSeatOnTeam:newTeam]) {  // found one
 		LLLog(@"OutfitMenuController.findTeam moved from team %d to %d", myTeam, newTeam);
 		[self selectTeam:[self buttonForTeam:newTeam]];
-		/*[[self buttonForTeam:myTeam] setState: NSOffState];
-		myTeam = newTeam;
-		[[self buttonForTeam:myTeam] setState: NSOnState];
-		*/
 		if (quickConnect) {
 			// continue
 			quickConnect = NO;
+			quickConnecting = YES;
+			[self play:self];
+		}
+		if (quickConnecting) {  // initial quick connect must have failed, but a handleTeamMask brought us here
+			quickConnecting = NO;  // can't go wrong now
 			[self play:self];
 		}
 	} else {
