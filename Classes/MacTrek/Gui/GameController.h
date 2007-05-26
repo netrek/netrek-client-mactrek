@@ -61,12 +61,14 @@
     // game window
     IBOutlet GameView         *gameView;
     IBOutlet MapView          *mapView;
-    
+	
+	// other
+	float frameRate;    
 }
 
 - (GameView *)gameView;
 - (MapView *)mapView;
-- (void) repaint;
+- (void) repaint:(float)timeSinceLastDraw;
 - (void) startGame;
 - (void) stopGame;
 - (void) newMessage:(NSString*)message;

@@ -373,25 +373,25 @@ NSString *defaultPassword;
     
 	int interval; 
 	
-#ifdef SHOWTIME
    static NSTimeInterval start, stop;
 	
    start = [NSDate timeIntervalSinceReferenceDate]; 
+#ifdef SHOWTIME
    LLLog(@"GuiManager.screenRefreshTimerFired(slept): %f sec", (start-stop));     
 #endif
 
     if (gameState == GS_GAME_ACTIVE) {
 		 //[notificationCenter setEnable:NO];
         // after that, repaint
-		interval = (1 / FRAME_RATE);
-        [gameCntrl repaint];        
+		interval = (1 / FRAME_RATE); // for non-multithreading 
+        [gameCntrl repaint:(start-stop)];        
     } else {
-		interval = 1; // every second? it's quite blocking
+		interval = 1; // every second? it's quite blocking, for non-multithreading 
         //[notificationCenter setEnable:YES];
     }
 	
-#ifdef SHOWTIME
     stop = [NSDate timeIntervalSinceReferenceDate];  
+#ifdef SHOWTIME
     LLLog(@"GuiManager.screenRefreshTimerFired(spent): %f sec", (stop-start));
 #endif
 	

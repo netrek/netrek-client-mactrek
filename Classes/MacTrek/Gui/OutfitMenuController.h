@@ -34,6 +34,7 @@
 	
 	PainterFactory* painter;
 	bool quickConnect;
+	bool quickConnecting;
 }
 
 // IB

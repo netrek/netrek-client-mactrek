@@ -98,7 +98,7 @@
 			[entry setGameTypeWithString: [line substringWithRange:NSMakeRange(78,1)]];
 				
 			// don't list paradise servers
-			if ([entry gameType] != PARADISE) {
+			if (([entry gameType] != PARADISE) && ([entry status] != TIME_OUT)){
                 [entries addObject:entry]; 
 
 			}			

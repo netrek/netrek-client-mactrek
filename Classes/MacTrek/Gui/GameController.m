@@ -82,9 +82,23 @@ bool forceBarUpdate = NO;
 }
 
 
-- (void) repaint {
-    // invoked by timer
-    
+- (void) repaint:(float)timeSinceLastPaint {
+    // invoked by timer in gui manager
+	
+	// refresh every now and then
+	static int frameCount = 0;
+	
+	if (frameCount++ > FRAMES_PER_FULL_UPDATE_DASHBOARD) {
+		frameCount = 0;
+		forceBarUpdate = YES;
+	} else {
+		forceBarUpdate = NO;
+	}
+	
+	// calculate the framerate
+	frameRate = 1 / timeSinceLastPaint;
+	if (frameRate < 0) frameRate = 0;
+	
     // repaint the dashboard here
     [self updateDashboard:[universe playerThatIsMe]];
     
@@ -94,7 +108,8 @@ bool forceBarUpdate = NO;
         [messages setNeedsDisplay:YES];
     }
     // do the playerList list if an update occured
-    if ([playerList hasChanged]) {
+	// sometimes death is not registerd properly, so update more often
+    if ([playerList hasChanged] || forceBarUpdate) {
         //LLLog(@"GameController.repaint repainting playerList view");
         [playerList setNeedsDisplay:YES];
     }
@@ -179,16 +194,6 @@ bool forceBarUpdate = NO;
     if (![me isMe]) { // this is not me...
         return;
     }
-	
-	// refresh every now and then
-	static int frameCount = 0;
-	
-	if (frameCount++ > FRAMES_PER_FULL_UPDATE_DASHBOARD) {
-		frameCount = 0;
-		forceBarUpdate = YES;
-	} else {
-		forceBarUpdate = NO;
-	}
 
     [self updateBar:hullBar   andTextValue:hullValue   
           withValue:[me hull] max:[[me ship] maxHull] inverseWarning:NO];
@@ -211,32 +216,23 @@ bool forceBarUpdate = NO;
     [self updateBar:torpsBar andTextValue:nil     
           withValue:[me availableTorps] max:[me maxTorps]
           inverseWarning:NO];
-    [self updateBar:phasersBar andTextValue:nil   
-          withValue:[me availablePhaserShots] max:[me maxPhaserShots] 
-          inverseWarning:NO];
+	
+	// abusing phaser bar to show frame rate!	
+	//LLLog(@"GameController.updateDashboard framerate %f max %f", frameRate, FRAME_RATE);
+	
+	// average a little
+	static float averageFrameRate = 0;
+	static int sampleCount = 0;
+	
+	averageFrameRate += frameRate;
+	sampleCount++;	
+	
+	if (forceBarUpdate) { // smooth display
+		[self updateBar:phasersBar andTextValue:nil withValue:(averageFrameRate/sampleCount) max:50.0 inverseWarning:NO];
+		averageFrameRate = 0;
+		sampleCount = 0;
+	}
 }
-
-/* FR 1682996 refactor settings
-
-- (void) setDistressKeyMap:(MTKeyMap *)newKeyMap {
-    // pass it on
-    [gameView setDistressKeyMap:newKeyMap];
-	[mapView setDistressKeyMap:newKeyMap];
-}
-
-- (void) setActionKeyMap:(MTKeyMap *)newKeyMap {
-    // pass it on
-    [gameView setActionKeyMap:newKeyMap];
-	// 1636263 support interaction on main map
-	[mapView setActionKeyMap:newKeyMap];
-}
-
-- (void) setMouseMap:(MTMouseMap *)newMouseMap {
-	// 1666849 selectable mouse buttons
-	[gameView setMouseMap:newMouseMap];
-	[mapView setMouseMap:newMouseMap];
-}
-*/
 
 - (void) setPainter:(PainterFactory*)newPainter {
     [gameView setPainter:newPainter];
