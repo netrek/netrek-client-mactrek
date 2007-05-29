@@ -110,8 +110,9 @@
 - (void) drawLabel:(NSString*)label inRect:(NSRect)aRect withColor:(NSColor*)col;
 - (void) drawLabel:(NSString*)label atPoint:(NSPoint)aPoint withColor:(NSColor*)col;
 - (void) drawShipType:(int)type forTeamId:(int) teamId withCloakPhase:(int)cloakPhase inRect:(NSRect)Rect;
-- (void)   drawCircleWithCompletion: (float)shieldPercentage inRect:(NSRect) Rect thickness:(float)thick andAlpha:(float)alpha;
+- (void) drawCircleWithCompletion: (float)shieldPercentage inRect:(NSRect) Rect thickness:(float)thick andAlpha:(float)alpha;
 - (void) drawFuelGaugeOfPlayer:(Player*) player rightOfRect:(NSRect)aRect;
+- (void) drawDetCircleAround:(NSPoint)centre withScale:(int) scale;
 // and the stamping algorithm (will use defaults otherwise)
 - (NSSize) backGroundImageSize;
 // could be overwritten if you want different colors

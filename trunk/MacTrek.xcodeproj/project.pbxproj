@@ -1277,7 +1277,6 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				52AA52280C08834200C68D78 /* tips.plist */,
 				527B94E00BFE0C3600B4D740 /* MacTrekUserManual.pdf */,
 				5253D56E0BCF790E0075E0D5 /* licence.rtf */,
 				52756EA90B3554CA00631149 /* PRECOMPILED */,
@@ -1293,6 +1292,7 @@
 				52D16B640A06C64900995816 /* logo.icns */,
 				8D1107310486CEB800E47090 /* Info.plist */,
 				089C165CFE840E0CC02AAC07 /* InfoPlist.strings */,
+				52AA52280C08834200C68D78 /* tips.plist */,
 				528E7EC00B0A67FB00B22943 /* federation.png */,
 				528E7EC20B0A680000B22943 /* klingon.png */,
 				528E7EC60B0A680700B22943 /* orion.png */,
@@ -2849,6 +2849,8 @@
 					ppc,
 					i386,
 				);
+				CURRENT_PROJECT_VERSION = "$(inherited)";
+				DYLIB_CURRENT_VERSION = "$(inherited)";
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
@@ -2859,6 +2861,7 @@
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				PREBINDING = NO;
 				SDKROOT = /Developer/SDKs/MacOSX10.4u.sdk;
+				VERSIONING_SYSTEM = "apple-generic";
 				ZERO_LINK = NO;
 			};
 			name = Debug;
@@ -2870,6 +2873,8 @@
 					ppc,
 					i386,
 				);
+				CURRENT_PROJECT_VERSION = "$(inherited)";
+				DYLIB_CURRENT_VERSION = "$(inherited)";
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
@@ -2880,6 +2885,7 @@
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				PREBINDING = NO;
 				SDKROOT = /Developer/SDKs/MacOSX10.4u.sdk;
+				VERSIONING_SYSTEM = "apple-generic";
 				ZERO_LINK = NO;
 			};
 			name = Release;
