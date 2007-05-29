@@ -97,11 +97,15 @@ char myship = SHIP_CA;
 			// continue
 			quickConnect = NO;
 			quickConnecting = YES; // keep state since it may go wrong
+			LLLog(@"OutfitMenuController.findTeam quick connecting with selected team");
 			[self play:self];
+			return;
 		}
 		if (quickConnecting) {  // initial quick connect must have failed, but a handleTeamMask brought us here
 			quickConnecting = NO;  // can't go wrong now
-			[self play:self];
+			LLLog(@"OutfitMenuController.findTeam quick connecting with selected team attempt 2");
+			[self play:self];			
+			return;
 		}
 		return; // no need
 	}
@@ -122,11 +126,15 @@ char myship = SHIP_CA;
 			// continue
 			quickConnect = NO;
 			quickConnecting = YES;
+			LLLog(@"OutfitMenuController.findTeam quick connecting after team move");
 			[self play:self];
+			return;
 		}
 		if (quickConnecting) {  // initial quick connect must have failed, but a handleTeamMask brought us here
 			quickConnecting = NO;  // can't go wrong now
+			LLLog(@"OutfitMenuController.findTeam quick connecting after team move attempt 2");
 			[self play:self];
+			return;
 		}
 	} else {
 		LLLog(@"OutfitMenuController.findTeam NO free team, might as well go home");

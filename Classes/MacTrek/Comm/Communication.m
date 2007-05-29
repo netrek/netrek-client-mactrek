@@ -1156,7 +1156,7 @@ bool goSleeping;
         [self sendSocketVersionAndNumberReq:port];
     }
     @catch (NSException * e) {
-        LLLog([NSString stringWithFormat:@"Communication.callServer: error connecting to %@", hostName]);
+        LLLog(@"Communication.callServer: error connecting to %@ reason %@", hostName, [e reason]);
         return NO;
     }
     

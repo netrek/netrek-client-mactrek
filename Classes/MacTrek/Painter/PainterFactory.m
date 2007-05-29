@@ -33,10 +33,13 @@
         float dash[] = { 1.0, 3.0 };
         [dashedLine setLineDash: dash count: 2 phase: 0.0]; 
         
+		// attributes for string (cache for performance)
         normalStateAttribute =[[NSMutableDictionary dictionaryWithObjectsAndKeys:
         [NSColor whiteColor],NSForegroundColorAttributeName,nil] retain];
 		
+		// fuel bar
 		bar = [[LLBar alloc] init];
+		[bar setAlpha:0.5]; // stay transparent
     }
     return self;
 }
@@ -234,6 +237,7 @@
 - (void) drawBackgroundInRect:(NSRect) drawingBounds ofViewBounds:(NSRect)viewBounds forMe:(Player*) me {
     
 	// as of 1.3 MacTrek theme no longer shows background
+	// commented out code for performance reasons
 	[[NSColor blackColor] set];
     NSRectFill(drawingBounds);
 	return;
@@ -306,9 +310,6 @@
                                              viewRect:viewBounds 
                                 gamePosInCentreOfView:[self centreOfRect:gameBounds] 
                                             withScale:scale];
-    
-    // $$ but do we need to draw it ? check with drawingBounds to make sure...
-    // $$ todo, but it is only a few lines    
     
     // are we near the north line?
     if (gameBounds.origin.y <= 0) {
@@ -583,6 +584,9 @@
 			
 			// and fuel can
 			[self drawFuelGaugeOfPlayer:player rightOfRect:playerViewBounds];
+			
+			// and the det circle
+			[self drawDetCircleAround:[self centreOfRect:playerViewBounds] withScale:scale];
 		}		
         
         // save this value, we may need it again
@@ -1231,33 +1235,47 @@
 	[self drawCircleWithCompletion:percentage inRect:NSInsetRect(Rect, -inset, -inset)  thickness: thickness andAlpha:alpha];
 }
 
-- (void)   drawHullWithStrenght: (float)percentage inRect:(NSRect) Rect andAlpha:(float)alpha {
+- (void) drawHullWithStrenght: (float)percentage inRect:(NSRect) Rect andAlpha:(float)alpha {
 	[self drawCircleWithCompletion:percentage inRect:Rect thickness:1.0 andAlpha:alpha];
 }
+
+- (void) drawDetCircleAround:(NSPoint)centre withScale:(int) scale {
 	
-- (void)   drawCircleWithCompletion: (float)shieldPercentage inRect:(NSRect) Rect thickness:(float)thick andAlpha:(float)alpha {
+	// calculate size
+	float radius = 1700 / scale; // det range from server
+	
+	// detcircle is gray
+    [[NSColor grayColor] set];
+		
+    // first the remaining strenght
+    [line removeAllPoints];  
+    [line appendBezierPathWithArcWithCenter:centre radius:radius startAngle:0.0 endAngle:360.0];
+    [line stroke]; 
+}
+	
+- (void)   drawCircleWithCompletion: (float)percentage inRect:(NSRect) Rect thickness:(float)thick andAlpha:(float)alpha {
     // recalculate
     NSPoint centre = [self centreOfRect:Rect];
     // shield extends our ship by 1 point
     float radius = (Rect.size.width / 2) + 1; // assume Rect is square!!
     
     // get the colour
-    NSColor *shieldColor = [NSColor greenColor];
-    if (shieldPercentage < 50.0) {
-        shieldColor = [NSColor yellowColor];
+    NSColor *lineColor = [NSColor greenColor];
+    if (percentage < 50.0) {
+        lineColor = [NSColor yellowColor];
     }
-    if (shieldPercentage < 25.0) {
-        shieldColor = [NSColor redColor];
+    if (percentage < 25.0) {
+        lineColor = [NSColor redColor];
     }
     
     // get angle
-    float angle = (360.0 * shieldPercentage / 100);
+    float angle = (360.0 * percentage / 100);
     
-    //LLLog(@"PainterFactory.drawShield strenght %f, angle %f", shieldPercentage, angle);
+    //LLLog(@"PainterFactory.drawShield strenght %f, angle %f", percentage, angle);
     
     // draw (with intensity) BUG 1636274
-    shieldColor = [shieldColor colorWithAlphaComponent:alpha];
-	[shieldColor set];
+    lineColor = [lineColor colorWithAlphaComponent:alpha];
+	[lineColor set];
     
 	// set thickness
 	float currentThickness = [line lineWidth];
@@ -1508,13 +1526,13 @@
 	
 	// define rect
 	NSRect gaugeRect = aRect;
-	gaugeRect.origin.x += gaugeRect.size.width * 1.3; // 20% right of ship
-	gaugeRect.origin.y += gaugeRect.size.height * 0.1; // 10% off top and bottom
 	gaugeRect.size.height *= 0.2;  // displayed as width!!
 	if (gaugeRect.size.height < 5.0) {  // box + seperator + 1pix bar
 		gaugeRect.size.height = 5.0;
 	}
 	gaugeRect.size.width *= 0.8;   // displayed as heigth (we rotate the bar)
+	gaugeRect.origin.x += gaugeRect.size.width * 1.3; // 30% right of ship
+	gaugeRect.origin.y += gaugeRect.size.height * 1.6; // 60% off top and bottom
 	
 	// draw it
 	// first save the GC

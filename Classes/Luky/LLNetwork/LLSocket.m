@@ -247,7 +247,7 @@
 }
 
 //
-// Connect the socket to the host specified by hostName, on the requested port.
+// Connect the socket to the host specified by hostAddress, on the requested port.
 //
 - (void)connectToHost:(LLHost*)host port:(unsigned short)port  {
 	[self connectToHost:host port:port force:NO];
@@ -255,9 +255,14 @@
 
 - (void)connectToHost:(LLHost*)host port:(unsigned short)port force:(BOOL)force {
 	
-	NSString *hostName = [host address];
+	NSString *hostAddress = [host address];
     struct hostent* remoteHost;
     struct sockaddr_in remoteAddr;
+	
+	if (hostAddress == nil) {
+		LLLog(@"LLSocket.connectToHost no address for %@", [host hostname]);		
+		return; // no lock obtained, so no need to unlock
+	}
 	
 	if (![mutex lockBeforeDate:[NSDate dateWithTimeIntervalSinceNow:timeOut]]) {
 		LLLog(@"LLSocket.connectToHost lock timeout");		
@@ -274,8 +279,8 @@
         [NSException raise:SOCKET_EX_ALREADY_CONNECTED 
 					format:SOCKET_EX_ALREADY_CONNECTED];
     
-    // Look up host     
-    if ( (remoteHost = gethostbyname([hostName cString])) == NULL )
+    // Look up host  
+    if ( (remoteHost = gethostbyname([hostAddress cString])) == NULL )
         [NSException raise:SOCKET_EX_HOST_NOT_FOUND 
 					format:SOCKET_EX_HOST_NOT_FOUND_F, strerror(errno)];
     
@@ -291,7 +296,7 @@
 					format:SOCKET_EX_CONNECT_FAILED_F, strerror(errno)];
 	
     // Note successful connection    
-    remoteHostName = [[NSString alloc] initWithString:hostName];
+    remoteHostName = [[NSString alloc] initWithString:hostAddress];
     remotePort = port;
 	
     connected = YES;

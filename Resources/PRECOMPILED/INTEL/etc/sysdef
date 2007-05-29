@@ -6,10 +6,10 @@
 #	view and update it graphically.
 #
 #	Maximum client update rate per second
-MAXUPDATE=10
+MAXUPDATE=20
 #
 #	Default client update rate per second
-DEFUPDATE=10
+DEFUPDATE=20
 #
 # 	Do clue checks (0 = no, 1 = keyword, 2 = question and answer)
 #	(We need more twinks, don't turn this on lightly)
@@ -62,7 +62,7 @@ WEAPONS=PLASMA,TRACTOR
 PLKILLS=2
 #
 # 	Rank needed to take out starbase (3 = Commander)
-SBRANK=3
+SBRANK=1
 #
 #	Planets needed to take out starbase
 SBPLANETS=5
@@ -149,7 +149,7 @@ WARPSPEED=60
 #MOTD=.motd_basep
 #
 #       Basepractice Server
-BASEPRACTICE=0
+BASEPRACTICE=1
 #
 #ROBOTHOST=myrtle
 #

@@ -54,11 +54,33 @@
 	return name;
 }
 
-- (NSString *)address {
+- (NSArray *)addresses {
 	if (name == nil) {
 		return nil;
 	}
-	return [[NSHost hostWithName:name] address];
+	return [[NSHost hostWithName:name] addresses];
+}
+
+- (NSString *)address {
+	
+	NSArray *addresses = [self addresses];
+	if (addresses == nil) {
+		return nil;
+	}
+	
+	unsigned int i, count = [addresses count];
+	NSString *address;
+	for (i = 0; i < count; i++) {
+		address = [addresses objectAtIndex:i];
+		//LLLog(@"LLHost.address %@ becomes %@", name, address);
+		NSRange r = [address rangeOfString:@":"]; // ip6 names
+		if (r.location == NSNotFound) {
+			// must be ip4
+			return address;
+		}
+	}
+	
+	return nil; // no ip4 found
 }
 
 - (NSData *)firstAddressData {

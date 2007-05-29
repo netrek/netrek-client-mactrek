@@ -297,7 +297,7 @@ NSString *defaultPassword;
 	// set the version string
 	[versionString setStringValue:[NSString stringWithFormat:@"Version %@", VERSION]];
 	LLLog(@"GuiManager.awakeFromNib Setting version to %@", VERSION);
-		
+	
 	// new server controller. No longer managed with buttons but allways running!
 	server = [[ServerControllerNew alloc] init];
 	[server restartServer];		// stop only on shutdown... (but restart in case we were badly shutdowned)

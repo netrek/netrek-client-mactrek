@@ -16,7 +16,8 @@
 + (LLHost *)hostWithName:(NSString *)hostname; 
 + (LLHost *)hostWithAddress:(NSString *)address;
 - (NSString *)hostname;
-- (NSString *)address;
+- (NSString *)address; // the first ip number
+- (NSArray *)addresses;
 - (NSData *)firstAddressData;
 
 @end
