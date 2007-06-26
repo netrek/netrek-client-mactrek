@@ -47,6 +47,15 @@ bool validServer;
 	MetaServerEntry *entry = nil;
 	for (int i=0; i < [entries count]; i++) {
 		entry = (MetaServerEntry *) [entries objectAtIndex:i];
+		
+		if ([entry gameType] != BRONCO) { // only go for bronco servers
+			continue;
+		}
+		
+		if ([entry status] == WAIT) { // don;t go for full servers
+			continue;
+		}
+		
 		if (entry != nil) {
 			if (bestEntry == nil) {
 				bestEntry = entry; // anything beats nil
