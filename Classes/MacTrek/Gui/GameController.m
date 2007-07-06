@@ -134,7 +134,13 @@ bool forceBarUpdate = NO;
     
     // add speech...
     if (shouldSpeak && (![synth isSpeaking])) {
-        [synth startSpeakingString:message];
+		LLLog(@"GameController.newMessage startSpeaking: [%@]", message);
+		if ([message isEqualToString:@"Our computers limit us to having 8 live torpedos at a time captain!"]) {
+			// patch string
+			[synth startSpeakingString:@"Our computers limit us to having 8 lighve torpedos at a time captain!"];
+		} else {
+			[synth startSpeakingString:message];		
+		}
     }
     
 }
