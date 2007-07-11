@@ -225,7 +225,7 @@
         char playerId = [address characterAtIndex:1];
         if (playerId >= '0' && playerId <= '9') {
             playerId -= '0';
-        } else if (playerId >= 'a' && playerId <= 'k'){ // WAS f but i see more players !!!!!
+        } else if (playerId >= 'a' && playerId <= 'v'){ // WAS f but i see more players !!!!!
             playerId -= 'a';
             playerId += 10;
         } else {

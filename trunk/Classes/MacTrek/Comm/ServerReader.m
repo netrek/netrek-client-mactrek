@@ -1852,7 +1852,7 @@ int shortFromPacket(char *buffer, int offset) {
                 [pingStats setIncrementalLossServerToClient:(buffer[6] & 0xFF) 
                                              ClientToServer:(buffer[7] & 0xFF)];
                 [pingStats calculateLag];
-                [notificationCenter postNotificationName:@"SP_PING" object:self userInfo:pingStats];  
+				//[notificationCenter postNotificationName:@"SP_PING" object:self userInfo:pingStats];  
             }
             @catch (NSException * e) {
                 LLLog(@"ServerReader.handlePacket: SP_PING error");

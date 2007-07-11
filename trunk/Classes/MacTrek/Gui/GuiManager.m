@@ -84,6 +84,8 @@ NSString *defaultPassword;
                                    name:@"SP_PICKOK" object:nil];
         [notificationCenter addObserver:self selector:@selector(loginComplete) 
                                    name:@"SP_PICKNOK" object:nil];
+		[notificationCenter addObserver:self selector:@selector(serverDeSelected) 
+                                   name:@"SP_QUEUE" object:nil];
         // when killed
         [notificationCenter addObserver:self selector:@selector(iDied) 
                                    name:@"CC_GO_OUTFIT" object:nil];
@@ -126,6 +128,8 @@ NSString *defaultPassword;
     }
     return self;
 }
+
+
 
 - (void) settingsChanged:(SettingsController*) settingsController  {
 	[self setTheme];
@@ -257,11 +261,16 @@ NSString *defaultPassword;
         [menuButton setNeedsDisplay:YES];
         // or go automaticaly after 1 seconds (use obj nil since menu does not know us
         [menuCntrl  performSelector:@selector(leaveSplashScreen) withObject:nil afterDelay: 1];
-		
-		// if we need to, show a tip
-		if ([settingsCntrl tipsEnabled]) {
-			// show a tip
-			[tipCntrl performSelector:@selector(showTip) withObject:nil afterDelay: 1];			
+				
+		if ([tipCntrl newVersionAvailable]) {
+			// show as tip even when disabled tips 
+			[tipCntrl performSelector:@selector(showNewVersionIndicationIfAvailable) withObject:nil afterDelay: 1];
+		} else {			
+			// if we need to, show a tip
+			if ([settingsCntrl tipsEnabled]) {
+				// show a tip
+				[tipCntrl performSelector:@selector(showTip) withObject:nil afterDelay: 1];			
+			}
 		}
         
     } else if (startUpEvents > NR_OF_EVENTS_BEFORE_SHOWING_MENU) {
@@ -470,18 +479,23 @@ NSString *defaultPassword;
             break;
         case GS_SERVER_CONNECTED:
         case GS_SERVER_SLOT_FOUND:
-        case GS_LOGIN_ACCEPTED:
+        case GS_LOGIN_ACCEPTED:			
             // same server selected again?
-            if (currentServer != selectedServer) {
+            //if (currentServer != selectedServer) {
+			if (YES) {   // 1750207 reconnect fails				
+				LLLog(@"GuiManager.serverSelected (re)connecting to %@", [selectedServer address]);
                 
                 if (currentServer != nil) {
                      // close old connection
+					LLLog(@"GuiManager.serverSelected disconnecting to %@", [currentServer address]);
                     [self serverDeSelected];
                 }
                 // open to new
                 [self serverSelected:selectedServer];
                 currentServer = selectedServer;
-            }
+            } else {
+				LLLog(@"GuiManager.serverSelected ignoring GS_LOGIN_ACCEPTED of %@", [currentServer address]);
+			}
             break;
         case GS_OUTFIT_ACCEPTED:
         case GS_GAME_ACTIVE:

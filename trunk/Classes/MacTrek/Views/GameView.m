@@ -268,11 +268,11 @@ whichRepresentsGameBounds:gameBounds
         return;
         break;
     case 'G':
-    case 'g':
+    //case 'g': // 1751357 g is now a player
         [notificationCenter postNotificationName:@"GV_MESSAGE_DEST" userInfo:@"GOD"];
         return;
         break;
-    case 'T':
+    //case 'T': // 1751357 T is should be a player ?
     case 't':
         [notificationCenter postNotificationName:@"GV_MESSAGE_DEST" userInfo:@"TEAM"];
         return;
@@ -309,17 +309,16 @@ whichRepresentsGameBounds:gameBounds
     case '9':
         playerId = theChar - '0';
         break;
-    case 'a':
-    case 'b':
-    case 'c':
-    case 'd':
-    case 'e':
-    case 'f':
-        playerId = theChar - 'a' + 10;
-        break;
-    default:    // should be GV_ but lets limmit the nr of observers
-        [notificationCenter postNotificationName:@"PM_WARNING" userInfo:@"Unknown player. message not sent."]; 
-        return;
+    default:    
+         // 1751357 support up to 32 players
+        if ((theChar >= 'a') && (theChar <= 'v')) {
+            playerId = theChar - 'a' + 10;
+        } else if (theChar == 'T') {
+            playerId = 't' - 'a' + 10; // swap t and T
+        } else {
+            [notificationCenter postNotificationName:@"PM_WARNING" userInfo:@"Unknown player. message not sent."]; 
+            return; 
+        }
         break;
     }
     [notificationCenter postNotificationName:@"GV_MESSAGE_DEST" 

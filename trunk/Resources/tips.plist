@@ -25,5 +25,7 @@ Battleships are the best cruiser-killers.  Cruisers can't dodge significantly be
 	<string>Perfection is what we strive fro</string>
 	<string>MacTrek was written from scratch in 8 months time</string>
 	<string>Netrek has been arround since 1973</string>
+	<string>MacTrek can detect new clients have been released</string>
+	<string>Sending 5 spaces to someone will cause a reply with the client they are using (try sending to ALL)</string>
 </array>
 </plist>
