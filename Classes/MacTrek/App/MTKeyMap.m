@@ -391,7 +391,7 @@
     // convert all dicts to Keymap entries and add them
     while ((entryAsDict = [temp objectForKey:[enumerator nextObject]])) {
         MTKeyMapEntry *keyEntry = [[MTKeyMapEntry alloc] initWithDictionairy:entryAsDict];
-        LLLog(@"MTKeyMap.readDefaultKeyMap setting key [%c] for action: %@", [keyEntry key], [keyEntry description]);
+        //LLLog(@"MTKeyMap.readDefaultKeyMap setting key [%c] for action: %@", [keyEntry key], [keyEntry description]);
         [newKeyMap setObject:keyEntry forKey:[NSNumber numberWithInt:[keyEntry action]]];
     }          
     // ---

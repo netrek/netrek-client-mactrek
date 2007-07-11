@@ -128,8 +128,8 @@ bool ghostStart = NO;
     [notificationCenter postNotificationName:@"COMM_SEND_SHORT_REQ" object:self userInfo:[NSNumber numberWithInt:SPK_VON]];
 	//send options we have set
     [notificationCenter postNotificationName:@"COMM_SEND_OPTIONS_PACKET" object:self userInfo:nil];
-	// $$ don't ping yet
-    [notificationCenter postNotificationName:@"COMM_SEND_PING_REQ" object:self userInfo:[NSNumber numberWithBool:NO]];
+	// must ping 1750190 Ghostbust on idle
+    [notificationCenter postNotificationName:@"COMM_SEND_PING_REQ" object:self userInfo:[NSNumber numberWithBool:YES]];
 	//send desired updates per second
     [notificationCenter postNotificationName:@"COMM_SEND_UPDATE_PACKET" object:self userInfo:[NSNumber numberWithInt:COMM_UPDATES_PER_SECOND]]; 
     return YES;

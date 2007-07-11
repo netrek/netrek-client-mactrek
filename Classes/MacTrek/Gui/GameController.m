@@ -25,6 +25,8 @@ bool forceBarUpdate = NO;
                              object:nil useLocks:NO useMainRunLoop:NO]; // is fired in main loop
     [notificationCenter addObserver:self selector:@selector(newInfoMessage:) name:@"GV_MODE_INFO"
                              object:nil useLocks:NO useMainRunLoop:NO]; // is fired in main loop
+	[notificationCenter addObserver:self selector:@selector(queueFull) 
+							   name:@"SP_QUEUE" object:nil];
 	universe = [Universe defaultInstance];
     
     // set up discrete bars
@@ -63,6 +65,10 @@ bool forceBarUpdate = NO;
 	// set up voice control (1.2.0 feature)
 	voiceCntrl = [[MTVoiceController alloc] init];
 	//[voiceCntrl enableListening:YES];
+}
+
+- (void) queueFull {
+	[self newMessage:@"This server is full, please select a different server"];
 }
 
 - (GameView *)gameView {
@@ -135,6 +141,11 @@ bool forceBarUpdate = NO;
     // add speech...
     if (shouldSpeak && (![synth isSpeaking])) {
 		LLLog(@"GameController.newMessage startSpeaking: [%@]", message);
+		
+		if ([message isEqualToString:@"Server sending PING packets at 2 second intervals"]) {
+			return; // ignore that
+		}
+		
 		if ([message isEqualToString:@"Our computers limit us to having 8 live torpedos at a time captain!"]) {
 			// patch string
 			[synth startSpeakingString:@"Our computers limit us to having 8 lighve torpedos at a time captain!"];

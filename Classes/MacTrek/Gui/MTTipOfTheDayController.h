@@ -12,8 +12,11 @@
 @interface MTTipOfTheDayController : BaseClass {
 	LLHUDWindowController *tipOfTheDayWindowController; 
 	NSArray *tips;
+	NSDictionary *latestVersion;
 }
 
 - (void) showTip;
+- (bool) newVersionAvailable;
+- (bool) showNewVersionIndicationIfAvailable;
 
 @end

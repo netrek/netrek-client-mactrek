@@ -41,6 +41,44 @@
 	return self;
 }
 
+- (bool) newVersionAvailable {
+	NSString *currentVersionNumber = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleVersion"];
+	NSURL * url = [NSURL URLWithString:@"http://mactrek.sourceforge.net/MacTrekLatestVersion.plist"];
+	//NSURL * url = [NSURL URLWithString:@"http://worrelsik/Temp/MacTrekLatestVersion.plist"];
+	latestVersion = [[NSDictionary alloc] initWithContentsOfURL:url];
+	
+	// check for network error
+	if ([latestVersion count] == 0) {
+		LLLog(@"MTTipOfTheDayController.newVersionAvailable: CANT TELL, no file at %@", url);
+		return NO;	
+	}
+	
+	if ([[latestVersion objectForKey:@"Version"] isEqualToString:currentVersionNumber]) {
+		LLLog(@"MTTipOfTheDayController.newVersionAvailable: NO");
+		return NO;
+	} else {
+		LLLog(@"MTTipOfTheDayController.newVersionAvailable: YES");
+		return YES;
+	}
+}
+	
+- (bool) showNewVersionIndicationIfAvailable {
+	
+	bool available = [self newVersionAvailable];
+	
+	if (available) {
+		
+		NSString *message = [NSString stringWithFormat:@"\nNEW VERSION OF MACTREK FOUND\n----------------------------\n\nYou are strongly adviced to upgrade. \n\nThe new version is %@\n\nand can be downloaded from %@ \n\n Checkout %@\n for more information.",
+			[latestVersion objectForKey:@"Version"], 
+			[latestVersion objectForKey:@"DownloadURL"],
+			[latestVersion objectForKey:@"MoreInfoURL"]];
+		
+		[[tipOfTheDayWindowController textField] setStringValue:message];
+		[[tipOfTheDayWindowController window] orderFront:self];
+		
+	} 
+	return available;
+}
 
 - (void) showTip {
 	

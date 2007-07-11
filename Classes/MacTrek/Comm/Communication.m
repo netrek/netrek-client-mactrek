@@ -319,7 +319,9 @@ bool goSleeping;
 }
 
 -(void) setPing:(bool) received withResponse:(int)response {
-    // i have no idea $$
+    // 1750190 Ghostbust on IDLE
+    ping = received;
+    [self sendServerPingResponse:[NSNumber numberWithInt:response]];
 }
 
 -(int) packetsReceived {
