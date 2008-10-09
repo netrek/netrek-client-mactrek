@@ -6,7 +6,7 @@
 //  Copyright 2006 Luky Soft. LGPL Licence.
 //
 
-#import "LLVector.h""
+#import "LLVector.h"
 
 @implementation LLVector
 

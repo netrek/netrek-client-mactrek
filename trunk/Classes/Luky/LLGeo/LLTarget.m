@@ -6,7 +6,7 @@
 //  Copyright 2006 Luky Soft. LGPL Licence.
 //
 
-#import "LLTarget.h""
+#import "LLTarget.h"
 
 @implementation LLTarget
 
