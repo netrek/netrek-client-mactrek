@@ -73,7 +73,7 @@
 }
 
 // my brain works the other way around
-- (bool) isFlipped {
+- (BOOL) isFlipped {
     return YES;
 }
 

@@ -81,7 +81,7 @@
     return YES; // $$ check...
 }
 
-- (bool) isOpaque{
+- (BOOL) isOpaque{
     return YES; // speed bump
 }
 
@@ -90,18 +90,18 @@
 }
 
 // old X11 calls were flipped
-- (bool) isFlipped {
+- (BOOL) isFlipped {
     return YES;
 }
 
 
 // i will accept key and mouse input
-- (bool) acceptsFirstResponder {
+- (BOOL) acceptsFirstResponder {
     return YES;
 }
 
 // and i will accept it now
-- (bool) becomeFirstResponder {
+- (BOOL) becomeFirstResponder {
     [self setNeedsDisplay:YES];
     /* not needed, done by trackingRect and mouseEnter
     if([[self window] makeFirstResponder:self]) { // make this view first responder
@@ -114,7 +114,7 @@
     return YES; // always accept
 }
 
-- (bool) resignFirstResponder {
+- (BOOL) resignFirstResponder {
     [self setNeedsDisplay:YES];
     LLLog(@"BaseView.resignFirstResponder ok i resign");
     return [super resignFirstResponder];
