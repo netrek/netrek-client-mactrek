@@ -24,8 +24,8 @@ the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
 MA 02110-1301, USA. */
 
 #include <stdlib.h>
-#include "gmp.h"
-#include "gmp-impl.h"
+//#include "gmp.h"
+//#include "gmp-impl.h"
 
 int gmp_errno = 0;
 
@@ -41,7 +41,7 @@ void
 __gmp_exception (int error_bit)
 {
   gmp_errno |= error_bit;
-  __gmp_junk = 10 / __gmp_0;
+ // __gmp_junk = 10 / __gmp_0;
   abort ();
 }
 
@@ -52,10 +52,12 @@ __gmp_exception (int error_bit)
 void
 __gmp_sqrt_of_negative (void)
 {
-  __gmp_exception (GMP_ERROR_SQRT_OF_NEGATIVE);
+//  __gmp_exception (GMP_ERROR_SQRT_OF_NEGATIVE);
+    abort ();
 }
 void
 __gmp_divide_by_zero (void)
 {
-  __gmp_exception (GMP_ERROR_DIVISION_BY_ZERO);
+//  __gmp_exception (GMP_ERROR_DIVISION_BY_ZERO);
+    abort ();
 }

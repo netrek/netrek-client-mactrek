@@ -340,7 +340,7 @@ bool goSleeping;
 	// max is either the max or the length of the string we try to copy
 	max = (max > [str length] ? [str length] : max);
 	// get it as a cstring
-	const char *input = [str cString];
+	const char *input = [str UTF8String];
 	// perform the copy
 	strncpy(buffer+offset, input, max);
 	// close the string

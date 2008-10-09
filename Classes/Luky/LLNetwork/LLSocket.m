@@ -280,7 +280,7 @@
 					format:SOCKET_EX_ALREADY_CONNECTED];
     
     // Look up host  
-    if ( (remoteHost = gethostbyname([hostAddress cString])) == NULL )
+    if ( (remoteHost = gethostbyname([hostAddress UTF8String])) == NULL )
         [NSException raise:SOCKET_EX_HOST_NOT_FOUND 
 					format:SOCKET_EX_HOST_NOT_FOUND_F, strerror(errno)];
     

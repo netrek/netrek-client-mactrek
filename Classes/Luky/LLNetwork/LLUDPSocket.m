@@ -97,7 +97,7 @@
 	
 	if (listening == NO) {
 		// i am client of a remote host
-		if ( inet_aton([remoteHostName cString], &address) == 0 ) 
+		if ( inet_aton([remoteHostName UTF8String], &address) == 0 ) 
 			[NSException raise:SOCKET_EX_HOST_NOT_FOUND 
 						format:SOCKET_EX_HOST_NOT_FOUND_F, strerror(errno)];
 	} else {
@@ -175,7 +175,7 @@
 	
 	// translate the remote hostname to byte order
 	struct in_addr address;
-	if ( inet_aton([remoteHostName cString], &address) == 0 ) 
+	if ( inet_aton([remoteHostName UTF8String], &address) == 0 ) 
 		[NSException raise:SOCKET_EX_HOST_NOT_FOUND 
 					format:SOCKET_EX_HOST_NOT_FOUND_F, strerror(errno)];
 		
