@@ -67,7 +67,7 @@
             
             // !! strip off trailing spaces
             NSMutableString *address = [NSMutableString stringWithString:[entry address]];
-            [address replaceOccurrencesOfString:@" " withString:@"" options:nil range:NSMakeRange(0, [address length])];
+            [address replaceOccurrencesOfString:@" " withString:@"" options:NSLiteralSearch range:NSMakeRange(0, [address length])];
             [entry setAddress:address];
             
 			// TODO: Handle NumberFormatExceptions

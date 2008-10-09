@@ -119,7 +119,7 @@
     const char* cs;
     NSData* d;
     
-    cs = [s lossyCString];
+    cs = [s cStringUsingEncoding: NSASCIIStringEncoding];
     d = [NSData dataWithBytes:cs length:strlen(cs)];
     
     return [self indexOfData:d];

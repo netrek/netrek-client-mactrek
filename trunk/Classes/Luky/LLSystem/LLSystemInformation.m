@@ -49,7 +49,7 @@
 	//gestaltUserVisibleMachineName = 'mnam'
 	
 	err = Gestalt(gestaltUserVisibleMachineName, machineName);
-	if (err==nil)
+	if (err==0)
 		return [NSString stringWithCString:(char *)machineName];
 	else
 		return @"machineType: machine name cannot be determined";
@@ -182,7 +182,7 @@ static NSDictionary *translationDictionary=nil;
 	OSErr err;
 	long result;
 	err=Gestalt(gestaltProcClkSpeed,&result);
-	if (err!=nil)
+	if (err!=0)
 		return 0;
 	else
 		return result;

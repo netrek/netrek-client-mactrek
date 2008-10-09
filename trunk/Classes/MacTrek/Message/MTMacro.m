@@ -21,7 +21,7 @@
 		macro = newMacro;
 		
 		int bpos  = 0;
-		const char *buffer = [[name substringFromIndex:4] cString];
+		const char *buffer = [[name substringFromIndex:4] UTF8String];
 		int length = [name length] - 4;
 		
 		// determine what key is supposed to be pressed to activate the macro
