@@ -109,7 +109,7 @@ int karg5;
             @"Weapons officer:  Just to twiddle a few bits of the ship's memory?",
             @"Weapons officer:  Bah! [ bangs fist on inoperative console ]",
             @"First Officer:  Easy, big guy... it's just one of those mysterious",
-            @"First Officer:  laws of the universe, like 'tires on the ether'.",
+            @"First Officer:  laws of the universe, like 'MacTrek rules'.",
             @"First Officer:  laws of the universe, like 'Klingon bitmaps are ugly'.",
             @"First Officer:  laws of the universe, like 'all admirals have scummed'.",
             @"First Officer:  laws of the universe, like 'Mucus Pig exists'.",

@@ -147,8 +147,8 @@ bool forceBarUpdate = NO;
 		}
 		
 		if ([message isEqualToString:@"Our computers limit us to having 8 live torpedos at a time captain!"]) {
-			// patch string
-			[synth startSpeakingString:@"Our computers limit us to having 8 lighve torpedos at a time captain!"];
+			// patch string BUG 2242677
+			[synth startSpeakingString:@"Out of torpedos!"];
 		} else {
 			[synth startSpeakingString:message];		
 		}

@@ -42,6 +42,7 @@
 - (Team *) owner;
 - (NSString*) name;
 - (NSString*) nameWithArmiesIndicator;
+- (NSString*) abbrWithArmiesIndicator;
 - (NSString*) abbreviation;
 - (bool) needsDisplay;
 - (NSSize) size;

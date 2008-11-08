@@ -48,7 +48,7 @@
 	 */
 	
 	LLLog(@"RSAWrapper.encode: decoding RSA request");	
-	rsa_black_box(pResponse+2*KEY_SIZE, pData, pResponse+KEY_SIZE, pResponse);
+	//rsa_black_box(pResponse+2*KEY_SIZE, pData, pResponse+KEY_SIZE, pResponse);
 	LLLog(@"RSAWrapper.encode: complete");
 	return response;	
 }
