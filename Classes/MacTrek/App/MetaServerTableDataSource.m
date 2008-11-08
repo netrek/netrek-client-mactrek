@@ -102,8 +102,8 @@
 	
 	NSMutableArray *result, *result2;
 	@try {
-		result  = [meta readFromMetaServer:@"sage.real-time.com" atPort:3521];
-		result2 = [meta readFromMetaServer:@"orion.netrek.org" atPort:3521];
+		result  = [meta readFromMetaServer:@"metaserver.netrek.org" atPort:3521];
+		result2 = [meta readFromMetaServer:@"metaserver2.us.netrek.org" atPort:3521];
 	}
 	@catch (NSException * e) {
 		LLLog(@"MetaServerTableDataSource.refreshServers: error %@", [e reason]);

@@ -132,7 +132,7 @@
 		
 		// QTMovie * is actually a void pntr to the raw QT data media handler
 			
-		MediaSetSoundBalance((void*)sound, balance); 
+        MediaSetSoundBalance((void*)sound, balance); 
 		[sound setVolume:vol];
 		//LLLog(@"SoundEffect.playWithVolume %f balance %f (%d) sound %@", vol, bal, balance, name);
 		[sound play];

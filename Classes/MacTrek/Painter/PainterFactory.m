@@ -763,7 +763,7 @@
                 
                 // check if we need to process this torp
                 if ([torp status] == TORP_FREE) {
-                    [torp setPreviousStatus:[torp status]];
+                    [torp setPreviousStatus:TORP_FREE];
                     continue;
                 }            
                 // it is not free
@@ -772,7 +772,7 @@
                 // ---
                 // check for fuse and status changes
                 // ---
-                //LLLog(@"PainterFactory.drawTorpsInRect status %d, previous %d", [torp status], [torp previousStatus]);
+                LLLog(@"PainterFactory.drawTorpsInRect status %d, previous %d fuse %d", [torp status], [torp previousStatus], [torp fuse]);
                 
                 // check fuse overrun (maxfuse (n) sets the number of frames 0..n-1)
                 if ([torp fuse] >= [torp maxfuse]) {
@@ -807,8 +807,8 @@
                 } 
                 
                 // check for detonate
-                if (([torp status] == TORP_EXPLODE) &&
-                    ([torp previousStatus] != TORP_EXPLODE)) {
+                if (([torp status] == TORP_EXPLODE)  &&
+                    ([torp previousStatus] != TORP_EXPLODE) ) {
                     // set the fuse
                     [torp setFuse:0];
                     [torp setMaxFuse:[self maxFuseForExplodingTorp]];
@@ -1351,7 +1351,18 @@
 
 - (NSString *)labelForPlanet:(Planet*)planet {
 	
-	NSString *label = [NSString stringWithString:[planet nameWithArmiesIndicator]];
+	NSString *label;
+    
+    // smaller name on galactic BUG 2242653
+    if (!simple) {
+        label = [NSString stringWithString:[planet nameWithArmiesIndicator]];
+    } else {
+        label = [NSString stringWithString:[planet abbrWithArmiesIndicator]];
+    }
+    // agricaps
+    if ([planet flags] & PLANET_AGRI) {
+        label = [label uppercaseString];
+    }
     
     // extended label?
     if ([planet showInfo] || debugLabels) {

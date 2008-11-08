@@ -60,6 +60,15 @@
     return [NSString stringWithFormat:@"%c%@", hasArmies, name];
 }
 
+- (NSString*) abbrWithArmiesIndicator {
+    char hasArmies = ' ';
+    if (armies > 4) {
+        hasArmies = '+';
+    }
+    
+    return [NSString stringWithFormat:@"%c%@", hasArmies, [[self abbreviation] lowercaseString]];
+}
+
 - (NSString*) name {
     return name;
 }

@@ -16,6 +16,7 @@
 	NSString *pathToResources;
 	NSString *pathToExe;
     NSString *pathToServer;
+    NSString *pathToPid;
 }
 
 - (void)restartServer;

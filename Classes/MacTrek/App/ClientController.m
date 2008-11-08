@@ -43,7 +43,8 @@ bool ghostStart = NO;
             LLLog(@"ClientController.checkForDeath: firing delayed death warrent");
 			exploding = YES;
 			// some times we never enter the check for death routine again
-			[self performSelector: @selector(checkForDeath:) withObject:player afterDelay: 2.0]; 
+			[self performSelector: @selector(checkForDeath:) withObject:player afterDelay: 3.0]; 
+            return; // BUG 2242650
         } 
 		
 		if ( exploding ) {

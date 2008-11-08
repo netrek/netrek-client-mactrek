@@ -33,6 +33,7 @@
 @implementation GuiManager
 
 bool clientRuns = NO;
+bool firstGame = YES;
 int startUpEvents = 0;
 bool quickConnect = NO;
 NSString *defaultName;
@@ -750,6 +751,12 @@ NSString *defaultPassword;
             // a kill or error will get us out of the game  
             [soundPlayerActiveTheme playSoundEffect:@"ENTER_SHIP_SOUND"];
 			[notificationCenter postNotificationName:@"GM_GAME_ENTERED"];
+            // show help first time BUG 1750211
+            if (firstGame) {
+                [self showKeyMapPanel];
+                firstGame = NO;
+            }
+            
 			[self quickConnectComplete];
             break;
         default:
