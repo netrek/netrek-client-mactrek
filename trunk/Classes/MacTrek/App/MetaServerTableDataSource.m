@@ -103,13 +103,18 @@
 	NSMutableArray *result, *result2;
 	@try {
 		result  = [meta readFromMetaServer:@"sage.real-time.com" atPort:3521];
-		result2 = [meta readFromMetaServer:@"orion.netrek.org" atPort:3521];
 	}
 	@catch (NSException * e) {
-		LLLog(@"MetaServerTableDataSource.refreshServers: error %@", [e reason]);
+		LLLog(@"MetaServerTableDataSource.refreshServers (sage.realtime.com): error %@", [e reason]);
 		return; 
 	}
-
+	@try {
+		result2 = [meta readFromMetaServer:@"metaserver.netrek.org" atPort:3521];
+	}
+	@catch (NSException * e) {
+		LLLog(@"MetaServerTableDataSource.refreshServers (metaserver.netrek.org): error %@", [e reason]);
+		return; 
+	}
 	// small protection allows for initial empty array, so when tehre is no internet,
 	// you can still play on the local server.
 	if (result != nil) {

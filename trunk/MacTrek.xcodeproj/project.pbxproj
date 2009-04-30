@@ -340,7 +340,6 @@
 		522F9F4B0B96C842001C4896 /* MTDistress.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTDistress.m; sourceTree = "<group>"; };
 		524112ED0C08778500342E93 /* MTTipOfTheDayController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTTipOfTheDayController.h; sourceTree = "<group>"; };
 		524112EE0C08778500342E93 /* MTTipOfTheDayController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTTipOfTheDayController.m; sourceTree = "<group>"; };
-		525051E90E9F90C900174A9D /* gmp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gmp.h; sourceTree = "<group>"; };
 		5253D56E0BCF790E0075E0D5 /* licence.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = licence.rtf; sourceTree = "<group>"; };
 		5256E09D0B931D560078C491 /* MTMacroHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTMacroHandler.h; sourceTree = "<group>"; };
 		5256E09E0B931D560078C491 /* MTMacroHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTMacroHandler.m; sourceTree = "<group>"; };
@@ -485,7 +484,6 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				525051E80E9F90C900174A9D /* GMP */,
 				528E7DD10B0A649E00B22943 /* Luky */,
 				5212EFB40B08FFB80059A8B1 /* MacTrek */,
 			);
@@ -860,15 +858,6 @@
 				522F30AE0B0B1D6200E7DDED /* RSAWrapper.m */,
 			);
 			name = RSA;
-			sourceTree = "<group>";
-		};
-		525051E80E9F90C900174A9D /* GMP */ = {
-			isa = PBXGroup;
-			children = (
-				525051E90E9F90C900174A9D /* gmp.h */,
-			);
-			name = GMP;
-			path = Classes/GMP;
 			sourceTree = "<group>";
 		};
 		528E7DD10B0A649E00B22943 /* Luky */ = {
