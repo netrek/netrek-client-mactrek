@@ -308,6 +308,9 @@ NSString *defaultPassword;
 	[versionString setStringValue:[NSString stringWithFormat:@"Version %@", VERSION]];
 	LLLog(@"GuiManager.awakeFromNib Setting version to %@", VERSION);
 	
+    
+#if 0  // Bug 2846441
+    
 	// new server controller. No longer managed with buttons but allways running!
 	server = [[ServerControllerNew alloc] init];
 	[server restartServer];		// stop only on shutdown... (but restart in case we were badly shutdowned)
@@ -320,7 +323,9 @@ NSString *defaultPassword;
 		[entry setGameType:    BRONCO];	
 		[selectServerCntrl addServerPassivly:entry];  // gets selected automatically  
 	}
-		
+    
+#endif	
+    
 	// register for quit
 	[[NSNotificationCenter defaultCenter] addObserver:self
 											 selector:@selector(killed:) 

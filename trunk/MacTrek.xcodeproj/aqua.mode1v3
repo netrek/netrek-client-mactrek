@@ -280,8 +280,6 @@
 			<key>Layout</key>
 			<array>
 				<dict>
-					<key>BecomeActive</key>
-					<true/>
 					<key>ContentConfiguration</key>
 					<dict>
 						<key>PBXBottomSmartGroupGIDs</key>
@@ -362,12 +360,14 @@
 					<key>Dock</key>
 					<array>
 						<dict>
+							<key>BecomeActive</key>
+							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>
 								<string>1CE0B20306471E060097A5F4</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>MacTrekUserManual</string>
+								<string>RSAWrapper.m</string>
 								<key>PBXSplitModuleInNavigatorKey</key>
 								<dict>
 									<key>Split0</key>
@@ -375,11 +375,11 @@
 										<key>PBXProjectModuleGUID</key>
 										<string>1CE0B20406471E060097A5F4</string>
 										<key>PBXProjectModuleLabel</key>
-										<string>MacTrekUserManual</string>
+										<string>RSAWrapper.m</string>
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>52C597B60FC96FC700921F2D</string>
+										<string>524B2ED30FC997FF002B1547</string>
 										<key>history</key>
 										<array>
 											<string>525052C20E9FC61100174A9D</string>
@@ -390,7 +390,6 @@
 											<string>52A2B0060EC5E9B800608B75</string>
 											<string>52A2B0080EC5E9B800608B75</string>
 											<string>52A2B0090EC5E9B800608B75</string>
-											<string>52A2B00A0EC5E9B800608B75</string>
 											<string>52A2B0680EC5ED6800608B75</string>
 											<string>52A2B0690EC5ED6800608B75</string>
 											<string>52A2B06A0EC5ED6800608B75</string>
@@ -429,8 +428,9 @@
 											<string>52A2B1320EC5FA5900608B75</string>
 											<string>528A5D580FAA34030053981C</string>
 											<string>52C597B10FC96FC700921F2D</string>
-											<string>52C597B20FC96FC700921F2D</string>
-											<string>52C597B30FC96FC700921F2D</string>
+											<string>524B2ECB0FC997F2002B1547</string>
+											<string>524B2ECC0FC997F2002B1547</string>
+											<string>524B2ECD0FC997F2002B1547</string>
 										</array>
 										<key>prevStack</key>
 										<array>
@@ -482,8 +482,8 @@
 											<string>52A2B1510EC5FA5900608B75</string>
 											<string>52A2B1530EC5FA5900608B75</string>
 											<string>52A2B1560EC5FA5900608B75</string>
-											<string>52C597B40FC96FC700921F2D</string>
-											<string>52C597B50FC96FC700921F2D</string>
+											<string>524B2ECE0FC997F2002B1547</string>
+											<string>524B2ECF0FC997F2002B1547</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -541,9 +541,9 @@
 			</array>
 			<key>TableOfContents</key>
 			<array>
-				<string>52C5978B0FC96EA600921F2D</string>
+				<string>524B2EA30FC996D8002B1547</string>
 				<string>1CE0B1FE06471DED0097A5F4</string>
-				<string>52C5978C0FC96EA600921F2D</string>
+				<string>524B2EA40FC996D8002B1547</string>
 				<string>1CE0B20306471E060097A5F4</string>
 				<string>1CE0B20506471E060097A5F4</string>
 			</array>
@@ -664,7 +664,7 @@
 	<key>StatusbarIsVisible</key>
 	<true/>
 	<key>TimeStamp</key>
-	<real>264859591.668304</real>
+	<real>264869887.46655399</real>
 	<key>ToolbarDisplayMode</key>
 	<integer>1</integer>
 	<key>ToolbarIsVisible</key>
@@ -679,6 +679,7 @@
 	<integer>5</integer>
 	<key>WindowOrderList</key>
 	<array>
+		<string>1C78EAAD065D492600B07095</string>
 		<string>52822A030E9E9C84001B515C</string>
 		<string>1CD10A99069EF8BA00B06720</string>
 		<string>/Users/aqua/Documents/Code/MacTrek/trunk/MacTrek.xcodeproj</string>
@@ -705,7 +706,7 @@
 								<key>PBXProjectModuleGUID</key>
 								<string>1CD0528F0623707200166675</string>
 								<key>PBXProjectModuleLabel</key>
-								<string></string>
+								<string>RSAWrapper.m</string>
 								<key>StatusBarVisibility</key>
 								<true/>
 							</dict>
@@ -765,7 +766,7 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>52822A030E9E9C84001B515C</string>
-				<string>52C597980FC96EFB00921F2D</string>
+				<string>524B2E910FC99664002B1547</string>
 				<string>1CD0528F0623707200166675</string>
 				<string>XCMainBuildResultsModuleGUID</string>
 			</array>
@@ -885,13 +886,13 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>1CD10A99069EF8BA00B06720</string>
-				<string>52C5978D0FC96EA600921F2D</string>
+				<string>524B2E920FC99664002B1547</string>
 				<string>1C162984064C10D400B95A72</string>
-				<string>52C5978E0FC96EA600921F2D</string>
-				<string>52C5978F0FC96EA600921F2D</string>
-				<string>52C597900FC96EA600921F2D</string>
-				<string>52C597910FC96EA600921F2D</string>
-				<string>52C597920FC96EA600921F2D</string>
+				<string>524B2E930FC99664002B1547</string>
+				<string>524B2E940FC99664002B1547</string>
+				<string>524B2E950FC99664002B1547</string>
+				<string>524B2E960FC99664002B1547</string>
+				<string>524B2E970FC99664002B1547</string>
 			</array>
 			<key>ToolbarConfiguration</key>
 			<string>xcode.toolbar.config.debugV3</string>
@@ -1012,8 +1013,6 @@
 					<key>Dock</key>
 					<array>
 						<dict>
-							<key>BecomeActive</key>
-							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>
@@ -1049,7 +1048,7 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>1C78EAAD065D492600B07095</string>
-				<string>528A5D550FAA2A0D0053981C</string>
+				<string>524B2EA50FC996D8002B1547</string>
 				<string>1C78EAAC065D492600B07095</string>
 			</array>
 			<key>ToolbarConfiguration</key>
@@ -1059,7 +1058,7 @@
 			<key>WindowToolGUID</key>
 			<string>1C78EAAD065D492600B07095</string>
 			<key>WindowToolIsVisible</key>
-			<true/>
+			<false/>
 		</dict>
 		<dict>
 			<key>Identifier</key>
