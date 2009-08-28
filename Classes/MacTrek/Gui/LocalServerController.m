@@ -46,6 +46,8 @@ bool serverRuns = NO;
     [server startServer];
     serverRuns = YES;
     
+#if 0 // Bug 2846441
+    
     // add localhost if it is not already there
     if ([selectServerController findServer:@"localhost"] == nil) {
         MetaServerEntry *entry = [[MetaServerEntry alloc] init];
@@ -55,6 +57,7 @@ bool serverRuns = NO;
         [entry setGameType:    BRONCO];	
         [selectServerController addServer:entry];  // gets selected automatically  
     }
+#endif
     
     // wait until we have connected
     //[loginButton setEnabled:YES];

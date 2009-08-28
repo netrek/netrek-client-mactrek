@@ -32,7 +32,7 @@
 	// create a response buffer
 	// consisting of global[KEY_SIZE] followed by public[KEY_SIZE] followed by resp[KEY_SIZE]
 	NSMutableData *response = [[NSMutableData alloc] initWithLength:KEY_SIZE*3];
-	unsigned char *pResponse = (unsigned char*)[response mutableBytes];
+	//unsigned char *pResponse = (unsigned char*)[response mutableBytes];
 	
 	// decode the key
 	// void rsa_black_box(unsigned char *out, unsigned char *in, unsigned char *public, unsigned char *global) 
