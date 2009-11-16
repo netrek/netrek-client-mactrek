@@ -1,0 +1,284 @@
+{
+    IBClasses = (
+        {CLASS = BaseClass; LANGUAGE = ObjC; SUPERCLASS = NSObject; }, 
+        {
+            ACTIONS = {play = id; }; 
+            CLASS = DemoClientController; 
+            LANGUAGE = ObjC; 
+            SUPERCLASS = NSObject; 
+        }, 
+        {CLASS = FirstResponder; LANGUAGE = ObjC; SUPERCLASS = NSObject; }, 
+        {CLASS = FullScreenBackgroundWindow; LANGUAGE = ObjC; SUPERCLASS = NSWindow; }, 
+        {
+            CLASS = GameController; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {
+                armiesBar = LLBar; 
+                commTextField = NSTextField; 
+                eTempBar = LLBar; 
+                eTempValue = NSTextField; 
+                fuelBar = LLBar; 
+                fuelValue = NSTextField; 
+                gameView = GameView; 
+                hullBar = LLBar; 
+                hullValue = NSTextField; 
+                mapView = MapView; 
+                messageTextField = NSTextField; 
+                messages = MessagesListView; 
+                phasersBar = LLBar; 
+                playerList = PlayerListView; 
+                shieldBar = LLBar; 
+                shieldValue = NSTextField; 
+                speedBar = LLBar; 
+                speedValue = NSTextField; 
+                toField = NSTextField; 
+                torpsBar = LLBar; 
+                wTempBar = LLBar; 
+                wTempValue = NSTextField; 
+            }; 
+            SUPERCLASS = BaseClass; 
+        }, 
+        {CLASS = GameView; LANGUAGE = ObjC; SUPERCLASS = NSView; }, 
+        {
+            ACTIONS = {showNextTip = id; }; 
+            CLASS = GuiManager; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {
+                gameCntrl = GameController; 
+                keyMapList = NSTextView; 
+                keyMapPanel = NSPanel; 
+                localServerCntrl = LocalServerController; 
+                loginCntrl = LoginController; 
+                mainWindow = NSWindow; 
+                menuButton = NSButton; 
+                menuCntrl = MenuController; 
+                outfitCntrl = OutfitMenuController; 
+                selectServerCntrl = SelectServerController; 
+                settingsCntrl = SettingsController; 
+                startUpProgress = NSLevelIndicator; 
+                versionString = NSTextField; 
+            }; 
+            SUPERCLASS = BaseClass; 
+        }, 
+        {
+            CLASS = KeyMapTableDataSource; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {keyMapTableView = NSTableView; }; 
+            SUPERCLASS = BaseClass; 
+        }, 
+        {CLASS = LLBar; LANGUAGE = ObjC; SUPERCLASS = NSView; }, 
+        {CLASS = LLCharFormatter; LANGUAGE = ObjC; SUPERCLASS = NSFormatter; }, 
+        {
+            CLASS = LLFullScreenBackgroundWindow; 
+            LANGUAGE = ObjC; 
+            SUPERCLASS = NSWindow; 
+        }, 
+        {CLASS = LLStringList; LANGUAGE = ObjC; SUPERCLASS = NSView; }, 
+        {CLASS = LLStringTable; LANGUAGE = ObjC; SUPERCLASS = NSView; }, 
+        {
+            ACTIONS = {startRobots = id; startServer = id; stopRobots = id; stopServer = id; }; 
+            CLASS = LocalServerController; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {
+                loginButton = NSButton; 
+                numberOfRobots = NSTextField; 
+                selectServerController = SelectServerController; 
+                serverLogView = NSTextView; 
+                startRobotsButton = NSButton; 
+                startServerButton = NSButton; 
+                stopRobotsButton = NSButton; 
+                stopServerButton = NSButton; 
+            }; 
+            SUPERCLASS = BaseClass; 
+        }, 
+        {
+            CLASS = LoginController; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {
+                loginClock = NSLevelIndicator; 
+                loginInstruction = NSTextField; 
+                outfitButton = NSButton; 
+                playerName = NSTextField; 
+                playerPassword = NSTextField; 
+                playerPasswordVerify = NSTextField; 
+            }; 
+            SUPERCLASS = BaseClass; 
+        }, 
+        {
+            ACTIONS = {resetToTcp = id; updateAll = id; }; 
+            CLASS = MTUDPWindowController; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {
+                channelState = NSSegmentedControl; 
+                receiveModeBox = NSComboBox; 
+                resetButton = NSButton; 
+                sendModeBox = NSComboBox; 
+                sequenceChecking = NSSegmentedControl; 
+                statisticsField = NSTextField; 
+                statusField = NSTextField; 
+                udpPanel = NSPanel; 
+                updateAllButton = NSButton; 
+            }; 
+            SUPERCLASS = NSObject; 
+        }, 
+        {CLASS = MapView; LANGUAGE = ObjC; SUPERCLASS = RoundedView; }, 
+        {
+            ACTIONS = {
+                helpButtonPressed = id; 
+                quickButtonPressed = id; 
+                quit = id; 
+                raiseCredits = id; 
+                raiseGame = id; 
+                raiseLogin = id; 
+                raiseMenu = id; 
+                raiseOutfit = id; 
+                raiseSelectServer = id; 
+                raiseSettings = id; 
+                raiseStartServer = id; 
+            }; 
+            CLASS = MenuController; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {
+                creditsButton = NSButton; 
+                helpButton = NSButton; 
+                loginButton = NSButton; 
+                playButton = NSButton; 
+                quickConnectButton = NSButton; 
+                quitButton = NSButton; 
+                selectServerButton = NSButton; 
+                settingsButton = NSButton; 
+                startServerButton = NSButton; 
+                tabFrameView = NSTabView; 
+            }; 
+            SUPERCLASS = BaseClass; 
+        }, 
+        {
+            CLASS = MessagesDataSource; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {messagesList = NSTableView; }; 
+            SUPERCLASS = BaseClass; 
+        }, 
+        {CLASS = MessagesListView; LANGUAGE = ObjC; SUPERCLASS = LLStringList; }, 
+        {
+            ACTIONS = {refreshServers = id; }; 
+            CLASS = MetaServerTableDataSource; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {serverTableView = NSTableView; }; 
+            SUPERCLASS = BaseClass; 
+        }, 
+        {CLASS = NSLevelIndicator; LANGUAGE = ObjC; SUPERCLASS = NSControl; }, 
+        {CLASS = NSSegmentedControl; LANGUAGE = ObjC; SUPERCLASS = NSControl; }, 
+        {
+            ACTIONS = {play = id; selectShip = id; selectTeam = id; }; 
+            CLASS = OutfitMenuController; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {
+                asButton = NSButton; 
+                bbButton = NSButton; 
+                caButton = NSButton; 
+                ddButton = NSButton; 
+                fedButton = NSButton; 
+                instructionField = NSTextField; 
+                kliButton = NSButton; 
+                loginClock = NSLevelIndicator; 
+                messageTextField = NSTextField; 
+                oriButton = NSButton; 
+                playButton = NSButton; 
+                romButton = NSButton; 
+                sbButton = NSButton; 
+                scButton = NSButton; 
+            }; 
+            SUPERCLASS = BaseClass; 
+        }, 
+        {
+            CLASS = PlayerListDataSource; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {playerList = NSTableView; toField = NSPopUpButton; }; 
+            SUPERCLASS = BaseClass; 
+        }, 
+        {CLASS = PlayerListView; LANGUAGE = ObjC; SUPERCLASS = LLStringTable; }, 
+        {
+            CLASS = Postman; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {
+                commTextField = NSTextField; 
+                messageList = MessagesListView; 
+                playerList = PlayerListView; 
+                toField = NSTextField; 
+            }; 
+            SUPERCLASS = BaseClass; 
+        }, 
+        {CLASS = RoundedView; LANGUAGE = ObjC; SUPERCLASS = NSView; }, 
+        {
+            ACTIONS = {deselectServer = id; }; 
+            CLASS = SelectServerController; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {
+                loginButton = NSButton; 
+                refreshButton = NSButton; 
+                serverNameTextField = NSTextField; 
+                spinner = NSProgressIndicator; 
+            }; 
+            SUPERCLASS = MetaServerTableDataSource; 
+        }, 
+        {
+            CLASS = SettingsController; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {
+                accelerateButton = NSButton; 
+                actionKeyMapDataSource = KeyMapTableDataSource; 
+                distressKeyMapDataSource = KeyMapTableDataSource; 
+                fxLevel = NSSlider; 
+                graphicsModel = NSSegmentedControl; 
+                leftMouse = NSPopUpButton; 
+                logToConsole = NSButton; 
+                mainWindow = NSWindow; 
+                middleMouse = NSPopUpButton; 
+                musicLevel = NSSlider; 
+                playerName = NSTextField; 
+                playerPassword = NSTextField; 
+                resolution = NSPopUpButton; 
+                rightMouse = NSPopUpButton; 
+                tipsButton = NSButton; 
+                trackingEnabledButton = NSButton; 
+                useRCD = NSButton; 
+                voiceCmds = NSButton; 
+                voiceOver = NSButton; 
+                wheelMouse = NSPopUpButton; 
+            }; 
+            SUPERCLASS = BaseClass; 
+        }, 
+        {
+            ACTIONS = {
+                play = id; 
+                quit = id; 
+                refreshServers = id; 
+                startRobots = id; 
+                startServer = id; 
+                stopRobots = id; 
+                stopServer = id; 
+            }; 
+            CLASS = SetupWindowController; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {
+                backgroundWindow = NSWindow; 
+                keymapTableView = NSTableView; 
+                loginClock = NSTextField; 
+                loginInstruction = NSTextField; 
+                numberOfRobots = NSTextField; 
+                playButton = NSButton; 
+                playerName = NSTextField; 
+                playerPassword = NSTextField; 
+                playerPasswordVerify = NSTextField; 
+                serverLogView = NSTextView; 
+                serverNameTextField = NSTextField; 
+                serverTableView = NSTableView; 
+                setupWindow = NSWindow; 
+                tabView = NSTabView; 
+            }; 
+            SUPERCLASS = NSObject; 
+        }, 
+        {CLASS = TransparentWindow; LANGUAGE = ObjC; SUPERCLASS = NSWindow; }
+    ); 
+    IBVersion = 1; 
+}
