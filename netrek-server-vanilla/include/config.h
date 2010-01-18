@@ -484,7 +484,7 @@ only if you have no intention of retaining stats on the server for pickup */
 #define HAVE_SYS_FILIO_H 1
 /* #undef HAVE_GMP2_H */
 /* #undef NO_U_INT */
-#define SIZEOF_LONG 0
+#define SIZEOF_LONG 8
 #define HAVE_USLEEP 1
 #define HAVE_SETSTATE 1
 #define HAVE_RANDOM 1
