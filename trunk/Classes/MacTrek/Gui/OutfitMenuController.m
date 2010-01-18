@@ -281,6 +281,10 @@ char myship = SHIP_CA;
         return;
     }
     
+	if ([message isKindOfClass:[NSString class]] == NO) { // very strange, we get called by nibInstantiate asm code but not with a string...
+        return;
+    }
+	
     if ([[messageTextField stringValue] isEqualToString:message]) {
         return; // no need to update
     }
