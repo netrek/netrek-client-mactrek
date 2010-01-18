@@ -455,11 +455,12 @@ int karg5;
 			}			
 			break;
 		case SPW_SHORT_WARNING :
-            message = [NSString stringWithCString:(buffer + 4) length:(arg2 -5)];
+			message = [[[NSString alloc] initWithBytes:(buffer + 4) length:(arg2 -5) encoding:NSASCIIStringEncoding] autorelease]; 
 			[notificationCenter postNotificationName:@"SPW_SHORT_WARNING" object:self userInfo:message];
 			break;
 		case SPW_STEXTE_STRING :
-            message = [NSString stringWithCString:(buffer + 4) length:(arg2 -5)];
+			message = [[[NSString alloc] initWithBytes:(buffer + 4) length:(arg2 -5) encoding:NSASCIIStringEncoding] autorelease]; 
+
             // store it for recall
             [serverSentStrings insertObject: message atIndex:(buffer[2] & 0xFF)];			
 			[notificationCenter postNotificationName:@"SPW_STEXTE_STRING" object:self userInfo:message];

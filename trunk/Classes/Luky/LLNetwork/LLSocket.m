@@ -242,8 +242,7 @@
 // 32-bit network address
 //
 - (NSString*)_dottedIPFromAddress:(struct in_addr*)address; {
-	
-    return [NSString stringWithCString:inet_ntoa(*address)];
+	return [NSString stringWithCString:inet_ntoa(*address) encoding:NSASCIIStringEncoding];
 }
 
 //

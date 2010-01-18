@@ -1993,22 +1993,6 @@ int shortFromPacket(char *buffer, int offset) {
     NSString *line = [NSString stringWithUTF8String:(buffer + start)];
     //LLLog(@"ServerReader.stringFromBuffer (%@)", line);
     return line;
-    
-    // $$$ crashed runtime, fix here use old code...
-	/*
-    int end = max;
-    for (int i = start; i < max; i++) {
-        if (buffer[i] == '\0') {
-            end = i;
-            NSString *line = [NSString stringWithUTF8String:(buffer + start) length:end + 1];
-            LLLog(@"ServerReader.stringFromBuffer (%@)", line);
-            return line;
-        }
-    }
-    NSString *line = [NSString stringWithCString:(buffer + start) length:end + 1];
-    LLLog(@"ServerReader.stringFromBuffer (%@)", line);
-    return line;
-     */
 }
 
 - (NSTimeInterval)timeOut {

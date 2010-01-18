@@ -119,7 +119,7 @@
 	// close the string by replacing last character
 	[temp replaceBytesInRange:NSMakeRange([temp length] - 1, 1) withBytes:"\0"];
 	// return it
-    return [NSString stringWithCString:[temp bytes]];
+	return [NSString stringWithCString:[temp bytes] encoding:NSASCIIStringEncoding];
 }
 
 @end

@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 
 // interface of the rendezvous class
-@interface LLRendezvousController : NSObject
+@interface LLRendezvousController : NSObject <NSNetServiceDelegate, NSNetServiceBrowserDelegate>
 {
 	NSNetService		*_service;
 	NSString			*_serviceName;
