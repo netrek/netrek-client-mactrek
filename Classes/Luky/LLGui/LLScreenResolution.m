@@ -3,7 +3,7 @@
 //  MacTrek
 //
 //  Created by Chris & Judith Lukassen on 11/03/2007.
-//  Copyright 2007 Luky Soft. All rights reserved.
+//  Copyright 2010 Luky Soft. All rights reserved.
 //
 
 #import "LLScreenResolution.h"
@@ -13,18 +13,6 @@
 
 LLScreenResolution* defaultScreenResolution;
 
-/*
-// helper
-static int numberForKey( CFDictionaryRef desc, CFStringRef key ) {
-    CFNumberRef value;
-    int num = 0;
-	
-    if ( (value = CFDictionaryGetValue(desc, key)) == NULL )
-        return 0;
-    CFNumberGetValue(value, kCFNumberIntType, &num);
-    return num;
-}
-*/
 
 + (LLScreenResolution*) defaultScreenResolution {
     if (defaultScreenResolution == nil) {
@@ -34,94 +22,97 @@ static int numberForKey( CFDictionaryRef desc, CFStringRef key ) {
 }
 
 - (NSRect) frameForPrimairyDisplay {
-	
+		
 	NSRect frame = NSMakeRect(0, 0, CGDisplayPixelsWide(CGMainDisplayID()), CGDisplayPixelsHigh(CGMainDisplayID()));
 	return frame;
 }
 
-- (struct screenMode) screenModeOnPrimairyDisplay {
+- (size_t) displayBitsPerPixelForMode: (CGDisplayModeRef) mode {
 	
+	size_t depth = 0;
+	
+	CFStringRef pixEnc = CGDisplayModeCopyPixelEncoding(mode);
+	if(CFStringCompare(pixEnc, CFSTR(IO32BitDirectPixels), kCFCompareCaseInsensitive) == kCFCompareEqualTo)
+		depth = 32;
+	else if(CFStringCompare(pixEnc, CFSTR(IO16BitDirectPixels), kCFCompareCaseInsensitive) == kCFCompareEqualTo)
+		depth = 16;
+	else if(CFStringCompare(pixEnc, CFSTR(IO8BitIndexedPixels), kCFCompareCaseInsensitive) == kCFCompareEqualTo)
+		depth = 8;
+	
+	return depth;
+}
+
+- (size_t) displayBitsPerPixel:(CGDirectDisplayID) displayId {
+	
+	CGDisplayModeRef mode = CGDisplayCopyDisplayMode(displayId);
+	
+	return [self displayBitsPerPixelForMode: mode];
+}
+
+- (struct screenMode) screenModeOnPrimairyDisplay {
+		
 	struct screenMode mode;
 	
 	mode.width = CGDisplayPixelsWide(CGMainDisplayID());
 	mode.height = CGDisplayPixelsHigh(CGMainDisplayID());
-	mode.bitsPerPixel = CGDisplayBitsPerPixel(CGMainDisplayID());
+	mode.bitsPerPixel = [self displayBitsPerPixel: CGMainDisplayID() ];
 	
 	return mode;
 }
 
-- (void) setPrimairyDisplayToMode: (struct screenMode) mode {
+- (CGDisplayModeRef) bestMatchForMode: (struct screenMode) screenMode {
 	
-	[self setDisplay: [self primairyDisplayId] toMode:mode];
-} 
-
-/*
-
-- (CFDictionaryRef) descriptionForPrimairyDisplay {
+	bool exactMatch = false;
 	
-	return CGDisplayCurrentMode( [self primairyDisplayId] );
-}
+    // Get a copy of the current display mode
+	CGDisplayModeRef displayMode = CGDisplayCopyDisplayMode(kCGDirectMainDisplay);
+	
+    // Loop through all display modes to determine the closest match.
+    // CGDisplayBestModeForParameters is deprecated on 10.6 so we will emulate it's behavior
+    // Try to find a mode with the requested depth and equal or greater dimensions first.
+    // If no match is found, try to find a mode with greater depth and same or greater dimensions.
+    // If still no match is found, just use the current mode.
+    CFArrayRef allModes = CGDisplayCopyAllDisplayModes(kCGDirectMainDisplay, NULL);
+    for(int i = 0; i < CFArrayGetCount(allModes); i++)	{
+		CGDisplayModeRef mode = (CGDisplayModeRef)CFArrayGetValueAtIndex(allModes, i);
 
-- (bool) supportForAquaOnPrimairyDisplay {
-	CFDictionaryRef desc = [self descriptionForPrimairyDisplay];
-	if ( CFDictionaryGetValue(desc, kCGDisplayModeUsableForDesktopGUI) == kCFBooleanTrue )
-        return YES;
-    else
-        return NO;
-} 
-
-- (int) displayWidthOnPrimairyDisplay {
-	CFDictionaryRef desc = [self descriptionForPrimairyDisplay];
-	return numberForKey(desc, kCGDisplayWidth);
-}
-
-- (int) displayHeigthOnPrimairyDisplay {
-	CFDictionaryRef desc = [self descriptionForPrimairyDisplay];
-	return numberForKey(desc, kCGDisplayHeight);
-}
-
-- (int) displayBitsPerPixelOnPrimairyDisplay {
-	CFDictionaryRef desc = [self descriptionForPrimairyDisplay];
-	return numberForKey(desc, kCGDisplayBitsPerPixel);
-}
-
-- (int) displayRefreshRateOnPrimairyDisplay {
-	CFDictionaryRef desc = [self descriptionForPrimairyDisplay];
-	return numberForKey(desc, kCGDisplayRefreshRate);
-}
-
-- (bool) supportForAquaInDescr: (CFDictionaryRef) desc {
-	if ( CFDictionaryGetValue(desc, kCGDisplayModeUsableForDesktopGUI) == kCFBooleanTrue )
-        return YES;
-    else
-        return NO;
-} 
-
-- (int) displayWidthInDescr: (CFDictionaryRef) desc {
-	return numberForKey(desc, kCGDisplayWidth);
-}
-
-- (int) displayHeigthInDescr: (CFDictionaryRef) desc {
-	return numberForKey(desc, kCGDisplayHeight);
-}
-
-- (int) displayBitsPerPixelInDescr: (CFDictionaryRef) desc {
-	return numberForKey(desc, kCGDisplayBitsPerPixel);
-}
-
-- (int) displayRefreshRateInDescr: (CFDictionaryRef) desc {
-	return numberForKey(desc, kCGDisplayRefreshRate);
+		if([self displayBitsPerPixelForMode: mode] != screenMode.bitsPerPixel)
+			continue;
+		
+		if((CGDisplayModeGetWidth(mode) >= screenMode.width) && (CGDisplayModeGetHeight(mode) >= screenMode.height))
+		{
+			displayMode = mode;
+			exactMatch = true;
+			break;
+		}
+	}
+	
+    // No depth match was found
+    if(!exactMatch)
+	{
+		for(int i = 0; i < CFArrayGetCount(allModes); i++)
+		{
+			CGDisplayModeRef mode = (CGDisplayModeRef)CFArrayGetValueAtIndex(allModes, i);
+			if([self displayBitsPerPixelForMode: mode] >= screenMode.bitsPerPixel)
+				continue;
+			
+			if((CGDisplayModeGetWidth(mode) >= screenMode.width) && (CGDisplayModeGetHeight(mode) >= screenMode.height))
+			{
+				displayMode = mode;
+				break;
+			}
+		}
+	}
+	return displayMode;
 }
 
 - (void) setDisplay:(CGDirectDisplayID) dspy toMode: (struct screenMode) screenMode {
-
-    CFDictionaryRef mode;
-    CFDictionaryRef originalMode;
-    boolean_t exactMatch;
+	
+    CGDisplayModeRef mode;
     CGDisplayErr err;
     
-    originalMode = CGDisplayCurrentMode( dspy );
-    if ( originalMode == NULL ) {
+    CGDisplayModeRef originalMode = CGDisplayCopyDisplayMode(kCGDirectMainDisplay);    
+	if ( originalMode == NULL ) {
 		LLLog(@"LLScreenResolution.setDisplay display with id %d is invalid", (int)dspy);
         return;
     }
@@ -132,75 +123,39 @@ static int numberForKey( CFDictionaryRef desc, CFStringRef key ) {
 		  screenMode.width,
 		  screenMode.height,
 		  screenMode.bitsPerPixel );
+
+	mode = [self bestMatchForMode:screenMode];
 	
-	mode = CGDisplayBestModeForParameters(dspy,
-										  screenMode.bitsPerPixel,
-										  screenMode.width,
-										  screenMode.height,
-										  &exactMatch);
-	if ( exactMatch ) {
+
+	if ((screenMode.width == CGDisplayModeGetWidth(mode)) && 
+		(screenMode.height == CGDisplayModeGetHeight(mode)) &&
+		(screenMode.bitsPerPixel == [self displayBitsPerPixelForMode:mode])) {
 		LLLog(@"LLScreenResolution.setDisplay found an exact match, switching modes" );
 	} else {
 		LLLog(@"LLScreenResolution.setDisplay found a mode, switching modes" );
 	}
 	
-	err = CGDisplaySwitchToMode(dspy, mode);
+	err = CGDisplaySetDisplayMode(dspy, mode, NULL);
 	if ( err != CGDisplayNoErr ) {
 		LLLog(@"LLScreenResolution.setDisplay Oops!  Mode switch failed?!?? (%d)", err );
 		
 		// try to reset
-		err = CGDisplaySwitchToMode(dspy, originalMode);
+		err = CGDisplaySetDisplayMode(dspy, originalMode, NULL);
 		if ( err != CGDisplayNoErr )
 			LLLog(@"LLScreenResolution.setDisplay Oops!  Mode restore failed?!?? (%d)", err );
 	}
 	
 	// check result
-	CFDictionaryRef currentMode = CGDisplayCurrentMode( dspy );
+	struct screenMode currentMode = [self screenModeOnPrimairyDisplay];
 	LLLog(@"LLScreenResolution.setDisplay display has been set to %ld x %ld, %ld Bits Per Pixel",
-		  [self displayWidthInDescr:currentMode],
-		  [self displayHeigthInDescr:currentMode],
-		  [self displayBitsPerPixelInDescr:currentMode]);	
+		  currentMode.width,
+		  currentMode.height,
+		  currentMode.bitsPerPixel);	
 }
 
-- (CGDirectDisplayID) primairyDisplayId {
-	NSArray *displays = [self arrayOfDisplayIDs];
-	return (CGDirectDisplayID) [displays objectAtIndex:0];
-}
+- (void) setPrimairyDisplayToMode: (struct screenMode) mode {
+	
+	[self setDisplay: CGMainDisplayID() toMode:mode];
+} 
 
-- (NSArray *) arrayOfDisplayIDs {
-    CGDirectDisplayID display[kMaxDisplays];
-    CGDisplayCount numDisplays;
-    CGDisplayCount i;
-    CGDisplayErr err;
-	
-    err = CGGetActiveDisplayList(kMaxDisplays,
-                                 display,
-                                 &numDisplays);
-    if ( err != CGDisplayNoErr ) {
-		NSMutableArray* disIDs = [[[NSMutableArray alloc] init] autorelease];
-		for ( i = 0; i < numDisplays; ++i ) {
-			[disIDs addObject:[NSNumber numberWithInt:(int)display[i]]];
-		}
-		return disIDs;
-	} else {
-		return nil;
-	}	
-}
-
-- (int) numberOfDisplays {
-	
-    CGDirectDisplayID display[kMaxDisplays];
-    CGDisplayCount numDisplays;
-    CGDisplayErr err;
-	
-    err = CGGetActiveDisplayList(kMaxDisplays,
-                                 display,
-                                 &numDisplays);
-    if ( err != CGDisplayNoErr ) {
-		return numDisplays;
-	} else {
-		return -1;
-	}
-}
-*/
 @end
