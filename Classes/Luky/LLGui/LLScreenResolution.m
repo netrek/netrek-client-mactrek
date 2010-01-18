@@ -13,6 +13,7 @@
 
 LLScreenResolution* defaultScreenResolution;
 
+/*
 // helper
 static int numberForKey( CFDictionaryRef desc, CFStringRef key ) {
     CFNumberRef value;
@@ -23,6 +24,7 @@ static int numberForKey( CFDictionaryRef desc, CFStringRef key ) {
     CFNumberGetValue(value, kCFNumberIntType, &num);
     return num;
 }
+*/
 
 + (LLScreenResolution*) defaultScreenResolution {
     if (defaultScreenResolution == nil) {
@@ -33,7 +35,7 @@ static int numberForKey( CFDictionaryRef desc, CFStringRef key ) {
 
 - (NSRect) frameForPrimairyDisplay {
 	
-	NSRect frame = NSMakeRect(0, 0, [self displayWidthOnPrimairyDisplay], [self displayHeigthOnPrimairyDisplay]);
+	NSRect frame = NSMakeRect(0, 0, CGDisplayPixelsWide(CGMainDisplayID()), CGDisplayPixelsHigh(CGMainDisplayID()));
 	return frame;
 }
 
@@ -41,21 +43,23 @@ static int numberForKey( CFDictionaryRef desc, CFStringRef key ) {
 	
 	struct screenMode mode;
 	
-	mode.width = [self displayWidthOnPrimairyDisplay];
-	mode.height = [self displayHeigthOnPrimairyDisplay];
-	mode.bitsPerPixel = [self displayBitsPerPixelOnPrimairyDisplay];
+	mode.width = CGDisplayPixelsWide(CGMainDisplayID());
+	mode.height = CGDisplayPixelsHigh(CGMainDisplayID());
+	mode.bitsPerPixel = CGDisplayBitsPerPixel(CGMainDisplayID());
 	
 	return mode;
 }
 
+- (void) setPrimairyDisplayToMode: (struct screenMode) mode {
+	
+	[self setDisplay: [self primairyDisplayId] toMode:mode];
+} 
+
+/*
+
 - (CFDictionaryRef) descriptionForPrimairyDisplay {
 	
 	return CGDisplayCurrentMode( [self primairyDisplayId] );
-}
-
-- (CFDictionaryRef) descriptionForCurrentModeOnDisplay:(CGDirectDisplayID) dspy {
-	
-	return CGDisplayCurrentMode( dspy );
 }
 
 - (bool) supportForAquaOnPrimairyDisplay {
@@ -163,12 +167,6 @@ static int numberForKey( CFDictionaryRef desc, CFStringRef key ) {
 	return (CGDirectDisplayID) [displays objectAtIndex:0];
 }
 
-- (void) setPrimairyDisplayToMode: (struct screenMode) mode {
-	
-	[self setDisplay: [self primairyDisplayId] toMode:mode];
-} 
-
-
 - (NSArray *) arrayOfDisplayIDs {
     CGDirectDisplayID display[kMaxDisplays];
     CGDisplayCount numDisplays;
@@ -204,5 +202,5 @@ static int numberForKey( CFDictionaryRef desc, CFStringRef key ) {
 		return -1;
 	}
 }
-
+*/
 @end

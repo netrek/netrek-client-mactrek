@@ -11,7 +11,7 @@
 #import "MTKeyMap.h"
 #import "Luky.h"
 
-@interface MTVoiceController : BaseClass {
+@interface MTVoiceController : BaseClass <NSSpeechRecognizerDelegate> {
 	
 	NSSpeechRecognizer *speechRecognizer;
 	NSArray *codes;

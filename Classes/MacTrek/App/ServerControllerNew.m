@@ -79,7 +79,7 @@
 	[server release];
     
     // remove the pid file BUG 1780013
-    [[NSFileManager defaultManager] removeFileAtPath:pathToPid handler:nil];
+    [[NSFileManager defaultManager] removeItemAtPath:pathToPid error:NULL];
 
 }
 

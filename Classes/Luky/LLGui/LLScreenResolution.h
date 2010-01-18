@@ -44,6 +44,9 @@ struct screenMode {
 - (NSRect) frameForPrimairyDisplay;
 - (struct screenMode) screenModeOnPrimairyDisplay;
 - (void) setPrimairyDisplayToMode: (struct screenMode) mode;
+
+/*
+// internal??
 - (bool) supportForAquaOnPrimairyDisplay;
 - (int)  displayWidthOnPrimairyDisplay;
 - (int)  displayHeigthOnPrimairyDisplay;
@@ -52,7 +55,6 @@ struct screenMode {
 
 // internal
 - (CFDictionaryRef) descriptionForPrimairyDisplay;
-- (CFDictionaryRef) descriptionForCurrentModeOnDisplay:(CGDirectDisplayID) dspy;
 - (CGDirectDisplayID) primairyDisplayId;
 - (void) setDisplay:(CGDirectDisplayID) dspy toMode: (struct screenMode) screenMode;
 - (int) numberOfDisplays;
@@ -62,6 +64,6 @@ struct screenMode {
 - (int) displayHeigthInDescr: (CFDictionaryRef) desc;
 - (int) displayBitsPerPixelInDescr: (CFDictionaryRef) desc;
 - (int) displayRefreshRateInDescr: (CFDictionaryRef) desc;
-
+*/
 
 @end

@@ -88,7 +88,8 @@
 		prepend = ((cclist[i] & 0xFF) == 0x80);
 		int end = 17 + i;
 		if(buffer[end] != '\0') {
-			prepend_append = [NSString stringWithCString:&mtext[end] length:(80 - end)];
+			
+			prepend_append = [[[NSString alloc] initWithBytes:&mtext[end] length:(80 - end) encoding:NSASCIIStringEncoding] autorelease]; 
 		}
 	}
 	return self;

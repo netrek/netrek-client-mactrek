@@ -23,7 +23,7 @@
 // once per second 
 #define FRAMES_PER_FULL_UPDATE_DASHBOARD FRAME_RATE
 
-@interface GameController : BaseClass {
+@interface GameController : BaseClass <NSSpeechSynthesizerDelegate> {
    
     // dashboard
     IBOutlet LLBar *shieldBar;  
