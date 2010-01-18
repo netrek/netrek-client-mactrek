@@ -330,7 +330,7 @@
 							<real>283</real>
 						</array>
 						<key>RubberWindowFrame</key>
-						<string>124 370 1703 1208 0 0 2560 1578 </string>
+						<string>6 337 1703 1208 0 0 2560 1578 </string>
 					</dict>
 					<key>Module</key>
 					<string>PBXSmartGroupTreeModule</string>
@@ -346,7 +346,7 @@
 								<key>PBXProjectModuleGUID</key>
 								<string>523E418009F259FA00EE59E2</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>LLScreenResolution.m</string>
+								<string>LLScreenResolution.h</string>
 								<key>PBXSplitModuleInNavigatorKey</key>
 								<dict>
 									<key>Split0</key>
@@ -354,11 +354,11 @@
 										<key>PBXProjectModuleGUID</key>
 										<string>523E418109F259FA00EE59E2</string>
 										<key>PBXProjectModuleLabel</key>
-										<string>LLScreenResolution.m</string>
+										<string>LLScreenResolution.h</string>
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>520A7E6411047AAD003356FD</string>
+										<string>520A7EBE1104ACB2003356FD</string>
 										<key>history</key>
 										<array>
 											<string>528C780F10485DA200FF646E</string>
@@ -401,8 +401,8 @@
 											<string>520A7E4F11047496003356FD</string>
 											<string>520A7E5111047496003356FD</string>
 											<string>520A7E5211047496003356FD</string>
-											<string>520A7E6311047AAD003356FD</string>
-											<string>520A7E6011047AA4003356FD</string>
+											<string>520A7EBC1104ACB2003356FD</string>
+											<string>520A7EBD1104ACB2003356FD</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -416,18 +416,18 @@
 							<key>GeometryConfiguration</key>
 							<dict>
 								<key>Frame</key>
-								<string>{{0, 0}, {1376, 710}}</string>
+								<string>{{0, 0}, {1376, 981}}</string>
 								<key>RubberWindowFrame</key>
-								<string>124 370 1703 1208 0 0 2560 1578 </string>
+								<string>6 337 1703 1208 0 0 2560 1578 </string>
 							</dict>
 							<key>Module</key>
 							<string>PBXNavigatorGroup</string>
 							<key>Proportion</key>
-							<string>710pt</string>
+							<string>981pt</string>
 						</dict>
 						<dict>
 							<key>Proportion</key>
-							<string>452pt</string>
+							<string>181pt</string>
 							<key>Tabs</key>
 							<array>
 								<dict>
@@ -457,7 +457,7 @@
 									<key>GeometryConfiguration</key>
 									<dict>
 										<key>Frame</key>
-										<string>{{10, 27}, {1376, 425}}</string>
+										<string>{{10, 27}, {1376, 154}}</string>
 									</dict>
 									<key>Module</key>
 									<string>PBXProjectFindModule</string>
@@ -498,9 +498,9 @@
 									<key>GeometryConfiguration</key>
 									<dict>
 										<key>Frame</key>
-										<string>{{10, 27}, {1376, 425}}</string>
+										<string>{{10, 27}, {1376, 154}}</string>
 										<key>RubberWindowFrame</key>
-										<string>124 370 1703 1208 0 0 2560 1578 </string>
+										<string>6 337 1703 1208 0 0 2560 1578 </string>
 									</dict>
 									<key>Module</key>
 									<string>PBXCVSModule</string>
@@ -594,7 +594,7 @@
 							<key>PBXSmartGroupTreeModuleOutlineStateSelectionKey</key>
 							<array>
 								<array>
-									<integer>32</integer>
+									<integer>33</integer>
 									<integer>7</integer>
 									<integer>2</integer>
 									<integer>1</integer>
@@ -645,7 +645,7 @@
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>520A7E6511047AAD003356FD</string>
+										<string>520A7EBF1104ACB2003356FD</string>
 										<key>history</key>
 										<array>
 											<string>528C780F10485DA200FF646E</string>
@@ -688,8 +688,8 @@
 											<string>520A7E4F11047496003356FD</string>
 											<string>520A7E5111047496003356FD</string>
 											<string>520A7E5211047496003356FD</string>
-											<string>520A7E5E11047AA4003356FD</string>
-											<string>520A7E5F11047AA4003356FD</string>
+											<string>520A7EB71104ACA3003356FD</string>
+											<string>520A7EB81104ACA3003356FD</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -927,7 +927,7 @@
 	<key>StatusbarIsVisible</key>
 	<true/>
 	<key>TimeStamp</key>
-	<real>285506221.33743799</real>
+	<real>285519026.07886702</real>
 	<key>ToolbarDisplayMode</key>
 	<integer>1</integer>
 	<key>ToolbarIsVisible</key>
@@ -945,7 +945,7 @@
 		<string>/Users/aqua/Documents/Code/Active/mactrek-trunk/MacTrek.xcodeproj</string>
 	</array>
 	<key>WindowString</key>
-	<string>124 370 1703 1208 0 0 2560 1578 </string>
+	<string>6 337 1703 1208 0 0 2560 1578 </string>
 	<key>WindowToolsV3</key>
 	<array>
 		<dict>
