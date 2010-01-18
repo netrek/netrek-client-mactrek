@@ -1,6 +1,6 @@
 #!/bin/sh
 
-LIBDIR=/usr/local/games/netrek-server-vanilla/lib
+LIBDIR=/Users/Shared/MacTrek/Server/lib
 ROOT=`${LIBDIR}/tools/getpath`
 export PATH=${ROOT}/bin:${ROOT}/lib:${ROOT}/lib/tools:${PATH}
 

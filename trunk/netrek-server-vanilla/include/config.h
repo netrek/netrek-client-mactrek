@@ -476,15 +476,15 @@ only if you have no intention of retaining stats on the server for pickup */
 #define HAVE_SYS_FCNTL_H 1
 #define HAVE_FCNTL_H 1
 #define HAVE_CTYPE_H 1
-/* #undef HAVE_MACHINE_ENDIAN_H */
+#define HAVE_MACHINE_ENDIAN_H 1
 #define HAVE_SYS_RESOURCE_H 1
 #define HAVE_SYS_WAIT_H 1
 #define HAVE_NETINET_IN_H 1
 				/* Needed for Solaris 2.x */
-/* #undef HAVE_SYS_FILIO_H */
+#define HAVE_SYS_FILIO_H 1
 /* #undef HAVE_GMP2_H */
 /* #undef NO_U_INT */
-#define SIZEOF_LONG 4
+#define SIZEOF_LONG 0
 #define HAVE_USLEEP 1
 #define HAVE_SETSTATE 1
 #define HAVE_RANDOM 1
@@ -522,10 +522,10 @@ only if you have no intention of retaining stats on the server for pickup */
 
 #ifdef SERVER
 /* paths substituted by configure, see AC_DEFINE_UNQUOTED in configure.in */
-#define LIBDIR "/usr/local/games/netrek-server-vanilla/lib"
-#define BINDIR "/usr/local/games/netrek-server-vanilla/bin"
-#define SYSCONFDIR "/usr/local/games/netrek-server-vanilla/etc"
-#define LOCALSTATEDIR "/usr/local/games/netrek-server-vanilla/var"
+#define LIBDIR "/Users/Shared/MacTrek/Server/lib"
+#define BINDIR "/Users/Shared/MacTrek/Server/bin"
+#define SYSCONFDIR "/Users/Shared/MacTrek/Server/etc"
+#define LOCALSTATEDIR "/Users/Shared/MacTrek/Server/var"
 
 /* System dependend programs */
 #define UPTIME "/usr/ucb/uptime"
@@ -608,7 +608,7 @@ extern long random ();
 #if defined (linux) || defined(sgi) || (defined(sparc) && defined(sun))
 #define SETPGRP()       setpgrp()
 #else
-#define SETPGRP()       setpgrp (0, 0)
+#define SETPGRP()       setpgrp ()
 #endif
 #endif
 #else
