@@ -5,9 +5,9 @@ include ../$(CONFIG)
 
 .PHONY: clean reallyclean install checkin checkout tar dist depend
 
-DESTDIR = /usr/local/games/netrek-server-vanilla/og
-XTREKDIR = /usr/local/games/netrek-server-vanilla
-XTREKOWNER = james
+DESTDIR = /Users/Shared/MacTrek/Server/og
+XTREKDIR = /Users/Shared/MacTrek/Server
+XTREKOWNER = aqua
 
 R_OBJS = 	   \
 	    robot.o\
@@ -91,12 +91,12 @@ INCLUDES = struct.h \
 
 INPUT = input.o redraw.o
 
-LIBS =  -lgdbm -lresolv -lnsl -lm 
+LIBS =  -lgdbm -lresolv -lm 
 EXTRALIBS = $(LINKFLAGS)
 
 CC = gcc
 CFLAGS =  -funroll-loops -finline-functions -DATM -DPING -DHAVE_NINT=0
-LDFLAGS =  
+LDFLAGS = -L/Users/aqua/Documents/Code/Active/mactrek-trunk/netrek-server-vanilla/libgdbm/.libs/ 
 #CFLAGS = -O6 -fomit-frame-pointer -DATM -DPING 
 
 robot: $(R_OBJS) $(INPUT)

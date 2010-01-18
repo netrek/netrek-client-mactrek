@@ -3,7 +3,7 @@
 CONFIG = system.mk
 
 srcdir = .
-DESTDIR = /usr/local/games/netrek-server-vanilla
+DESTDIR = /Users/Shared/MacTrek/Server
 
 # Do Not Change anything below this line. It should be setup in config
 

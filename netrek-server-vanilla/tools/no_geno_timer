@@ -1,7 +1,7 @@
 #!/bin/bash
 
-LIBDIR=/usr/local/games/netrek-server-vanilla/lib
-LOCALSTATEDIR=/usr/local/games/netrek-server-vanilla/var
+LIBDIR=/Users/Shared/MacTrek/Server/lib
+LOCALSTATEDIR=/Users/Shared/MacTrek/Server/var
 
 if [ ! -x $LIBDIR/tools/sequencer ]; then
   echo "Cannot execute sequencer"
