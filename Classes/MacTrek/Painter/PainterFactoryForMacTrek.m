@@ -41,7 +41,7 @@
 	
 	// we have some different types of files 
 	[imgBackground release];    
-	imgBackground = [self cacheImage:@"/background.gif"];
+	imgBackground = [self cacheImage:@"/background.png"];
 	[imgFuel release];
 	imgFuel       = [self cacheImage:@"/Planets/fuel.png"]; 
     [imgArmy release];
