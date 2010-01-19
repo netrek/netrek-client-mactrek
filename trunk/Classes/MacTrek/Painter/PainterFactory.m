@@ -234,21 +234,38 @@
     
 }
 
-- (void) drawBackgroundInRect:(NSRect) drawingBounds ofViewBounds:(NSRect)viewBounds forMe:(Player*) me {
+- (void) drawBackgroundInRect:(NSRect) drawingBounds ofViewBounds:(NSRect)viewBounds forMe:(Player*) me withScale:(int)scale {
     
 	// as of 1.3 MacTrek theme no longer shows background
-	// commented out code for performance reasons
+    // commented out code for performance reasons
+	// in 1.6 it is back in an optimized form
+#if 0
 	[[NSColor blackColor] set];
     NSRectFill(drawingBounds);
 	return;
+#else	
+
 	
-	/*
+	
+	static NSTimeInterval start, stop;
+    start = [NSDate timeIntervalSinceReferenceDate];  
+   
     // get the size of the stamp
     NSSize backGroundImageSize = [self backGroundImageSize];
     // use a local var so we can debug...
     NSPoint startPoint = backGroundStartPoint;
     
+	
     // $$ scale the stars (nah don't do that)
+	// at scale = 40 default, image is 200x200 blow it up	
+	/*
+	 float newWidth = backGroundImageSize.width *=  1.0/scale;
+	float newHeight = backGroundImageSize.height *= 1.0/scale;
+	
+	// keep a min
+	backGroundImageSize.width = (newWidth > 200 ? newWidth : 200);
+	backGroundImageSize.height = (newHeight > 200 ? newHeight : 200);
+	*/
     
     // move the start point away  in the oposite dir, based on my speed
     float course = [me course];
@@ -277,6 +294,7 @@
     // $$ do not scale the stars here?
     targetArea.size = backGroundImageSize;
     // go and paint 
+	int iterations = 0;
     for(int y = (int)startPoint.y; y < viewBounds.size.height; y += backGroundImageSize.height) {
         for(int x = (int)startPoint.x; x < viewBounds.size.width; x += backGroundImageSize.width) {
             targetArea.origin.x = x;
@@ -286,14 +304,23 @@
             if (!NSIntersectsRect(targetArea, drawingBounds)) {
                 continue;
             } 
-            
+            iterations++;
             [self drawBackgroundImageInRect: targetArea];
         }
     } 
+	LLLog(@"PainterFactory.drawBackgroundInRect %d drawCycles", iterations);
     
     backGroundStartPoint = startPoint;
-
-	 */
+	
+	stop = [NSDate timeIntervalSinceReferenceDate];  
+    //if ((stop - start) > 0.01) {
+        LLLog(@"PainterFactory.drawBackgroundInRect: used %f sec", (stop-start));
+    //}
+	
+#endif
+	
+	
+	 
 }
 
 - (void) drawGalaxyEdgesInRect:(NSRect) drawingBounds forGameRect:(NSRect)gameBounds ofViewBounds:(NSRect)viewBounds withScale:(int)scale {
@@ -1096,7 +1123,7 @@
     // -------------------------------------------------------------------------
     
     if (!simple) {
-            [self drawBackgroundInRect:drawingBounds ofViewBounds:viewBounds forMe:me];
+		[self drawBackgroundInRect:drawingBounds ofViewBounds:viewBounds forMe:me withScale:scale];
     } else {
         // at least clear the screen
         [[NSColor blackColor] set];

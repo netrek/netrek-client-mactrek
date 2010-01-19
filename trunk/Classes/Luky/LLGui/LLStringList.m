@@ -70,6 +70,9 @@
     // we changed
     hasChanged = YES;
     //[self setNeedsDisplay:YES];
+	
+	// free mem
+	[aStr release];
 }
 
 // my brain works the other way around

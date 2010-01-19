@@ -64,7 +64,7 @@
 - (void) drawRect:(NSRect)drawingBounds ofViewBounds:(NSRect)viewBounds whichRepresentsGameBounds:(NSRect)gameBounds 
         withScale:(int)scale;
 - (void) drawAlertBorder:(NSRect) bounds forMe:(Player *)me;
-- (void) drawBackgroundInRect:(NSRect) drawingBounds ofViewBounds:(NSRect)viewBounds forMe:(Player*) me ;
+- (void) drawBackgroundInRect:(NSRect) drawingBounds ofViewBounds:(NSRect)viewBounds forMe:(Player*) me withScale:(int)scale;
 - (void) drawGalaxyEdgesInRect:(NSRect) drawingBounds forGameRect:(NSRect)gameBounds ofViewBounds:(NSRect)viewBounds withScale:(int)scale;
 - (void) drawPlanetsInRect:(NSRect)drawingBounds forGameRect:(NSRect)gameBounds ofViewBounds:(NSRect)viewBounds withScale:(int)scale;
 - (void) drawPlayersInRect:(NSRect)drawingBounds forGameRect:(NSRect)gameBounds ofViewBounds:(NSRect)viewBounds  withScale:(int)scale;
