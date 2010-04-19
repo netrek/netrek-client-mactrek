@@ -1064,11 +1064,14 @@
     // 0. gather some metrics
     // -------------------------------------------------------------------------
     
-    static NSTimeInterval start, stop;
-    start = [NSDate timeIntervalSinceReferenceDate];  
-    if ((start-stop) > 0.1) {
-        LLLog(@"PainterFactory.drawView: slept %f sec", (start-stop));
-    }
+    static NSTimeInterval start, stop, oldStart;
+	if (!simple) {
+		oldStart = start;
+		start = [NSDate timeIntervalSinceReferenceDate];  
+		if ((start-stop) > 0.001) {
+			LLLog(@"PainterFactory.drawView: slept %f sec, interval %f FPS %f", (start-stop), (start - oldStart), 1.0/(start - oldStart));
+		}	
+	}
     
     // -------------------------------------------------------------------------
     // 1. draw alert border (yellow/red/green)
@@ -1142,10 +1145,12 @@
     // -------------------------------------------------------------------------
     // 0. gather some metrics
     // -------------------------------------------------------------------------
-    stop = [NSDate timeIntervalSinceReferenceDate];  
-    if ((stop - start) > 0.1) {
-        LLLog(@"PainterFactory.drawView: %f sec", (stop-start));
-    }
+	if (!simple) {
+		stop = [NSDate timeIntervalSinceReferenceDate];  
+		if ((stop - start) > 0.001)  {
+			LLLog(@"PainterFactory.drawView: %f sec", (stop-start));
+		}		
+	}
     
     // post-code
     [self postpareForDraw];

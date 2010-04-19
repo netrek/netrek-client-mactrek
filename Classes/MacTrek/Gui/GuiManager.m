@@ -383,13 +383,13 @@ NSString *defaultPassword;
 	}
 	else {		
 		if (multiThreaded) {
-			timer = [NSTimer scheduledTimerWithTimeInterval: (1 / FRAME_RATE)
+			timer = [NSTimer scheduledTimerWithTimeInterval: (1.0 / FRAME_RATE)
 													 target:self selector:@selector(screenRefreshTimerFired:)
 												   userInfo:nil 
 													repeats:YES];
 		} else {
 			// singleTreaded
-			[self performSelector:@selector(screenRefreshTimerFired:) withObject:nil afterDelay:(1 / FRAME_RATE)];
+			[self performSelector:@selector(screenRefreshTimerFired:) withObject:nil afterDelay:(1.0 / FRAME_RATE)];
 		}
 
 	}
